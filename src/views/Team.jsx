@@ -1,7 +1,7 @@
 function Team(){
     return(
         <div>
-            <h1>Team</h1>
+            <h1>Equipo</h1>
         </div>
     )
 }
