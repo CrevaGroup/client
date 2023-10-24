@@ -5,6 +5,8 @@ import Services from "./views/Services";
 import Team from "./views/Team";
 import Contact from "./views/Contact";
 import Blog from "./views/Blog";
+import Login from "./views/Login";
+import Register from "./Views/Register";
 
 import "./App.css";
 
