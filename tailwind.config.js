@@ -8,6 +8,8 @@ export default {
       },
       backgroundColor: {
         "custom-gray": "#EEECEC",
+        "light-violet": "#c2a2d0",
+        "dark-violet": "#7411a2",
       },
     },
   },
