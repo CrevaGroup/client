@@ -17,11 +17,11 @@ const Navbar = () => {
         setNavHandler(!navHandler);
     }
     
-    const additionalClass = navHandler ? "absolute opacity-0" : "";
+    const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
     const burguerHandler = navHandler ? burguer : close; 
 
     return(
-        <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between">
+        <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between ">
             <div
                 className="flex justify-between items-center"
             >
@@ -127,7 +127,7 @@ const Navbar = () => {
                     <img className= 'h-6 mr-4 lg:hidden' src={community}/>
 
                     <p
-                        className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
+                        className="text-xl hover:text-violet-500 duration-500 cursor-pointer my-6 lg:my-0 "
                     >Comunidad Creva</p>
                 </li>
             
