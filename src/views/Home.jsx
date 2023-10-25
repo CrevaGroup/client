@@ -25,6 +25,7 @@ const Home = () => {
           <div class="ml-auto mr-20">
             <img src={Consulting} alt="Consulta" class="w-96" />
           </div>
+
         </div>
         <h1 class="text-3xl mt-20 flex justify-center">Nuestro Blog</h1>
         <div class="mt-10 ml-10 mr-10 bg-white p-4 rounded overflow-visible">
