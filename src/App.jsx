@@ -6,22 +6,23 @@ import Team from "./views/Team";
 import Contact from "./views/Contact";
 import Blog from "./views/Blog";
 import Login from "./views/Login";
-import Register from "./Views/Register";
-
+import Register from "./views/Register";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
 
   return (
-    <div className="font-orkney">
+    <div className="font-orkney  ">
+      <Navbar/>
       <Routes>
         <Route path="/" element = {<Home/>}/>
-        <Route path="/Services" element={<Services />}/>
-        <Route path="/Team" element={<Team />}/>
-        <Route path="/Blog" element={<Blog />}/>
-        <Route path="/Contact" element={<Contact />}/>
-        <Route path="/Login" element={<Login />}/>
-        <Route path="/Register" element={<Register />}/>
+        <Route path="/services" element={<Services />}/>
+        <Route path="/team" element={<Team />}/>
+        <Route path="/blog" element={<Blog />}/>
+        <Route path="/contact" element={<Contact />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
       </Routes>
     </div>
   );
