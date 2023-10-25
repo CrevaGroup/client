@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         orkney: ["Orkney", "sans-serif"],
+        georgia: ["Roboto", "sans-serif"],
       },
       backgroundColor: {
         "custom-gray": "#EEECEC",

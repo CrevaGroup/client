@@ -24,6 +24,9 @@ const Home = () => {
         </div>
         <div class="ml-auto mr-20">
           <img src={Consulting} alt="Consulta" class="w-96" />
+        <div className="bg-custom-gray h-full">
+            <p>Creva significa “Crear Valor” el que muchas veces está ahí pero no sabemos cómo demostrarlo. Potenciamos a las personas en su búsqueda de crecimiento profesional desde cualquier parte del mundo y de diversas culturas.
+</p>
         </div>
       </div>
       <h1 class="text-3xl mt-20 flex justify-center">Nuestro Blog</h1>
