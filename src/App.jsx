@@ -7,16 +7,16 @@ import Contact from "./views/Contact";
 import Blog from "./views/Blog";
 import Login from "./views/Login";
 import Register from "./views/Register";
-
 import "./App.css";
 import Navbar from "./components/Navbar";
 
 function App() {
+  
   return (
-    <div className="font-orkney">
-      <Navbar />
+    <div className="font-orkney  ">
+      <Navbar/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element = {<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/team" element={<Team />} />
         <Route path="/blog" element={<Blog />} />

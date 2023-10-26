@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from '../assets/logo.png'
 import home from '../assets/home.svg'
@@ -17,11 +17,11 @@ const Navbar = () => {
         setNavHandler(!navHandler);
     }
     
-    const additionalClass = navHandler ? "absolute opacity-0" : "";
+    const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
     const burguerHandler = navHandler ? burguer : close; 
 
     return(
-        <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between">
+        <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between ">
             <div
                 className="flex justify-between items-center"
             >
@@ -51,7 +51,7 @@ const Navbar = () => {
             </span>
             </div>
             
-            <ul className={`lg:flex lg:items-center lg:ml-auto z-[-1] lg:z-auto lg:static w-full left:0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100  ${additionalClass}`}>
+            <ul className={`lg:flex lg:items-center  z-[-1] lg:z-auto lg:static w-full left:0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100  ${additionalClass}`}>
                 <li className={`mx-4 flex items-center h-8 my-4`}>
 
 
@@ -127,7 +127,7 @@ const Navbar = () => {
                     <img className= 'h-6 mr-4 lg:hidden' src={community}/>
 
                     <p
-                        className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
+                        className="text-xl hover:text-violet-500 duration-500 cursor-pointer my-6 lg:my-0 "
                     >Comunidad Creva</p>
                 </li>
             
@@ -139,7 +139,7 @@ const Navbar = () => {
                     >
                         <p  
                             onClick={toogleNav}
-                            className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none">
+                            className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center">
                         Iniciar Sesion
                     </p>
                     </NavLink>
@@ -151,7 +151,7 @@ const Navbar = () => {
                     >
                         <p  
                             onClick={toogleNav}
-                            className="text-xl hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white">
+                            className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white">
                         Registrarse
                     </p>
                     </NavLink>
