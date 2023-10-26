@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
 import Services from "../components/Services";
+import Footer from "../components/Footer";
 import Consulting from "../assets/Online-consulting-amico.png";
 import Blog from "../assets/Status-update-amico.png";
 
@@ -56,6 +57,7 @@ const Home = () => {
         <div className="bg-white w-48 h-40 m-4"></div>
       </div>
       <Services />
+      <Footer />
     </div>
   );
 };
