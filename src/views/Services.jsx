@@ -7,12 +7,15 @@ const Services = () => {
             className="bg-custom-gray h-full pt-4 lg:pt-8"
         >
             <div
-                className=" flex items-center justify-center text-dark-gray-blue cursor-default"
+                className=" flex flex-col items-center justify-center text-dark-gray-blue cursor-default"
             >
                 <p
-                    className="text-2xl  lg:text-3xl"
+                    className="text-2xl  lg:text-3xl font-bold"
                 >Nuestros servicios</p>
 
+                <p
+                    className="text-xl"
+                >Potenciá tu carrera</p>
             </div>
 
             <div
