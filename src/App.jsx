@@ -12,21 +12,20 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 
 function App() {
-
   return (
     <div className="font-orkney">
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element = {<Home/>}/>
-        <Route path="/services" element={<Services />}/>
-        <Route path="/team" element={<Team />}/>
-        <Route path="/blog" element={<Blog />}/>
-        <Route path="/contact" element={<Contact />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register />}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
 }
 
-export default App
+export default App;

@@ -5,10 +5,8 @@ import flechaVolver from "../assets/flechaVolver.svg";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    // Agrega la lógica de inicio de sesión aquí
-  };
   return (
     <div
       style={{ backgroundColor: "#EFEFEF" }}
@@ -22,28 +20,25 @@ const Login = () => {
         }}
       ></div>
       <div
+        className="bg-C2A3D1 shadow-md rounded p-24 mb-4"
         style={{
           border: "solid 1px #C1C1C1",
-          padding: "25px 70px 25px 70px",
           borderRadius: "4px",
         }}
       >
         <div
           style={{
             backgroundColor: "#C2A3D1",
-            width: "400px",
-            height: "370px",
           }}
-          className="bg-C2A3D1 shadow-md rounded p-8  mb-4"
+          className="bg-C2A3D1 shadow-md rounded p-24 mb-4"
         >
-          {" "}
           <Link to="/">
             <button
               style={{
                 color: "#7F7F7F",
                 position: "relative",
-                top: "-20px",
-                left: "-30px",
+                top: "-50px",
+                left: "-80px",
                 width: "30px",
                 height: "20px",
                 borderRadius: "50%",
@@ -59,7 +54,7 @@ const Login = () => {
                 src={flechaVolver}
                 alt=""
               />
-            </button>{" "}
+            </button>
           </Link>
           <h1
             style={{ color: "white" }}
@@ -67,9 +62,10 @@ const Login = () => {
           >
             Bienvenido
           </h1>
-          <div className="mb-4">
+          <div className="mb-6">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              style={{ width: "300px" }}
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="username"
               type="text"
               placeholder="Usuario"
@@ -77,21 +73,34 @@ const Login = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6" style={{ position: "relative" }}>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button
+              style={{
+                position: "absolute",
+                top: "50%",
+                right: "10px",
+                transform: "translateY(-50%)",
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+              }}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <div>{showPassword ? "👁" : "👁️‍🗨️"}</div>
+            </button>
           </div>
           <div className="mb-6 text-center">
             <button
               style={{ backgroundColor: "#7410A3", color: "white" }}
-              className="w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={handleLogin}
+              className="w-full hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Iniciar Sesión
             </button>
@@ -106,7 +115,7 @@ const Login = () => {
           </div>
           <p
             style={{ fontSize: ".8rem" }}
-            className=" text-center text-white text-xs"
+            className="text-center text-white text-xs"
           >
             ¿No tienes cuenta?{" "}
             <a className="text-blue-500 hover:text-gray-500" href="#">
