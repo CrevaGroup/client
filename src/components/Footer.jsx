@@ -30,7 +30,7 @@ function Footer(){
             <NavLink to="/Comunidad">Comunidad Creva</NavLink>
             </div>
             <div className="mb-2">
-            <NavLink to="/Contacto">Contacto</NavLink>
+            <NavLink to="/Contact">Contacto</NavLink>
             </div>
             <div className="mb-2"></div>
           </div>
