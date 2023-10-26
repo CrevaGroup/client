@@ -58,7 +58,7 @@ const ServiceCards = () => {
                             </li>
                         </ul>
                         <p
-                            className="my-2 text-xl"
+                            className="my-2 text-xl text-white"
                         >
                             Modalidad:                            
                         </p>
