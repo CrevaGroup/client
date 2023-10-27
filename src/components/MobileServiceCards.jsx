@@ -16,7 +16,7 @@ const MobileServiceCards = () => {
             <div
             >
                     <div
-                        className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-dark-violet to-black `}
+                        className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-dark-gray-blue to-black `}
                     >
                         
                         <h1
@@ -26,7 +26,7 @@ const MobileServiceCards = () => {
                         Capacitacion para entrevistas
                     </h1>
                     <button
-                        className=" bg-dark-violet p-2 rounded-full font-semibold  my-2 w-[104px] text-light-gray "
+                        className="  p-2 rounded-full font-semibold  my-2 w-full text-light-gray "
                         onClick={()=>cardHandler()}
                     >{open ? 'Ver menos' : 'Ver mas'}</button>
                     </div>
