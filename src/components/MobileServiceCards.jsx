@@ -10,41 +10,45 @@ const MobileServiceCards = () => {
 
     return(
         <div
-            className="lg:hidden"
+            className={`lg:hidden   overflow-hidden bg-dark-violet  rounded-3xl transition-all duration-300`}
         >
-            <div>
+ 
+            <div
+            >
                     <div
-                        className={`flex flex-col bg-dark-violet items-center justify-center text-center ${open ? `rounded-tl-3xl rounded-tr-3xl`: `rounded-3xl`} transition-all duration-300 `}
+                        className={`flex flex-col  items-center justify-center text-center  `}
                     >
+                        
                         <h1
-                        className="flex text-2xl font-bold text-custom-violet lg:hidden h-16 text-center items-center"
+                        className="flex text-2xl font-bold text-custom-violet lg:hidden h-16  text-center items-center"
 
                     >
                         Capacitacion para entrevistas
                     </h1>
                     <button
-                        className=" bg-light-gray p-2 rounded-full font-bold my-2"
+                        className=" bg-light-gray p-2 rounded-full font-bold my-2 w-28"
                         onClick={()=>cardHandler()}
-                    >Ver mas</button>
+                    >{open ? 'Ver menos' : 'Ver mas'}</button>
                     </div>
                 <Collapse
                     open={open}
                 >
                     <div>
                        <div
-            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[448px]  ${open ? 'rounded-br-3xl rounded-bl-3xl' : 'rounded-3xl'} lg:hidden transition-all duration-300`}
+            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[576px]  ${open ? 'rounded-br-3xl rounded-bl-3xl' : 'rounded-3xl'} lg:hidden transition-all duration-300`}
         >
-            <div
-                className="w-[352px] h-[448px] "
-            >
-                <img
-                    className="h-full w-full object-cover  "
+                            <img
+                    className="h-full w-full object-cover "
                     src={example}
                     alt="ex"
                 >
                 </img>
+            <div
+                className="w-[352px] h-[576px] "
+            >
+
                 <div
-                    className="absolute inset-0 "
+                    className="absolute inset-0 bg-black bg-opacity-70"
                 >
                 </div>
                 <div
