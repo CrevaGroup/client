@@ -1,36 +1,58 @@
-import React from "react";
+import { Collapse } from "@material-tailwind/react";
+import React, { useState } from "react";
 import example from '../assets/example.png'
+const MobileServiceCards = () => {
+    const [open,setOpen] = useState(false);
 
-
-const ServiceCards = () => {
+    const cardHandler = () => {
+        setOpen(curr => !curr);
+    }
 
     return(
         <div
-            className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/30 transition-shadow w-[352px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl"
+            className="lg:hidden"
+        >
+            <div>
+                    <div
+                        className={`flex flex-col bg-dark-violet items-center justify-center text-center ${open ? `rounded-tl-3xl rounded-tr-3xl`: `rounded-3xl`} transition-all duration-300 `}
+                    >
+                        <h1
+                        className="flex text-2xl font-bold text-custom-violet lg:hidden h-16 text-center items-center"
+
+                    >
+                        Capacitacion para entrevistas
+                    </h1>
+                    <button
+                        className=" bg-light-gray p-2 rounded-full font-bold my-2"
+                        onClick={()=>cardHandler()}
+                    >Ver mas</button>
+                    </div>
+                <Collapse
+                    open={open}
+                >
+                    <div>
+                       <div
+            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[448px]  ${open ? 'rounded-br-3xl rounded-bl-3xl' : 'rounded-3xl'} lg:hidden transition-all duration-300`}
         >
             <div
-                className="w-[352px] h-[448px] lg:h-[544px] lg:w-[448px]"
+                className="w-[352px] h-[448px] "
             >
                 <img
-                    className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
+                    className="h-full w-full object-cover  "
                     src={example}
                     alt="ex"
                 >
                 </img>
                 <div
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"
+                    className="absolute inset-0 "
                 >
                 </div>
                 <div
-                    className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center translate-y-[75%] group-hover:translate-y-0 transition-all duration-500"
+                    className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center "
                 >
-                    <h1
-                        className="text-2xl font-bold text-custom-violet"
-                    >
-                        Capacitacion para entrevistas
-                    </h1>
+
                     <div
-                        className="text-lg italic text-light-gray mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-start "
+                        className="text-lg italic text-light-gray mb-3  text-start "
                     >
                         <p
                             className="my-2 text-center text-xl"
@@ -39,7 +61,7 @@ const ServiceCards = () => {
 
                         </p>
                         <ul
-                            className="my-2 ml-8 hidden lg:block"
+                            className="my-2 ml-8 "
                         >
                             <li>
                                 Presentación personal
@@ -88,8 +110,13 @@ const ServiceCards = () => {
 
             </div>
         </div>
+                    </div>
+                </Collapse>
+            
+            </div>
+        </div>
     )
 }
 
-export default ServiceCards;
+export default MobileServiceCards;
 
