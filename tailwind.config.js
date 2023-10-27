@@ -15,6 +15,7 @@ export default {
         "custom-violet": "#E9D1F7",
         "light-gray": "#E4E6EB",
         "semidark-gray": "#979595",
+        "custom-blue": "#283430",
       },
     },
   },
