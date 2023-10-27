@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   return (
     <div
       style={{ backgroundColor: "#EFEFEF" }}
@@ -109,7 +110,10 @@ const Login = () => {
             <button
               style={{ backgroundColor: "#7410A3", color: "white" }}
               className="w-full hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => dispatch(getUser(email, password))}
+              onClick={() => {
+                dispatch(getUser(email, password))
+                navigate('/')
+              }}
             >
               Iniciar Sesión
             </button>
@@ -118,7 +122,10 @@ const Login = () => {
             <button
               style={{ backgroundColor: "#7410A3", color: "white" }}
               className="w-full hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => dispatch(googleLogin())}
+              onClick={() => {
+                dispatch(googleLogin())
+                navigate('/')
+              }}
             >
               Iniciar Sesión con Google
             </button>
