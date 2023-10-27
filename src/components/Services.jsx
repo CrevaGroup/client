@@ -12,8 +12,8 @@ function Services() {
   }
 
   return (
-    <div className="mt-40 flex items-center justify-center">
-      <div className="bg-white p-4 rounded">
+    <div className="mt-20 mb-20 flex items-center justify-center">
+      <div className="bg-white p-4 rounded shadow-xl">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between mt-5 mx-10 bg-white p-4 rounded overflow-visible">
           <div>
             <h1 className="text-4xl mb-2 lg:mb-0">Empieza con</h1>
