@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser } from "firebase/auth"
 import {auth} from "../../Firebase"
 
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
@@ -50,13 +50,18 @@ export const createUser = (username, password, email, age) => {
     }
 }
 
-export const deleteUser = () => {
+export const deleteUser = (email, password) => {
     return async function(dispatch){
         try {
-            const response = await axios.post(`URL`)
+            const firebaseUser = await signInWithEmailAndPassword(auth, email, password)
+            const id = firebaseUser.user.uid
+            const disable = await deleteUser(firebaseUser);
+            if(disable) {
+                const response = await axios.delete(`/user/${id}`)
+                alert(response.data)
+            }
             return dispatch({
                 type: DELETE_USER,
-                payload: response.data
             })
         } catch (error) {
             alert(error.message)
