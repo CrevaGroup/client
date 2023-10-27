@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { createUser } from "../Redux/Actions/actions";
 
 function Register() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNaigate()
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -274,9 +274,9 @@ const validateEmail = (email) => {
   if (!email) {
     return "El correo electrónico es obligatorio.";
   }
-  if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
-    return "El correo electrónico debe ser una dirección de Gmail válida.";
-  }
+  // if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
+  //   return "El correo electrónico debe ser una dirección de Gmail válida.";
+  // }
   return null; // Retorna null si no hay errores
 };
 

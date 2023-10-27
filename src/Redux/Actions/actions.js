@@ -6,6 +6,7 @@ import {
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
+  sendEmailVerification
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -41,9 +42,17 @@ export const getUser = (email, password) => {
         email,
         password
       );
-      const response = firebaseUser.user.uid
+      console.log(firebaseUser.user.emailVerified);
+      if(!firebaseUser.user.emailVerified) {
+        alert('Verifica Tu Email!!');
+        return
+      }
+
+
+        const response = firebaseUser.user.uid
         ? await axios.get(`/user/?id=${firebaseUser.user.uid}`)
         : null;
+
       return dispatch({
         type: GET_USER,
         payload: response.data,
@@ -91,12 +100,14 @@ export const createUser = (username, password, email, age) => {
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
+          verified: firebaseUser.user.emailVerified
         };
       }
       const response = await axios.post("/user", user);
+        sendEmailVerification(firebaseUser.user);
+        alert(response.data);
       return dispatch({
-        type: CREATE_USER,
-        payload: response.data,
+        type: CREATE_USER
       });
     } catch (error) {
       alert(error.message);
