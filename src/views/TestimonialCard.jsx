@@ -22,7 +22,7 @@ function StarIcon() {
   );
 }
 
-export function TestimonialCard() {
+const TestimonialCard = () => {
   return (
     <Card color="transparent" shadow={true} className="w-full max-w-[28rem]">
       <CardHeader
@@ -63,4 +63,6 @@ export function TestimonialCard() {
       </CardBody>
     </Card>
   );
-}
+};
+
+export default TestimonialCard;
