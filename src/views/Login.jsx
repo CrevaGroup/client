@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
-
+import logo from "../assets/logo.png";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +12,11 @@ const Login = () => {
       style={{ backgroundColor: "#EFEFEF" }}
       className="flex flex-col justify-center items-center h-screen"
     >
+      <img
+        src={logo}
+        alt="Logo"
+        style={{ width: "100px", height: "100px", marginTop: "40px" }}
+      />
       <div
         style={{
           display: "flex",

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
+import logo from "../assets/logo.png";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -49,6 +50,11 @@ function Register() {
       style={{ backgroundColor: "#EFEFEF" }}
       className="flex flex-col justify-center items-center h-screen"
     >
+      <img
+        src={logo}
+        alt="Logo"
+        style={{ width: "100px", height: "100px", marginTop: "40px" }}
+      />
       <div
         style={{
           display: "flex",
@@ -67,7 +73,7 @@ function Register() {
           style={{
             backgroundColor: "#C2A3D1",
           }}
-          className="bg-C2A3D1 shadow-md rounded p-40  mb-4"
+          className="bg-C2A3D1 shadow-md rounded p-32 mb-4"
         >
           <Link to="/">
             <button
@@ -133,20 +139,7 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
               onBlur={handleValidation}
             />
-            <button
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "10px",
-                transform: "translateY(-50%)",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "👁" : "👁️‍🗨️"}
-            </button>
+
             {errors.password && (
               <p
                 style={{ fontSize: ".8rem", marginBottom: "-20px" }}
@@ -168,20 +161,7 @@ function Register() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               onBlur={handleValidation}
             />
-            <button
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "10px",
-                transform: "translateY(-50%)",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? "👁" : "👁️‍🗨️"}
-            </button>
+
             {errors.confirmPassword && (
               <p
                 style={{ fontSize: ".8rem", marginBottom: "-20px" }}
