@@ -3,6 +3,7 @@ export const CREATE_USER = "CREATE_USER"
 export const UPDATE_USER = "UPDATE_USER"
 export const DELETE_USER = "DELETE_USER"
 export const RESTORE_USER = "RESTORE_USER"
+export const GOOGLE_LOGIN = "GOOGLE_LOGIN"
 
 export const UPDATE_PLAN = "UPDATE_PLAN"
 export const DELETE_PLAN = "DELETE_PLAN"

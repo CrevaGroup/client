@@ -2,7 +2,7 @@ import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER,
          UPDATE_PLAN, DELETE_PLAN,
          GET_REVIEW, CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW,
          GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
-         GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES } from "../Actions/actions-type";
+         GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES, GOOGLE_LOGIN } from "../Actions/actions-type";
 
 let initialState = {
     user:{},
@@ -21,6 +21,11 @@ function rootReducer(state = initialState, action){
                 user: action.payload
             }
         case  UPDATE_USER:
+            return{
+                ...state,
+                user: action.payload
+            }
+        case GOOGLE_LOGIN:
             return{
                 ...state,
                 user: action.payload

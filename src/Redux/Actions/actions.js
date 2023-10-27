@@ -1,18 +1,17 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser, updateEmail, updatePassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser, updateEmail, updatePassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import {auth} from "../../Firebase"
 
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
         UPDATE_PLAN, DELETE_PLAN, 
         GET_REVIEW, CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW, 
         GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
-        GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES } from "./actions-type"
+        GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES, GOOGLE_LOGIN } from "./actions-type"
 
 import axios from "axios"
 
 export const getUser = (email, password) => {
     return async function(dispatch){
         try {
-            console.log(email, password);
             const firebaseUser = await signInWithEmailAndPassword(auth, email, password);
             const response = firebaseUser.user.uid?await axios.get(`/user/?id=${firebaseUser.user.uid}`):null
             return dispatch({
@@ -25,11 +24,32 @@ export const getUser = (email, password) => {
     }
 }
 
+export const googleLogin = () => {
+    return async function(dispatch){
+        try {
+            const provider = new GoogleAuthProvider();
+            const googleUser = await signInWithPopup(auth, provider);
+            const user = {
+                providerId: googleUser.providerId,
+                fullName: googleUser.user.displayName,
+                email: googleUser.user.email,
+                id: googleUser.user.uid
+            }
+            const response = await axios.post('/user', user)
+            return dispatch({
+                type: GOOGLE_LOGIN,
+                payload: response.data
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+
 export const createUser = (username, password, email, age) => {
     return async function(dispatch){
         try {
             const firebaseUser = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(firebaseUser);
             let user = {}
             if(firebaseUser.user){
                  user = {
