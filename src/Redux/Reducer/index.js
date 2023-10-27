@@ -20,13 +20,10 @@ function rootReducer(state = initialState, action){
                 ...state,
                 user: action.payload
             }
-        case DELETE_USER:
-            return{
-
-            }
         case  UPDATE_USER:
             return{
-
+                ...state,
+                user: action.payload
             }
         case RESTORE_USER:
             return{

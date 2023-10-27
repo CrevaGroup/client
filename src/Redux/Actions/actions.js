@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser, updateEmail, updatePassword } from "firebase/auth"
 import {auth} from "../../Firebase"
 
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
@@ -69,10 +69,17 @@ export const deleteUser = (email, password) => {
     }
 }
 
-export const updateUser = () => {
+export const updateUser = (property) => {
     return async function(dispatch){
         try {
-            const response = await axios.put(`URL`)
+            const {data} = await axios.put(`/user`, property)
+            
+            if(property.hasOwnProperty(email)){
+            const firebaseUpdateEmail = await updateEmail(auth, data.id, data.email)
+            } else if(property.hasOwnProperty(password)){
+                const firebaseUpdatePassword = await updatePassword(auth, data.id, property.password)
+            }
+
             return dispatch({
                 type: UPDATE_USER,
                 payload: response.data
