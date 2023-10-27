@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
+import { useDispatch } from "react-redux";
+import { getUser, googleLogin } from "../Redux/Actions/actions";
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const dispatch = useDispatch();
   return (
     <div
       style={{ backgroundColor: "#EFEFEF" }}
@@ -74,8 +77,8 @@ const Login = () => {
               id="username"
               type="text"
               placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-6" style={{ position: "relative" }}>
@@ -106,8 +109,18 @@ const Login = () => {
             <button
               style={{ backgroundColor: "#7410A3", color: "white" }}
               className="w-full hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => dispatch(getUser(email, password))}
             >
               Iniciar Sesión
+            </button>
+          </div>
+          <div className="mb-6 text-center">
+            <button
+              style={{ backgroundColor: "#7410A3", color: "white" }}
+              className="w-full hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => dispatch(googleLogin())}
+            >
+              Iniciar Sesión con Google
             </button>
           </div>
           <div
