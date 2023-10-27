@@ -1,8 +1,12 @@
+import { createUserWithEmailAndPassword } from "@firebase/auth"
+import auth from "../../Firebase"
+
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
         UPDATE_PLAN, DELETE_PLAN, 
         GET_REVIEW, CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW, 
         GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
         GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES } from "./actions-type"
+        
 import axios from "axios"
 
 export const getUser = () => {
@@ -19,10 +23,21 @@ export const getUser = () => {
     }
 }
 
-export const createUser = () => {
+export const createUser = (userInfo) => {
     return async function(dispatch){
         try {
-            const response = await axios.post(`URL`)
+            const {email, password, age, username} = userInfo
+            const firebaseUser = await createUserWithEmailAndPassword(auth, email, password)
+            let user = {}
+            if(firebaseUser.user){
+                 user = {
+                    age: age,
+                    username: username,
+                    email: email,
+                    uid: firebaseUser.user.uid
+                }
+            }
+            const response = await axios.post('http://localhost:3001/user', user)
             return dispatch({
                 type: CREATE_USER,
                 payload: response.data
