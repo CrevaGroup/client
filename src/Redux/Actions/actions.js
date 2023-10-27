@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth"
-import auth from "../../Firebase"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import {auth} from "../../Firebase"
 
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
         UPDATE_PLAN, DELETE_PLAN, 
@@ -12,8 +12,9 @@ import axios from "axios"
 export const getUser = (email, password) => {
     return async function(dispatch){
         try {
+            console.log(email, password);
             const firebaseUser = await signInWithEmailAndPassword(auth, email, password);
-            const response = firebaseUser.user.uid?await axios.get(`http://localhost:3001/user/?id=${firebaseUser.user.uid}`):null
+            const response = firebaseUser.user.uid?await axios.get(`/user/?id=${firebaseUser.user.uid}`):null
             return dispatch({
                 type: GET_USER,
                 payload: response.data
@@ -24,10 +25,11 @@ export const getUser = (email, password) => {
     }
 }
 
-export const createUser = (email, password, age, username) => {
+export const createUser = (username, password, email, age) => {
     return async function(dispatch){
         try {
             const firebaseUser = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(firebaseUser);
             let user = {}
             if(firebaseUser.user){
                  user = {
@@ -37,7 +39,7 @@ export const createUser = (email, password, age, username) => {
                     id: firebaseUser.user.uid
                 }
             }
-            const response = await axios.post('http://localhost:3001/user', user)
+            const response = await axios.post('/user', user)
             return dispatch({
                 type: CREATE_USER,
                 payload: response.data
