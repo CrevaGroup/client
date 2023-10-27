@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
+import logo from "../assets/logo.png";
+import { useDispatch } from "react-redux";
+import { createUser } from "../Redux/Actions/actions";
 
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -10,6 +16,7 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [age, setAge] = useState("");
 
   const [errors, setErrors] = useState({
     username: "",
@@ -30,14 +37,13 @@ function Register() {
   };
 
   const handleLogin = () => {
-    // Realiza las validaciones antes de intentar crear la cuenta
     handleValidation();
 
     if (Object.values(errors).some((error) => error !== null)) {
       return;
     }
-
-    // Agrega aquí la lógica de creación de cuenta
+    dispatch(createUser(username, password, email, age));
+    navigate('/')
   };
 
   const handleRememberMeChange = () => {
@@ -49,6 +55,11 @@ function Register() {
       style={{ backgroundColor: "#EFEFEF" }}
       className="flex flex-col justify-center items-center h-screen"
     >
+      <img
+        src={logo}
+        alt="Logo"
+        style={{ width: "100px", height: "100px", marginTop: "40px" }}
+      />
       <div
         style={{
           display: "flex",
@@ -67,7 +78,7 @@ function Register() {
           style={{
             backgroundColor: "#C2A3D1",
           }}
-          className="bg-C2A3D1 shadow-md rounded p-40  mb-4"
+          className="bg-C2A3D1 shadow-md rounded p-32 mb-4"
         >
           <Link to="/">
             <button
@@ -133,20 +144,7 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
               onBlur={handleValidation}
             />
-            <button
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "10px",
-                transform: "translateY(-50%)",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "👁" : "👁️‍🗨️"}
-            </button>
+
             {errors.password && (
               <p
                 style={{ fontSize: ".8rem", marginBottom: "-20px" }}
@@ -168,20 +166,7 @@ function Register() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               onBlur={handleValidation}
             />
-            <button
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "10px",
-                transform: "translateY(-50%)",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? "👁" : "👁️‍🗨️"}
-            </button>
+
             {errors.confirmPassword && (
               <p
                 style={{ fontSize: ".8rem", marginBottom: "-20px" }}
@@ -201,6 +186,27 @@ function Register() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleValidation}
+            />
+            {errors.email && (
+              <p
+                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
+                className="text-red-600"
+              >
+                {errors.email}
+              </p>
+            )}
+          </div>
+          <div className="mb-6">
+            <input
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                errors.email ? "border-red-500" : ""
+              }`}
+              id="age"
+              type="number"
+              placeholder="Edad"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
               onBlur={handleValidation}
             />
             {errors.email && (
