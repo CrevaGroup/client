@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "@firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth"
 import auth from "../../Firebase"
 
 import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
@@ -6,13 +6,14 @@ import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER,
         GET_REVIEW, CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW, 
         GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
         GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES } from "./actions-type"
-        
+
 import axios from "axios"
 
-export const getUser = () => {
+export const getUser = (email, password) => {
     return async function(dispatch){
         try {
-            const response = await axios.get(`URL`)
+            const firebaseUser = await signInWithEmailAndPassword(auth, email, password);
+            const response = firebaseUser.user.uid?await axios.get(`http://localhost:3001/user/?id=${firebaseUser.user.uid}`):null
             return dispatch({
                 type: GET_USER,
                 payload: response.data
@@ -23,18 +24,17 @@ export const getUser = () => {
     }
 }
 
-export const createUser = (userInfo) => {
+export const createUser = (email, password, age, username) => {
     return async function(dispatch){
         try {
-            const {email, password, age, username} = userInfo
-            const firebaseUser = await createUserWithEmailAndPassword(auth, email, password)
+            const firebaseUser = await createUserWithEmailAndPassword(auth, email, password);
             let user = {}
             if(firebaseUser.user){
                  user = {
                     age: age,
-                    username: username,
+                    fullName: username,
                     email: email,
-                    uid: firebaseUser.user.uid
+                    id: firebaseUser.user.uid
                 }
             }
             const response = await axios.post('http://localhost:3001/user', user)

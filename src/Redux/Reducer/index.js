@@ -4,17 +4,21 @@ import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER,
          GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
          GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES } from "../Actions/actions-type";
 
-let initialState = {}
+let initialState = {
+    user:{},
+}
 
 function rootReducer(state = initialState, action){
     switch(action.type){
         case GET_USER: 
         return{
-
+                ...state,
+                user: action.payload
         }
         case CREATE_USER:
             return{
-
+                ...state,
+                user: action.payload
             }
         case DELETE_USER:
             return{
