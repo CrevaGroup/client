@@ -10,13 +10,13 @@ const MobileServiceCards = () => {
 
     return(
         <div
-            className={`lg:hidden   overflow-hidden bg-dark-violet  rounded-3xl transition-all duration-300`}
+            className={`lg:hidden   overflow-hidden   rounded-3xl transition-all duration-300`}
         >
  
             <div
             >
                     <div
-                        className={`flex flex-col  items-center justify-center text-center  `}
+                        className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-dark-violet to-black `}
                     >
                         
                         <h1
@@ -26,7 +26,7 @@ const MobileServiceCards = () => {
                         Capacitacion para entrevistas
                     </h1>
                     <button
-                        className=" bg-light-gray p-2 rounded-full font-bold my-2 w-28"
+                        className=" bg-dark-violet p-2 rounded-full font-semibold  my-2 w-[104px] text-light-gray "
                         onClick={()=>cardHandler()}
                     >{open ? 'Ver menos' : 'Ver mas'}</button>
                     </div>
@@ -35,7 +35,7 @@ const MobileServiceCards = () => {
                 >
                     <div>
                        <div
-            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[576px]  ${open ? 'rounded-br-3xl rounded-bl-3xl' : 'rounded-3xl'} lg:hidden transition-all duration-300`}
+            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[576px]  rounded-br-3xl rounded-bl-3xl lg:hidden transition-all duration-300`}
         >
                             <img
                     className="h-full w-full object-cover "
@@ -48,7 +48,7 @@ const MobileServiceCards = () => {
             >
 
                 <div
-                    className="absolute inset-0 bg-black bg-opacity-70"
+                    className="absolute inset-0 bg-black bg-opacity-80"
                 >
                 </div>
                 <div

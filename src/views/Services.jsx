@@ -2,6 +2,7 @@ import React from "react";
 import ServiceCards from "../components/ServiceCards";
 import Footer from "../components/Footer";
 import MobileServiceCards from "../components/MobileServiceCards";
+import AllServiceCards from "../components/AllServiceCards";
 
 const Services = () => {
     return(
@@ -27,15 +28,10 @@ const Services = () => {
                 <div
                 className="grid grid-cols-1 lg:grid-cols-2 gap-y-10  gap-x-64 min-w-screen my-8 justify-center items-center"
             >
-                <ServiceCards/>
-                <ServiceCards/>
-                <ServiceCards/>
-                <ServiceCards/>
-
-                <MobileServiceCards/>
-                <MobileServiceCards/>                
-                <MobileServiceCards/>                
-                <MobileServiceCards/>
+                <AllServiceCards/>
+                <AllServiceCards/>
+                <AllServiceCards/>
+                <AllServiceCards/>
 
             </div>
             </div>
