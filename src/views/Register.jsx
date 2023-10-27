@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import { createUser } from "../Redux/Actions/actions";
 
 function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,12 +42,13 @@ function Register() {
     if (Object.values(errors).some((error) => error !== null)) {
       return;
     }
+    dispatch(createUser(username, password, email, age));
+    navigate('/')
   };
 
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe);
   };
-  dispatch(createUser(username, password, email, age));
 
   return (
     <div
