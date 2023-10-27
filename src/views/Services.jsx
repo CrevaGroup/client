@@ -1,5 +1,6 @@
 import React from "react";
 import ServiceCards from "../components/ServiceCards";
+import Footer from "../components/Footer";
 
 const Services = () => {
     return(
@@ -32,7 +33,7 @@ const Services = () => {
 
             </div>
             </div>
-
+            <Footer/>
         </div>
     )
 }
