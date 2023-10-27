@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
+import { useDispatch } from "react-redux";
+import { createUser } from "../Redux/Actions/actions";
 
 function Register() {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -11,6 +15,7 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [age, setAge] = useState("");
 
   const [errors, setErrors] = useState({
     username: "",
@@ -31,19 +36,17 @@ function Register() {
   };
 
   const handleLogin = () => {
-    // Realiza las validaciones antes de intentar crear la cuenta
     handleValidation();
 
     if (Object.values(errors).some((error) => error !== null)) {
       return;
     }
-
-    // Agrega aquí la lógica de creación de cuenta
   };
 
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe);
   };
+  dispatch(createUser(username, password, email, age));
 
   return (
     <div
@@ -181,6 +184,27 @@ function Register() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleValidation}
+            />
+            {errors.email && (
+              <p
+                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
+                className="text-red-600"
+              >
+                {errors.email}
+              </p>
+            )}
+          </div>
+          <div className="mb-6">
+            <input
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                errors.email ? "border-red-500" : ""
+              }`}
+              id="age"
+              type="number"
+              placeholder="Edad"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
               onBlur={handleValidation}
             />
             {errors.email && (
