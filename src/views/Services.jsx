@@ -5,8 +5,17 @@ import cv from '../assets/cv.png'
 import interview from '../assets/interview.png'
 import job from '../assets/job-search.png'
 import profile from '../assets/linkedin-profile.png'
+import Filters from "../components/Filters";
+import { useDispatch } from "react-redux";
+import { filtersService } from "../Redux/Actions/actions";
 
 const Services = () => {
+    const dispatch = useDispatch();
+
+    const filtrado = e => {
+        dispatch(filtersService(e));
+    }
+
     return(
         <div
             className="bg-custom-gray h-full pt-4 lg:pt-8"
@@ -21,6 +30,12 @@ const Services = () => {
                 <p
                     className="text-xl"
                 >Potenciá tu carrera</p>
+            </div>
+
+            <div>
+                <Filters
+                    filtrado={filtrado}
+                />
             </div>
 
             <div

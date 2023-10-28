@@ -1,96 +1,94 @@
-import { GET_USER, CREATE_USER, DELETE_USER, UPDATE_USER, RESTORE_USER, 
-         UPDATE_PLAN, DELETE_PLAN,
-         GET_REVIEW, CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW,
-         GET_TRANSACTION, UPDATE_TRANSACTION, CREATE_TRANSACTION, DELETE_TRANSACTION,
-         GET_SERVICES, CREATE_SERVICES, DELETE_SERVICES, GOOGLE_LOGIN } from "../Actions/actions-type";
+import {
+  GET_USER,
+  CREATE_USER,
+  DELETE_USER,
+  UPDATE_USER,
+  RESTORE_USER,
+  UPDATE_PLAN,
+  DELETE_PLAN,
+  GET_REVIEW,
+  CREATE_REVIEW,
+  UPDATE_REVIEW,
+  DELETE_REVIEW,
+  GET_TRANSACTION,
+  UPDATE_TRANSACTION,
+  CREATE_TRANSACTION,
+  DELETE_TRANSACTION,
+  GET_SERVICES,
+  CREATE_SERVICES,
+  DELETE_SERVICES,
+  GOOGLE_LOGIN,
+  FILTERS_SERVICES,
+} from "../Actions/actions-type";
 
 let initialState = {
-    user:{},
-}
+  user: {},
+  services: [],
+  allServices: [],
+};
 
-function rootReducer(state = initialState, action){
-    switch(action.type){
-        case GET_USER: 
-        return{
-                ...state,
-                user: action.payload
-        }
-        case CREATE_USER:
-            return{
-                ...state,
-                user: action.payload
-            }
-        case  UPDATE_USER:
-            return{
-                ...state,
-                user: action.payload
-            }
-        case GOOGLE_LOGIN:
-            return{
-                ...state,
-                user: action.payload
-            }
-        case RESTORE_USER:
-            return{
+function rootReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case CREATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case GOOGLE_LOGIN:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case RESTORE_USER:
+      return {};
+    case UPDATE_PLAN:
+      return {};
+    case DELETE_PLAN:
+      return {};
+    case GET_REVIEW:
+      return {};
+    case CREATE_REVIEW:
+      return {};
+    case UPDATE_REVIEW:
+      return {};
+    case DELETE_REVIEW:
+      return {};
+    case GET_TRANSACTION:
+      return {};
+    case UPDATE_TRANSACTION:
+      return {};
+    case DELETE_TRANSACTION:
+      return {};
+    case CREATE_TRANSACTION:
+      return {};
+    case GET_SERVICES:
+      return {};
+    case CREATE_SERVICES:
+      return {};
+    case DELETE_SERVICES:
+      return {};
 
-            }
-        case UPDATE_PLAN:
-            return{
-
-            }
-        case DELETE_PLAN:
-            return{
-
-            }
-        case GET_REVIEW:
-            return{
-
-            }
-        case CREATE_REVIEW:
-            return{
-
-            }
-        case UPDATE_REVIEW:
-            return {
-
-            }
-        case DELETE_REVIEW:
-            return{
-
-            }
-        case GET_TRANSACTION:
-            return {
-
-            }
-        case UPDATE_TRANSACTION:
-            return{
-
-            }
-        case DELETE_TRANSACTION:
-            return{
-
-            }
-        case CREATE_TRANSACTION:
-            return{
-
-            }
-        case GET_SERVICES:
-            return{
-
-            }
-        case CREATE_SERVICES:
-            return{
-
-            }
-        case DELETE_SERVICES:
-            return{
-
-            }
-        default:
-            return{
-                state
-            }
-    }
+    case FILTERS_SERVICES:
+      const filteredServices = action.payload;
+      return {
+        ...state,
+        services: filteredServices,
+      };
+    default:
+      return {
+        state,
+      };
+  }
 }
 
 export default rootReducer;

@@ -6,7 +6,7 @@ import {
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
-  sendEmailVerification
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -30,6 +30,7 @@ import {
   CREATE_SERVICES,
   DELETE_SERVICES,
   GOOGLE_LOGIN,
+  FILTERS_SERVICES,
 } from "./actions-type";
 
 import axios from "axios";
@@ -43,13 +44,12 @@ export const getUser = (email, password) => {
         password
       );
       console.log(firebaseUser.user.emailVerified);
-      if(!firebaseUser.user.emailVerified) {
-        alert('Verifica Tu Email!!');
-        return
+      if (!firebaseUser.user.emailVerified) {
+        alert("Verifica Tu Email!!");
+        return;
       }
 
-
-        const response = firebaseUser.user.uid
+      const response = firebaseUser.user.uid
         ? await axios.get(`/user/?id=${firebaseUser.user.uid}`)
         : null;
 
@@ -100,14 +100,14 @@ export const createUser = (username, password, email, age) => {
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
-          verified: firebaseUser.user.emailVerified
+          verified: firebaseUser.user.emailVerified,
         };
       }
       const response = await axios.post("/user", user);
-        sendEmailVerification(firebaseUser.user);
-        alert(response.data);
+      sendEmailVerification(firebaseUser.user);
+      alert(response.data);
       return dispatch({
-        type: CREATE_USER
+        type: CREATE_USER,
       });
     } catch (error) {
       alert(error.message);
@@ -355,6 +355,50 @@ export const deleteServices = () => {
       const response = await axios.post(`URL`);
       return dispatch({
         type: DELETE_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+// export const orderServices = (order) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios(`URL/services/${order}`);
+//       return dispatch({
+//         type: ORDER_SERVICES,
+//         payload: response.data,
+//       });
+//     } catch (error) {
+//       alert(error.message);
+//     }
+//   };
+// };
+
+// export const filterServices = (filter) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios(`URL/services/${filter}`);
+//       return dispatch({
+//         type: FILTER_SERVICES,
+//         payload: response.data,
+//       });
+//     } catch (error) {
+//       alert(error.message);
+//     }
+//   };
+// };
+
+export const filtersService = ({ min, max, order, filter }) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `services/?order=${order}&min=${min}&max${max}&keyword=${filter}`
+      );
+      return dispatch({
+        type: FILTERS_SERVICES,
         payload: response.data,
       });
     } catch (error) {

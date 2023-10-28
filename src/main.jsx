@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-
+import 'tw-elements';
 import store from './Redux/Store/index.js'
 import { Provider } from 'react-redux'
 import axios from 'axios'
