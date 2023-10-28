@@ -1,7 +1,7 @@
 import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import example from '../assets/example.png'
-const MobileServiceCards = () => {
+const MobileServiceCards = ({img}) => {
     const [open,setOpen] = useState(false);
 
     const cardHandler = () => {
@@ -16,7 +16,7 @@ const MobileServiceCards = () => {
             <div
             >
                     <div
-                        className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-dark-gray-blue to-black `}
+                        className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-black/60  to-black/70`}
                     >
                         
                         <h1
@@ -26,7 +26,7 @@ const MobileServiceCards = () => {
                         Capacitacion para entrevistas
                     </h1>
                     <button
-                        className="  p-2 rounded-full font-semibold  my-2 w-full text-light-gray "
+                        className="  p-2 rounded-full text-lg  my-2 w-full text-light-gray "
                         onClick={()=>cardHandler()}
                     >{open ? 'Ver menos' : 'Ver mas'}</button>
                     </div>
@@ -39,7 +39,7 @@ const MobileServiceCards = () => {
         >
                             <img
                     className="h-full w-full object-cover "
-                    src={example}
+                    src={img}
                     alt="ex"
                 >
                 </img>
@@ -48,7 +48,7 @@ const MobileServiceCards = () => {
             >
 
                 <div
-                    className="absolute inset-0 bg-black bg-opacity-80"
+                    className="absolute inset-0 bg-black bg-opacity-70"
                 >
                 </div>
                 <div

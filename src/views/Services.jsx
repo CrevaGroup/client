@@ -1,8 +1,10 @@
 import React from "react";
-import ServiceCards from "../components/ServiceCards";
 import Footer from "../components/Footer";
-import MobileServiceCards from "../components/MobileServiceCards";
 import AllServiceCards from "../components/AllServiceCards";
+import cv from '../assets/cv.png'
+import interview from '../assets/interview.png'
+import job from '../assets/job-search.png'
+import profile from '../assets/linkedin-profile.png'
 
 const Services = () => {
     return(
@@ -28,10 +30,10 @@ const Services = () => {
                 <div
                 className="grid grid-cols-1 lg:grid-cols-2 gap-y-10  gap-x-64 min-w-screen my-8 justify-center items-center"
             >
-                <AllServiceCards/>
-                <AllServiceCards/>
-                <AllServiceCards/>
-                <AllServiceCards/>
+                <AllServiceCards img={cv}/>
+                <AllServiceCards img={profile}/>
+                <AllServiceCards img={job}/>
+                <AllServiceCards img={interview}/>
 
             </div>
             </div>

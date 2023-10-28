@@ -2,7 +2,7 @@ import React from "react";
 import example from '../assets/example.png'
 
 
-const ServiceCards = () => {
+const ServiceCards = ({img}) => {
 
     return(
         <div
@@ -13,12 +13,12 @@ const ServiceCards = () => {
             >
                 <img
                     className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
-                    src={example}
+                    src={img}
                     alt="ex"
                 >
                 </img>
                 <div
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"
+                    className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"
                 >
                 </div>
                 <div
