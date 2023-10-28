@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { createUser } from "../Redux/Actions/actions";
 
 function Register() {
   const dispatch = useDispatch();
-  const navigate = useNaigate()
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
