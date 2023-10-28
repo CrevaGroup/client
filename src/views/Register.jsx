@@ -274,9 +274,9 @@ const validateEmail = (email) => {
   if (!email) {
     return "El correo electrónico es obligatorio.";
   }
-  if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
-    return "El correo electrónico debe ser una dirección de Gmail válida.";
-  }
+  // if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
+  //   return "El correo electrónico debe ser una dirección de Gmail válida.";
+  // }
   return null; // Retorna null si no hay errores
 };
 
