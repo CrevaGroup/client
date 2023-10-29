@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import flechaVolver from "../assets/flechaVolver.svg";
 import logo from "../assets/logo.png";
+import imgGoogle from "../assets/LogosGoogleIcon.svg";
+import nuevaImagen from "../assets/Sign up-amico.png";
 import { useDispatch } from "react-redux";
-import { createUser } from "../Redux/Actions/actions";
+import { createUser, googleLogin } from "../Redux/Actions/actions";
 
 function Register() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,25 +27,36 @@ function Register() {
     email: "",
   });
 
-  const handleValidation = () => {
-    const newErrors = {
-      username: validateUsername(username),
-      password: validatePassword(password),
-      confirmPassword: validateConfirmPassword(password, confirmPassword),
-      email: validateEmail(email),
-    };
-
-    setErrors(newErrors);
+  const handleValidation = (field, value) => {
+    if (field === "username") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        username: validateUsername(value),
+      }));
+    } else if (field === "password") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: validatePassword(value),
+      }));
+    } else if (field === "confirmPassword") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: validateConfirmPassword(password, value),
+      }));
+    } else if (field === "email") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: validateEmail(value),
+      }));
+    }
   };
 
   const handleLogin = () => {
-    handleValidation();
-
-    if (Object.values(errors).some((error) => error !== null)) {
+    if (Object.values(errors).some((error) => error !== "")) {
       return;
     }
     dispatch(createUser(username, password, email, age));
-    navigate('/')
+    navigate("/");
   };
 
   const handleRememberMeChange = () => {
@@ -51,68 +64,40 @@ function Register() {
   };
 
   return (
-    <div
-      style={{ backgroundColor: "#EFEFEF" }}
-      className="flex flex-col justify-center items-center h-screen"
-    >
-      <img
-        src={logo}
-        alt="Logo"
-        style={{ width: "100px", height: "100px", marginTop: "40px" }}
-      />
+    <div className="bg-gray-200 min-h-screen flex flex-row">
+      <div className="w-full md:w-1/2 p-20 hidden md:flex md:items-center md:justify-center">
+        <img src={nuevaImagen} alt="Nueva Imagen" className="w-full h-auto" />
+      </div>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingBottom: "20px",
-        }}
-      ></div>
-      <div
-        style={{
-          border: "solid 1px #C1C1C1",
-          padding: "35px 100px 35px 100px",
-          borderRadius: "4px",
-        }}
+        style={{ flexDirection: "column", margin: "10px" }}
+        className="w-full md:w-1/2 flex items-center justify-center"
       >
+        <div>
+          <img
+            style={{
+              width: "100px",
+              height: "100px",
+              margin: "0 auto 20px auto",
+              display: "block",
+            }}
+            src={logo}
+            alt=""
+          />
+        </div>
         <div
-          style={{
-            backgroundColor: "#C2A3D1",
-          }}
-          className="bg-C2A3D1 shadow-md rounded p-32 mb-4"
+          style={{ background: "#C2A3D1" }}
+          className="p-8 rounded shadow-md w-full md:w-96"
         >
           <Link to="/">
-            <button
-              style={{
-                color: "#7F7F7F",
-                position: "relative",
-                top: "-90px",
-                left: "-100px",
-                width: "30px",
-                height: "20px",
-                borderRadius: "50%",
-                border: "none",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "1.5rem",
-              }}
-            >
-              <img
-                style={{ width: "15px", height: "15px" }}
-                src={flechaVolver}
-                alt=""
-              />
+            <button className="text-gray-600 absolute top-0 left-0 mt-2 ml-2 w-8 h-8 rounded-full border-none">
+              <img src={flechaVolver} alt="" className="w-4 h-4 m-auto" />
             </button>
           </Link>
-          <h1
-            style={{ color: "white" }}
-            className="text-2xl text-center font-bold mb-4"
-          >
+          <h1 className="text-2xl font-bold text-center text-white mb-4">
             Registrarse
           </h1>
           <div className="mb-6">
             <input
-              style={{ width: "400px" }}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.username ? "border-red-500" : ""
               }`}
@@ -120,14 +105,13 @@ function Register() {
               type="text"
               placeholder="Nombres"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              onBlur={handleValidation}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                handleValidation("username", e.target.value);
+              }}
             />
             {errors.username && (
-              <p
-                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
-                className="text-red-600"
-              >
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
                 {errors.username}
               </p>
             )}
@@ -141,15 +125,13 @@ function Register() {
               type={showPassword ? "text" : "password"}
               placeholder="Contraseña"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={handleValidation}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                handleValidation("password", e.target.value);
+              }}
             />
-
             {errors.password && (
-              <p
-                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
-                className="text-red-600"
-              >
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
                 {errors.password}
               </p>
             )}
@@ -163,15 +145,13 @@ function Register() {
               type={showConfirmPassword ? "text" : "password"}
               placeholder="Confirmar contraseña"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              onBlur={handleValidation}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                handleValidation("confirmPassword", e.target.value);
+              }}
             />
-
             {errors.confirmPassword && (
-              <p
-                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
-                className="text-red-600"
-              >
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
                 {errors.confirmPassword}
               </p>
             )}
@@ -185,41 +165,29 @@ function Register() {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={handleValidation}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                handleValidation("email", e.target.value);
+              }}
             />
             {errors.email && (
-              <p
-                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
-                className="text-red-600"
-              >
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
                 {errors.email}
               </p>
             )}
           </div>
-          <div className="mb-6">
+          <div className="mb-6" style={{ position: "relative" }}>
             <input
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                errors.email ? "border-red-500" : ""
-              }`}
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="age"
               type="number"
               placeholder="Edad"
               value={age}
               onChange={(e) => setAge(e.target.value)}
-              onBlur={handleValidation}
             />
-            {errors.email && (
-              <p
-                style={{ fontSize: ".8rem", marginBottom: "-20px" }}
-                className="text-red-600"
-              >
-                {errors.email}
-              </p>
-            )}
           </div>
           <div className="mb-6 text-center">
-            <div className="flex items-center justify-between mb-2">
+            {/* <div className="flex items-center justify-between mb-2">
               <label htmlFor="rememberMe" className="inline-flex items-center">
                 <input
                   type="checkbox"
@@ -228,15 +196,38 @@ function Register() {
                   onChange={handleRememberMeChange}
                   className="form-checkbox h-5 w-5 text-purple-600"
                 />
-                <span className="ml-2 text-gray-700">Remember Me</span>
+                <span className="ml-2 text-white">Recordarme</span>
               </label>
-            </div>
+            </div> */}
             <button
-              style={{ backgroundColor: "#7410A3", color: "white" }}
-              className="w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              style={{ backgroundColor: "#7410A3" }}
+              className="w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               onClick={handleLogin}
             >
               Crear Cuenta
+            </button>
+          </div>
+          <div
+            style={{
+              backgroundColor: "#7410A3",
+              display: "flex",
+              height: "50px",
+              background: "#7410A3",
+              justifyContent: "space-between",
+              borderRadius: "5px",
+              padding: "10px",
+            }}
+            className="mb-6 text-center"
+          >
+            <img src={imgGoogle} alt="" />
+            <button
+              className="w-full text-white font-bold py-0 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => {
+                dispatch(googleLogin());
+                navigate("/");
+              }}
+            >
+              Registrarse con Google
             </button>
           </div>
         </div>
@@ -253,31 +244,32 @@ const validateUsername = (username) => {
   if (!/^[a-zA-Z ]+$/i.test(username)) {
     return "El nombre solo puede contener letras y espacios.";
   }
-  return null; // Retorna null si no hay errores
+  return ""; // Retorna una cadena vacía si no hay errores
 };
 
 const validatePassword = (password) => {
   if (password.length < 6) {
     return "La contraseña debe tener al menos 6 caracteres.";
   }
-  return null;
+  return "";
 };
 
 const validateConfirmPassword = (password, confirmPassword) => {
   if (password !== confirmPassword) {
     return "Las contraseñas no coinciden.";
   }
-  return null;
+  return "";
 };
 
 const validateEmail = (email) => {
   if (!email) {
     return "El correo electrónico es obligatorio.";
   }
+  // Agrega validación personalizada para el formato de correo si es necesario
   // if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
   //   return "El correo electrónico debe ser una dirección de Gmail válida.";
   // }
-  return null; // Retorna null si no hay errores
+  return ""; // Retorna una cadena vacía si no hay errores
 };
 
 export default Register;
