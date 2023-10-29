@@ -1,11 +1,7 @@
 import {
   GET_USER,
   CREATE_USER,
-  DELETE_USER,
   UPDATE_USER,
-  RESTORE_USER,
-  UPDATE_PLAN,
-  DELETE_PLAN,
   GET_REVIEW,
   CREATE_REVIEW,
   UPDATE_REVIEW,
@@ -14,9 +10,10 @@ import {
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
   DELETE_TRANSACTION,
-  GET_SERVICES,
-  CREATE_SERVICES,
-  DELETE_SERVICES,
+  GET_SERVICE,
+  CREATE_SERVICE,
+  DELETE_SERVICE,
+  UPDATE_SERVICE,
   GOOGLE_LOGIN,
   FILTERS_SERVICES,
 } from "../Actions/actions-type";
@@ -59,12 +56,6 @@ function rootReducer(state = initialState, action) {
         services: action.payload
       };
       
-    case RESTORE_USER:
-      return {};
-    case UPDATE_PLAN:
-      return {};
-    case DELETE_PLAN:
-      return {};
     case GET_REVIEW:
       return {};
     case CREATE_REVIEW:
@@ -77,15 +68,15 @@ function rootReducer(state = initialState, action) {
       return {};
     case UPDATE_TRANSACTION:
       return {};
-    case DELETE_TRANSACTION:
-      return {};
     case CREATE_TRANSACTION:
       return {};
-    case GET_SERVICES:
+    case GET_SERVICE:
       return {};
-    case CREATE_SERVICES:
+    case CREATE_SERVICE:
       return {};
-    case DELETE_SERVICES:
+    case DELETE_SERVICE:
+      return {};
+    case UPDATE_SERVICE:
       return {};
 
     default:

@@ -16,6 +16,7 @@ import {
   DELETE_USER,
   UPDATE_USER,
   RESTORE_USER,
+  GOOGLE_LOGIN,
   GET_REVIEW,
   CREATE_REVIEW,
   UPDATE_REVIEW,
@@ -23,11 +24,9 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
-  GET_SERVICE,
   CREATE_SERVICE,
   UPDATE_SERVICE,
   DELETE_SERVICE,
-  GOOGLE_LOGIN,
   FILTERS_SERVICES,
 } from "./actions-type";
 
@@ -169,10 +168,10 @@ export const updateUser = (property) => {
   };
 };
 
-export const restoreUser = () => {
+export const restoreUser = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.delete(`/user/${id}`);
       return dispatch({
         type: RESTORE_USER,
         payload: response.data,
@@ -286,7 +285,7 @@ export const createService = () => {
     try {
       const response = await axios.post(`URL`);
       return dispatch({
-        type: CREATE_SERVICES,
+        type: CREATE_SERVICE,
         payload: response.data,
       });
     } catch (error) {
@@ -300,7 +299,7 @@ export const updateService = () => {
     try {
       const response = await axios.put(`URL`);
       return dispatch({
-        type: UPDATE_PLAN,
+        type: UPDATE_SERVICE,
         payload: response.data,
       });
     } catch (error) {
@@ -314,7 +313,7 @@ export const deleteService = () => {
     try {
       const response = await axios.post(`URL`);
       return dispatch({
-        type: DELETE_SERVICES,
+        type: DELETE_SERVICE,
         payload: response.data,
       });
     } catch (error) {
