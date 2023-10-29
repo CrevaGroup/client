@@ -24,9 +24,9 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
-  CREATE_SERVICE,
-  UPDATE_SERVICE,
-  DELETE_SERVICE,
+  CREATE_SERVICES,
+  UPDATE_SERVICES,
+  DELETE_SERVICES,
   FILTERS_SERVICES,
   GET_ALL_USERS,
 } from "./actions-type";
@@ -72,7 +72,7 @@ export const getAllUsers = (deleted) => {
         payload: response.data
       })
     } catch (error) {
-
+      alert(error.message);
     }
   }
 }
@@ -154,22 +154,22 @@ export const deleteUserById = (email, password) => {
   };
 };
 
-export const updateUser = (property) => {
+export const updateUser = (properties) => {
   return async function (dispatch) {
     try {
-      const { data } = await axios.put(`/user`, property);
+      const { data } = await axios.put(`/user`, properties);
 
-      if (property.hasOwnProperty(email)) {
+      if (properties.hasOwnProperty(email)) {
         const firebaseUpdateEmail = await updateEmail(
           auth,
           data.id,
           data.email
         );
-      } else if (property.hasOwnProperty(password)) {
+      } else if (properties.hasOwnProperty(password)) {
         const firebaseUpdatePassword = await updatePassword(
           auth,
           data.id,
-          property.password
+          properties.password
         );
       }
 
@@ -295,12 +295,12 @@ export const updateTransaction = () => {
   };
 };
 
-export const createService = () => {
+export const createServices = (service) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.post(`/service`, service);
       return dispatch({
-        type: CREATE_SERVICE,
+        type: CREATE_SERVICES,
         payload: response.data,
       });
     } catch (error) {
@@ -309,12 +309,12 @@ export const createService = () => {
   };
 };
 
-export const updateService = () => {
+export const updateServices = () => {
   return async function (dispatch) {
     try {
       const response = await axios.put(`URL`);
       return dispatch({
-        type: UPDATE_SERVICE,
+        type: UPDATE_SERVICES,
         payload: response.data,
       });
     } catch (error) {
@@ -323,12 +323,12 @@ export const updateService = () => {
   };
 };
 
-export const deleteService = () => {
+export const deleteServices = () => {
   return async function (dispatch) {
     try {
       const response = await axios.post(`URL`);
       return dispatch({
-        type: DELETE_SERVICE,
+        type: DELETE_SERVICES,
         payload: response.data,
       });
     } catch (error) {
