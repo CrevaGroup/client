@@ -1,32 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { filtersService } from "../Redux/Actions/actions";
 
 
-const Filters = ({filtrado}) => {
+const Filters = () => {
+
+    const dispatch = useDispatch()
+
     const [filters, setFilters] = useState({
         min:1,
         max:100,
         order:'',
         filter:''
     })
+
     const handleInputChange = e => {
-        console.log(e.target.value)
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value,
+        })
+        // dispatch(filtersService(filters))
     }
 
-    const orderHandler = e => {
-        setFilters({
-            ...filters,
-            order:e.target.value
-        })
-        filtrado(filters)
-    }
-    
-    const filterHandler = e => {
-        setFilters({
-            ...filters,
-            filter:e.target.value
-        })
-        filtrado(filters)
-    }
+    const changeHandler = () => {}
 
     return(
         <div className=" grid grid-cols-1 lg:grid-cols-3">
@@ -41,7 +37,8 @@ const Filters = ({filtrado}) => {
                     <input
                     className=" field"
                         type="number"
-                        value="10"
+                        value={filters.min}
+                        onChange={changeHandler}
                     />
                 </div>
 
@@ -50,7 +47,8 @@ const Filters = ({filtrado}) => {
                     <span>Max</span>
                     <input
                         type="number"
-                        value="40"
+                        value={filters.max}
+                        onChange={changeHandler}
                     />
                 </div>
                 {/*slider*/}
@@ -68,7 +66,7 @@ const Filters = ({filtrado}) => {
                 >
                     <input 
                         className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="50"
+                        type="range" min="0" max="50" name="min"
                         defaultValue={filters.min}
                         onChange={handleInputChange}
                     />
@@ -76,7 +74,7 @@ const Filters = ({filtrado}) => {
                     
                         onChange={handleInputChange}
                         className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="50"
+                        type="range" min="0" max="50" name="max"
                         defaultValue={filters.max}
                     />
                      <style>
@@ -114,29 +112,30 @@ const Filters = ({filtrado}) => {
             {/*filter*/}
 
             <div>
-                <p>Palabras clave</p>
+                <p>Servicios</p>
                 <select
-                    onChange={filterHandler}
+                    name="filter"
+                    onChange={handleInputChange}
                 >
                     <option
                         value="cv"
                     >
-
+Currículum
                     </option>
                     <option
                         value="perfil"
                     >
-
+Perfil Linkedin
                     </option>
                     <option
                         value="practica"
                     >
-
+Capacitación
                     </option>
                     <option
                         value="busqueda"
                     >
-
+Búsqueda
                     </option>
                 </select>
             </div>
@@ -149,14 +148,15 @@ const Filters = ({filtrado}) => {
                 <p>Precio</p>
 
                 <select
-                    onChange={orderHandler}
+                    name="order"
+                    onChange={handleInputChange}
                 >
                 <option
                     value="ASC"
-                >A-Z</option>
+                >Asc</option>
                 <option
                     value="DESC"
-                >Z-A</option>
+                >Desc</option>
             </select>
             </div>
         </div>
