@@ -1,4 +1,5 @@
 import {
+  GET_ALL_USERS,
   GET_USER,
   CREATE_USER,
   UPDATE_USER,
@@ -9,7 +10,6 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
-  DELETE_TRANSACTION,
   GET_SERVICE,
   CREATE_SERVICE,
   DELETE_SERVICE,
@@ -19,12 +19,19 @@ import {
 } from "../Actions/actions-type";
 
 let initialState = {
+  allUsers: [],
   user: {},
   services: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      }
 
     case GET_USER:
       return {
@@ -55,7 +62,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         services: action.payload
       };
-      
+
     case GET_REVIEW:
       return {};
     case CREATE_REVIEW:

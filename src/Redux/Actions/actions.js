@@ -28,6 +28,7 @@ import {
   UPDATE_SERVICE,
   DELETE_SERVICE,
   FILTERS_SERVICES,
+  GET_ALL_USERS,
 } from "./actions-type";
 
 import axios from "axios";
@@ -42,7 +43,7 @@ export const getUser = (email, password) => {
         email,
         password
       );
-      console.log(firebaseUser.user.emailVerified);
+
       if (!firebaseUser.user.emailVerified) {
         alert("Verifica Tu Email!!");
         return;
@@ -61,6 +62,20 @@ export const getUser = (email, password) => {
     }
   };
 };
+
+export const getAllUsers = (deleted) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/user/?deleted=${deleted}`);
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: response.data
+      })
+    } catch (error) {
+
+    }
+  }
+}
 
 export const googleLogin = () => {
   return async function (dispatch) {
