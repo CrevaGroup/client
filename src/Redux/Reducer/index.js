@@ -23,32 +23,42 @@ import {
 
 let initialState = {
   user: {},
-  services: [],
-  allServices: [],
+  services: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
     case GET_USER:
       return {
         ...state,
         user: action.payload,
       };
+
     case CREATE_USER:
       return {
         ...state,
         user: action.payload,
       };
+
     case UPDATE_USER:
       return {
         ...state,
         user: action.payload,
       };
+
     case GOOGLE_LOGIN:
       return {
         ...state,
         user: action.payload,
       };
+
+    case FILTERS_SERVICES:
+      return {
+        ...state,
+        services: action.payload
+      };
+      
     case RESTORE_USER:
       return {};
     case UPDATE_PLAN:
@@ -78,15 +88,9 @@ function rootReducer(state = initialState, action) {
     case DELETE_SERVICES:
       return {};
 
-    case FILTERS_SERVICES:
-      const filteredServices = action.payload;
-      return {
-        ...state,
-        services: filteredServices,
-      };
     default:
       return {
-        state,
+        ...state,
       };
   }
 }

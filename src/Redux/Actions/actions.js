@@ -16,8 +16,6 @@ import {
   DELETE_USER,
   UPDATE_USER,
   RESTORE_USER,
-  UPDATE_PLAN,
-  DELETE_PLAN,
   GET_REVIEW,
   CREATE_REVIEW,
   UPDATE_REVIEW,
@@ -25,15 +23,17 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
-  DELETE_TRANSACTION,
-  GET_SERVICES,
-  CREATE_SERVICES,
-  DELETE_SERVICES,
+  GET_SERVICE,
+  CREATE_SERVICE,
+  UPDATE_SERVICE,
+  DELETE_SERVICE,
   GOOGLE_LOGIN,
   FILTERS_SERVICES,
 } from "./actions-type";
 
 import axios from "axios";
+
+
 
 export const getUser = (email, password) => {
   return async function (dispatch) {
@@ -73,6 +73,7 @@ export const googleLogin = () => {
         fullName: googleUser.user.displayName,
         email: googleUser.user.email,
         id: googleUser.user.uid,
+        photo: googleUser.user.photoURL,
       };
       const response = await axios.post("/user", user);
       return dispatch({
@@ -85,7 +86,7 @@ export const googleLogin = () => {
   };
 };
 
-export const createUser = (username, password, email, age) => {
+export const createUser = (username, password, email, age, photo) => {
   return async function (dispatch) {
     try {
       const firebaseUser = await createUserWithEmailAndPassword(
@@ -101,6 +102,7 @@ export const createUser = (username, password, email, age) => {
           email: email,
           id: firebaseUser.user.uid,
           verified: firebaseUser.user.emailVerified,
+          photo: photo,
         };
       }
       const response = await axios.post("/user", user);
@@ -173,34 +175,6 @@ export const restoreUser = () => {
       const response = await axios.post(`URL`);
       return dispatch({
         type: RESTORE_USER,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const updatePlan = () => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.put(`URL`);
-      return dispatch({
-        type: UPDATE_PLAN,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const deletePlan = () => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.post(`URL`);
-      return dispatch({
-        type: DELETE_PLAN,
         payload: response.data,
       });
     } catch (error) {
@@ -307,35 +281,7 @@ export const updateTransaction = () => {
   };
 };
 
-export const deleteTransaction = () => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.post(`URL`);
-      return dispatch({
-        type: DELETE_TRANSACTION,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getServices = () => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(`URL`);
-      return dispatch({
-        type: GET_SERVICES,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const createServices = () => {
+export const createService = () => {
   return async function (dispatch) {
     try {
       const response = await axios.post(`URL`);
@@ -349,7 +295,21 @@ export const createServices = () => {
   };
 };
 
-export const deleteServices = () => {
+export const updateService = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`URL`);
+      return dispatch({
+        type: UPDATE_PLAN,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const deleteService = () => {
   return async function (dispatch) {
     try {
       const response = await axios.post(`URL`);
@@ -363,39 +323,11 @@ export const deleteServices = () => {
   };
 };
 
-// export const orderServices = (order) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios(`URL/services/${order}`);
-//       return dispatch({
-//         type: ORDER_SERVICES,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// };
-
-// export const filterServices = (filter) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios(`URL/services/${filter}`);
-//       return dispatch({
-//         type: FILTER_SERVICES,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// };
-
 export const filtersService = ({ min, max, order, filter }) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `services/?order=${order}&min=${min}&max${max}&keyword=${filter}`
+        `service/?order=${order}&min=${min}&max${max}&type=${filter}`
       );
       return dispatch({
         type: FILTERS_SERVICES,
