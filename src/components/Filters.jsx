@@ -7,32 +7,81 @@ const Filters = () => {
 
     const dispatch = useDispatch()
 
+    const [styles, setStyles] = useState({
+        left: '',
+        right: ''
+    });
     const minRef = useRef()
     const maxRef = useRef()
     const typeRef = useRef()
     const orderRef = useRef()
 
+    const [des, setDes] = useState(false);
+    const min = 1;
+    const max = 100;
+
+    const priceGap = 10;
+    
     const [filters, setFilters] = useState({
-        min:1,
-        max:100,
+        min:min,
+        max:max,
         order:'',
         filter:''
     })
 
 
     const handleInputChange = e => {
-        setFilters({
+    setFilters(prevFilters => {
+        let newMin = prevFilters.min;
+        let newMax = prevFilters.max;
+        
+        if(e.target.name === 'min' || e.target.name === 'max'){
+            if (e.target.name === 'min') {
+            newMin = parseInt(e.target.value, 10);
+            if (newMin < 1) {
+                newMin = 1;
+            }
+            if (newMax - newMin <= priceGap) {
+                newMax = newMin + priceGap;
+                if (newMax > 100) {
+                    newMax = 100;
+                    newMin = 100 - priceGap;
+                }
+            }
+        } else if (e.target.name === 'max') {
+            newMax = parseInt(e.target.value, 10);
+            if (newMax > 100) {
+                newMax = 100;
+            }
+            if (newMax - newMin <= priceGap) {
+                newMin = newMax - priceGap;
+                if (newMin < 1) {
+                    newMin = 1;
+                    newMax = 1 + priceGap;
+                }
+            }
+        }
+        
+        return {
+            ...prevFilters,
+            min: newMin,
+            max: newMax
+        };
+        }
+                return({
             ...filters,
             [e.target.name]: e.target.value,
         })
-        dispatch(filtersService({
-            ...filters,
-            [e.target.name]: e.target.value,
-        }))
-    }
+
+    });
+    // dispatch(filtersService({
+    //         ...filters,
+    //         [e.target.name]: e.target.value,
+    //     }))
+};
 
     useEffect(()=>{
-        dispatch(filtersService(filters))
+        // dispatch(filtersService(filters))
       }, [])
 
     function resetHandler(){
@@ -42,101 +91,117 @@ const Filters = () => {
             order:'',
             filter:''
         })
-        dispatch(filtersService({
-            min:1,
-            max:100,
-            order:'',
-            filter:''
-        }))
+        // dispatch(filtersService({
+        //     min:1,
+        //     max:100,
+        //     order:'',
+        //     filter:''
+        // }))
         minRef.current.value = 1;
         maxRef.current.value = 100;
         typeRef.current.value = "";
         orderRef.current.value = "ASC";
     }
 
-    const changeHandler = () => {}
 
     return(
-        <div style={{maxWidth: "100vw",marginTop:"50px" ,display:"flex", flexDirection:"column", alignItems:"center"}} className=" flex-col items-center">
-                <div>
+        <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
+            
+            <div
+                className="flex flex-col "
+            >
+                <div
+                    className="flex items-center justify-center"
+                >
                 <p>Rango de precio</p>
                 </div>
-            
-            <div>
-                <div style={{display:"flex", justifyContent:"space-between"}}>
-                  <div>
-                    <span>Min</span>
-                    <input
-                    className=" field"
-                    type="text"
-                    disabled
-                    value={filters.min}
-                    onChange={changeHandler}
-                    />
-                  </div>
-                  <div>
-                      <span>Max</span>
-                      <input
-                        style={{width:"30px"}}
-                        type="text"
-                        disabled
-                        value={filters.max}
-                        onChange={changeHandler}
-                          />
-                  </div>
-                </div>
-                {/*slider*/}
                 <div
-                    className="h-[5px] bg-slate-600  rounded-xl relative"
+                    className="flex items-center justify-center my-2 "
                 >
                     <div
-                        className="h-[5px] bg-dark-violet w-10 rounded-xl absolute left-1/4 right-1/4"
+                    
+                >
+                    <span>Min</span>
+                    <input
+                        
+                        name="min"
+                        className=" field w-20 mx-2 "
+                        type="number"
+                        ref={minRef}
+                        value={filters.min}
+                        onSubmit={handleInputChange}
+                    />
+                </div>
+
+                <div
+                    className=" mx-4"
+                >-</div>
+                <div>
+                    <span>Max</span>
+                    <input
+                    className=" w-20  mx-2"
+                        name="max"
+                        type="number"
+                        value={filters.max}
+                        onChange={handleInputChange}
+                        ref={maxRef}
+                    />
+                </div>
+                </div>
+                
+                {/*slider*/}
+                <div
+                    className="p-2"
+                >
+                    <div
+                    className="h-[5px] bg-light-violet  rounded-xl relative  w-full"
+                >
+                    <div
+                        style={{ left: styles.left}}
+                        className={`h-[5px] bg-dark-violet  rounded-xl absolute w-full`}
                     >
                     </div>
                 </div>
                 {/* range min*/}
-                <div
-                    className="relative"
-                >
-                    <input 
-                        className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="100" name="min" ref={minRef}
-                        defaultValue={filters.min}
-                        onChange={handleInputChange}
+                    <div className="relative">
+                        <input 
+                            className={` absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none`}
+                            type="range" min={min} max={max} name="min"
+                            value={filters.min}
+                            onChange={handleInputChange}
                     />
-                    <input 
-                    
-                        onChange={handleInputChange}
-                        className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="100" name="max" ref={maxRef}
-                        defaultValue={filters.max}
-                    />
-                     <style>
-        {`
-          input[type="range"]::-webkit-slider-thumb {
-            height: 17px;
-            width: 17px;
-            border-radius: 50%;
-            background: #17A2B8;
-            -webkit-appearance: none;
-            appearance: none;
-            pointer-events: auto;
-            -webkit-appearance: none;
-            box-shadow: 0 0 6px rgba(0,0,0,0.05);
-          }
+                        <input 
+                            onChange={handleInputChange}
+                            className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
+                            type="range" min={min} max={max} name="max"
+                            value={filters.max}
+                            disabled={des}
+                        />
+                        <style>
+                            {`
+                               input[type="range"]::-webkit-slider-thumb {
+                               height: 17px;
+                               width: 17px;
+                               border-radius: 50%;
+                               background: hsl(224,30%,27%);
+                               -webkit-appearance: none;
+                               appearance: none;
+                               pointer-events: auto;
+                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+                           }
 
-          input[type="range"]::-moz-range-thumb{
-            height: 17px;
-            width: 17px;
-            border: none;
-            border-radius: 50%;
-            background: #17A2B8;
-            pointer-events: auto;
-            -moz-appearance: none;
-            box-shadow: 0 0 6px rgba(0,0,0,0.05);
-          }
-        `}
-      </style>
+                           input[type="range"]::-moz-range-thumb {
+                               height: 17px;
+                               width: 17px;
+                               border: none;
+                               border-radius: 50%;
+                               pointer-events: auto;
+                               -moz-appearance: none;
+                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+                           }
+                       `}
+                        </style>
+                    </div>
                 </div>
                 
 
@@ -144,9 +209,10 @@ const Filters = () => {
             </div>
             
             {/*filter*/}
-        <div className="flex" >
 
-            <div>
+            <div
+                className="flex flex-col items-center my-4"
+            >
                 <p>Servicios</p>
                 <select
                     name="filter"
@@ -154,28 +220,23 @@ const Filters = () => {
                     ref={typeRef}
                 >
                     <option
-                        value=""
-                        >
-Todos
-                    </option>
-                    <option
                         value="cv"
-                        >
+                    >
 Currículum
                     </option>
                     <option
                         value="perfil"
-                        >
+                    >
 Perfil Linkedin
                     </option>
                     <option
                         value="practica"
-                        >
+                    >
 Capacitación
                     </option>
                     <option
                         value="busqueda"
-                        >
+                    >
 Búsqueda
                     </option>
                 </select>
@@ -184,8 +245,8 @@ Búsqueda
             {/*select*/}
 
             <div
-                
-                >
+                className="flex flex-col items-center"
+            >
                 <p>Precio</p>
 
                 <select
@@ -195,14 +256,12 @@ Búsqueda
                 >
                 <option
                     value="ASC"
-                    >Asc</option>
+                >Asc</option>
                 <option
                     value="DESC"
-                    >Desc</option>
+                >Desc</option>
             </select>
             </div>
-        </div>
-            <button style={{backgroundColor:"#c2a2d0", width:"50px", borderRadius:"3px"}} onClick={resetHandler}>Reset</button>
         </div>
     )
 }

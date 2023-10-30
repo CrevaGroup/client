@@ -36,7 +36,9 @@ const Services = () => {
       </div>
               {create && <NewServices />}
 
-      <div>
+      <div
+        className="flex items-center justify-center my-4"
+      >
         <Filters />
       </div>
 
