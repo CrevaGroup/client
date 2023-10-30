@@ -65,7 +65,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_SERVICES:
       return {
         ...state,
-        services: [...services, action.payload]
+        services: [...state.services, action.payload]
       };
 
     case GET_REVIEW:
