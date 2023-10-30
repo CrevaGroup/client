@@ -32,6 +32,7 @@ import {
 } from "./actions-type";
 
 import axios from "axios";
+import App from "../../../cloudinary";
 
 
 
@@ -110,13 +111,14 @@ export const createUser = (username, password, email, age, photo) => {
       );
       let user = {};
       if (firebaseUser.user) {
+        const photoURL = await App(photo)
         user = {
           age: age,
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
           verified: firebaseUser.user.emailVerified,
-          photo: photo,
+          photo: photoURL,
         };
       }
       const response = await axios.post("/user", user);
@@ -298,7 +300,8 @@ export const updateTransaction = () => {
 export const createServices = (service) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`/service`, service);
+      const photoURL = await App(service.photo)
+      const response = await axios.post(`/service`, {...service, photo: photoURL});
       return dispatch({
         type: CREATE_SERVICES,
         payload: response.data,

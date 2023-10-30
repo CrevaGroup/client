@@ -37,7 +37,15 @@ function NewServices() {
         })
     }
 
-    function submitHandler(){
+    function submitHandler(e){
+      e.preventDefault()
+      setServicesInfo({
+        name: "",
+        description: "",
+        price: "",
+        photo: "",
+        types: []
+      })
         dispatch(createServices(servicesInfo))
     }
 
@@ -47,15 +55,15 @@ function NewServices() {
     <form onSubmit={submitHandler} className="text-center">
       <h1 className="text-3xl mt-2">Crear un nuevo servicio</h1>
       <h2 className="mt-4">Nombre:</h2>
-      <input type="text" name="name" onChange={handleChange} className=" mb-4"/>
+      <input type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4"/>
       <h2>Descripción:</h2>
-      <input type="text" name="description" onChange={handleChange} className="mb-4"/>
+      <input type="text" name="description" onChange={handleChange} value={servicesInfo.description} className="mb-4"/>
       <h2>Precio:</h2>
-      <input type="number" name="price" onChange={handleChange} className="mb-4"/>
+      <input type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4"/>
       <h2>Imágen</h2>
       <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4"/>
       <h2>Incluye:</h2>
-      <select name="types" onChange={selectedChange} className="mb-4">
+      <select name="types" onChange={selectedChange} value={servicesInfo.types} className="mb-4">
         <option value="cv">Curriculum Vitae</option>
         <option value="perfil">Perfil de Linkedin</option>
         <option value="busqueda">Búsqueda Laboral</option>
