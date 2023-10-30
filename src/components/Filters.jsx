@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { filtersService } from "../Redux/Actions/actions";
 
-
 const Filters = () => {
 
     const dispatch = useDispatch()
@@ -211,7 +210,7 @@ const Filters = () => {
             {/*filter*/}
 
             <div
-                className="flex flex-col items-center my-4"
+                className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p>Servicios</p>
                 <select
@@ -219,6 +218,11 @@ const Filters = () => {
                     onChange={handleInputChange}
                     ref={typeRef}
                 >
+                    <option
+                        value=""
+                    >
+                        Elegir servicio
+                    </option>
                     <option
                         value="cv"
                     >
@@ -245,7 +249,7 @@ Búsqueda
             {/*select*/}
 
             <div
-                className="flex flex-col items-center"
+                className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p>Precio</p>
 
