@@ -1,7 +1,7 @@
 import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import example from '../assets/example.png'
-const MobileServiceCards = ({img}) => {
+const MobileServiceCards = ({img, name, description, price}) => {
     const [open,setOpen] = useState(false);
 
     const cardHandler = () => {
@@ -23,7 +23,7 @@ const MobileServiceCards = ({img}) => {
                         className="flex text-2xl font-bold text-custom-violet lg:hidden h-16  text-center items-center"
 
                     >
-                        Capacitacion para entrevistas
+                        {name}
                     </h1>
                     <button
                         className="  p-2 rounded-full text-lg  my-2 w-full text-light-gray "
@@ -61,10 +61,10 @@ const MobileServiceCards = ({img}) => {
                         <p
                             className="my-2 text-center text-xl"
                         >
-                                Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral.
+                                {description}
 
                         </p>
-                        <ul
+                        {/* <ul
                             className="my-2 ml-8 "
                         >
                             <li>
@@ -94,7 +94,7 @@ const MobileServiceCards = ({img}) => {
                                 Reunión virtual de aproximadamente 1 hora de duración con uno de nuestros expertos en selección de personal.
 
                             </li>
-                        </ul>
+                        </ul> */}
                         </div>
 
 
@@ -106,7 +106,7 @@ const MobileServiceCards = ({img}) => {
                                 Buy now
                             </button>
                             <div className=" ml-2">
-                                <p className="text-white font-bold text-2xl ">$20</p>
+                                <p className="text-white font-bold text-2xl ">{`$${price}`}</p>
                             </div>
                         </div>
 

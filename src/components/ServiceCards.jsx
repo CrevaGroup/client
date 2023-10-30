@@ -2,7 +2,7 @@ import React from "react";
 import example from '../assets/example.png'
 
 
-const ServiceCards = ({img}) => {
+const ServiceCards = ({img, name, description, price}) => {
 
     return(
         <div
@@ -27,7 +27,7 @@ const ServiceCards = ({img}) => {
                     <h1
                         className="text-2xl font-bold text-custom-violet"
                     >
-                        Capacitacion para entrevistas
+                        {name}
                     </h1>
                     <div
                         className="text-lg italic text-light-gray mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-start "
@@ -35,10 +35,10 @@ const ServiceCards = ({img}) => {
                         <p
                             className="my-2 text-center text-xl"
                         >
-                                Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral.
+                                {description}
 
                         </p>
-                        <ul
+                        {/* <ul
                             className="my-2 ml-8 hidden lg:block"
                         >
                             <li>
@@ -68,7 +68,7 @@ const ServiceCards = ({img}) => {
                                 Reunión virtual de aproximadamente 1 hora de duración con uno de nuestros expertos en selección de personal.
 
                             </li>
-                        </ul>
+                        </ul> */}
                         </div>
 
 
@@ -80,7 +80,7 @@ const ServiceCards = ({img}) => {
                                 Buy now
                             </button>
                             <div className=" ml-2">
-                                <p className="text-white font-bold text-2xl ">$20</p>
+                                <p className="text-white font-bold text-2xl ">{`$${price}`}</p>
                             </div>
                         </div>
 
