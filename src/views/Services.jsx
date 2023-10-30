@@ -8,9 +8,12 @@ import profile from "../assets/linkedin-profile.png";
 import Filters from "../components/Filters";
 import EditDocument from "../assets/EditDocument.svg";
 import NewServices from "../components/NewServices";
+import { useSelector } from "react-redux";
 
 const Services = () => {
     const [create, setCreate] = useState(false)
+
+    const services = useSelector(state => state.services)
 
   function disableHandler(){
     setCreate(create?false : true)
@@ -41,10 +44,19 @@ const Services = () => {
 
       <div className="flex lg:min-h-screen items-center justify-center  lg:my-8 ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10  gap-x-64 min-w-screen my-8 justify-center items-center">
-          <AllServiceCards img={cv} />
-          <AllServiceCards img={profile} />
-          <AllServiceCards img={job} />
-          <AllServiceCards img={interview} />
+          <AllServiceCards img={cv} name={"Capacitacion para entrevistas"} description={"Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral."} price={"20"} />
+          <AllServiceCards img={profile} name={"Capacitacion para entrevistas"} description={"Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral."} price={"20"} />
+          <AllServiceCards img={job} name={"Capacitacion para entrevistas"} description={"Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral."} price={"20"} />
+          <AllServiceCards img={interview} name={"Capacitacion para entrevistas"} description={"Te ayudamos a que puedas desarrollar todo tu potencial a la hora de desempeñarte en una entrevista laboral."} price={"20"} />
+          {services?.map((service, index)=>
+            <AllServiceCards 
+            key={index}
+            img={service.photo}
+            name={service.name}
+            description={service.description}
+            price={service.price}
+             />
+          )}
         </div>
       </div>
       <Footer />
