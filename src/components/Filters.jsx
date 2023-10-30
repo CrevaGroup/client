@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { filtersService } from "../Redux/Actions/actions";
 
@@ -7,6 +7,11 @@ const Filters = () => {
 
     const dispatch = useDispatch()
 
+    const minRef = useRef()
+    const maxRef = useRef()
+    const typeRef = useRef()
+    const orderRef = useRef()
+
     const [filters, setFilters] = useState({
         min:1,
         max:100,
@@ -14,42 +19,71 @@ const Filters = () => {
         filter:''
     })
 
+
     const handleInputChange = e => {
         setFilters({
             ...filters,
             [e.target.name]: e.target.value,
         })
-        // dispatch(filtersService(filters))
+        dispatch(filtersService({
+            ...filters,
+            [e.target.name]: e.target.value,
+        }))
+    }
+
+    useEffect(()=>{
+        dispatch(filtersService(filters))
+      }, [])
+
+    function resetHandler(){
+        setFilters({
+            min:1,
+            max:100,
+            order:'',
+            filter:''
+        })
+        dispatch(filtersService({
+            min:1,
+            max:100,
+            order:'',
+            filter:''
+        }))
+        minRef.current.value = 1;
+        maxRef.current.value = 100;
+        typeRef.current.value = "";
+        orderRef.current.value = "ASC";
     }
 
     const changeHandler = () => {}
 
     return(
-        <div className=" grid grid-cols-1 lg:grid-cols-3">
-            
-            <div>
+        <div style={{maxWidth: "100vw",marginTop:"50px" ,display:"flex", flexDirection:"column", alignItems:"center"}} className=" flex-col items-center">
                 <div>
                 <p>Rango de precio</p>
                 </div>
-
-                <div>
+            
+            <div>
+                <div style={{display:"flex", justifyContent:"space-between"}}>
+                  <div>
                     <span>Min</span>
                     <input
                     className=" field"
-                        type="number"
-                        value={filters.min}
-                        onChange={changeHandler}
+                    type="text"
+                    disabled
+                    value={filters.min}
+                    onChange={changeHandler}
                     />
-                </div>
-
-                <div>-</div>
-                <div>
-                    <span>Max</span>
-                    <input
-                        type="number"
+                  </div>
+                  <div>
+                      <span>Max</span>
+                      <input
+                        style={{width:"30px"}}
+                        type="text"
+                        disabled
                         value={filters.max}
                         onChange={changeHandler}
-                    />
+                          />
+                  </div>
                 </div>
                 {/*slider*/}
                 <div
@@ -66,7 +100,7 @@ const Filters = () => {
                 >
                     <input 
                         className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="50" name="min"
+                        type="range" min="0" max="100" name="min" ref={minRef}
                         defaultValue={filters.min}
                         onChange={handleInputChange}
                     />
@@ -74,7 +108,7 @@ const Filters = () => {
                     
                         onChange={handleInputChange}
                         className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                        type="range" min="0" max="50" name="max"
+                        type="range" min="0" max="100" name="max" ref={maxRef}
                         defaultValue={filters.max}
                     />
                      <style>
@@ -110,31 +144,38 @@ const Filters = () => {
             </div>
             
             {/*filter*/}
+        <div className="flex" >
 
             <div>
                 <p>Servicios</p>
                 <select
                     name="filter"
                     onChange={handleInputChange}
+                    ref={typeRef}
                 >
                     <option
+                        value=""
+                        >
+Todos
+                    </option>
+                    <option
                         value="cv"
-                    >
+                        >
 Currículum
                     </option>
                     <option
                         value="perfil"
-                    >
+                        >
 Perfil Linkedin
                     </option>
                     <option
                         value="practica"
-                    >
+                        >
 Capacitación
                     </option>
                     <option
                         value="busqueda"
-                    >
+                        >
 Búsqueda
                     </option>
                 </select>
@@ -144,21 +185,24 @@ Búsqueda
 
             <div
                 
-            >
+                >
                 <p>Precio</p>
 
                 <select
                     name="order"
                     onChange={handleInputChange}
+                    ref={orderRef}
                 >
                 <option
                     value="ASC"
-                >Asc</option>
+                    >Asc</option>
                 <option
                     value="DESC"
-                >Desc</option>
+                    >Desc</option>
             </select>
             </div>
+        </div>
+            <button style={{backgroundColor:"#c2a2d0", width:"50px", borderRadius:"3px"}} onClick={resetHandler}>Reset</button>
         </div>
     )
 }
