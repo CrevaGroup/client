@@ -10,6 +10,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Community from "./views/Community";
 
 function App() {
   return (
@@ -57,6 +58,15 @@ function App() {
             <React.Fragment>
               <Navbar />
               <Contact />
+            </React.Fragment>
+          }
+        />{" "}
+        <Route
+          path="/community"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Community />
             </React.Fragment>
           }
         />
