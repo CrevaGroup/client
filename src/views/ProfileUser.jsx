@@ -1,4 +1,3 @@
-import Prueba from "../assets/cv.png";
 import { Button } from "@material-tailwind/react";
 
 function ProfileUser() {
