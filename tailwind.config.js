@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,html}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,html}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -15,8 +19,10 @@ export default {
         "custom-violet": "#E9D1F7",
         "light-gray": "#E4E6EB",
         "semidark-gray": "#979595",
+        "custom-blue": "#283430",
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [require("tailwind-scrollbar"), require("tw-elements/dist/plugin")],
+  darkMode: "class",
 };

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import React from "react";
 
 import Home from "./views/Home";
 import Services from "./views/Services";
@@ -11,16 +12,54 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 
 function App() {
-  
   return (
-    <div className="font-orkney  ">
-      <Navbar/>
+    <div className="font-orkney">
       <Routes>
-        <Route path="/" element = {<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Home />
+            </React.Fragment>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Services />
+            </React.Fragment>
+          }
+        />
+        <Route
+          path="/team"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Team />
+            </React.Fragment>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Blog />
+            </React.Fragment>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <React.Fragment>
+              <Navbar />
+              <Contact />
+            </React.Fragment>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
