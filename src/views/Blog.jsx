@@ -2,9 +2,23 @@ import React from "react";
 import Footer from "../components/Footer";
 import blog from '../assets/blogv.png'
 import Services from "../components/Services";
+import { InstagramEmbed } from 'react-social-media-embed';
 
 
 const Blog = () => {
+    const postQuantity = 3;
+    const posts = [];
+
+    for(let i=0 ; i<postQuantity; i++){
+        posts.push(
+            <div
+                key={i}
+                className="flex justify-center w-full"
+            >
+                <InstagramEmbed url={`https://www.instagram.com/p/Cs9HfB5A8SC/`}/>
+            </div>
+        )
+    }
     return(
         <div>
             <div
@@ -29,23 +43,12 @@ const Blog = () => {
                     className="flex items-center justify-center my-16"
                 >
                     <div
-                    className="grid grid-cols-1 lg:grid-cols-3 gap-x-20 w-3/4 gap-y-8 "
+                    className="grid grid-cols-1 lg:grid-cols-3 gap-x-8  gap-y-8  w-full lg:mx-16"
                 >
-                    <div
-                        className="bg-red-400 h-20"
-                    >
-                        
-                    </div>
-                    <div
-                        className="bg-blue-500 h-20"
-                    >
-                        
-                    </div>
-                    <div
-                        className="bg-white h-20"
-                    >
-                        
-                    </div>
+
+                    {
+                        posts.map(post => post)
+                    }
 
                 </div>
                 </div>
