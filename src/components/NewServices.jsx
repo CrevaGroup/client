@@ -51,7 +51,7 @@ function NewServices({dis}) {
     }
 
   return (
-    <div className="flex justify-center items-center absolute z-10 bg-transparent/60 w-full h-[800px] lg:h-[1100px]" >
+    <div className="flex lg:min-h-screen justify-center items-center absolute z-10 bg-transparent/60 w-full h-full  " >
 
       
           <div
@@ -83,7 +83,8 @@ function NewServices({dis}) {
       <h2>Imágen</h2>
       <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4"/>
       <h2>Incluye:</h2>
-      <select name="types" onChange={selectedChange} value={servicesInfo.types} className="mb-4">
+      <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4">
+        <option value=""> Elegir servicio</option>
         <option value="cv">Curriculum Vitae</option>
         <option value="perfil">Perfil de Linkedin</option>
         <option value="busqueda">Búsqueda Laboral</option>

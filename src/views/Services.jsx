@@ -17,9 +17,8 @@ const Services = () => {
   }
 
   return (
-      <div className=" bg-custom-gray h-full ">
-
-      <div
+      <div className=" bg-custom-gray  ">
+              <div
    
               >
                 {create && 
@@ -32,12 +31,15 @@ const Services = () => {
                 }
               </div>
 
+
       <div
         className="pt-4 lg:pt-8"
       >
                 
         <div className="flex flex-col items-center justify-center text-dark-gray-blue cursor-default">
+          
         <div className="flex items-center mb-2">
+          
           <p className="text-2xl lg:text-3xl font-bold mr-2">
             Nuestros servicios
           </p>
@@ -72,7 +74,10 @@ const Services = () => {
           )}
         </div>:
           <div className="flex-col items-center" >
-            <img style={{width:"800px"}} src={Servicio_no_encontrado} ></img>
+            <img 
+              className=" h-60"
+              src={Servicio_no_encontrado} 
+            />
           </div>}
       </div>
       </div>

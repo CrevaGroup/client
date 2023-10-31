@@ -59,18 +59,20 @@ const Filters = () => {
                     newMax = 1 + priceGap;
                 }
             }
-        }
+        } 
         
         return {
             ...prevFilters,
             min: newMin,
             max: newMax
         };
-        }
-                return({
+        } else {
+            return({
             ...filters,
             [e.target.name]: e.target.value,
         })
+        }
+                
 
     });
     // dispatch(filtersService({
@@ -104,7 +106,10 @@ const Filters = () => {
 
 
     return(
-        <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
+        <div
+            className="flex flex-col w-full   items-center justify-center"
+        >
+            <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
             
             <div
                 className="flex flex-col "
@@ -128,7 +133,7 @@ const Filters = () => {
                         type="number"
                         ref={minRef}
                         value={filters.min}
-                        onSubmit={handleInputChange}
+                        onChange={handleInputChange}
                     />
                 </div>
 
@@ -266,6 +271,15 @@ Búsqueda
                 >Desc</option>
             </select>
             </div>
+        </div>
+        <div
+            className="border-2 border-light-violet rounded-3xl"
+        >
+            <button
+                onClick={resetHandler}
+                className="m-1"
+            >Reiniciar filtros</button>
+        </div>
         </div>
     )
 }
