@@ -133,7 +133,7 @@ const Filters = () => {
                     className="flex items-center justify-center"
                 >
                 <p
-                    className=" text-lg "
+                    className=" text-lg text-dark-gray-blue "
                 >Rango de precio</p>
                 </div>
                 <div
@@ -237,12 +237,13 @@ const Filters = () => {
                 className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p
-                    className=" text-lg mb-2"
+                    className=" text-lg mb-2 text-dark-gray-blue"
                 >Servicios</p>
                 <select
                     name="filter"
                     onChange={handleInputChange}
                     ref={typeRef}
+                    className="peer rounded-lg border border-light-violet  bg-transparent outline outline-0 transition-all   focus:border-1 focus:border-dark-violet p-1"
                 >
                     <option
                         value=""
@@ -278,29 +279,31 @@ Búsqueda
                 className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p
-                    className=" text-lg mb-2"
-                >Precio</p>
-
+                    className=" text-lg mb-2 text-dark-gray-blue"
+                >Ordenar por precio</p>
+                
                 <select
                     name="order"
                     onChange={handleInputChange}
                     ref={orderRef}
-                >
+                    className="peer rounded-lg border border-light-violet  bg-transparent outline outline-0 transition-all   focus:border-1 focus:border-dark-violet p-1"
+                    >
+                
                 <option
                     value="ASC"
-                >Asc</option>
+                >Ascendente</option>
                 <option
                     value="DESC"
-                >Desc</option>
+                >Descendente</option>
             </select>
             </div>
         </div>
         <div
-            className="border-2 border-light-violet rounded-3xl"
+            className="border-2 border-light-violet rounded-3xl transition duration-200 ease-in-out hover:bg-light-violet hover:duration-200"
         >
             <button
                 onClick={resetHandler}
-                className="m-1"
+                className="m-2 text-lg"
             >Reiniciar filtros</button>
         </div>
         </div>
