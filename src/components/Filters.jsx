@@ -6,9 +6,11 @@ const Filters = () => {
 
     const dispatch = useDispatch()
 
+        const min = 1;
+    const max = 100;
     const [styles, setStyles] = useState({
-        left: '',
-        right: ''
+        left:`${min}%`,
+        right: `${max}%`
     });
     const minRef = useRef()
     const maxRef = useRef()
@@ -16,8 +18,7 @@ const Filters = () => {
     const orderRef = useRef()
 
     const [des, setDes] = useState(false);
-    const min = 1;
-    const max = 100;
+
 
     const priceGap = 10;
     
@@ -60,6 +61,13 @@ const Filters = () => {
                 }
             }
         } 
+            const leftPercent = ((newMin - min) / (max - min)) * 100;
+            const rightPercent = 100 - ((newMax - min) / (max - min)) * 100;
+
+            setStyles({
+                left: `${leftPercent}%`,
+                right: `${rightPercent}%`
+            });
         
         return {
             ...prevFilters,
@@ -81,9 +89,16 @@ const Filters = () => {
     //     }))
 };
 
-    useEffect(()=>{
+       useEffect(() => {
+                const leftPercent = ((filters.min - min) / (max - min)) * 100;
+        const rightPercent = 100 - ((filters.max - min) / (max - min)) * 100;
+
+        setStyles({
+            left: `${leftPercent}%`,
+            right: `${rightPercent}%`
+        });
         // dispatch(filtersService(filters))
-      }, [])
+    }, [filters]);
 
     function resetHandler(){
         setFilters({
@@ -158,11 +173,12 @@ const Filters = () => {
                     className="p-2"
                 >
                     <div
+                    
                     className="h-[5px] bg-light-violet  rounded-xl relative  w-full"
                 >
                     <div
-                        style={{ left: styles.left}}
-                        className={`h-[5px] bg-dark-violet  rounded-xl absolute w-full`}
+                        style={{ left: styles.left,right:styles.right}}
+                        className={`h-[5px] bg-dark-violet  rounded-xl absolute`}
                     >
                     </div>
                 </div>
