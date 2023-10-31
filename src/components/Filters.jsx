@@ -132,38 +132,48 @@ const Filters = () => {
                 <div
                     className="flex items-center justify-center"
                 >
-                <p>Rango de precio</p>
+                <p
+                    className=" text-lg "
+                >Rango de precio</p>
                 </div>
                 <div
                     className="flex items-center justify-center my-2 "
                 >
                     <div
-                    
+                    className="flex  flex-col items-center justify-center "
                 >
-                    <span>Min</span>
+                    <span
+                        className="font-bold"
+                    >Min</span>
                     <input
                         
                         name="min"
-                        className=" field w-20 mx-2 "
-                        type="number"
+                        className=" field w-8 mx-2 flex text-center"
+                        type="text"
                         ref={minRef}
                         value={filters.min}
                         onChange={handleInputChange}
+                        disabled={true}
                     />
                 </div>
 
                 <div
                     className=" mx-4"
                 >-</div>
-                <div>
-                    <span>Max</span>
+                <div
+                    className="flex  flex-col items-center justify-center"
+                >
+                    <span
+                        className="font-bold"
+                    >Max</span>
                     <input
-                    className=" w-20  mx-2"
+                    className=" flex text-center w-8  mx-2 justify-"
                         name="max"
-                        type="number"
+                        type="text"
                         value={filters.max}
                         onChange={handleInputChange}
                         ref={maxRef}
+                        disabled={true}
                     />
                 </div>
                 </div>
@@ -200,24 +210,17 @@ const Filters = () => {
                         <style>
                             {`
                                input[type="range"]::-webkit-slider-thumb {
-                               height: 17px;
-                               width: 17px;
-                               border-radius: 50%;
                                background: hsl(224,30%,27%);
                                -webkit-appearance: none;
                                appearance: none;
                                pointer-events: auto;
-                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
                            }
 
                            input[type="range"]::-moz-range-thumb {
-                               height: 17px;
-                               width: 17px;
                                border: none;
                                border-radius: 50%;
                                pointer-events: auto;
                                -moz-appearance: none;
-                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
                            }
                        `}
                         </style>
@@ -233,7 +236,9 @@ const Filters = () => {
             <div
                 className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p>Servicios</p>
+                <p
+                    className=" text-lg mb-2"
+                >Servicios</p>
                 <select
                     name="filter"
                     onChange={handleInputChange}
@@ -272,7 +277,9 @@ Búsqueda
             <div
                 className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p>Precio</p>
+                <p
+                    className=" text-lg mb-2"
+                >Precio</p>
 
                 <select
                     name="order"
