@@ -2,14 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { filtersService } from "../Redux/Actions/actions";
 
-
 const Filters = () => {
 
     const dispatch = useDispatch()
 
+        const min = 1;
+    const max = 100;
     const [styles, setStyles] = useState({
-        left: '',
-        right: ''
+        left:`${min}%`,
+        right: `${max}%`
     });
     const minRef = useRef()
     const maxRef = useRef()
@@ -17,8 +18,7 @@ const Filters = () => {
     const orderRef = useRef()
 
     const [des, setDes] = useState(false);
-    const min = 1;
-    const max = 100;
+
 
     const priceGap = 10;
     
@@ -60,18 +60,27 @@ const Filters = () => {
                     newMax = 1 + priceGap;
                 }
             }
-        }
+        } 
+            const leftPercent = ((newMin - min) / (max - min)) * 100;
+            const rightPercent = 100 - ((newMax - min) / (max - min)) * 100;
+
+            setStyles({
+                left: `${leftPercent}%`,
+                right: `${rightPercent}%`
+            });
         
         return {
             ...prevFilters,
             min: newMin,
             max: newMax
         };
-        }
-                return({
+        } else {
+            return({
             ...filters,
             [e.target.name]: e.target.value,
         })
+        }
+                
 
     });
     // dispatch(filtersService({
@@ -80,9 +89,16 @@ const Filters = () => {
     //     }))
 };
 
-    useEffect(()=>{
+       useEffect(() => {
+                const leftPercent = ((filters.min - min) / (max - min)) * 100;
+        const rightPercent = 100 - ((filters.max - min) / (max - min)) * 100;
+
+        setStyles({
+            left: `${leftPercent}%`,
+            right: `${rightPercent}%`
+        });
         // dispatch(filtersService(filters))
-      }, [])
+    }, [filters]);
 
     function resetHandler(){
         setFilters({
@@ -105,7 +121,10 @@ const Filters = () => {
 
 
     return(
-        <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
+        <div
+            className="flex flex-col w-full   items-center justify-center"
+        >
+            <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
             
             <div
                 className="flex flex-col "
@@ -113,38 +132,48 @@ const Filters = () => {
                 <div
                     className="flex items-center justify-center"
                 >
-                <p>Rango de precio</p>
+                <p
+                    className=" text-lg text-dark-gray-blue "
+                >Rango de precio</p>
                 </div>
                 <div
                     className="flex items-center justify-center my-2 "
                 >
                     <div
-                    
+                    className="flex  flex-col items-center justify-center "
                 >
-                    <span>Min</span>
+                    <span
+                        className="font-bold"
+                    >Min</span>
                     <input
                         
                         name="min"
-                        className=" field w-20 mx-2 "
-                        type="number"
+                        className=" field w-8 mx-2 flex text-center"
+                        type="text"
                         ref={minRef}
                         value={filters.min}
-                        onSubmit={handleInputChange}
+                        onChange={handleInputChange}
+                        disabled={true}
                     />
                 </div>
 
                 <div
                     className=" mx-4"
                 >-</div>
-                <div>
-                    <span>Max</span>
+                <div
+                    className="flex  flex-col items-center justify-center"
+                >
+                    <span
+                        className="font-bold"
+                    >Max</span>
                     <input
-                    className=" w-20  mx-2"
+                    className=" flex text-center w-8  mx-2 justify-"
                         name="max"
-                        type="number"
+                        type="text"
                         value={filters.max}
                         onChange={handleInputChange}
                         ref={maxRef}
+                        disabled={true}
                     />
                 </div>
                 </div>
@@ -154,11 +183,12 @@ const Filters = () => {
                     className="p-2"
                 >
                     <div
+                    
                     className="h-[5px] bg-light-violet  rounded-xl relative  w-full"
                 >
                     <div
-                        style={{ left: styles.left}}
-                        className={`h-[5px] bg-dark-violet  rounded-xl absolute w-full`}
+                        style={{ left: styles.left,right:styles.right}}
+                        className={`h-[5px] bg-dark-violet  rounded-xl absolute`}
                     >
                     </div>
                 </div>
@@ -180,24 +210,17 @@ const Filters = () => {
                         <style>
                             {`
                                input[type="range"]::-webkit-slider-thumb {
-                               height: 17px;
-                               width: 17px;
-                               border-radius: 50%;
                                background: hsl(224,30%,27%);
                                -webkit-appearance: none;
                                appearance: none;
                                pointer-events: auto;
-                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
                            }
 
                            input[type="range"]::-moz-range-thumb {
-                               height: 17px;
-                               width: 17px;
                                border: none;
                                border-radius: 50%;
                                pointer-events: auto;
                                -moz-appearance: none;
-                               box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
                            }
                        `}
                         </style>
@@ -211,14 +234,22 @@ const Filters = () => {
             {/*filter*/}
 
             <div
-                className="flex flex-col items-center my-4"
+                className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p>Servicios</p>
+                <p
+                    className=" text-lg mb-2 text-dark-gray-blue"
+                >Servicios</p>
                 <select
                     name="filter"
                     onChange={handleInputChange}
                     ref={typeRef}
+                    className="peer rounded-lg border border-light-violet  bg-transparent outline outline-0 transition-all   focus:border-1 focus:border-dark-violet p-1"
                 >
+                    <option
+                        value=""
+                    >
+                        Elegir servicio
+                    </option>
                     <option
                         value="cv"
                     >
@@ -245,23 +276,36 @@ Búsqueda
             {/*select*/}
 
             <div
-                className="flex flex-col items-center"
+                className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p>Precio</p>
-
+                <p
+                    className=" text-lg mb-2 text-dark-gray-blue"
+                >Ordenar por precio</p>
+                
                 <select
                     name="order"
                     onChange={handleInputChange}
                     ref={orderRef}
-                >
+                    className="peer rounded-lg border border-light-violet  bg-transparent outline outline-0 transition-all   focus:border-1 focus:border-dark-violet p-1"
+                    >
+                
                 <option
                     value="ASC"
-                >Asc</option>
+                >Ascendente</option>
                 <option
                     value="DESC"
-                >Desc</option>
+                >Descendente</option>
             </select>
             </div>
+        </div>
+        <div
+            className="border-2 border-light-violet rounded-3xl transition duration-200 ease-in-out hover:bg-light-violet hover:duration-200"
+        >
+            <button
+                onClick={resetHandler}
+                className="m-2 text-lg"
+            >Reiniciar filtros</button>
+        </div>
         </div>
     )
 }

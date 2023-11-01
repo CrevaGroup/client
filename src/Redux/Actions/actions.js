@@ -29,12 +29,11 @@ import {
   DELETE_SERVICES,
   FILTERS_SERVICES,
   GET_ALL_USERS,
+  CREATE_POSTIG,
 } from "./actions-type";
 
 import axios from "axios";
 import App from "../../../cloudinary";
-
-
 
 export const getUser = (email, password) => {
   return async function (dispatch) {
@@ -70,13 +69,13 @@ export const getAllUsers = (deleted) => {
       const response = await axios.get(`/user/?deleted=${deleted}`);
       return dispatch({
         type: GET_ALL_USERS,
-        payload: response.data
-      })
+        payload: response.data,
+      });
     } catch (error) {
       alert(error.message);
     }
-  }
-}
+  };
+};
 
 export const googleLogin = () => {
   return async function (dispatch) {
@@ -111,7 +110,7 @@ export const createUser = (username, password, email, age, photo) => {
       );
       let user = {};
       if (firebaseUser.user) {
-        const photoURL = await App(photo)
+        const photoURL = await App(photo);
         user = {
           age: age,
           fullName: username,
@@ -300,8 +299,11 @@ export const updateTransaction = () => {
 export const createServices = (service) => {
   return async function (dispatch) {
     try {
-      const photoURL = await App(service.photo)
-      const response = await axios.post(`/service`, {...service, photo: photoURL});
+      const photoURL = await App(service.photo);
+      const response = await axios.post(`/service`, {
+        ...service,
+        photo: photoURL,
+      });
       return dispatch({
         type: CREATE_SERVICES,
         payload: response.data,
@@ -359,3 +361,17 @@ export const filtersService = ({ min, max, order, filter }) => {
     }
   };
 };
+
+export const createPostIg = (quantity, posts) => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`blog/`);
+      return dispatch({
+        type:CREATE_POSTIG,
+        payload: response.data
+      });
+    } catch(error) {
+      alert(error.message);
+    }
+  }
+}
