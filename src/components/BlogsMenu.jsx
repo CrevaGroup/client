@@ -64,7 +64,6 @@ const BlogsMenu = () => {
                 return value;
             }
         });
-        console.log(menu);
     }
 
     useEffect(() => {
@@ -81,22 +80,22 @@ const BlogsMenu = () => {
                 className={` w-full   lg:w-3/5 bg-light-violet flex  items-center justify-evenly ${design}`}
             >
                 <div
-                    className="my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
+                    className=""
                 >
                     <button
                         value={1}
                         onClick={menuHandler}
-                        className="mx-2 text-lg"
+                        className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Text</button>
                 </div>
 
                 <div
-                    className="my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
+                    className=""
                 >
                     <button
                         value={2}
                         onClick={menuHandler}
-                        className="mx-2 text-lg"
+                        className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Instagram</button>
                 </div>
 
