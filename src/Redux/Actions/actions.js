@@ -29,7 +29,7 @@ import {
   DELETE_SERVICES,
   FILTERS_SERVICES,
   GET_ALL_USERS,
-  CREATE_POSTS,
+  CREATE_POSTIG,
 } from "./actions-type";
 
 import axios from "axios";
@@ -362,12 +362,12 @@ export const filtersService = ({ min, max, order, filter }) => {
   };
 };
 
-export const createPosts = (quantity, posts) => {
+export const createPostIg = (quantity, posts) => {
   return async dispatch => {
     try {
       const response = await axios.get(`blog/`);
       return dispatch({
-        type:CREATE_POSTS,
+        type:CREATE_POSTIG,
         payload: response.data
       });
     } catch(error) {
