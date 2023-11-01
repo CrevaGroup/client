@@ -15,12 +15,14 @@ import {
   DELETE_SERVICES,
   UPDATE_SERVICES,
   GOOGLE_LOGIN,
+  CREATE_POSTIG,
 } from "../Actions/actions-type";
 
 let initialState = {
   allUsers: [],
   user: {},
-  services: []
+  services: [],
+  postig:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -67,6 +69,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         services: [...state.services, action.payload]
       };
+
+    case CREATE_POSTIG:
+      return{
+        ...state,
+        postig:action.payload,
+      }
 
     case GET_REVIEW:
       return {};

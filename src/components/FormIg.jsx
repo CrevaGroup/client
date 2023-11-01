@@ -1,0 +1,54 @@
+import React from "react";
+
+const FormIg = ({ change, submit, count, quantity}) => {
+    return(
+        <div
+            className="w-full h-full "
+        >
+            <form
+                className="w-full h-full flex flex-col justify-center items-center "
+                onSubmit={submit}
+            >
+                <div
+                    className="flex flex-col  w-full lg:w-3/5 h-full items-center justify-center bg-light-violet rounded-b-xl"
+                >
+                    <p>Actualizar post</p>
+
+                    <div>
+                        <button
+                            value={0}
+                            onClick={count}
+                        >-</button>
+                        <button
+                            value={1}
+                            onClick={count}
+                        >+</button>
+                    </div>
+
+                    <div
+                        className="flex flex-col "
+                    >
+                        {
+                            Array.from({ length: quantity }, (_, index) => (
+                                <input
+                                    key={index}
+                                    className="my-2"
+                                    onChange={e => change(e, index)}
+                                >
+                                </input>
+                            ))
+                        }
+                    </div>
+                    <button
+                        type="submit"
+                    >
+                        CLICK
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    )
+}
+
+export default FormIg;
