@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserById, setPopup } from "../Redux/Actions/actions";
+import { deleteUserById, setPopup, updateUser } from "../Redux/Actions/actions";
 
 import { Button } from "@material-tailwind/react";
 import Close from "../assets/closeIcon.svg";
@@ -12,8 +12,9 @@ function ProfileUser() {
   const [infoUser, setInfoUser] = useState({
     id: user.id,
     fullName: "",
-    photo: "",
     age: "",
+    nacionalidad: "",
+    photo: "",
   });
 
   function photoHandle(event) {
@@ -29,6 +30,7 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false)
+    dispatch(updateUser(infoUser))
   }
 
   function deleteUser() {
@@ -57,7 +59,7 @@ function ProfileUser() {
             <div className="flex items-center justify-center w-full h-full">
               <div className="rounded-full overflow-hidden w-3/4 h-3/4">
                 <img
-                  src={user.photo}
+                  src={user?.photo}
                   alt="Imagen de Usuario"
                   className="w-full h-full object-cover"
                 />
@@ -67,11 +69,11 @@ function ProfileUser() {
         </div>
         <div className="text-xl mt-20 lg:ml-8">
           {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })}/></h3> 
-          ) : (<h3>Edad: {user.age}</h3>)}
-          {isEditing ? (<h3>Pais: <input type="text" value={infoUser.countrie} onChange={(event) => setInfoUser({ ...infoUser, countrie: event.target.value})}/></h3>
-          ) : ( <h3>Pais: {user.countrie}</h3>)}
+          ) : (<h3>Edad: {user?.age}</h3>)}
+          {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value})}/></h3>
+          ) : ( <h3>Pais: {user?.nacionalidad}</h3>)}
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value})}/></h3>
-          ) : (<h3>Email: {user.email}</h3>)}
+          ) : (<h3>Email: {user?.email}</h3>)}
           <div className="mt-12 ">
             <Button className="bg-dark-violet mr-4" onClick={deleteUser}>Eliminar Perfil</Button>
             {isEditing ? (<Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>Guardar</Button>) : (
