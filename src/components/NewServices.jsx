@@ -51,20 +51,13 @@ function NewServices({dis}) {
     }
 
   return (
-    <div className="flex lg:min-h-screen justify-center items-center absolute z-10 bg-transparent/60 w-full h-full  " >
+    <div className="flex  justify-center items-center  w-full h-full  " >
 
       
           <div
               className="flex top-0  lg:top-32   w-full lg:w-4/5   absolute z-10  "
               >
-          <div
-            className="ml-auto bg-dark-violet/30 h-12 lg:h-16 rounded-full mt-8"
-          >
-            <img 
-            className=" h-12  lg:h-16 "
-            onClick={dis}
-            src={close}/>
-          </div>
+
         </div>
 
   <div className="p-8 rounded-lg mt-5 mb-5 bg-light-violet lg:w-1/3  items-center justify-center">
