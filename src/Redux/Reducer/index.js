@@ -22,6 +22,9 @@ let initialState = {
   allUsers: [],
   user: {},
   services: [],
+  popup: {
+    type: '',
+  },
   postig:[],
 };
 

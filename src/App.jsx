@@ -10,11 +10,21 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import "./App.css";
 import Navbar from "./components/Navbar";
+
+import { useSelector } from "react-redux";
+import ProfileUser from "./components/ProfileUser";
+
 import Community from "./views/Community";
 
+
 function App() {
+  const popup = useSelector(state => state.popup)
+
   return (
     <div className="font-orkney">
+      {popup.type !== '' && <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
+        {popup.type === "perfil" && <ProfileUser />}
+        </div>}
       <Routes>
         <Route
           path="/"
