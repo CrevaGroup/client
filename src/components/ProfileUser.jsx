@@ -75,7 +75,7 @@ function ProfileUser() {
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value})}/></h3>
           ) : (<h3>Email: {user?.email}</h3>)}
           <div className="mt-12 ">
-            <Button className="bg-dark-violet mr-4" onClick={deleteUser}>Eliminar Perfil</Button>
+            <Button className="bg-dark-violet mr-4" onClick={deleteUser(user.id)}>Eliminar Perfil</Button>
             {isEditing ? (<Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>Guardar</Button>) : (
               <Button className="bg-dark-violet" onClick={handleEditClick}>Editar</Button>)}
           </div>
