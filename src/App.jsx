@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Home from "./views/Home";
@@ -10,6 +10,8 @@ import Blog from "./views/Blog";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Community from "./views/Community";
+import Success from "./views/Success";
+import Failure from "./views/failure";
 
 import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
@@ -88,6 +90,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/Success" element={<Success />}/>
+        <Route path="/Failure" element={<Failure />}/>
       </Routes>
     </div>
   );
