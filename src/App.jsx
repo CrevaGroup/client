@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Home from "./views/Home";
 import Services from "./views/Services";
@@ -8,13 +9,13 @@ import Contact from "./views/Contact";
 import Blog from "./views/Blog";
 import Login from "./views/Login";
 import Register from "./views/Register";
-import "./App.css";
-import Navbar from "./components/Navbar";
-
-import { useSelector } from "react-redux";
-import ProfileUser from "./components/ProfileUser";
-
 import Community from "./views/Community";
+
+import Navbar from "./components/Navbar";
+import ProfileUser from "./components/ProfileUser";
+import AlertNotif from "./components/AlertNotif";
+
+import "./App.css";
 
 
 function App() {
@@ -24,7 +25,12 @@ function App() {
     <div className="font-orkney">
       {popup.type !== '' && <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
         {popup.type === "perfil" && <ProfileUser />}
-        </div>}
+      </div>}
+      {popup.type !== '' && <div className="fixed bottom-4 right-4">
+        {popup.type === 'NOTIF' && <AlertNotif />}
+        {popup.type === 'ERROR' && <AlertNotif />}
+        {popup.type === 'ALERT' && <AlertNotif />}
+      </div>}
       <Routes>
         <Route
           path="/"
