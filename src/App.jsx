@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Home from "./views/Home";
 import Services from "./views/Services";
@@ -8,13 +9,14 @@ import Contact from "./views/Contact";
 import Blog from "./views/Blog";
 import Login from "./views/Login";
 import Register from "./views/Register";
-import "./App.css";
-import Navbar from "./components/Navbar";
+import Community from "./views/Community";
+import Success from "./views/Success";
+import Failure from "./views/failure";
 
-import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
 
-import Community from "./views/Community";
+import "./App.css";
 
 
 function App() {
@@ -82,6 +84,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/Success" element={<Success />}/>
+        <Route path="/Failure" element={<Failure />}/>
       </Routes>
     </div>
   );
