@@ -24,6 +24,35 @@ function Sidebar() {
             >
               <svg
                 class="h-8 w-8 text-dark-violet"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+              Perfil
+            </li>{" "}
+          </Link>
+          <Link to="/sales" className="text-white-100 hover:text-white-900">
+            <li
+              style={{
+                width: "120px",
+                borderRadius: "8px",
+                textAlign: "center",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+              className="p-2 mb-6 bg-custom-gray"
+            >
+              <svg
+                class="h-8 w-8 text-dark-violet"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
