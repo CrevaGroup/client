@@ -29,6 +29,7 @@ import {
   DELETE_SERVICES,
   FILTERS_SERVICES,
   GET_ALL_USERS,
+  SET_POPUP
 } from "./actions-type";
 
 import axios from "axios";
@@ -359,3 +360,10 @@ export const filtersService = ({ min, max, order, filter }) => {
     }
   };
 };
+
+export const setPopup = (type) => {
+  return {
+    type: SET_POPUP,
+    payload: type
+  }
+}

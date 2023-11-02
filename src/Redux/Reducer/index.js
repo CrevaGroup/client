@@ -20,7 +20,10 @@ import {
 let initialState = {
   allUsers: [],
   user: {},
-  services: []
+  services: [],
+  popup: {
+    type: '',
+  }
 };
 
 function rootReducer(state = initialState, action) {
