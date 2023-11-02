@@ -27,6 +27,7 @@ const FormText = ({submit, change}) => {
                             className="w-full p-1 rounded-lg outline-none"
                             name="title"
                             onChange={change}
+                            placeholder="Ingresar titulo..."
                         ></input>
                     </div>
 
@@ -34,11 +35,11 @@ const FormText = ({submit, change}) => {
                         className="w-3/4 my-2"
                     >
                         <p>Contenido</p>
-                        <input
-                            className="w-full p-4 rounded-lg outline-none"
-                            name="text"
+
+                        <textarea name="text" rows="3"
                             onChange={change}
-                        ></input>
+                            className="p-1 w-full text-gray-900 rounded-lg outline-none "
+                            placeholder="Ingresar comentario..." ></textarea>
                     </div>
 
                         <button

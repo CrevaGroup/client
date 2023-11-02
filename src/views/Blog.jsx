@@ -9,7 +9,7 @@ import BlogsMenu from "../components/BlogsMenu";
 
 const Blog = () => {
     const postQuantity = 3;
-    const posts = [];
+    const postsIg = [];
     const [post,setPost] = useState(false)
 
     const disableHandler = () => {
@@ -17,7 +17,7 @@ const Blog = () => {
     }
 
     for(let i=0 ; i<postQuantity; i++){
-        posts.push(
+        postsIg.push(
             <div
                 key={i}
                 className="flex justify-center w-full"
@@ -26,6 +26,9 @@ const Blog = () => {
             </div>
         )
     }
+
+
+
     return(
         <div>
             <div
@@ -72,10 +75,62 @@ const Blog = () => {
                 >
 
                     {
-                        posts.map(post => post)
+                        postsIg.map(post => post)
                     }
 
                 </div>
+                
+                </div>
+                <div
+                    className="flex flex-col items-center justify-center my-8  "
+                >
+                    {/* Posts text design*/}
+                    <div
+                        className="flex flex-col w-3/5 justify-center  my-4 text-dark-gray-blue"
+                    >
+                        <h1
+                            className="my-4 font-bold text-3xl "
+                        >Actualizacion de precios</h1>
+                        <p
+                            className="text-xl p-2 whitespace-pre-line"
+                        >{`Mollit ut dolore in minim incididunt exercitation duis nisi 
+                        culpa incididunt excepteur quis laboris.Laboris velit in voluptate commodo elit.Esse irure incididunt non Lorem officia
+                         
+                        magna culpa.Aliquip Lorem nulla anim consequat duis id in.
+                        Ea aliqua anim ullamco proident voluptate.`}</p>
+                    </div>
+
+                    <div
+                        className="flex flex-col w-3/5 justify-center  my-4 text-dark-gray-blue"
+                    >
+                        <h1
+                            className="my-4 font-bold text-3xl "
+                        >Actualizacion de precios</h1>
+                        <p
+                            className="text-xl p-2 whitespace-pre-line"
+                        >{`Mollit ut dolore in minim incididunt exercitation duis nisi 
+                        culpa incididunt excepteur quis laboris.Laboris velit in voluptate commodo elit.Esse irure incididunt non Lorem officia
+                         
+                        magna culpa.Aliquip Lorem nulla anim consequat duis id in.
+                        Ea aliqua anim ullamco proident voluptate.`}</p>
+                    </div>
+                    <div
+                        className="flex flex-col w-3/5 justify-center  my-4 text-dark-gray-blue"
+                    >
+                        <h1
+                            className="my-4 font-bold text-3xl "
+                        >Actualizacion de precios</h1>
+                        <p
+                            className="text-xl p-2 whitespace-pre-line"
+                        >{`Mollit ut dolore in minim incididunt exercitation duis nisi 
+                        culpa incididunt excepteur quis laboris.Laboris velit in voluptate commodo elit.Esse irure incididunt non Lorem officia
+                         
+                        magna culpa.Aliquip Lorem nulla anim consequat duis id in.
+                        Ea aliqua anim ullamco proident voluptate.`}</p>
+                    </div>
+
+
+
                 </div>
                 <Services/>
             </div>
