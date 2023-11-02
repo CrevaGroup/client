@@ -59,10 +59,16 @@ export const getUser = (email, password) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
-  };
-};
+  }
+}
 
 export const getAllUsers = (deleted) => {
   return async function (dispatch) {
@@ -73,7 +79,13 @@ export const getAllUsers = (deleted) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -96,7 +108,13 @@ export const googleLogin = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -128,7 +146,13 @@ export const createUser = (username, password, email, age, photo) => {
         type: CREATE_USER,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -151,7 +175,13 @@ export const deleteUserById = (email, password) => {
         type: DELETE_USER,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -180,7 +210,13 @@ export const updateUser = (properties) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -194,7 +230,13 @@ export const restoreUser = (id) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -208,7 +250,13 @@ export const getReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -222,7 +270,13 @@ export const createReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -236,7 +290,13 @@ export const updateReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -250,7 +310,13 @@ export const deleteReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -264,7 +330,13 @@ export const getTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -278,7 +350,13 @@ export const createTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -292,7 +370,13 @@ export const updateTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -310,7 +394,13 @@ export const createServices = (service) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -324,7 +414,13 @@ export const updateServices = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -338,7 +434,13 @@ export const deleteServices = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -354,7 +456,6 @@ export const filtersService = ({ min, max, order, filter }) => {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error.message);
       return dispatch({
         type: FILTERS_SERVICES,
         payload: [],
@@ -366,7 +467,11 @@ export const filtersService = ({ min, max, order, filter }) => {
 export const setPopup = (type) => {
   return {
     type: SET_POPUP,
-    payload: type
+    payload: {
+      type: type,
+      title: '',
+      message: ''
+    }
   }
 }
 
@@ -375,11 +480,17 @@ export const createPostIg = (quantity, posts) => {
     try {
       const response = await axios.get(`blog/`);
       return dispatch({
-        type:CREATE_POSTIG,
+        type: CREATE_POSTIG,
         payload: response.data
       });
     } catch(error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }

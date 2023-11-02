@@ -19,13 +19,16 @@ import {
 } from "../Actions/actions-type";
 
 let initialState = {
-  allUsers: [],
   user: {},
+  allUsers: [],
   services: [],
+  postig:[],
+  cart: [],
   popup: {
     type: '',
+    title: '',
+    message: ''
   },
-  postig:[],
 };
 
 function rootReducer(state = initialState, action) {
