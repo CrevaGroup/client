@@ -18,18 +18,7 @@ const Services = () => {
 
   return (
       <div className=" bg-custom-gray  ">
-              <div
-   
-              >
-                {create && 
-                  <div className=" "> 
 
-                  <NewServices 
-                    dis = {disableHandler}
-                  /> 
-                  </div> 
-                }
-              </div>
 
 
       <div
@@ -52,6 +41,18 @@ const Services = () => {
           </button>
         </div>
         <p className="text-xl">Potenciá tu carrera</p>
+          <div className=" w-full"
+
+          >
+            {create &&
+              <div className=" ">
+
+                <NewServices
+                  dis={disableHandler}
+                />
+              </div>
+            }
+          </div>
       </div>
               
 

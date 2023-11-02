@@ -1,4 +1,4 @@
-export const GET_ALL_USERS = "GET_ALL_USERS"
+export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER = "GET_USER";
 export const CREATE_USER = "CREATE_USER";
 export const UPDATE_USER = "UPDATE_USER";
@@ -20,4 +20,11 @@ export const GET_TRANSACTION = "GET_TRANSACTION";
 export const CREATE_TRANSACTION = "CREATE_TRANSACTION";
 export const UPDATE_TRANSACTION = "UPDATE_TRANSACTION";
 
+
 export const SET_POPUP = "SET_POPUP"
+
+export const GET_POSTIG = "GET_POSTIG";
+export const CREATE_POSTIG = "CREATE_POSTIG";
+export const UPDATE_POSTIG = "UPDATE_POSTIG";
+export const DELETE_POSTIG = "DELETE_POSTIG";
+

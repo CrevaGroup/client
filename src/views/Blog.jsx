@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import blog from '../assets/blogv.png'
 import Services from "../components/Services";
 import { InstagramEmbed } from 'react-social-media-embed';
 
+import EditDocument from "../assets/EditDocument.svg";
+import BlogsMenu from "../components/BlogsMenu";
 
 const Blog = () => {
     const postQuantity = 3;
     const posts = [];
+    const [post,setPost] = useState(false)
+
+    const disableHandler = () => {
+        setPost(post ? false : true)
+    }
 
     for(let i=0 ; i<postQuantity; i++){
         posts.push(
@@ -29,8 +36,26 @@ const Blog = () => {
                 >
                     <h1
                         className=" text-5xl text-dark-gray-blue"
-                    >Nuestro Blog</h1>
+                    >
+                        Nuestro Blog
+                    </h1>
+                              
+                
+                    <img
+                    src={EditDocument}
+                    alt="EditDocument"
+                    className="w-8 cursor-pointer"
+                    onClick={disableHandler}
+                    />
                 </div>
+                {
+                    post && 
+                    <div> 
+                        <BlogsMenu
+                            dis = {disableHandler}
+                        />
+                    </div>
+                }
                 <div
                     className="flex items-center justify-center"
                 >
