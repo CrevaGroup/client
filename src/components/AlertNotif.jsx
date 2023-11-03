@@ -3,17 +3,17 @@ import { useEffect } from "react";
 
 import { Alert } from "flowbite-react"
 
-import { clearPopup } from "../Redux/Actions/actions"
+// import { clearPopup } from "../Redux/Actions/actions"
 
 function AlertNotif() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const popup = useSelector(state => state.popup);
 
-    useEffect(()=>{
-        setTimeout(()=>{
-            dispatch(clearPopup());
-        }, 3500)
-    })
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         dispatch(clearPopup());
+    //     }, 3500)
+    // })
 
     return (
         <div>
