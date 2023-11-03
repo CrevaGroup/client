@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 
 import Logo from "../assets/logo.png"
-import Linkedin from "../assets/MdiLinkedin.svg"
-import Instagram from "../assets/MdiInstagram.svg"
+import Linkedin from "../assets/UilLinkedin.svg"
+import Instagram from "../assets/PhInstagramLogo.svg"
 import WhatsApp from "../assets/MdiWhatsapp.svg"
 import Gmail from "../assets/BxBxlGmail.svg"
 
