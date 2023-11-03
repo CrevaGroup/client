@@ -13,6 +13,7 @@ const Blog = () => {
 
     const [postMenu,setPostMenu] = useState(false)
     const dispatch = useDispatch();
+    const [quant, setQuant] = useState('');
 
     const postsText = useSelector(state => state.postText);
     const postsIg = useSelector(state => state.postIg)
@@ -24,13 +25,21 @@ const Blog = () => {
 
     useEffect(() => {
         dispatch(getPostIg());
+        dispatch(getPostText());
     }, [dispatch]);
     
     useEffect(() => {
-        dispatch(getPostText());
+        let quant = '';
+        if (postsIg.length % 2 === 0 && postsIg.length % 3 !== 0) {
+            quant = 'lg:grid-cols-2';
+        } else if (postsIg.length % 3 === 0) {
+            quant = 'lg:grid-cols-3';
+        } else {
+            quant = 'lg:grid-cols-1';
+        }
 
-    }, [dispatch]);
-    
+        setQuant(quant);
+    }, [postsIg]);
     
     return(
         <div>
@@ -78,7 +87,7 @@ const Blog = () => {
 
                     {
                         postsIg.length > 0 ? <div
-                            className="grid grid-cols-1 lg:grid-cols-3 gap-x-8  gap-y-8  w-full lg:mx-16"
+                            className={`grid grid-cols-1 ${quant} gap-x-8  gap-y-8  w-full lg:mx-16`}
                         >
                             {
                                 postsIg.map((post,index) =>(
@@ -117,7 +126,7 @@ const Blog = () => {
                                 ))
                             
                             }
-                        </div> : 0
+                        </div> : ''
                     }
                 
 
