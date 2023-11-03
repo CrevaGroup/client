@@ -25,13 +25,11 @@ function App() {
 
   return (
     <div className="font-orkney">
-      {popup.type !== '' && <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
-        {popup.type === "perfil" && <ProfileUser />}
+      {popup.type !== '' && popup.type !== 'perfil' && <div className="fixed bottom-4 right-4 z-20">
+        <AlertNotif />
       </div>}
-      {popup.type !== '' && <div className="fixed bottom-4 right-4">
-        {popup.type === 'NOTIF' && <AlertNotif />}
-        {popup.type === 'ERROR' && <AlertNotif />}
-        {popup.type === 'ALERT' && <AlertNotif />}
+      {popup.type === "perfil" && <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
+        <ProfileUser />
       </div>}
       <Routes>
         <Route
