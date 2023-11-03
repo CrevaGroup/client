@@ -19,10 +19,12 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const currentYear = new Date().getFullYear();
+
   const [birthdate, setBirthdate] = useState({
-    day: "",
-    month: "",
-    year: "",
+    day: null,
+    month: null,
+    year: currentYear,
   });
   const [nationality, setNationality] = useState("");
   const [countries, setCountries] = useState([
@@ -41,6 +43,7 @@ function Register() {
     password: "",
     confirmPassword: "",
     email: "",
+    birthdate: "",
   });
 
   const handleValidation = (field, value) => {
@@ -64,6 +67,20 @@ function Register() {
         ...prevErrors,
         email: validateEmail(value),
       }));
+    } else if (field === "birthdate") {
+      setBirthdate(value);
+      const age = calculateAge(value);
+      if (age < 18) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          birthdate: "Debes ser mayor de 18 años.",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          birthdate: "",
+        }));
+      }
     }
   };
 
@@ -208,7 +225,10 @@ function Register() {
                   value: (i + 1).toString(),
                 }))}
                 onChange={(selectedOption) =>
-                  setBirthdate({ ...birthdate, day: selectedOption.value })
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    day: selectedOption,
+                  })
                 }
                 placeholder="Día"
               />
@@ -233,23 +253,37 @@ function Register() {
                   value: (index + 1).toString(),
                 }))}
                 onChange={(selectedOption) =>
-                  setBirthdate({ ...birthdate, month: selectedOption.value })
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    month: selectedOption,
+                  })
                 }
                 placeholder="Mes"
               />
               <Select
                 className="custom-select"
                 value={birthdate.year}
-                options={Array.from({ length: 104 }, (_, i) => ({
-                  label: (i + 1920).toString(),
-                  value: (i + 1920).toString(),
-                }))}
+                options={Array.from(
+                  { length: currentYear - 1923 + 1 },
+                  (_, i) => ({
+                    label: (currentYear - i).toString(),
+                    value: (currentYear - i).toString(),
+                  })
+                )}
                 onChange={(selectedOption) =>
-                  setBirthdate({ ...birthdate, year: selectedOption.value })
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    year: selectedOption,
+                  })
                 }
                 placeholder="Año"
               />
             </div>
+            {errors.birthdate && (
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
+                {errors.birthdate}
+              </p>
+            )}
           </div>
           <div className="mb-6">
             <select
@@ -315,7 +349,7 @@ const validateUsername = (username) => {
   if (!/^[a-zA-Z ]+$/i.test(username)) {
     return "El nombre solo puede contener letras y espacios.";
   }
-  return ""; // Retorna una cadena vacía si no hay errores
+  return "";
 };
 
 const validatePassword = (password) => {
@@ -336,11 +370,25 @@ const validateEmail = (email) => {
   if (!email) {
     return "El correo electrónico es obligatorio.";
   }
-  // Agrega validación personalizada para el formato de correo si es necesario
-  // if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
-  //   return "El correo electrónico debe ser una dirección de Gmail válida.";
-  // }
-  return ""; // Retorna una cadena vacía si no hay errores
+  return "";
+};
+
+const calculateAge = (birthdate) => {
+  const birthdateObj = new Date(
+    birthdate.year.value,
+    birthdate.month.value - 1,
+    birthdate.day.value
+  );
+  const currentDate = new Date();
+  const age = currentDate.getFullYear() - birthdateObj.getFullYear();
+  const monthDiff = currentDate.getMonth() - birthdateObj.getMonth();
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && currentDate.getDate() < birthdateObj.getDate())
+  ) {
+    return age - 1;
+  }
+  return age;
 };
 
 export default Register;
