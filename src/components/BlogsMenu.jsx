@@ -31,7 +31,7 @@ const BlogsMenu = () => {
 
     const changeHandlerIg = (e, index) => {
        
-        const { name, value } = e.target;
+        const { value } = e.target;
         setPosts(prevPosts => {
             const updatedPosts = [...prevPosts];
             updatedPosts[index] = value;
@@ -50,6 +50,7 @@ const BlogsMenu = () => {
             }
             return updatedPost
         })
+        
     }
 
     const submitIgHandler = e => {
@@ -91,25 +92,19 @@ const BlogsMenu = () => {
             <div
                 className={` w-full   lg:w-3/5 bg-light-violet flex  items-center justify-evenly ${design}`}
             >
-                <div
-                    className=""
-                >
+
                     <button
                         value={1}
                         onClick={menuHandler}
                         className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Text</button>
-                </div>
 
-                <div
-                    className=""
-                >
                     <button
                         value={2}
                         onClick={menuHandler}
                         className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Instagram</button>
-                </div>
+
 
             </div>
             {

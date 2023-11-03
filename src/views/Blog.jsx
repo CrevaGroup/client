@@ -43,7 +43,7 @@ const Blog = () => {
                     className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0"
                 >
                     <h1
-                        className=" text-5xl text-dark-gray-blue"
+                        className=" text-3xl lg:text-5xl text-dark-gray-blue"
                     >
                         Nuestro Blog
                     </h1>
