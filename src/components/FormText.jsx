@@ -19,26 +19,31 @@ const FormText = ({submit, change}) => {
                         <h1>Publicar articulo</h1>
                     </div>
                     <div
-                        className=" w-3/4 my-2"
+                        className=" w-3/4 my-4"
                     >
-                        <p>Titulo</p>
+                        <p
+                            className="my-1"
+                        >Titulo</p>
 
                         <input
                             className="w-full p-1 rounded-lg outline-none"
                             name="title"
                             onChange={change}
+                            placeholder="Ingresar titulo..."
                         ></input>
                     </div>
 
                     <div
-                        className="w-3/4 my-2"
+                        className="w-3/4 my-4"
                     >
-                        <p>Contenido</p>
-                        <input
-                            className="w-full p-4 rounded-lg outline-none"
-                            name="text"
+                        <p
+                            className="my-1"
+                        >Contenido</p>
+
+                        <textarea name="text" rows="3"
                             onChange={change}
-                        ></input>
+                            className="p-1 w-full text-gray-900 rounded-lg outline-none "
+                            placeholder="Ingresar comentario..." ></textarea>
                     </div>
 
                         <button

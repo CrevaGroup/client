@@ -16,6 +16,9 @@ import {
   UPDATE_SERVICES,
   GOOGLE_LOGIN,
   CREATE_POSTIG,
+  CREATE_POSTTEXT,
+  GET_POSTIG,
+  GET_POSTTEXT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -25,7 +28,8 @@ let initialState = {
   popup: {
     type: '',
   },
-  postig:[],
+  postIg:[],
+  postText:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -73,11 +77,29 @@ function rootReducer(state = initialState, action) {
         services: [...state.services, action.payload]
       };
 
+    case GET_POSTIG:
+      return{
+        ...state,
+        postIg: action.payload,
+      }
+
+    case GET_POSTTEXT:
+      return{
+        ...state,
+        postText: action.payload,
+      }
+
     case CREATE_POSTIG:
       return{
         ...state,
-        postig:action.payload,
-      }
+        postIg:[...state.postIg, action.payload],
+      };
+
+    case CREATE_POSTTEXT:
+      return{
+        ...state,
+        postText:[...state.postText, action.payload],
+      };
 
     case GET_REVIEW:
       return {};

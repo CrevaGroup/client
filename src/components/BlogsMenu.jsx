@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import FormIg from "./FormIg";
 import FormText from "./FormText";
+import { createPostIg, createPostText } from "../Redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const BlogsMenu = () => {
 
@@ -9,6 +11,10 @@ const BlogsMenu = () => {
     const [menu, setMenu] = useState(0);
     const [design, setDesign] = useState('rounded-xl');
     const [postText, setPostText] = useState([]);
+
+    const dispatch = useDispatch();
+
+
 
     const countHandler = (e) => {
         e.preventDefault();
@@ -25,7 +31,7 @@ const BlogsMenu = () => {
 
     const changeHandlerIg = (e, index) => {
        
-        const { name, value } = e.target;
+        const { value } = e.target;
         setPosts(prevPosts => {
             const updatedPosts = [...prevPosts];
             updatedPosts[index] = value;
@@ -44,15 +50,22 @@ const BlogsMenu = () => {
             }
             return updatedPost
         })
+        
     }
 
     const submitIgHandler = e => {
         e.preventDefault();
-        console.log(posts)
+        for(let i=0; i<quantityPosts; i++){
+            dispatch(createPostIg(posts[i]));
+            
+        }
+        setMenu(0);
+        
     }
     const submitTextHandler = e => {
         e.preventDefault();
-        console.log(postText)
+        dispatch(createPostText(postText[0],postText[1]));
+        setMenu(0);
     }
 
     const menuHandler = e => {
@@ -79,25 +92,19 @@ const BlogsMenu = () => {
             <div
                 className={` w-full   lg:w-3/5 bg-light-violet flex  items-center justify-evenly ${design}`}
             >
-                <div
-                    className=""
-                >
+
                     <button
                         value={1}
                         onClick={menuHandler}
                         className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Text</button>
-                </div>
 
-                <div
-                    className=""
-                >
                     <button
                         value={2}
                         onClick={menuHandler}
                         className="px-2 text-lg my-8 border-2 border-custom-gray rounded-xl transition duration-200 ease-in-out hover:bg-custom-gray hover:duration-200"
                     >Instagram</button>
-                </div>
+
 
             </div>
             {
