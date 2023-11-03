@@ -6,6 +6,7 @@ export const DELETE_USER = "DELETE_USER";
 export const RESTORE_USER = "RESTORE_USER";
 export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
 
+export const SEARCH_SERVICES = "SEARCH_SERVICES";
 export const FILTERS_SERVICES = "FILTERS_SERVICES";
 export const CREATE_SERVICES = "CREATE_SERVICES";
 export const UPDATE_SERVICES = "UPDATE_SERVICES";
@@ -22,6 +23,7 @@ export const UPDATE_TRANSACTION = "UPDATE_TRANSACTION";
 
 
 export const SET_POPUP = "SET_POPUP"
+export const CLEAR_POPUP = "CLEAR_POPUP"
 
 export const GET_POSTIG = "GET_POSTIG";
 export const CREATE_POSTIG = "CREATE_POSTIG";
