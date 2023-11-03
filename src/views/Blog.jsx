@@ -118,22 +118,7 @@ const Blog = () => {
                                     </div>
                                 ))
                             
-                            
-                            
-                            /* <div
-                        className="flex flex-col  w-10/12 lg:w-3/5 justify-center  my-4 text-dark-gray-blue"
-                    >
-                        <h1
-                            className="my-4 font-bold text-3xl "
-                        >Actualizacion de precios</h1>
-                        <p
-                            className="text-xl p-2 whitespace-pre-line"
-                        >{`Mollit ut dolore in minim incididunt exercitation duis nisi 
-                        culpa incididunt excepteur quis laboris.Laboris velit in voluptate commodo elit.Esse irure incididunt non Lorem officia
-                         
-                        magna culpa.Aliquip Lorem nulla anim consequat duis id in.
-                        Ea aliqua anim ullamco proident voluptate.`}</p>
-                    </div>*/}
+                            }
                         </div> : 0
                     }
                 
