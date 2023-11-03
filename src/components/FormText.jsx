@@ -19,9 +19,11 @@ const FormText = ({submit, change}) => {
                         <h1>Publicar articulo</h1>
                     </div>
                     <div
-                        className=" w-3/4 my-2"
+                        className=" w-3/4 my-4"
                     >
-                        <p>Titulo</p>
+                        <p
+                            className="my-1"
+                        >Titulo</p>
 
                         <input
                             className="w-full p-1 rounded-lg outline-none"
@@ -32,9 +34,11 @@ const FormText = ({submit, change}) => {
                     </div>
 
                     <div
-                        className="w-3/4 my-2"
+                        className="w-3/4 my-4"
                     >
-                        <p>Contenido</p>
+                        <p
+                            className="my-1"
+                        >Contenido</p>
 
                         <textarea name="text" rows="3"
                             onChange={change}
