@@ -181,7 +181,7 @@ const Login = () => {
                   navigate("/");
                 }}
               >
-                Registrarse con Google
+                Iniciar sesión con Google
               </button>
             </div>
             <div
