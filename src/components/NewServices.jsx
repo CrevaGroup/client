@@ -108,28 +108,55 @@ function NewServices({dis}) {
   <div className="p-8 rounded-lg mt-5 mb-5 bg-light-violet lg:w-3/5  items-center justify-center text-xl text-black">
 
 
-    <form onSubmit={submitHandler} className="text-center">
+    <form onSubmit={submitHandler} className="flex flex-col w-full items-center">
               
 
       <h1 className="text-3xl my-4 text-black">Crear un nuevo servicio</h1>
-      <h2 className="">Nombre</h2>
-      <input type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4"/>
-      <h2>Descripción</h2>
-      <input type="text" name="description" onChange={handleChange} value={servicesInfo.description} className="mb-4"/>
-      <h2>Precio</h2>
-      <input type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4"/>
+      <div
+            className="flex flex-col items-center justify-center w-3/4 "
+      >
+      <div
+        className="lg:w-full"
+      >
+              <h2 >Nombre</h2>
+              <input placeholder="Ingresar nombre..." type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4 w-full rounded-lg outline-none p-1" />
+      </div>
+      <div
+              className="lg:w-full"
+      >
+              <h2
+                className=""
+              >Descripción</h2>
+              <textarea name="description" rows="3"
+                value={servicesInfo.description}
+                onChange={handleChange}
+                className="mb-4 w-full rounded-lg outline-none p-1"
+                placeholder="Ingresar descripcion..." ></textarea>
+      </div>
+      
+     <div
+      className="w-full flex flex-col items-center justify-center"
+     >
+              <h2>Precio</h2>
+              <input placeholder="##" type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2" />
+     </div>
       <h2>Imágen</h2>
-      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4"/>
+      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer"/>
       <h2>Incluye</h2>
-      <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4">
+      <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4 outline-none p-1 rounded-lg">
         <option value=""> Elegir servicio</option>
         <option value="cv">Curriculum Vitae</option>
         <option value="perfil">Perfil de Linkedin</option>
         <option value="busqueda">Búsqueda Laboral</option>
         <option value="practica">Capacitación</option>
       </select>
+          </div>
       <div className="flex justify-center items-center mt-2 mb-2">
-        <Button type="submit" className="bg-dark-violet">Crear</Button>
+        
+            <button
+              type="submit"
+              className="px-2 text-lgp py-2 my-8 border-2 border-custom-gray rounded-2xl transition duration-200 ease-in-out hover:bg-dark-violet hover:text-custom-gray hover:border-dark-violet hover:duration-200"
+            >Crear</button>
       </div>
     </form>
   </div>

@@ -19,8 +19,6 @@ const Blog = () => {
 
     const disableHandler = () => {
         setPostMenu(postMenu ? false : true)
-        console.log(postsIg)
-        console.log(postsText)
     }
 
 

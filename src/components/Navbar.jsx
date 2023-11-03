@@ -20,8 +20,6 @@ const Navbar = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  console.log(user);
-
   const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
   const burguerHandler = navHandler ? burguer : close;
   const logoutHandler = () => {
