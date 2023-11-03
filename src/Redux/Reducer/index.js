@@ -10,22 +10,41 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
+  SEARCH_SERVICES,
   FILTERS_SERVICES,
   CREATE_SERVICES,
   DELETE_SERVICES,
   UPDATE_SERVICES,
   GOOGLE_LOGIN,
   CREATE_POSTIG,
+  CLEAR_POPUP,
+  CREATE_POSTTEXT,
+  GET_POSTIG,
+  GET_POSTTEXT,
+  LOGOUT,
+  GET_TRANSACTION_LINK,
 } from "../Actions/actions-type";
 
 let initialState = {
-  allUsers: [],
   user: {},
+  allUsers: [],
   services: [],
+  types: [],
+  postig: [],
+  postText: [],
+  cart: [],
+  cartUrl: "",
+  filters: {
+    min: 1,
+    max: 100,
+    order: 'ASC',
+    types: []
+  },
   popup: {
     type: '',
+    title: '',
+    message: ''
   },
-  postig:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -41,24 +60,44 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'BIENVENIDO',
+          message: 'Inicio de sesión exitoso.'
+        }
       };
 
     case CREATE_USER:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'REGISTRO EXITOSO',
+          message: 'Se ha enviado un correo para validar su cuenta.'
+        }
       };
 
     case UPDATE_USER:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'DATOS EDITADOS',
+          message: 'Se han guardado los cambios.'
+        }
       };
 
     case GOOGLE_LOGIN:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'BIENVENIDO',
+          message: 'Inicio de sesión exitoso.'
+        }
       };
 
     case FILTERS_SERVICES:
@@ -70,14 +109,61 @@ function rootReducer(state = initialState, action) {
     case CREATE_SERVICES:
       return {
         ...state,
-        services: [...state.services, action.payload]
+        services: [...state.services, action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: 'SERVICIO CREADO',
+          message: 'Se ha guardado el nuevo servicio correctamente.'
+        }
       };
+
+    case GET_POSTIG:
+      return{
+        ...state,
+        postIg: action.payload,
+      }
+
+    case GET_POSTTEXT:
+      return{
+        ...state,
+        postText: action.payload,
+      }
 
     case CREATE_POSTIG:
       return{
         ...state,
-        postig:action.payload,
+        postIg:[...state.postIg, action.payload],
+      };
+
+    case CREATE_POSTTEXT:
+      return{
+        ...state,
+        postText:[...state.postText, action.payload],
+      };
+
+    case LOGOUT:
+      return{
+        ...state,
+        user:{}
       }
+
+    case CLEAR_POPUP:
+      return {
+        ... state,
+        popup: action.payload
+      }
+
+    case SEARCH_SERVICES:
+      return {
+        ...state,
+        filters: action.payload
+      }
+
+    case GET_TRANSACTION_LINK:
+      return {
+        ...state,
+        cartUrl: action.payload
+      };
 
     case GET_REVIEW:
       return {};
@@ -86,8 +172,6 @@ function rootReducer(state = initialState, action) {
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
-      return {};
-    case GET_TRANSACTION:
       return {};
     case UPDATE_TRANSACTION:
       return {};
