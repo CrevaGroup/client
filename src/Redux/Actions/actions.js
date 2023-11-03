@@ -31,6 +31,9 @@ import {
   GET_ALL_USERS,
   SET_POPUP,
   CREATE_POSTIG,
+  CREATE_POSTTEXT,
+  GET_POSTIG,
+  GET_POSTTEXT,
 } from "./actions-type";
 
 import axios from "axios";
@@ -370,12 +373,57 @@ export const setPopup = (type) => {
   }
 }
 
-export const createPostIg = (quantity, posts) => {
+export const getPostIg = () => {
   return async dispatch => {
     try {
-      const response = await axios.get(`blog/`);
+      const response = await axios.get(`/igpost`);
+      return dispatch({
+        type:GET_POSTIG,
+        payload: response.data
+      })
+    } catch(error) {
+      alert(error.message)
+    }
+  }
+}
+
+export const getPostText = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/textblog`);
+      return dispatch({
+        type:GET_POSTTEXT,
+        payload: response.data
+      })
+    } catch(error) {
+      alert(error.message)
+    }
+  }
+}
+
+export const createPostIg = (postURL) => {
+  return async dispatch => {
+    try {
+      const response = await axios.post(`igpost/`,{url:postURL});
       return dispatch({
         type:CREATE_POSTIG,
+        payload: response.data
+      });
+    } catch(error) {
+      alert(error.message);
+    }
+  }
+}
+
+export const createPostText = (title, content) => {
+  return async dispatch => {
+    try {
+      const response = await axios.post(`/textblog/`,{
+        title,
+        content
+      });
+      return dispatch({
+        type:CREATE_POSTTEXT,
         payload: response.data
       });
     } catch(error) {

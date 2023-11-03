@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import FormIg from "./FormIg";
 import FormText from "./FormText";
+import { createPostIg, createPostText } from "../Redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const BlogsMenu = () => {
 
@@ -9,6 +11,10 @@ const BlogsMenu = () => {
     const [menu, setMenu] = useState(0);
     const [design, setDesign] = useState('rounded-xl');
     const [postText, setPostText] = useState([]);
+
+    const dispatch = useDispatch();
+
+
 
     const countHandler = (e) => {
         e.preventDefault();
@@ -48,11 +54,17 @@ const BlogsMenu = () => {
 
     const submitIgHandler = e => {
         e.preventDefault();
-        console.log(posts)
+        for(let i=0; i<quantityPosts; i++){
+            dispatch(createPostIg(posts[i]));
+            
+        }
+        setMenu(0);
+        
     }
     const submitTextHandler = e => {
         e.preventDefault();
-        console.log(postText)
+        dispatch(createPostText(postText[0],postText[1]));
+        setMenu(0);
     }
 
     const menuHandler = e => {

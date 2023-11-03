@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import blog from '../assets/blogv.png'
 import Services from "../components/Services";
@@ -6,26 +6,29 @@ import { InstagramEmbed } from 'react-social-media-embed';
 
 import EditDocument from "../assets/EditDocument.svg";
 import BlogsMenu from "../components/BlogsMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostIg } from "../Redux/Actions/actions";
 
 const Blog = () => {
-    const postQuantity = 3;
-    const posts = [];
-    const [post,setPost] = useState(false)
+
+    const [postMenu,setPostMenu] = useState(false)
+    const dispatch = useDispatch();
+
+    const postsText = useSelector(state => state.postText);
+    const postsIg = useSelector(state => state.postIg)
 
     const disableHandler = () => {
-        setPost(post ? false : true)
+        setPostMenu(postMenu ? false : true)
+        console.log(postsIg)
     }
 
-    for(let i=0 ; i<postQuantity; i++){
-        posts.push(
-            <div
-                key={i}
-                className="flex justify-center w-full"
-            >
-                <InstagramEmbed url={`https://www.instagram.com/p/Cs9HfB5A8SC/`}/>
-            </div>
-        )
-    }
+
+    useEffect(() => {
+        dispatch(getPostIg());
+    }, [dispatch]);
+    
+    
+    
     return(
         <div>
             <div
@@ -49,7 +52,7 @@ const Blog = () => {
                     />
                 </div>
                 {
-                    post && 
+                    postMenu && 
                     <div> 
                         <BlogsMenu
                             dis = {disableHandler}
@@ -67,15 +70,31 @@ const Blog = () => {
                 <div
                     className="flex items-center justify-center my-16"
                 >
-                    <div
-                    className="grid grid-cols-1 lg:grid-cols-3 gap-x-8  gap-y-8  w-full lg:mx-16"
-                >
+                   
+
 
                     {
-                        posts.map(post => post)
-                    }
+                        postsIg.length > 0 ? <div
+                            className="grid grid-cols-1 lg:grid-cols-3 gap-x-8  gap-y-8  w-full lg:mx-16"
+                        >
+                            {
+                                postsIg.map((post,index) =>(
+                                    <div
+                                        key={index}
+                                        className="flex justify-center w-full"
+                                    >
+                                        <InstagramEmbed 
+                                            className="w-[328px] lg:w-[400px]"
+                                        url={`${post.url}`} />
 
-                </div>
+                                    </div>
+                                ))  
+                            }
+
+                            </div> : ''
+                    }
+                
+
                 </div>
                 <Services/>
             </div>
