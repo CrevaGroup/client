@@ -11,7 +11,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Community from "./views/Community";
 import Success from "./views/Success";
-import Failure from "./views/failure";
+import Failure from "./views/Failure";
 
 import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
