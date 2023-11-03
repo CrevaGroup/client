@@ -7,22 +7,13 @@ import Transaction from "../components/Transaction";
 import Users from "../components/Users";
 import OrderRequest from "../components/OrderRequest";
 import Config from "../components/Config";
-import ProfileUser from "../components/ProfileUser";
-import UserList from "../components/UserList";
-
-import Subscription from "../components/Subscription";
 
 function Admin() {
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-row">
       <Sidebar />
       <div className="w-full p-4 bg-gray-100">
-        <UserList />
-
         <Routes>
-          <Route path="/" element={<ProfileUser />} index />
-          <Route path="/subs" element={<Subscription />} />
-          <Route path="/profile" element={<ProfileUser />} />
           <Route path="/clients" element={<CLients />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/transaction" element={<Transaction />} />
