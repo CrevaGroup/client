@@ -30,6 +30,7 @@ import {
   FILTERS_SERVICES,
   GET_ALL_USERS,
   SET_POPUP,
+  CLEAR_POPUP,
   CREATE_POSTIG,
 } from "./actions-type";
 
@@ -139,9 +140,8 @@ export const createUser = (username, password, email, age, photo) => {
           photo: photoURL,
         };
       }
-      const response = await axios.post("/user", user);
+      await axios.post("/user", user);
       sendEmailVerification(firebaseUser.user);
-      alert(response.data);
       return dispatch({
         type: CREATE_USER,
       });
@@ -167,10 +167,7 @@ export const deleteUserById = (email, password) => {
       );
       const id = firebaseUser.user.uid;
       const disable = await deleteUser(firebaseUser);
-      if (disable) {
-        const response = await axios.delete(`/user/${id}`);
-        alert(response.data);
-      }
+      if (disable) await axios.delete(`/user/${id}`);
       return dispatch({
         type: DELETE_USER,
       });
@@ -469,6 +466,17 @@ export const setPopup = (type) => {
     type: SET_POPUP,
     payload: {
       type: type,
+      title: '',
+      message: ''
+    }
+  }
+}
+
+export const clearPopup = () => {
+  return {
+    type: CLEAR_POPUP,
+    payload: {
+      type: '',
       title: '',
       message: ''
     }

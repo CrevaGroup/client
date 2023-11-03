@@ -22,6 +22,7 @@ export const UPDATE_TRANSACTION = "UPDATE_TRANSACTION";
 
 
 export const SET_POPUP = "SET_POPUP"
+export const CLEAR_POPUP = "CLEAR_POPUP"
 
 export const GET_POSTIG = "GET_POSTIG";
 export const CREATE_POSTIG = "CREATE_POSTIG";

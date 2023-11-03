@@ -16,6 +16,7 @@ import {
   UPDATE_SERVICES,
   GOOGLE_LOGIN,
   CREATE_POSTIG,
+  CLEAR_POPUP,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -44,24 +45,44 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'BIENVENIDO',
+          message: 'Inicio de sesión exitoso.'
+        }
       };
 
     case CREATE_USER:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'REGISTRO EXITOSO',
+          message: 'Se ha enviado un correo para validar su cuenta.'
+        }
       };
 
     case UPDATE_USER:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'DATOS EDITADOS',
+          message: 'Se han guardado los cambios.'
+        }
       };
 
     case GOOGLE_LOGIN:
       return {
         ...state,
         user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'BIENVENIDO',
+          message: 'Inicio de sesión exitoso.'
+        }
       };
 
     case FILTERS_SERVICES:
@@ -73,13 +94,24 @@ function rootReducer(state = initialState, action) {
     case CREATE_SERVICES:
       return {
         ...state,
-        services: [...state.services, action.payload]
+        services: [...state.services, action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: 'SERVICIO CREADO',
+          message: 'Se ha guardado el nuevo servicio correctamente.'
+        }
       };
 
     case CREATE_POSTIG:
       return{
         ...state,
         postig:action.payload,
+      }
+
+    case CLEAR_POPUP:
+      return {
+        ... state,
+        popup: action.payload
       }
 
     case GET_REVIEW:
