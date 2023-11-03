@@ -22,6 +22,7 @@ import {
   GET_POSTIG,
   GET_POSTTEXT,
   LOGOUT,
+  GET_TRANSACTION_LINK,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -32,6 +33,7 @@ let initialState = {
   postig: [],
   postText: [],
   cart: [],
+  cartUrl: "",
   filters: {
     min: 1,
     max: 100,
@@ -157,6 +159,12 @@ function rootReducer(state = initialState, action) {
         filters: action.payload
       }
 
+    case GET_TRANSACTION_LINK:
+      return {
+        ...state,
+        cartUrl: action.payload
+      };
+
     case GET_REVIEW:
       return {};
     case CREATE_REVIEW:
@@ -164,8 +172,6 @@ function rootReducer(state = initialState, action) {
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
-      return {};
-    case GET_TRANSACTION:
       return {};
     case UPDATE_TRANSACTION:
       return {};

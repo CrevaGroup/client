@@ -21,6 +21,7 @@ import {
   CREATE_REVIEW,
   UPDATE_REVIEW,
   DELETE_REVIEW,
+  GET_TRANSACTION_LINK,
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
@@ -588,4 +589,25 @@ export const logout = () => {
       payload: ''
     })
   } 
+}
+
+export const getTransactionLink = (transactionInfo, userCountry) => {
+  return async dispatch => {
+    try {
+      const URL = userCountry === "Argentina"?await axios.post('/transaction/mpLink', transactionInfo)
+      : await axios.post('/stripe', transactionInfo);
+      return dispatch({
+        type: GET_TRANSACTION_LINK,
+        payload: URL
+      })
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  }
 }
