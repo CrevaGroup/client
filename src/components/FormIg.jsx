@@ -45,10 +45,11 @@ const FormIg = ({ change, submit, count, quantity}) => {
                                     key={index}
                                 >
                                     <p>
-                                        {`Ingresar URL del post #${index+1}`}
+                                        {`Post #${index+1}`}
                                     </p>
                                     <input
                                         key={index}
+                                        placeholder="Ingresar URL del post..."
                                         className="my-2 w-full p-2 rounded-lg outline-none"
                                         onChange={e => change(e, index)}
                                     >

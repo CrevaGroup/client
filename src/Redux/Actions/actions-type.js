@@ -30,3 +30,9 @@ export const CREATE_POSTIG = "CREATE_POSTIG";
 export const UPDATE_POSTIG = "UPDATE_POSTIG";
 export const DELETE_POSTIG = "DELETE_POSTIG";
 
+export const GET_POSTTEXT = "GET_POSTTEXT";
+export const CREATE_POSTTEXT = "CREATE_POSTTEXT";
+export const UPDATE_POSTTEXT = "UPDATE_POSTTEXT";
+export const DELETE_POSTTEXT = "DELETE_POSTTEXT";
+
+export const LOGOUT = 'LOGOUT';

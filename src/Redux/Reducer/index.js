@@ -18,6 +18,10 @@ import {
   GOOGLE_LOGIN,
   CREATE_POSTIG,
   CLEAR_POPUP,
+  CREATE_POSTTEXT,
+  GET_POSTIG,
+  GET_POSTTEXT,
+  LOGOUT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -26,6 +30,7 @@ let initialState = {
   services: [],
   types: [],
   postig: [],
+  postText: [],
   cart: [],
   filters: {
     min: 1,
@@ -110,10 +115,34 @@ function rootReducer(state = initialState, action) {
         }
       };
 
+    case GET_POSTIG:
+      return{
+        ...state,
+        postIg: action.payload,
+      }
+
+    case GET_POSTTEXT:
+      return{
+        ...state,
+        postText: action.payload,
+      }
+
     case CREATE_POSTIG:
       return{
         ...state,
-        postig:action.payload,
+        postIg:[...state.postIg, action.payload],
+      };
+
+    case CREATE_POSTTEXT:
+      return{
+        ...state,
+        postText:[...state.postText, action.payload],
+      };
+
+    case LOGOUT:
+      return{
+        ...state,
+        user:{}
       }
 
     case CLEAR_POPUP:
