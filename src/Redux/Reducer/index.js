@@ -19,6 +19,7 @@ import {
   CREATE_POSTTEXT,
   GET_POSTIG,
   GET_POSTTEXT,
+  LOGOUT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -100,6 +101,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         postText:[...state.postText, action.payload],
       };
+
+    case LOGOUT:
+      return{
+        ...state,
+        user:{}
+      }
 
     case GET_REVIEW:
       return {};

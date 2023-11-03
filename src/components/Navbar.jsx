@@ -9,15 +9,24 @@ import service from "../assets/service.svg";
 import team from "../assets/team.svg";
 import community from "../assets/community.svg";
 import blog from "../assets/blog.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Redux/Actions/actions";
 
 const Navbar = () => {
   const [navHandler, setNavHandler] = useState(true);
   const toogleNav = () => {
     setNavHandler(!navHandler);
   };
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  console.log(user);
 
   const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
   const burguerHandler = navHandler ? burguer : close;
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between ">
@@ -110,25 +119,43 @@ const Navbar = () => {
         </li>
 
         <li className="mx-4 text-center lg:text-start">
-          <NavLink to={"/login"}>
-            <p
-              onClick={toogleNav}
-              className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
-            >
-              Iniciar Sesion
-            </p>
-          </NavLink>
+          {
+            user?.fullName === undefined ? <NavLink to={"/login"}>
+              <p
+                onClick={toogleNav}
+                className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
+              >
+                Iniciar Sesion
+              </p>
+            </NavLink> : <NavLink>
+                <p
+                  onClick={toogleNav}
+                  className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
+                >Mi Perfil</p></NavLink>
+          }
         </li>
 
         <li className="mx-3 text-center lg:text-start">
-          <NavLink to={"/register"}>
-            <p
-              onClick={toogleNav}
-              className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white"
-            >
-              Registrarse
-            </p>
-          </NavLink>
+          {
+            user?.fullName === undefined ? <NavLink to={"/register"}>
+              <p
+                onClick={toogleNav}
+                className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white"
+              >
+                Registrarse
+              </p>
+            </NavLink> : 
+                <p
+                onClick={() => {
+                  toogleNav();
+                  logoutHandler();
+                }}
+                className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white"
+              >
+                Cerrar Sesion
+              </p>
+  
+          }
         </li>
       </ul>
     </div>

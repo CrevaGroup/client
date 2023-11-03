@@ -34,6 +34,7 @@ import {
   CREATE_POSTTEXT,
   GET_POSTIG,
   GET_POSTTEXT,
+  LOGOUT,
 } from "./actions-type";
 
 import axios from "axios";
@@ -430,4 +431,13 @@ export const createPostText = (title, content) => {
       alert(error.message);
     }
   }
+}
+
+export const logout = () => {
+  return dispatch => {
+    return dispatch({
+      type:LOGOUT,
+      payload: ''
+    })
+  } 
 }
