@@ -7,7 +7,7 @@ import { InstagramEmbed } from 'react-social-media-embed';
 import EditDocument from "../assets/EditDocument.svg";
 import BlogsMenu from "../components/BlogsMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostIg } from "../Redux/Actions/actions";
+import { getPostIg, getPostText } from "../Redux/Actions/actions";
 
 const Blog = () => {
 
@@ -20,6 +20,7 @@ const Blog = () => {
     const disableHandler = () => {
         setPostMenu(postMenu ? false : true)
         console.log(postsIg)
+        console.log(postsText)
     }
 
 
@@ -27,6 +28,10 @@ const Blog = () => {
         dispatch(getPostIg());
     }, [dispatch]);
     
+    useEffect(() => {
+        dispatch(getPostText());
+
+    }, [dispatch]);
     
     
     return(
@@ -68,7 +73,7 @@ const Blog = () => {
                     ></img>
                 </div>
                 <div
-                    className="flex items-center justify-center my-16"
+                    className="flex  flex-col items-center justify-center my-16"
                 >
                    
 
@@ -95,8 +100,27 @@ const Blog = () => {
                     }
 
                     {
-                        postsText.length > 0 ? <div> 
-                            {/* <div
+                        postsText.length > 0 ? <div
+                            className="flex flex-col items-center justify-center my-8 w-full  "
+                        >
+                            {
+                                postsText.map((post,index) => (
+                                    <div
+                                        key={index}
+                                        className="flex flex-col  w-10/12 lg:w-3/5 justify-center  my-4 text-dark-gray-blue "
+                                    >
+                                        <h1
+                                            className="my-4 font-bold text-3xl "
+                                        >{post.title}</h1>
+                                        <p
+                                            className="text-xl p-2 whitespace-pre-line"
+                                        >{`${post.content}`}</p>
+                                    </div>
+                                ))
+                            
+                            
+                            
+                            /* <div
                         className="flex flex-col  w-10/12 lg:w-3/5 justify-center  my-4 text-dark-gray-blue"
                     >
                         <h1
