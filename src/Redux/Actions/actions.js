@@ -24,6 +24,7 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
+  SEARCH_SERVICES,
   CREATE_SERVICES,
   UPDATE_SERVICES,
   DELETE_SERVICES,
@@ -47,8 +48,13 @@ export const getUser = (email, password) => {
       );
 
       if (!firebaseUser.user.emailVerified) {
-        alert("Verifica Tu Email!!");
-        return;
+        return dispatch({
+          type: SET_POPUP,
+          payload: {
+            type: 'ERROR',
+            title: 'OOPS!',
+            message: error.message
+        }});
       }
 
       const response = firebaseUser.user.uid
@@ -457,6 +463,29 @@ export const filtersService = ({ min, max, order, filter }) => {
         type: FILTERS_SERVICES,
         payload: [],
       });
+    }
+  };
+};
+
+export const searchServices = (input) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `service/search`,
+        input
+      );
+      return dispatch({
+        type: SEARCH_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };

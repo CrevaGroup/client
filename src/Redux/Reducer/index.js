@@ -10,6 +10,7 @@ import {
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
+  SEARCH_SERVICES,
   FILTERS_SERVICES,
   CREATE_SERVICES,
   DELETE_SERVICES,
@@ -23,8 +24,15 @@ let initialState = {
   user: {},
   allUsers: [],
   services: [],
-  postig:[],
+  types: [],
+  postig: [],
   cart: [],
+  filters: {
+    min: 1,
+    max: 100,
+    order: 'ASC',
+    types: []
+  },
   popup: {
     type: '',
     title: '',
@@ -112,6 +120,12 @@ function rootReducer(state = initialState, action) {
       return {
         ... state,
         popup: action.payload
+      }
+
+    case SEARCH_SERVICES:
+      return {
+        ...state,
+        filters: action.payload
       }
 
     case GET_REVIEW:
