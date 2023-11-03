@@ -37,6 +37,8 @@ import {
   GET_POSTIG,
   GET_POSTTEXT,
   LOGOUT,
+  GET_SERVICES,
+  GET_TYPES,
 } from "./actions-type";
 
 import axios from "axios";
@@ -467,6 +469,50 @@ export const filtersService = ({ min, max, order, filter }) => {
         type: FILTERS_SERVICES,
         payload: [],
       });
+    }
+  };
+};
+
+export const getServices = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `service/`
+      );
+      return dispatch({
+        type: GET_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  };
+};
+
+export const getTypes = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `type/`
+      );
+      return dispatch({
+        type: GET_TYPES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
