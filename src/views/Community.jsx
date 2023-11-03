@@ -34,19 +34,21 @@ const Community = () => {
 
   return (
     <div>
-      <div className="bg-custom-gray flex flex-col items-center justify-center min-h-screen">
+      <div className="bg-custom-gray min-h-screen p-4">
         <div className="text-center">
-          <h1 className="text-5xl font-semibold mt-8">Nuestra Comunidad</h1>
+          <h1 className="text-4xl md:text-5xl font-semibold mt-4 md:mt-8">
+            Nuestra Comunidad
+          </h1>
           <img
             src={SocialMedia}
             alt="Imagen de la comunidad"
-            className="my-4 mx-auto w-1/3 h-auto"
+            className="my-2 mx-auto w-2/3 md:w-1/3 h-auto"
           />
         </div>
-        <div className="my-8 text-center">
-          <h2 className="text-5xl font-semibold">Testimonios</h2>
+        <div className="my-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-semibold">Testimonios</h2>
         </div>
-        <div className="flex flex-wrap justify-center my-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Testimonio 1 */}
           <div className="max-w-md m-4 rounded-lg shadow-lg">
             <TestimonialCard />
@@ -78,7 +80,7 @@ const Community = () => {
           </div>
         </div>
 
-        <div className="w-2/4 p-4">
+        <div className="w-full md:w-2/4 p-4 mx-auto">
           <div className="bg-white rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold">Deja tu comentario</h3>
             <textarea
@@ -111,9 +113,12 @@ const Community = () => {
             </button>
           </div>
         </div>
-        <div className="my-10">
-          <h2 className="text-2xl text-center font-semibold">Comentarios</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 m-8">
+
+        <div className="my-4">
+          <h2 className="text-2xl md:text-3xl text-center font-semibold">
+            Comentarios
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4">
             {comentarios.map((comentario) => (
               <div key={comentario.id}>
                 <Comentario
