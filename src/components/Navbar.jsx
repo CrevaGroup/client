@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import home from "../assets/home.svg";
 import burguer from "../assets/burguer.svg";
-import contact from "../assets/contact.svg";
 import close from "../assets/close.svg";
 import service from "../assets/service.svg";
-import team from "../assets/team.svg";
 import community from "../assets/community.svg";
 import blog from "../assets/blog.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +25,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="  p-5  bg-custom-gray lg:flex  lg:items-center lg:justify-between ">
+    <div className="p-3 lg:flex  lg:items-center lg:justify-between" style={{backgroundColor: `#C3A3D0`}}>
       <div className="flex justify-between items-center">
         <span className="text-2xl flex">
           <NavLink to={"/"}>
@@ -50,7 +48,7 @@ const Navbar = () => {
           <NavLink to={"/"}>
             <p
               onClick={toogleNav}
-              className={`text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 `}
+              className={`text-lg hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 `}
             >
               Inicio
             </p>
@@ -62,21 +60,9 @@ const Navbar = () => {
           <NavLink to={"/services"}>
             <p
               onClick={toogleNav}
-              className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
+              className="text-lg hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
             >
-              Nuestros Servicios
-            </p>
-          </NavLink>
-        </li>
-
-        <li className="mx-4 flex items-center  h-8 my-4">
-          <img className="h-6 mr-4 lg:hidden" src={team} />
-          <NavLink to={"/team"}>
-            <p
-              onClick={toogleNav}
-              className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
-            >
-              Equipo
+              Servicios
             </p>
           </NavLink>
         </li>
@@ -86,7 +72,7 @@ const Navbar = () => {
           <NavLink to={"/blog"}>
             <p
               onClick={toogleNav}
-              className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
+              className="text-lg hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
             >
               Blog
             </p>
@@ -94,22 +80,11 @@ const Navbar = () => {
         </li>
 
         <li className="mx-4 flex items-center h-8 my-4">
-          <img className="h-6 mr-4 lg:hidden" src={contact} />
-          <NavLink to={"/contact"}>
-            <p
-              onClick={toogleNav}
-              className="text-xl hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0 "
-            >
-              Contacto
-            </p>
-          </NavLink>
-        </li>
-        <li className="mx-4 flex items-center h-8 my-4">
           <img className="h-6 mr-4 lg:hidden" src={community} />
           <NavLink to={"/community"}>
             <p
               onClick={toogleNav}
-              className="text-xl hover:text-violet-500 duration-500 cursor-pointer my-6 lg:my-0 "
+              className="text-lg hover:text-violet-500 duration-500 cursor-pointer my-6 lg:my-0 "
             >
               Comunidad Creva
             </p>
@@ -121,15 +96,15 @@ const Navbar = () => {
             user?.fullName === undefined ? <NavLink to={"/login"}>
               <p
                 onClick={toogleNav}
-                className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
+                className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
               >
                 Iniciar Sesion
               </p>
             </NavLink> : <NavLink>
-                <p
-                  onClick={toogleNav}
-                  className="text-xl h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-xl lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
-                >Mi Perfil</p></NavLink>
+              <p
+                onClick={toogleNav}
+                className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
+              >Mi Perfil</p></NavLink>
           }
         </li>
 
@@ -138,21 +113,21 @@ const Navbar = () => {
             user?.fullName === undefined ? <NavLink to={"/register"}>
               <p
                 onClick={toogleNav}
-                className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white"
+                className="text-lg  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-lg font-bold text-white"
               >
                 Registrarse
               </p>
-            </NavLink> : 
-                <p
+            </NavLink> :
+              <p
                 onClick={() => {
                   toogleNav();
                   logoutHandler();
                 }}
-                className="text-xl  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-xl font-bold text-white"
+                className="text-lg  hover:text-black duration-500 lg:cursor-pointer my-6 lg:my-0  bg-dark-violet p-2  mx-1 rounded-lg font-bold text-white"
               >
                 Cerrar Sesion
               </p>
-  
+
           }
         </li>
       </ul>
