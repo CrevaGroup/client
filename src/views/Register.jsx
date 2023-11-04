@@ -6,6 +6,7 @@ import imgGoogle from "../assets/LogosGoogleIcon.svg";
 import nuevaImagen from "../assets/Sign up-amico.png";
 import { useDispatch } from "react-redux";
 import { createUser, googleLogin } from "../Redux/Actions/actions";
+import Select from "react-select";
 
 function Register() {
   const dispatch = useDispatch();
@@ -18,13 +19,31 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [age, setAge] = useState("");
+  const currentYear = new Date().getFullYear();
+
+  const [birthdate, setBirthdate] = useState({
+    day: null,
+    month: null,
+    year: currentYear,
+  });
+  const [nationality, setNationality] = useState("");
+  const [countries, setCountries] = useState([
+    "Argentina",
+    "Brasil",
+    "Chile",
+    "Colombia",
+    "México",
+    "Perú",
+    "Venezuela",
+    "Estados Unidos",
+  ]);
 
   const [errors, setErrors] = useState({
     username: "",
     password: "",
     confirmPassword: "",
     email: "",
+    birthdate: "",
   });
 
   const handleValidation = (field, value) => {
@@ -48,6 +67,20 @@ function Register() {
         ...prevErrors,
         email: validateEmail(value),
       }));
+    } else if (field === "birthdate") {
+      setBirthdate(value);
+      const age = calculateAge(value);
+      if (age < 18) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          birthdate: "Debes ser mayor de 18 años.",
+        }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          birthdate: "",
+        }));
+      }
     }
   };
 
@@ -55,7 +88,7 @@ function Register() {
     if (Object.values(errors).some((error) => error !== "")) {
       return;
     }
-    dispatch(createUser(username, password, email, age));
+    dispatch(createUser(username, password, email, birthdate, nationality));
     navigate("/");
   };
 
@@ -176,29 +209,101 @@ function Register() {
               </p>
             )}
           </div>
-          <div className="mb-6" style={{ position: "relative" }}>
-            <input
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              id="age"
-              type="number"
-              placeholder="Edad"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
+          <div className="mb-6">
+            <label
+              htmlFor="birthdate"
+              className="text-white text-sm mb-2 block"
+            >
+              Fecha de Nacimiento
+            </label>
+            <div style={{ display: "flex", width: "100%" }}>
+              <Select
+                className="custom-select"
+                value={birthdate.day}
+                options={Array.from({ length: 31 }, (_, i) => ({
+                  label: (i + 1).toString(),
+                  value: (i + 1).toString(),
+                }))}
+                onChange={(selectedOption) =>
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    day: selectedOption,
+                  })
+                }
+                placeholder="Día"
+              />
+              <Select
+                className="custom-select mx-4"
+                value={birthdate.month}
+                options={[
+                  "Enero",
+                  "Febrero",
+                  "Marzo",
+                  "Abril",
+                  "Mayo",
+                  "Junio",
+                  "Julio",
+                  "Agosto",
+                  "Septiembre",
+                  "Octubre",
+                  "Noviembre",
+                  "Diciembre",
+                ].map((month, index) => ({
+                  label: month,
+                  value: (index + 1).toString(),
+                }))}
+                onChange={(selectedOption) =>
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    month: selectedOption,
+                  })
+                }
+                placeholder="Mes"
+              />
+              <Select
+                className="custom-select"
+                value={birthdate.year}
+                options={Array.from(
+                  { length: currentYear - 1923 + 1 },
+                  (_, i) => ({
+                    label: (currentYear - i).toString(),
+                    value: (currentYear - i).toString(),
+                  })
+                )}
+                onChange={(selectedOption) =>
+                  handleValidation("birthdate", {
+                    ...birthdate,
+                    year: selectedOption,
+                  })
+                }
+                placeholder="Año"
+              />
+            </div>
+            {errors.birthdate && (
+              <p className="text-white text-sm py-1 px-2 rounded mt-1">
+                {errors.birthdate}
+              </p>
+            )}
           </div>
+          <div className="mb-6">
+            <select
+              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              id="nationality"
+              value={nationality}
+              onChange={(e) => setNationality(e.target.value)}
+            >
+              <option value="" disabled>
+                Seleccione su nacionalidad
+              </option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="mb-6 text-center">
-            {/* <div className="flex items-center justify-between mb-2">
-              <label htmlFor="rememberMe" className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  id="rememberMe"
-                  checked={rememberMe}
-                  onChange={handleRememberMeChange}
-                  className="form-checkbox h-5 w-5 text-purple-600"
-                />
-                <span className="ml-2 text-white">Recordarme</span>
-              </label>
-            </div> */}
             <button
               style={{ backgroundColor: "#7410A3" }}
               className="w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -244,7 +349,7 @@ const validateUsername = (username) => {
   if (!/^[a-zA-Z ]+$/i.test(username)) {
     return "El nombre solo puede contener letras y espacios.";
   }
-  return ""; // Retorna una cadena vacía si no hay errores
+  return "";
 };
 
 const validatePassword = (password) => {
@@ -265,11 +370,25 @@ const validateEmail = (email) => {
   if (!email) {
     return "El correo electrónico es obligatorio.";
   }
-  // Agrega validación personalizada para el formato de correo si es necesario
-  // if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
-  //   return "El correo electrónico debe ser una dirección de Gmail válida.";
-  // }
-  return ""; // Retorna una cadena vacía si no hay errores
+  return "";
+};
+
+const calculateAge = (birthdate) => {
+  const birthdateObj = new Date(
+    birthdate.year.value,
+    birthdate.month.value - 1,
+    birthdate.day.value
+  );
+  const currentDate = new Date();
+  const age = currentDate.getFullYear() - birthdateObj.getFullYear();
+  const monthDiff = currentDate.getMonth() - birthdateObj.getMonth();
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && currentDate.getDate() < birthdateObj.getDate())
+  ) {
+    return age - 1;
+  }
+  return age;
 };
 
 export default Register;
