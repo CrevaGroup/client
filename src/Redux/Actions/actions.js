@@ -47,10 +47,12 @@ import axios from "axios";
 import App from "../../../cloudinary";
 
 export const setLocalStorage = (key) => {
-  const key = localStorage.getItem(key)
-  return {
-    type: LOCAL_STORAGE,
-    payload: key
+  const info = JSON.parse(localStorage.getItem(key))
+  if(info){
+    return {
+      type: LOCAL_STORAGE,
+      payload: {info, key}
+    }
   }
 }
 
@@ -126,6 +128,7 @@ export const googleLogin = () => {
         photo: googleUser.user.photoURL,
       };
       const response = await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(response.data))
       return dispatch({
         type: GOOGLE_LOGIN,
         payload: response.data,
@@ -160,9 +163,9 @@ export const createUser = (username, password, email, birthdate, nationality) =>
           verified: firebaseUser.user.emailVerified,
           nacionalidad: nationality
         };
-        console.log("hola");
       }
       await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(user))
       sendEmailVerification(firebaseUser.user);
       return dispatch({
         type: CREATE_USER,

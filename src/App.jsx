@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Home from "./views/Home";
 import Services from "./views/Services";
@@ -18,10 +18,18 @@ import ProfileUser from "./components/ProfileUser";
 import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
+import { setLocalStorage } from "./Redux/Actions/actions";
 
 
 function App() {
+
+  const dispatch = useDispatch()
+
   const popup = useSelector(state => state.popup)
+
+  useEffect(()=>{
+    dispatch(setLocalStorage('user'))
+  },[])
 
   return (
     <div className="font-orkney">

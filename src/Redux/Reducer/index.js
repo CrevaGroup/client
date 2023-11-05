@@ -25,6 +25,7 @@ import {
   GET_TRANSACTION_LINK,
   GET_SERVICES,
   GET_TYPES,
+  LOCAL_STORAGE,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -52,6 +53,12 @@ let initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case LOCAL_STORAGE:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.info 
+      }
 
     case GET_ALL_USERS:
       return {
