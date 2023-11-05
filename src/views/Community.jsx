@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReview, getReview, getUser } from "../Redux/Actions/actions";
 
 const Community = () => {
-  const [comentarios, setComentarios] = useState(initialComentarios);
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [votoComentario, setVotoComentario] = useState(0);
   const dispatch = useDispatch();
@@ -25,7 +24,7 @@ const Community = () => {
     dispatch(getReview());
   }, [dispatch]);
 
-  const handleComentarioSubmit = () => {
+  const handleComentarioSubmit = async () => {
 /**    if (nuevoComentario.trim() !== "") {
       const nuevoId = comentarios.length + 1;
       const nuevoComentarioObj = {
@@ -40,7 +39,10 @@ const Community = () => {
       setNuevoComentario("");
       setVotoComentario(0);
     } */
-    dispatch(createReview(nuevoComentario,votoComentario))
+    await dispatch(createReview(nuevoComentario,votoComentario))
+    await dispatch(getReview());
+    setVotoComentario(0);
+    setNuevoComentario('');
   };
 
   return (
