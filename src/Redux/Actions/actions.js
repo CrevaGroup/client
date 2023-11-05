@@ -133,7 +133,7 @@ export const googleLogin = () => {
   };
 };
 
-export const createUser = (username, password, email, age, photo) => {
+export const createUser = (username, password, email, birthdate, nationality) => {
   return async function (dispatch) {
     try {
       const firebaseUser = await createUserWithEmailAndPassword(
@@ -143,15 +143,15 @@ export const createUser = (username, password, email, age, photo) => {
       );
       let user = {};
       if (firebaseUser.user) {
-        const photoURL = await App(photo);
         user = {
-          age: age,
+          age: birthdate,
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
           verified: firebaseUser.user.emailVerified,
-          photo: photoURL,
+          nacionalidad: nationality
         };
+        console.log("hola");
       }
       await axios.post("/user", user);
       sendEmailVerification(firebaseUser.user);
@@ -642,9 +642,9 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
     try {
       const URL = userCountry === "Argentina"?await axios.post('/transaction/mpLink', transactionInfo)
       : await axios.post('/stripe', transactionInfo);
+      window.location.href = URL.data;
       return dispatch({
         type: GET_TRANSACTION_LINK,
-        payload: URL
       })
     } catch (error) {
       return dispatch({
