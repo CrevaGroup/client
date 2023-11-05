@@ -32,6 +32,7 @@ let initialState = {
   allUsers: [],
   services: [],
   servicesFiltered: [],
+  reviews: [],
   types: [],
   postIg: [],
   postText: [],
@@ -182,9 +183,15 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_REVIEW:
-      return {};
+      return {
+        ...state,
+        reviews: action.payload
+      };
     case CREATE_REVIEW:
-      return {};
+      return {
+        ...state,
+        reviews: [...reviews, action.payload]
+      };
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
