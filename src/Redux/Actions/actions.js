@@ -526,7 +526,7 @@ export const getPostIg = () => {
         payload: response.data
       })
     } catch(error) {
-      alert(error.message)
+      console.log(error.message)
     }
   }
 }
@@ -540,7 +540,7 @@ export const getPostText = () => {
         payload: response.data
       })
     } catch(error) {
-      alert(error.message)
+      console.log(error.message)
     }
   }
 }

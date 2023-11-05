@@ -8,7 +8,8 @@ import store from './Redux/Store/index.js'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://server-lovat-nu.vercel.app'
+//https://server-lovat-nu.vercel.app
+axios.defaults.baseURL = 'http://localhost:3001'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
