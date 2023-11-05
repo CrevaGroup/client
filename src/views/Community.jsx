@@ -6,40 +6,48 @@ import Comentario from "../components/Comentarios";
 import { comentarios as initialComentarios } from "../components/comentariosData";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getReview, getUser } from "../Redux/Actions/actions";
+import { createReview, getReview, getServices, getUser } from "../Redux/Actions/actions";
 
 const Community = () => {
-  const [nuevoComentario, setNuevoComentario] = useState("");
+  const [nuevoComentario, setNuevoComentario] = useState({
+    description: '',
+    serv: ''
+  });
   const [votoComentario, setVotoComentario] = useState(0);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const reviews = useSelector(state => state.reviews);
-
+  const services = useSelector(state => state.services);
 
   const handleComentarioChange = (e) => {
-    setNuevoComentario(e.target.value);
+    const { name, value } = e.target;
+    setNuevoComentario((prevComentario) => ({
+      ...prevComentario,
+      [name]: value
+    }));
   };
 
   useEffect(() => {
     dispatch(getReview());
+    dispatch(getServices());
   }, [dispatch]);
 
   const handleComentarioSubmit = async () => {
-/**    if (nuevoComentario.trim() !== "") {
-      const nuevoId = comentarios.length + 1;
-      const nuevoComentarioObj = {
-        id: nuevoId,
-        nombre: "Tu Nombre",
-        comentario: nuevoComentario,
-        imagenPerfil: "URL de tu imagen de perfil",
-        voto: votoComentario,
-      };
-
-      setComentarios([...comentarios, nuevoComentarioObj]);
-      setNuevoComentario("");
-      setVotoComentario(0);
-    } */
-    await dispatch(createReview(nuevoComentario,votoComentario))
+    /**    if (nuevoComentario.trim() !== "") {
+          const nuevoId = comentarios.length + 1;
+          const nuevoComentarioObj = {
+            id: nuevoId,
+            nombre: "Tu Nombre",
+            comentario: nuevoComentario,
+            imagenPerfil: "URL de tu imagen de perfil",
+            voto: votoComentario,
+          };
+    
+          setComentarios([...comentarios, nuevoComentarioObj]);
+          setNuevoComentario("");
+          setVotoComentario(0);
+        } */
+    await dispatch(createReview(nuevoComentario, votoComentario, user.id))
     await dispatch(getReview());
     setVotoComentario(0);
     setNuevoComentario('');
@@ -100,7 +108,8 @@ const Community = () => {
               //disabled={user?.fullName === undefined ? true : false}
               className="w-full mt-2 p-2 border rounded disabled:cursor-not-allowed"
               placeholder="Escribe tu comentario..."
-              value={nuevoComentario}
+              name="description"
+              value={nuevoComentario.description}
               onChange={handleComentarioChange}
             />
             <div className="flex items-center mt-4">
@@ -108,16 +117,29 @@ const Community = () => {
               {[1, 2, 3, 4, 5].map((valor) => (
                 <span
                   key={valor}
-                  className={`cursor-pointer ${
-                    votoComentario >= valor
-                      ? "text-yellow-500"
-                      : "text-gray-400"
-                  }`}
+                  className={`cursor-pointer ${votoComentario >= valor
+                    ? "text-yellow-500"
+                    : "text-gray-400"
+                    }`}
                   onClick={() => setVotoComentario(valor)}
                 >
                   &#9733;
                 </span>
               ))}
+              <select
+                className="ml-auto"
+                name="serv"
+                onChange={handleComentarioChange}
+              >
+                {
+                  services.map((service, index) =>
+                  (<option
+                    value={service.id}
+                    key={index}
+                  >{service.name}</option>)
+                  )
+                }
+              </select>
             </div>
             <button
               //disabled={user?.fullName === undefined ? true : false}
@@ -134,15 +156,15 @@ const Community = () => {
             Comentarios
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4">
-            
-            
-            
-            
+
+
+
+
             {
-              reviews.map((review,index) =>(
+              reviews.map((review, index) => (
                 <div
                   key={index}
-                > 
+                >
                   <Comentario
                     nombre={''}
                     comentario={review.description}
