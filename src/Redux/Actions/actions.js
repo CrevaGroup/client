@@ -641,6 +641,7 @@ export const createPostText = (title, content) => {
 }
 
 export const logout = () => {
+  localStorage.clear()
   return dispatch => {
     return dispatch({
       type:LOGOUT,
