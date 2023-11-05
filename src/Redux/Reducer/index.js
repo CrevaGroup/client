@@ -23,12 +23,15 @@ import {
   GET_POSTTEXT,
   LOGOUT,
   GET_TRANSACTION_LINK,
+  GET_SERVICES,
+  GET_TYPES,
 } from "../Actions/actions-type";
 
 let initialState = {
   user: {},
   allUsers: [],
   services: [],
+  servicesFiltered: [],
   types: [],
   postIg: [],
   postText: [],
@@ -99,6 +102,19 @@ function rootReducer(state = initialState, action) {
           message: 'Inicio de sesión exitoso.'
         }
       };
+
+    case GET_TYPES:
+      return {
+        ...state,
+        types: action.payload
+      }
+
+    case GET_SERVICES:
+      return {
+        ...state,
+        services: action.payload,
+        servicesFiltered: action.payload
+      }
 
     case FILTERS_SERVICES:
       return {

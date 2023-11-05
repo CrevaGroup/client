@@ -1,34 +1,35 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { filtersService } from "../Redux/Actions/actions";
+import Select from 'react-select';
+import  { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { filtersService, getServices, getTypes } from "../Redux/Actions/actions";
 
 const Filters = () => {
 
-    const dispatch = useDispatch()
+    const minRef = useRef();
+    const maxRef = useRef();
+    const typeRef = useRef();
+    const orderRef = useRef();
+    const dispatch = useDispatch();
+    const filtersRedux = useSelector(state => state.filters);
+    const types = useSelector(state => state.types);
 
-        const min = 1;
+    const min = 1;
     const max = 100;
     const [styles, setStyles] = useState({
         left:`${min}%`,
         right: `${max}%`
     });
-    const minRef = useRef()
-    const maxRef = useRef()
-    const typeRef = useRef()
-    const orderRef = useRef()
 
     const [des, setDes] = useState(false);
-
 
     const priceGap = 10;
     
     const [filters, setFilters] = useState({
-        min:min,
-        max:max,
-        order:'',
-        filter:''
+        min: filtersRedux.min,
+        max: filtersRedux.max,
+        order: filtersRedux.order,
+        filter: ''
     })
-
 
     const handleInputChange = e => {
     setFilters(prevFilters => {
@@ -80,17 +81,16 @@ const Filters = () => {
             [e.target.name]: e.target.value,
         })
         }
-                
 
     });
-    // dispatch(filtersService({
-    //         ...filters,
-    //         [e.target.name]: e.target.value,
-    //     }))
-};
+    dispatch(filtersService({
+            ...filters,
+            [e.target.name]: e.target.value,
+        }))
+    };
 
-       useEffect(() => {
-                const leftPercent = ((filters.min - min) / (max - min)) * 100;
+    useEffect(() => {
+        const leftPercent = ((filters.min - min) / (max - min)) * 100;
         const rightPercent = 100 - ((filters.max - min) / (max - min)) * 100;
 
         setStyles({
@@ -236,41 +236,19 @@ const Filters = () => {
             <div
                 className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p
-                    className=" text-lg mb-2 text-dark-gray-blue"
-                >Servicios</p>
-                <select
+                <p className="text-lg mb-2 text-dark-gray-blue">Incluye</p>
+                 <Select
+                    defaultValue={[]}
+                    isMulti
                     name="filter"
                     onChange={handleInputChange}
                     ref={typeRef}
-                    className="peer rounded-lg border border-light-violet  bg-transparent outline outline-0 transition-all   focus:border-1 focus:border-dark-violet p-1"
-                >
-                    <option
-                        value=""
-                    >
-                        Elegir servicio
-                    </option>
-                    <option
-                        value="cv"
-                    >
-Currículum
-                    </option>
-                    <option
-                        value="perfil"
-                    >
-Perfil Linkedin
-                    </option>
-                    <option
-                        value="practica"
-                    >
-Capacitación
-                    </option>
-                    <option
-                        value="busqueda"
-                    >
-Búsqueda
-                    </option>
-                </select>
+                    options={[
+                        ...types.map(type => { 
+                            return { value: type.name, label: type.name }
+                        })
+                    ]}
+                />
             </div>
 
             {/*select*/}
