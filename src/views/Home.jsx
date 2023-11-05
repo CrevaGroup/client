@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import SearchBar from "../components/SearchBar";
 import Services from "../components/Services";
 import Footer from "../components/Footer";
+import TestimonialCard from "./TestimonialCard";
+
 import Consulting from "../assets/Online-consulting-amico.png";
 import Blog from "../assets/Status-update-amico.png";
-import TestimonialCard from "./TestimonialCard";
+import Flecha from "../assets/Flecha.svg"
+
 import { Button } from "@material-tailwind/react";
 
 const Home = () => {
@@ -20,19 +22,28 @@ const Home = () => {
     <div className="bg-custom-gray">
       <div className="flex flex-col lg:flex-row">
         <div
-          style={{ textAlign: "start", marginLeft: "-0px", margin: "20px" }}
-          className="lg:w-1/2 lg:pr-10 mt-10 ml-10"
-        >
-          <h1 className="text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
-            Visualizamos un futuro donde cada persona esté equipada con el
-            conocimiento y las herramientas necesarias para alcanzar su máximo
-            potencial.
+          style={{ textAlign: "start", marginLeft: "-0px", margin: "30px", marginTop: `20px` }}
+          className="lg:w-1/2 lg:pr-10 mt-10 ml-10">
+          <h1 className="text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
+            Despega tu carrera laboral
+            desde cualquier parte del mundo
           </h1>
-          <h2 className="text-base lg:text-3xl lg:text-xl xl:text-2xl">
-            Si buscas asistencia online para potenciar tu búsqueda de
-            crecimiento laboral, ¡Bienvenid@, llegaste al lugar indicado!
+          <h2 className="text-2xl mb-2 mt-1 lg:text-3xl lg:text-xl xl:text-2xl">
+            Nuestro proposito:
           </h2>
-          <SearchBar />
+          <div className="p-3 text-center" style={{ backgroundColor: `#C6A9D9` }}>
+            <p className="text-xl">Muchos profesionales se enfrentan a un desafío común: </p>
+            <p className="text-xl">no cuentan con las herramientas necesarias para buscar trabajo de manera efectiva.</p>
+          </div>
+          <img src={Flecha} alt="Flecha" className="w-16 mx-auto" />
+          <div className="p-3 text-center" style={{ backgroundColor: `#C6A9D9` }}>
+            <p className="text-xl">¿Cómo redactar un currículum que destaque?</p>
+            <p className="text-xl">¿Cómo generar el impacto deseado en una entrevista? ¿Cómo conseguir que las empresas te encuentren en LinkedIn?</p>
+          </div>
+          <img src={Flecha} alt="Flecha" className="w-16 mx-auto" />
+          <div className="p-3 text-center" style={{ backgroundColor: `#C6A9D9` }}>
+            <p className="text-xl">En Creva estamos para brindar esas respuestas e impulsar a la gente a alcanzar su máximo potencial</p>
+          </div>
         </div>
         <div className="lg:w-1/3 mt-10 lg:mt-0 mx-auto lg:ml-62">
           <img
@@ -41,7 +52,7 @@ const Home = () => {
             className="rounded-lg object-cover object-center mx-auto"
             style={{
               maxWidth: `100%`,
-              marginTop: "0",
+              marginTop: "10px",
             }}
           />
         </div>
@@ -79,7 +90,7 @@ const Home = () => {
               </div>
               <div className="lg:w-1/2 text-center lg:text-left">
                 <h1 className="text-center mb-4 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
-                  Pasa a ver nuestro blog
+                  Conoce tips esenciales en tu búsqueda laboral
                 </h1>
                 <div className="text-center lg:text-left">
                   <Button
@@ -96,7 +107,7 @@ const Home = () => {
         </div>
       </div>
 
-      <h1 className="text-3xl mt-40 text-center">Reseñas</h1>
+      <h1 className="text-3xl mt-40 text-center mb-3">Testimonios</h1>
       <div
         style={{
           display: "flex",

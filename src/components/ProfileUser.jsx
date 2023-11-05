@@ -15,12 +15,20 @@ function ProfileUser() {
     age: "",
     nacionalidad: "",
     photo: "",
+    curriculum: ""
   });
 
   function photoHandle(event) {
     setInfoUser({
       ...infoUser,
       photo: event.target.files[0],
+    });
+  }
+
+  function curriculumHandle(event) {
+    setInfoUser({
+      ...infoUser,
+      curriculum: event.target.files[0]
     });
   }
 
@@ -58,22 +66,21 @@ function ProfileUser() {
           >
             <div className="flex items-center justify-center w-full h-full">
               <div className="rounded-full overflow-hidden w-3/4 h-3/4">
-                <img
-                  src={user?.photo}
-                  alt="Imagen de Usuario"
-                  className="w-full h-full object-cover"
-                />
+                {isEditing ? (<input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" />) :
+                  (<img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />)}
               </div>
             </div>
           </div>
         </div>
         <div className="text-xl mt-20 lg:ml-8">
-          {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })}/></h3> 
+          {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
           ) : (<h3>Edad: {user?.age}</h3>)}
-          {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value})}/></h3>
-          ) : ( <h3>Pais: {user?.nacionalidad}</h3>)}
-          {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value})}/></h3>
+          {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} /></h3>
+          ) : (<h3>Pais: {user?.nacionalidad}</h3>)}
+          {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>
           ) : (<h3>Email: {user?.email}</h3>)}
+          {isEditing ? (<h3>Curriculum: <input type="file" name="curriculum" onChange={curriculumHandle} className="mb-4" /></h3>)
+            : (<h3>Curriculum: {user.curriculum}</h3>)}
           <div className="mt-12 ">
             <Button className="bg-dark-violet mr-4" onClick={deleteUser}>Eliminar Perfil</Button>
             {isEditing ? (<Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>Guardar</Button>) : (

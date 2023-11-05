@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, unstable_useViewTransitionState } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -9,7 +9,7 @@ function Sidebar() {
     >
       <div className="h-full  flex flex-col justify-between">
         <ul className="mb-auto">
-          <Link to="/sales" className="text-white-100 hover:text-white-900">
+          <Link to="/profile" className="text-white-100 hover:text-white-900">
             <li
               style={{
                 width: "120px",

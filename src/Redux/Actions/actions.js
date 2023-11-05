@@ -21,15 +21,18 @@ import {
   CREATE_REVIEW,
   UPDATE_REVIEW,
   DELETE_REVIEW,
+  GET_TRANSACTION_LINK,
   GET_TRANSACTION,
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
+  SEARCH_SERVICES,
   CREATE_SERVICES,
   UPDATE_SERVICES,
   DELETE_SERVICES,
   FILTERS_SERVICES,
   GET_ALL_USERS,
   SET_POPUP,
+  CLEAR_POPUP,
   CREATE_POSTIG,
   CREATE_POSTTEXT,
   GET_POSTIG,
@@ -50,8 +53,13 @@ export const getUser = (email, password) => {
       );
 
       if (!firebaseUser.user.emailVerified) {
-        alert("Verifica Tu Email!!");
-        return;
+        return dispatch({
+          type: SET_POPUP,
+          payload: {
+            type: 'ERROR',
+            title: 'OOPS!',
+            message: error.message
+        }});
       }
 
       const response = firebaseUser.user.uid
@@ -63,10 +71,16 @@ export const getUser = (email, password) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
-  };
-};
+  }
+}
 
 export const getAllUsers = (deleted) => {
   return async function (dispatch) {
@@ -77,7 +91,13 @@ export const getAllUsers = (deleted) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -100,7 +120,13 @@ export const googleLogin = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -125,14 +151,19 @@ export const createUser = (username, password, email, age, photo) => {
           photo: photoURL,
         };
       }
-      const response = await axios.post("/user", user);
+      await axios.post("/user", user);
       sendEmailVerification(firebaseUser.user);
-      alert(response.data);
       return dispatch({
         type: CREATE_USER,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -147,15 +178,18 @@ export const deleteUserById = (email, password) => {
       );
       const id = firebaseUser.user.uid;
       const disable = await deleteUser(firebaseUser);
-      if (disable) {
-        const response = await axios.delete(`/user/${id}`);
-        alert(response.data);
-      }
+      if (disable) await axios.delete(`/user/${id}`);
       return dispatch({
         type: DELETE_USER,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -184,7 +218,13 @@ export const updateUser = (properties) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -198,7 +238,13 @@ export const restoreUser = (id) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -212,7 +258,13 @@ export const getReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -226,7 +278,13 @@ export const createReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -240,7 +298,13 @@ export const updateReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -254,7 +318,13 @@ export const deleteReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -268,7 +338,13 @@ export const getTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -282,7 +358,13 @@ export const createTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -296,7 +378,13 @@ export const updateTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -314,7 +402,13 @@ export const createServices = (service) => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -328,7 +422,13 @@ export const updateServices = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -342,7 +442,13 @@ export const deleteServices = () => {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -358,7 +464,6 @@ export const filtersService = ({ min, max, order, filter }) => {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error.message);
       return dispatch({
         type: FILTERS_SERVICES,
         payload: [],
@@ -367,10 +472,48 @@ export const filtersService = ({ min, max, order, filter }) => {
   };
 };
 
+export const searchServices = (input) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `service/search`,
+        input
+      );
+      return dispatch({
+        type: SEARCH_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  };
+};
+
 export const setPopup = (type) => {
   return {
     type: SET_POPUP,
-    payload: type
+    payload: {
+      type: type,
+      title: '',
+      message: ''
+    }
+  }
+}
+
+export const clearPopup = () => {
+  return {
+    type: CLEAR_POPUP,
+    payload: {
+      type: '',
+      title: '',
+      message: ''
+    }
   }
 }
 
@@ -407,11 +550,17 @@ export const createPostIg = (postURL) => {
     try {
       const response = await axios.post(`igpost/`,{url:postURL});
       return dispatch({
-        type:CREATE_POSTIG,
+        type: CREATE_POSTIG,
         payload: response.data
       });
     } catch(error) {
-      alert(error.message);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }
@@ -440,4 +589,25 @@ export const logout = () => {
       payload: ''
     })
   } 
+}
+
+export const getTransactionLink = (transactionInfo, userCountry) => {
+  return async dispatch => {
+    try {
+      const URL = userCountry === "Argentina"?await axios.post('/transaction/mpLink', transactionInfo)
+      : await axios.post('/stripe', transactionInfo);
+      return dispatch({
+        type: GET_TRANSACTION_LINK,
+        payload: URL
+      })
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  }
 }
