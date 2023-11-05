@@ -30,7 +30,7 @@ let initialState = {
   allUsers: [],
   services: [],
   types: [],
-  postig: [],
+  postIg: [],
   postText: [],
   cart: [],
   cartUrl: "",

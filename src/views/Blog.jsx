@@ -3,7 +3,6 @@ import Footer from "../components/Footer";
 import blog from '../assets/blogv.png'
 import Services from "../components/Services";
 import { InstagramEmbed } from 'react-social-media-embed';
-
 import EditDocument from "../assets/EditDocument.svg";
 import BlogsMenu from "../components/BlogsMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +20,6 @@ const Blog = () => {
     const disableHandler = () => {
         setPostMenu(postMenu ? false : true)
     }
-
 
     useEffect(() => {
         dispatch(getPostIg());
