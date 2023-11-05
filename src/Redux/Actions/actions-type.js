@@ -1,3 +1,5 @@
+export const LOCAL_STORAGE = "LOCAL_STORAGE"
+
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER = "GET_USER";
 export const CREATE_USER = "CREATE_USER";

@@ -40,10 +40,19 @@ import {
   LOGOUT,
   GET_SERVICES,
   GET_TYPES,
+  LOCAL_STORAGE,
 } from "./actions-type";
 
 import axios from "axios";
 import App from "../../../cloudinary";
+
+export const setLocalStorage = (key) => {
+  const key = localStorage.getItem(key)
+  return {
+    type: LOCAL_STORAGE,
+    payload: key
+  }
+}
 
 export const getUser = (email, password) => {
   return async function (dispatch) {
