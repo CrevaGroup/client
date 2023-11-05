@@ -15,7 +15,7 @@ export default {
         "custom-gray": "#EEECEC",
         "light-violet": "#c2a2d0",
         "dark-violet": "#7411a2",
-        "dark-gray-blue": "hsl(224,30%,27%)",
+        "dark-gray-blue": "#242E42",
         "custom-violet": "#E9D1F7",
         "light-gray": "#E4E6EB",
         "semidark-gray": "#979595",

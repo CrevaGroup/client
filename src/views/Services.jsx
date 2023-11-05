@@ -38,7 +38,7 @@ const Services = () => {
         <div className="flex items-center mb-2">
           
           <p className="text-3xl lg:text-5xl  mr-2">
-            Nuestros servicios
+            Nuestros Servicios
           </p>
           <button onClick={disableHandler}>
             <img

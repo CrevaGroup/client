@@ -254,7 +254,7 @@ export const restoreUser = (id) => {
 export const getReview = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`URL`);
+      const response = await axios.get(`/review`);
       return dispatch({
         type: GET_REVIEW,
         payload: response.data,
@@ -271,10 +271,13 @@ export const getReview = () => {
   };
 };
 
-export const createReview = () => {
+export const createReview = (com,star) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.post(`/review`,{
+        description:com,
+        assessment:star
+      });
       return dispatch({
         type: CREATE_REVIEW,
         payload: response.data,

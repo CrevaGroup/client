@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SocialMedia from "../assets/Social media-amico.png";
 import GroupChat from "../assets/Group Chat-bro.png";
 import TestimonialCard from "./TestimonialCard";
 import Comentario from "../components/Comentarios";
 import { comentarios as initialComentarios } from "../components/comentariosData";
 import Footer from "../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { createReview, getReview, getUser } from "../Redux/Actions/actions";
 
 const Community = () => {
-  const [comentarios, setComentarios] = useState(initialComentarios);
   const [nuevoComentario, setNuevoComentario] = useState("");
   const [votoComentario, setVotoComentario] = useState(0);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const reviews = useSelector(state => state.reviews);
+
 
   const handleComentarioChange = (e) => {
     setNuevoComentario(e.target.value);
   };
 
-  const handleComentarioSubmit = () => {
-    if (nuevoComentario.trim() !== "") {
+  useEffect(() => {
+    dispatch(getReview());
+  }, [dispatch]);
+
+  const handleComentarioSubmit = async () => {
+/**    if (nuevoComentario.trim() !== "") {
       const nuevoId = comentarios.length + 1;
       const nuevoComentarioObj = {
         id: nuevoId,
@@ -29,14 +38,18 @@ const Community = () => {
       setComentarios([...comentarios, nuevoComentarioObj]);
       setNuevoComentario("");
       setVotoComentario(0);
-    }
+    } */
+    await dispatch(createReview(nuevoComentario,votoComentario))
+    await dispatch(getReview());
+    setVotoComentario(0);
+    setNuevoComentario('');
   };
 
   return (
     <div>
-      <div className="bg-custom-gray min-h-screen p-4">
+      <div className="bg-custom-gray min-h-screen p-4 text-dark-gray-blue cursor-default">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-semibold mt-4 md:mt-8">
+          <h1 className="text-3xl md:text-5xl  mt-4">
             Nuestra Comunidad
           </h1>
           <img
@@ -46,7 +59,7 @@ const Community = () => {
           />
         </div>
         <div className="my-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold">Testimonios</h2>
+          <h2 className="text-3xl md:text-5xl ">Testimonios</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Testimonio 1 */}
@@ -84,7 +97,8 @@ const Community = () => {
           <div className="bg-white rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold">Deja tu comentario</h3>
             <textarea
-              className="w-full mt-2 p-2 border rounded"
+              //disabled={user?.fullName === undefined ? true : false}
+              className="w-full mt-2 p-2 border rounded disabled:cursor-not-allowed"
               placeholder="Escribe tu comentario..."
               value={nuevoComentario}
               onChange={handleComentarioChange}
@@ -106,7 +120,8 @@ const Community = () => {
               ))}
             </div>
             <button
-              className="bg-dark-violet text-white px-4 py-2 rounded mt-4"
+              //disabled={user?.fullName === undefined ? true : false}
+              className="bg-dark-violet text-white px-4 py-2 rounded mt-4 disabled:bg-dark-violet/70 disabled:cursor-not-allowed "
               onClick={handleComentarioSubmit}
             >
               Publicar
@@ -119,7 +134,24 @@ const Community = () => {
             Comentarios
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4">
-            {comentarios.map((comentario) => (
+            
+            
+            
+            
+            {
+              reviews.map((review,index) =>(
+                <div
+                  key={index}
+                > 
+                  <Comentario
+                    nombre={''}
+                    comentario={review.description}
+                    imagenPerfil={''}
+                    voto={review.assessment}
+                  />
+                </div>
+              ))
+              /*{comentarios.map((comentario) => (
               <div key={comentario.id}>
                 <Comentario
                   nombre={comentario.nombre}
@@ -128,7 +160,8 @@ const Community = () => {
                   voto={comentario.voto}
                 />
               </div>
-            ))}
+            ))}*/
+            }
           </div>
         </div>
       </div>
