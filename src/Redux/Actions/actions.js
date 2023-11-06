@@ -91,6 +91,8 @@ export const getUser = (email, password) => {
         ? await axios.get(`/user/?id=${firebaseUser.user.uid}`)
         : null;
 
+        localStorage.setItem("user", JSON.stringify(response.data))
+
       return dispatch({
         type: GET_USER,
         payload: response.data,
