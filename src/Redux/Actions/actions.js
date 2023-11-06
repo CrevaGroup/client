@@ -29,7 +29,8 @@ import {
   CREATE_SERVICES,
   UPDATE_SERVICES,
   DELETE_SERVICES,
-  FILTERS_SERVICES,
+  FILTER_SERVICES,
+  RESET_FILTERS,
   GET_ALL_USERS,
   SET_POPUP,
   CLEAR_POPUP,
@@ -38,10 +39,35 @@ import {
   GET_POSTIG,
   GET_POSTTEXT,
   LOGOUT,
+  GET_SERVICES,
+  GET_TYPES,
+  LOCAL_STORAGE,
 } from "./actions-type";
 
 import axios from "axios";
 import App from "../../../cloudinary";
+
+export const setLocalStorage = (key) => {
+  return async function (dispatch) {
+try {
+  const info = await JSON.parse(localStorage.getItem(key))
+  if(info){
+    return dispatch({
+      type: LOCAL_STORAGE,
+      payload: {info, key}
+    })
+  }
+} catch (error) {
+  return dispatch({
+    type: SET_POPUP,
+    payload: {
+      type: 'ERROR',
+      title: 'OOPS!',
+      message: error.message
+  }});
+}
+}
+}
 
 export const getUser = (email, password) => {
   return async function (dispatch) {
@@ -65,6 +91,8 @@ export const getUser = (email, password) => {
       const response = firebaseUser.user.uid
         ? await axios.get(`/user/?id=${firebaseUser.user.uid}`)
         : null;
+
+        localStorage.setItem("user", JSON.stringify(response.data))
 
       return dispatch({
         type: GET_USER,
@@ -115,6 +143,7 @@ export const googleLogin = () => {
         photo: googleUser.user.photoURL,
       };
       const response = await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(response.data))
       return dispatch({
         type: GOOGLE_LOGIN,
         payload: response.data,
@@ -131,7 +160,7 @@ export const googleLogin = () => {
   };
 };
 
-export const createUser = (username, password, email, age, photo) => {
+export const createUser = (username, password, email, birthdate, nationality) => {
   return async function (dispatch) {
     try {
       const firebaseUser = await createUserWithEmailAndPassword(
@@ -141,17 +170,17 @@ export const createUser = (username, password, email, age, photo) => {
       );
       let user = {};
       if (firebaseUser.user) {
-        const photoURL = await App(photo);
         user = {
-          age: age,
+          age: birthdate,
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
           verified: firebaseUser.user.emailVerified,
-          photo: photoURL,
+          nacionalidad: nationality
         };
       }
       await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(user))
       sendEmailVerification(firebaseUser.user);
       return dispatch({
         type: CREATE_USER,
@@ -252,7 +281,7 @@ export const restoreUser = (id) => {
 export const getReview = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`URL`);
+      const response = await axios.get(`/review`);
       return dispatch({
         type: GET_REVIEW,
         payload: response.data,
@@ -269,10 +298,14 @@ export const getReview = () => {
   };
 };
 
-export const createReview = () => {
+export const createReview = (com,star,id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.post(`/review`,{
+        description:com,
+        assessment:star,
+        userId:id
+      });
       return dispatch({
         type: CREATE_REVIEW,
         payload: response.data,
@@ -453,21 +486,65 @@ export const deleteServices = () => {
   };
 };
 
-export const filtersService = ({ min, max, order, filter }) => {
+export const filterServices = (filters) => {
+  return {
+    type: FILTER_SERVICES,
+    payload: filters
+  };
+};
+
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS,
+    payload: {
+      min: 1,
+      max: 100,
+      order: 'ASC',
+      types: []
+    }
+  }
+}
+
+export const getServices = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `service/?order=${order}&min=${min}&max=${max}&type=${filter}`
+        `service/`
       );
       return dispatch({
-        type: FILTERS_SERVICES,
+        type: GET_SERVICES,
         payload: response.data,
       });
     } catch (error) {
       return dispatch({
-        type: FILTERS_SERVICES,
-        payload: [],
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  };
+};
+
+export const getTypes = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `type/`
+      );
+      return dispatch({
+        type: GET_TYPES,
+        payload: response.data,
       });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   };
 };
@@ -526,7 +603,7 @@ export const getPostIg = () => {
         payload: response.data
       })
     } catch(error) {
-      alert(error.message)
+      console.log(error.message)
     }
   }
 }
@@ -540,7 +617,7 @@ export const getPostText = () => {
         payload: response.data
       })
     } catch(error) {
-      alert(error.message)
+      console.log(error.message)
     }
   }
 }
@@ -583,6 +660,7 @@ export const createPostText = (title, content) => {
 }
 
 export const logout = () => {
+  localStorage.clear()
   return dispatch => {
     return dispatch({
       type:LOGOUT,
@@ -596,9 +674,9 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
     try {
       const URL = userCountry === "Argentina"?await axios.post('/transaction/mpLink', transactionInfo)
       : await axios.post('/stripe', transactionInfo);
+      window.location.href = URL.data;
       return dispatch({
         type: GET_TRANSACTION_LINK,
-        payload: URL
       })
     } catch (error) {
       return dispatch({

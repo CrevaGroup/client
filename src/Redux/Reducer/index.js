@@ -11,7 +11,8 @@ import {
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
   SEARCH_SERVICES,
-  FILTERS_SERVICES,
+  FILTER_SERVICES,
+  RESET_FILTERS,
   CREATE_SERVICES,
   DELETE_SERVICES,
   UPDATE_SERVICES,
@@ -23,14 +24,19 @@ import {
   GET_POSTTEXT,
   LOGOUT,
   GET_TRANSACTION_LINK,
+  GET_SERVICES,
+  GET_TYPES,
+  LOCAL_STORAGE,
 } from "../Actions/actions-type";
 
 let initialState = {
   user: {},
   allUsers: [],
   services: [],
+  servicesFiltered: [],
+  reviews: [],
   types: [],
-  postig: [],
+  postIg: [],
   postText: [],
   cart: [],
   cartUrl: "",
@@ -49,6 +55,12 @@ let initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case LOCAL_STORAGE:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.info 
+      }
 
     case GET_ALL_USERS:
       return {
@@ -100,11 +112,42 @@ function rootReducer(state = initialState, action) {
         }
       };
 
-    case FILTERS_SERVICES:
+    case GET_TYPES:
       return {
         ...state,
-        services: action.payload
+        types: action.payload
+      }
+
+    case GET_SERVICES:
+      return {
+        ...state,
+        services: action.payload,
+        servicesFiltered: action.payload
+      }
+
+    case FILTER_SERVICES:
+      state.servicesFiltered = state.services;
+
+      if (action.payload.order === 'ASC')
+				state.servicesFiltered.sort((a, b) => a.price > b.price ? 1 : -1)
+			if (action.payload.order === 'DESC') 
+        state.servicesFiltered.sort((a, b) => a.price < b.price ? 1 : -1)
+      
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.price > action.payload.min);
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.price < action.payload.max);
+
+      return {
+        ...state,
+        filters: action.payload,
+        servicesFiltered: [ ...state.servicesFiltered ]
       };
+
+    case RESET_FILTERS:
+      return {
+        ...state,
+        servicesFiltered: state.services,
+        filters: action.payload
+      }
 
     case CREATE_SERVICES:
       return {
@@ -166,9 +209,15 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_REVIEW:
-      return {};
+      return {
+        ...state,
+        reviews: action.payload
+      };
     case CREATE_REVIEW:
-      return {};
+      return {
+        ...state,
+        reviews: [...reviews, action.payload]
+      };
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:

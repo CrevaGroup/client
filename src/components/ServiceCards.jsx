@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import example from '../assets/example.png'
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactionLink } from "../Redux/Actions/actions";
 
 
-const ServiceCards = ({img, name, description, price}) => {
+const ServiceCards = ({img, name, description, price, id}) => {
+
+    const dispatch = useDispatch()
+
+    const user = useSelector(state => state.user)
+
+    const [transactionInfo, setTransactionInfo] = useState({
+        userId: user.id,
+        items: [{
+            id: id,
+            title: name,
+            photo: img,
+            description: description,
+            price: price
+        }]
+    })
+
+    function clickHandler(){
+        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+    }
 
     return(
         <div
@@ -74,7 +95,7 @@ const ServiceCards = ({img, name, description, price}) => {
 
                         <div className=" w-2/3 flex items-center  ml-auto">
                             <button
-                                onClick={() => { alert('Hello') }}
+                                onClick={clickHandler}
                                 className="rounded-full shadow shadow-black/60 bg-dark-violet py-2 px-3.5  capitalize text-white  font-bold text-xl hover:text-semidark-gray duration-500"
                             >
                                 Buy now

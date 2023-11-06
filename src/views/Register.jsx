@@ -22,8 +22,8 @@ function Register() {
   const currentYear = new Date().getFullYear();
 
   const [birthdate, setBirthdate] = useState({
-    day: null,
-    month: null,
+    day: "",
+    month: "",
     year: currentYear,
   });
   const [nationality, setNationality] = useState("");

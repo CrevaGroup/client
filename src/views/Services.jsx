@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import AllServiceCards from "../components/AllServiceCards";
 import Filters from "../components/Filters";
 import EditDocument from "../assets/EditDocument.svg";
 import NewServices from "../components/NewServices";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Servicio_no_encontrado from "../assets/Servicio_no_encontrado.png"
+import { getServices, getTypes } from "../Redux/Actions/actions";
+
 const Services = () => {
 
-    const [create, setCreate] = useState(false)
+  const dispatch = useDispatch();
 
-    const services = useSelector(state => state.services)
+  const [create, setCreate] = useState(false)
+  const services = useSelector(state => state.servicesFiltered)
 
   function disableHandler(){
     setCreate(create ? false : true)
   }
+
+  useEffect(() => {
+    dispatch(getServices());
+    dispatch(getTypes());
+}, []);
 
   return (
       <div className=" bg-custom-gray  ">
@@ -30,7 +38,7 @@ const Services = () => {
         <div className="flex items-center mb-2">
           
           <p className="text-3xl lg:text-5xl  mr-2">
-            Nuestros servicios
+            Nuestros Servicios
           </p>
           <button onClick={disableHandler}>
             <img
@@ -71,6 +79,7 @@ const Services = () => {
             name={service.name}
             description={service.description}
             price={service.price}
+            id={service.id}
              />
           )}
         </div>:
