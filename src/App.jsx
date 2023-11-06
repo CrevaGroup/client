@@ -96,7 +96,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/logrado" element={<Success />}/>
+        <Route path="/Success" element={<Success />}/>
         <Route path="/Failure" element={<Failure />}/>
       </Routes>
     </div>
