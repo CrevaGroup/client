@@ -47,13 +47,25 @@ import axios from "axios";
 import App from "../../../cloudinary";
 
 export const setLocalStorage = (key) => {
-  const info = JSON.parse(localStorage.getItem(key))
+  return async function (dispatch) {
+try {
+  const info = await JSON.parse(localStorage.getItem(key))
   if(info){
-    return {
+    return dispatch({
       type: LOCAL_STORAGE,
       payload: {info, key}
-    }
+    })
   }
+} catch (error) {
+  return dispatch({
+    type: SET_POPUP,
+    payload: {
+      type: 'ERROR',
+      title: 'OOPS!',
+      message: error.message
+  }});
+}
+}
 }
 
 export const getUser = (email, password) => {
