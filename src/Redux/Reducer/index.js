@@ -136,6 +136,9 @@ function rootReducer(state = initialState, action) {
       state.servicesFiltered = state.servicesFiltered.filter(service => service.price > action.payload.min);
       state.servicesFiltered = state.servicesFiltered.filter(service => service.price < action.payload.max);
 
+      if (action.payload.types.length)
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.Types.some(type => action.payload.types.includes(type.name)));
+
       return {
         ...state,
         filters: action.payload,
