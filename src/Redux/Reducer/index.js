@@ -11,7 +11,8 @@ import {
   UPDATE_TRANSACTION,
   CREATE_TRANSACTION,
   SEARCH_SERVICES,
-  FILTERS_SERVICES,
+  FILTER_SERVICES,
+  RESET_FILTERS,
   CREATE_SERVICES,
   DELETE_SERVICES,
   UPDATE_SERVICES,
@@ -124,11 +125,29 @@ function rootReducer(state = initialState, action) {
         servicesFiltered: action.payload
       }
 
-    case FILTERS_SERVICES:
+    case FILTER_SERVICES:
+      state.servicesFiltered = state.services;
+
+      if (action.payload.order === 'ASC')
+				state.servicesFiltered.sort((a, b) => a.price > b.price ? 1 : -1)
+			if (action.payload.order === 'DESC') 
+        state.servicesFiltered.sort((a, b) => a.price < b.price ? 1 : -1)
+      
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.price > action.payload.min);
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.price < action.payload.max);
+
       return {
         ...state,
-        services: action.payload
+        filters: action.payload,
+        servicesFiltered: [ ...state.servicesFiltered ]
       };
+
+    case RESET_FILTERS:
+      return {
+        ...state,
+        servicesFiltered: state.services,
+        filters: action.payload
+      }
 
     case CREATE_SERVICES:
       return {

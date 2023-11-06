@@ -29,7 +29,8 @@ import {
   CREATE_SERVICES,
   UPDATE_SERVICES,
   DELETE_SERVICES,
-  FILTERS_SERVICES,
+  FILTER_SERVICES,
+  RESET_FILTERS,
   GET_ALL_USERS,
   SET_POPUP,
   CLEAR_POPUP,
@@ -485,24 +486,24 @@ export const deleteServices = () => {
   };
 };
 
-export const filtersService = ({ min, max, order, filter }) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        `service/?order=${order}&min=${min}&max=${max}&type=${filter}`
-      );
-      return dispatch({
-        type: FILTERS_SERVICES,
-        payload: response.data,
-      });
-    } catch (error) {
-      return dispatch({
-        type: FILTERS_SERVICES,
-        payload: [],
-      });
-    }
+export const filterServices = (filters) => {
+  return {
+    type: FILTER_SERVICES,
+    payload: filters
   };
 };
+
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS,
+    payload: {
+      min: 1,
+      max: 100,
+      order: 'ASC',
+      types: []
+    }
+  }
+}
 
 export const getServices = () => {
   return async (dispatch) => {
