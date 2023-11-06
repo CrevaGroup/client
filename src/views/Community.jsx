@@ -47,10 +47,16 @@ const Community = () => {
           setNuevoComentario("");
           setVotoComentario(0);
         } */
+    if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
+      return(alert('Falta informacion'))
+    }
     await dispatch(createReview(nuevoComentario, votoComentario, user.id))
     await dispatch(getReview());
     setVotoComentario(0);
-    setNuevoComentario('');
+    setNuevoComentario({
+      description: '',
+      serv: ''
+    });
   };
 
   return (
