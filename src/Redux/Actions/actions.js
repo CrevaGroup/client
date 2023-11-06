@@ -40,10 +40,33 @@ import {
   LOGOUT,
   GET_SERVICES,
   GET_TYPES,
+  LOCAL_STORAGE,
 } from "./actions-type";
 
 import axios from "axios";
 import App from "../../../cloudinary";
+
+export const setLocalStorage = (key) => {
+  return async function (dispatch) {
+try {
+  const info = await JSON.parse(localStorage.getItem(key))
+  if(info){
+    return dispatch({
+      type: LOCAL_STORAGE,
+      payload: {info, key}
+    })
+  }
+} catch (error) {
+  return dispatch({
+    type: SET_POPUP,
+    payload: {
+      type: 'ERROR',
+      title: 'OOPS!',
+      message: error.message
+  }});
+}
+}
+}
 
 export const getUser = (email, password) => {
   return async function (dispatch) {
@@ -117,6 +140,7 @@ export const googleLogin = () => {
         photo: googleUser.user.photoURL,
       };
       const response = await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(response.data))
       return dispatch({
         type: GOOGLE_LOGIN,
         payload: response.data,
@@ -133,7 +157,7 @@ export const googleLogin = () => {
   };
 };
 
-export const createUser = (username, password, email, age, photo) => {
+export const createUser = (username, password, email, birthdate, nationality) => {
   return async function (dispatch) {
     try {
       const firebaseUser = await createUserWithEmailAndPassword(
@@ -143,17 +167,17 @@ export const createUser = (username, password, email, age, photo) => {
       );
       let user = {};
       if (firebaseUser.user) {
-        const photoURL = await App(photo);
         user = {
-          age: age,
+          age: birthdate,
           fullName: username,
           email: email,
           id: firebaseUser.user.uid,
           verified: firebaseUser.user.emailVerified,
-          photo: photoURL,
+          nacionalidad: nationality
         };
       }
       await axios.post("/user", user);
+      localStorage.setItem("user", JSON.stringify(user))
       sendEmailVerification(firebaseUser.user);
       return dispatch({
         type: CREATE_USER,
@@ -633,6 +657,7 @@ export const createPostText = (title, content) => {
 }
 
 export const logout = () => {
+  localStorage.clear()
   return dispatch => {
     return dispatch({
       type:LOGOUT,
@@ -646,9 +671,9 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
     try {
       const URL = userCountry === "Argentina"?await axios.post('/transaction/mpLink', transactionInfo)
       : await axios.post('/stripe', transactionInfo);
+      window.location.href = URL.data;
       return dispatch({
         type: GET_TRANSACTION_LINK,
-        payload: URL
       })
     } catch (error) {
       return dispatch({

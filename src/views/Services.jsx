@@ -79,6 +79,7 @@ const Services = () => {
             name={service.name}
             description={service.description}
             price={service.price}
+            id={service.id}
              />
           )}
         </div>:
