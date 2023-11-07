@@ -226,9 +226,12 @@ export const deleteUserById = (email, password) => {
 };
 
 export const updateUser = (properties, user) => {
-  console.log(properties);
   return async function (dispatch) {
     try {
+      if(properties.curriculum !== user.curriculum){
+        const cvURL = await App(properties.curriculum);
+        properties.curriculum = cvURL
+      }
       if(properties.photo !== user.photo){
         const photoURL = await App(properties.photo);
         properties.photo = photoURL

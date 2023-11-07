@@ -17,7 +17,6 @@ function ProfileUser() {
     nacionalidad: user.nacionalidad,
     photo: user.photo,
     curriculum: "",
-    password:""
   });
 
   function photoHandle(event) {
