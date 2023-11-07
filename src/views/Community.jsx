@@ -105,7 +105,7 @@ const Community = () => {
           <div className="bg-white rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold">Deja tu comentario</h3>
             <textarea
-              //disabled={user?.fullName === undefined ? true : false}
+              disabled={user?.fullName === undefined ? true : false}
               className="w-full mt-2 p-2 border rounded disabled:cursor-not-allowed"
               placeholder="Escribe tu comentario..."
               name="description"
@@ -142,7 +142,7 @@ const Community = () => {
               </select>
             </div>
             <button
-              //disabled={user?.fullName === undefined ? true : false}
+              disabled={user?.fullName === undefined ? true : false}
               className="bg-dark-violet text-white px-4 py-2 rounded mt-4 disabled:bg-dark-violet/70 disabled:cursor-not-allowed "
               onClick={handleComentarioSubmit}
             >
