@@ -27,6 +27,8 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  SET_POPUP,
+  UPDATE_USER_EMAIL,
   GET_CONFIG,
 } from "../Actions/actions-type";
 
@@ -62,6 +64,12 @@ function rootReducer(state = initialState, action) {
         [action.payload.key]: action.payload.info 
       }
 
+    case SET_POPUP:
+      return {
+        ...state,
+        popup: action.payload
+      }
+
     case GET_ALL_USERS:
       return {
         ...state,
@@ -87,6 +95,17 @@ function rootReducer(state = initialState, action) {
           type: 'NOTIF',
           title: 'REGISTRO EXITOSO',
           message: 'Se ha enviado un correo para validar su cuenta.'
+        }
+      };
+
+    case UPDATE_USER_EMAIL:
+      return {
+        ...state,
+        user: action.payload,
+        popup: {
+          type: 'NOTIF',
+          title: 'DATOS EDITADOS',
+          message: 'Se han guardado los cambios. Se envio un correo para verificar el nuevo email'
         }
       };
 

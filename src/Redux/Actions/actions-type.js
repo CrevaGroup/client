@@ -4,6 +4,7 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER = "GET_USER";
 export const CREATE_USER = "CREATE_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_EMAIL = "UPDATE_USER_EMAIL"
 export const DELETE_USER = "DELETE_USER";
 export const RESTORE_USER = "RESTORE_USER";
 export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
