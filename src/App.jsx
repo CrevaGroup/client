@@ -18,7 +18,7 @@ import ProfileUser from "./components/ProfileUser";
 import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
-import { setLocalStorage } from "./Redux/Actions/actions";
+import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
 
   useEffect(()=>{
     dispatch(setLocalStorage('user'))
+    dispatch(getConfig());
   },[])
 
   return (
