@@ -47,10 +47,16 @@ const Community = () => {
           setNuevoComentario("");
           setVotoComentario(0);
         } */
+    if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
+      return(alert('Falta informacion'))
+    }
     await dispatch(createReview(nuevoComentario, votoComentario, user.id))
     await dispatch(getReview());
     setVotoComentario(0);
-    setNuevoComentario('');
+    setNuevoComentario({
+      description: '',
+      serv: ''
+    });
   };
 
   return (
@@ -127,10 +133,13 @@ const Community = () => {
                 </span>
               ))}
               <select
-                className="ml-auto"
+                className="ml-auto border border-light-violet rounded-lg p-1"
                 name="serv"
                 onChange={handleComentarioChange}
               >
+                <option
+                  value={''}
+                >Elegir servicio</option>
                 {
                   services.map((service, index) =>
                   (<option

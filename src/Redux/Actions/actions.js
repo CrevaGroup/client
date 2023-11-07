@@ -298,13 +298,14 @@ export const getReview = () => {
   };
 };
 
-export const createReview = (com,star,id) => {
+export const createReview = ({description, serv},star,id) => {
   return async function (dispatch) {
     try {
       const response = await axios.post(`/review`,{
-        description:com,
+        description:description,
         assessment:star,
-        userId:id
+        userId:id,
+        serviceId:serv
       });
       return dispatch({
         type: CREATE_REVIEW,
