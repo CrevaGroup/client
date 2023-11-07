@@ -1,16 +1,18 @@
 import Select from 'react-select';
 import  { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filtersService, getServices, getTypes } from "../Redux/Actions/actions";
+import { filterServices, resetFilters } from "../Redux/Actions/actions";
 
 const Filters = () => {
 
     const minRef = useRef();
+    const minSliderRef = useRef();
     const maxRef = useRef();
+    const maxSliderRef = useRef();
     const typeRef = useRef();
     const orderRef = useRef();
     const dispatch = useDispatch();
-    const filtersRedux = useSelector(state => state.filters);
+    const filters = useSelector(state => state.filters);
     const types = useSelector(state => state.types);
 
     const min = 1;
@@ -19,49 +21,47 @@ const Filters = () => {
         left:`${min}%`,
         right: `${max}%`
     });
-
     const [des, setDes] = useState(false);
-
     const priceGap = 10;
     
-    const [filters, setFilters] = useState({
-        min: filtersRedux.min,
-        max: filtersRedux.max,
-        order: filtersRedux.order,
-        filter: ''
-    })
-
     const handleInputChange = e => {
-    setFilters(prevFilters => {
-        let newMin = prevFilters.min;
-        let newMax = prevFilters.max;
-        
-        if(e.target.name === 'min' || e.target.name === 'max'){
+
+        if (!e.target) {
+            dispatch(filterServices({
+                ...filters,
+                types: e.map(type => type.value)
+            }));
+            return;
+        }
+       
+        if (e.target.name === "order")
+            dispatch(filterServices({
+                ...filters,
+                [e.target.name]: e.target.value
+            }));
+
+        let newMin = filters.min;
+        let newMax = filters.max;
+
+        if (e.target.name === "min" || e.target.name === "max") {
+
             if (e.target.name === 'min') {
-            newMin = parseInt(e.target.value, 10);
-            if (newMin < 1) {
-                newMin = 1;
-            }
-            if (newMax - newMin <= priceGap) {
-                newMax = newMin + priceGap;
-                if (newMax > 100) {
-                    newMax = 100;
-                    newMin = 100 - priceGap;
-                }
-            }
-        } else if (e.target.name === 'max') {
-            newMax = parseInt(e.target.value, 10);
-            if (newMax > 100) {
-                newMax = 100;
-            }
-            if (newMax - newMin <= priceGap) {
-                newMin = newMax - priceGap;
-                if (newMin < 1) {
-                    newMin = 1;
-                    newMax = 1 + priceGap;
-                }
-            }
-        } 
+                newMin = parseInt(e.target.value, 10);
+                if (newMin < 1) newMin = 1;
+                if (newMax - newMin <= priceGap) {
+                    newMax = newMin + priceGap;
+                    if (newMax > 100) {
+                        newMax = 100;
+                        newMin = 100 - priceGap;
+            }}} else {
+                newMax = parseInt(e.target.value, 10);
+                if (newMax > 100) newMax = 100;
+                if (newMax - newMin <= priceGap) {
+                    newMin = newMax - priceGap;
+                    if (newMin < 1) {
+                        newMin = 1;
+                        newMax = 1 + priceGap;
+            }}}
             const leftPercent = ((newMin - min) / (max - min)) * 100;
             const rightPercent = 100 - ((newMax - min) / (max - min)) * 100;
 
@@ -69,27 +69,21 @@ const Filters = () => {
                 left: `${leftPercent}%`,
                 right: `${rightPercent}%`
             });
-        
-        return {
-            ...prevFilters,
-            min: newMin,
-            max: newMax
-        };
-        } else {
-            return({
-            ...filters,
-            [e.target.name]: e.target.value,
-        })
+
+            dispatch(filterServices({
+                ...filters,
+                min: Number(newMin),
+                max: Number(newMax)
+            }));
         }
 
-    });
-    dispatch(filtersService({
-            ...filters,
-            [e.target.name]: e.target.value,
-        }))
     };
 
     useEffect(() => {
+        percentCalc();
+    }, []);
+
+    const percentCalc = () => {
         const leftPercent = ((filters.min - min) / (max - min)) * 100;
         const rightPercent = 100 - ((filters.max - min) / (max - min)) * 100;
 
@@ -97,26 +91,17 @@ const Filters = () => {
             left: `${leftPercent}%`,
             right: `${rightPercent}%`
         });
-        // dispatch(filtersService(filters))
-    }, [filters]);
+    }
 
     function resetHandler(){
-        setFilters({
-            min:1,
-            max:100,
-            order:'',
-            filter:''
-        })
-        // dispatch(filtersService({
-        //     min:1,
-        //     max:100,
-        //     order:'',
-        //     filter:''
-        // }))
-        minRef.current.value = 1;
-        maxRef.current.value = 100;
-        typeRef.current.value = "";
+        minRef.current.value = min;
+        minSliderRef.current.value = min;
+        maxRef.current.value = max;
+        maxSliderRef.current.value = max;
+        typeRef.current.setValue([]);
         orderRef.current.value = "ASC";
+        percentCalc();
+        // dispatch(resetFilters());
     }
 
 
@@ -198,6 +183,7 @@ const Filters = () => {
                             className={` absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none`}
                             type="range" min={min} max={max} name="min"
                             value={filters.min}
+                            ref={minSliderRef}
                             onChange={handleInputChange}
                     />
                         <input 
@@ -205,6 +191,7 @@ const Filters = () => {
                             className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
                             type="range" min={min} max={max} name="max"
                             value={filters.max}
+                            ref={maxSliderRef}
                             disabled={des}
                         />
                         <style>
