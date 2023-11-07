@@ -19,7 +19,6 @@ import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
 import { setLocalStorage } from "./Redux/Actions/actions";
-import Admin from "./views/Admin";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ function App() {
 
   return (
     <div className="font-orkney">
-      <Admin />
       {popup.type !== "" && popup.type !== "perfil" && (
         <div className="fixed bottom-4 right-4 z-20">
           <AlertNotif />
