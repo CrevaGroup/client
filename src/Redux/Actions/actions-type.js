@@ -43,3 +43,4 @@ export const UPDATE_POSTTEXT = "UPDATE_POSTTEXT";
 export const DELETE_POSTTEXT = "DELETE_POSTTEXT";
 
 export const LOGOUT = 'LOGOUT';
+export const GET_CONFIG = 'GET_CONFIG';
