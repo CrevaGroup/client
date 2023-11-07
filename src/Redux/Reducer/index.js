@@ -156,6 +156,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: [...state.services, action.payload],
+        servicesFiltered: [...state.services, action.payload],
         popup: {
           type: 'NOTIF',
           title: 'SERVICIO CREADO',
