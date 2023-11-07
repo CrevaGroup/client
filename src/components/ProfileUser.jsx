@@ -11,11 +11,13 @@ function ProfileUser() {
   const [isEditing, setIsEditing] = useState(false);
   const [infoUser, setInfoUser] = useState({
     id: user.id,
-    fullName: "",
-    age: "",
-    nacionalidad: "",
-    photo: "",
-    curriculum: ""
+    fullName: user.fullName,
+    email: user.email,
+    age: user.age,
+    nacionalidad: user.nacionalidad,
+    photo: user.photo,
+    curriculum: "",
+    password:""
   });
 
   function photoHandle(event) {
@@ -38,7 +40,7 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false)
-    dispatch(updateUser(infoUser))
+    dispatch(updateUser(infoUser, user))
   }
 
   function deleteUser() {
@@ -73,8 +75,8 @@ function ProfileUser() {
           </div>
         </div>
         <div className="text-xl mt-20 lg:ml-8">
-          {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
-          ) : (<h3>Edad: {user?.age}</h3>)}
+          {/* {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
+          ) : (<h3>Edad: {user?.age}</h3>)} */}
           {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} /></h3>
           ) : (<h3>Pais: {user?.nacionalidad}</h3>)}
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>

@@ -2,11 +2,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   deleteUser,
-  updateEmail,
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
+  verifyBeforeUpdateEmail
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -42,6 +42,7 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  UPDATE_USER_EMAIL,
 } from "./actions-type";
 
 import axios from "axios";
@@ -223,28 +224,26 @@ export const deleteUserById = (email, password) => {
   };
 };
 
-export const updateUser = (properties) => {
+export const updateUser = (properties, user) => {
   return async function (dispatch) {
     try {
       const { data } = await axios.put(`/user`, properties);
 
-      if (properties.hasOwnProperty(email)) {
-        const firebaseUpdateEmail = await updateEmail(
-          auth,
-          data.id,
+      if (properties.email !== user.email) {
+        const firebaseUpdateEmail = await verifyBeforeUpdateEmail(
+          auth.currentUser,
           data.email
         );
-      } else if (properties.hasOwnProperty(password)) {
-        const firebaseUpdatePassword = await updatePassword(
-          auth,
-          data.id,
-          properties.password
-        );
+        localStorage.setItem("user", JSON.stringify(data))
+        return dispatch({
+          type: UPDATE_USER_EMAIL,
+          payload: data,
+        });
       }
 
       return dispatch({
         type: UPDATE_USER,
-        payload: response.data,
+        payload: data,
       });
     } catch (error) {
       return dispatch({
