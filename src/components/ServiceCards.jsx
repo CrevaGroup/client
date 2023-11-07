@@ -9,6 +9,7 @@ const ServiceCards = ({img, name, description, price, id}) => {
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.user)
+    const usd = useSelector(state => state.config?.dolarValue);
 
     const [transactionInfo, setTransactionInfo] = useState({
         userId: user.id,
@@ -98,10 +99,13 @@ const ServiceCards = ({img, name, description, price, id}) => {
                                 onClick={clickHandler}
                                 className="rounded-full shadow shadow-black/60 bg-dark-violet py-2 px-3.5  capitalize text-white  font-bold text-xl hover:text-semidark-gray duration-500"
                             >
-                                Buy now
+                                Comprar
                             </button>
                             <div className=" ml-2">
-                                <p className="text-white font-bold text-2xl ">{`$${price}`}</p>
+                                {user.nacionalidad === 'Argentina'
+                                    ? <p className="text-white font-bold text-2xl ">{`$${price * usd}`}</p>
+                                    : <p className="text-white font-bold text-2xl ">{`$${price}`}</p>
+                                }
                             </div>
                         </div>
 

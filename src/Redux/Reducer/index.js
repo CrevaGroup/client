@@ -27,6 +27,7 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  GET_CONFIG,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -38,8 +39,7 @@ let initialState = {
   types: [],
   postIg: [],
   postText: [],
-  cart: [],
-  cartUrl: "",
+  config: {},
   filters: {
     min: 1,
     max: 100,
@@ -136,6 +136,9 @@ function rootReducer(state = initialState, action) {
       state.servicesFiltered = state.servicesFiltered.filter(service => service.price > action.payload.min);
       state.servicesFiltered = state.servicesFiltered.filter(service => service.price < action.payload.max);
 
+      if (action.payload.types.length)
+      state.servicesFiltered = state.servicesFiltered.filter(service => service.Types.some(type => action.payload.types.includes(type.name)));
+
       return {
         ...state,
         filters: action.payload,
@@ -153,6 +156,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         services: [...state.services, action.payload],
+        servicesFiltered: [...state.services, action.payload],
         popup: {
           type: 'NOTIF',
           title: 'SERVICIO CREADO',
@@ -218,6 +222,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [...reviews, action.payload]
       };
+
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
@@ -230,6 +235,12 @@ function rootReducer(state = initialState, action) {
       return {};
     case UPDATE_SERVICES:
       return {};
+
+    case GET_CONFIG:
+      return {
+        ...state,
+        config: action.payload
+      }
 
     default:
       return {

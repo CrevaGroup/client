@@ -6,7 +6,7 @@ import EditDocument from "../assets/EditDocument.svg";
 import NewServices from "../components/NewServices";
 import { useDispatch, useSelector } from "react-redux";
 import Servicio_no_encontrado from "../assets/Servicio_no_encontrado.png"
-import { getServices, getTypes } from "../Redux/Actions/actions";
+import { getServices, getTypes, filterServices } from "../Redux/Actions/actions";
 
 const Services = () => {
 
