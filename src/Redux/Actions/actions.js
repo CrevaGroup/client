@@ -226,8 +226,13 @@ export const deleteUserById = (email, password) => {
 };
 
 export const updateUser = (properties, user) => {
+  console.log(properties);
   return async function (dispatch) {
     try {
+      if(properties.photo !== user.photo){
+        const photoURL = await App(properties.photo);
+        properties.photo = photoURL
+      }
       const { data } = await axios.put(`/user`, properties);
 
       if (properties.email !== user.email) {
@@ -241,7 +246,7 @@ export const updateUser = (properties, user) => {
           payload: data,
         });
       }
-
+      localStorage.setItem("user", JSON.stringify(data))
       return dispatch({
         type: UPDATE_USER,
         payload: data,
