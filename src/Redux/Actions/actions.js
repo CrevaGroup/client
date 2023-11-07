@@ -42,6 +42,7 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  GET_CONFIG,
 } from "./actions-type";
 
 import axios from "axios";
@@ -678,6 +679,26 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
       return dispatch({
         type: GET_TRANSACTION_LINK,
       })
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  }
+}
+
+export const getConfig = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/config/`);
+      return dispatch({
+        type: GET_CONFIG,
+        payload: response.data
+      });
     } catch (error) {
       return dispatch({
         type: SET_POPUP,

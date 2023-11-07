@@ -27,6 +27,7 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  GET_CONFIG,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -38,8 +39,7 @@ let initialState = {
   types: [],
   postIg: [],
   postText: [],
-  cart: [],
-  cartUrl: "",
+  config: {},
   filters: {
     min: 1,
     max: 100,
@@ -221,6 +221,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [...reviews, action.payload]
       };
+
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
@@ -233,6 +234,12 @@ function rootReducer(state = initialState, action) {
       return {};
     case UPDATE_SERVICES:
       return {};
+
+    case GET_CONFIG:
+      return {
+        ...state,
+        config: action.payload
+      }
 
     default:
       return {
