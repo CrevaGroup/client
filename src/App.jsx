@@ -18,16 +18,17 @@ import ProfileUser from "./components/ProfileUser";
 import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
-import { setLocalStorage } from "./Redux/Actions/actions";
+import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
 
 function App() {
   const dispatch = useDispatch();
 
   const popup = useSelector((state) => state.popup);
 
-  useEffect(() => {
-    dispatch(setLocalStorage("user"));
-  }, []);
+  useEffect(()=>{
+    dispatch(setLocalStorage('user'))
+    dispatch(getConfig());
+  },[])
 
   return (
     <div className="font-orkney">
