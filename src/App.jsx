@@ -20,12 +20,10 @@ import AlertNotif from "./components/AlertNotif";
 import "./App.css";
 import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
 
-
 function App() {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const popup = useSelector(state => state.popup)
+  const popup = useSelector((state) => state.popup);
 
   useEffect(()=>{
     dispatch(setLocalStorage('user'))
@@ -34,12 +32,16 @@ function App() {
 
   return (
     <div className="font-orkney">
-      {popup.type !== '' && popup.type !== 'perfil' && <div className="fixed bottom-4 right-4 z-20">
-        <AlertNotif />
-      </div>}
-      {popup.type === "perfil" && <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
-        <ProfileUser />
-      </div>}
+      {popup.type !== "" && popup.type !== "perfil" && (
+        <div className="fixed bottom-4 right-4 z-20">
+          <AlertNotif />
+        </div>
+      )}
+      {popup.type === "perfil" && (
+        <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
+          <ProfileUser />
+        </div>
+      )}
       <Routes>
         <Route
           path="/"
@@ -97,8 +99,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/Success" element={<Success />}/>
-        <Route path="/Failure" element={<Failure />}/>
+        <Route path="/Success" element={<Success />} />
+        <Route path="/Failure" element={<Failure />} />
       </Routes>
     </div>
   );
