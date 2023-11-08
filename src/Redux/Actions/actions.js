@@ -42,6 +42,8 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  GET_ONEUSER,
+  GET_ONESERVICE,
 } from "./actions-type";
 
 import axios from "axios";
@@ -687,6 +689,34 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
           title: 'OOPS!',
           message: error.message
       }});
+    }
+  }
+}
+
+export const getOneUser = (id) => {
+  return async dispatch => {
+    try{
+      const response = await axios.get(`/user/?id=${id}`);
+      return dispatch({
+        type:GET_ONEUSER,
+        payload:response.data
+      })
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+export const getOneService = (id) => {
+  return async dispatch => {
+    try{
+      const response = await axios.get(`/service/?id=${id}`);
+      return dispatch({
+        type:GET_ONESERVICE,
+        payload:response.data
+      })
+    } catch(error) {
+      console.log(error);
     }
   }
 }
