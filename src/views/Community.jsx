@@ -6,7 +6,7 @@ import Comentario from "../components/Comentarios";
 import { comentarios as initialComentarios } from "../components/comentariosData";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getReview, getServices, getUser } from "../Redux/Actions/actions";
+import { createReview, getOneService, getReview, getServices, getUser,getOneUser } from "../Redux/Actions/actions";
 
 const Community = () => {
   const [nuevoComentario, setNuevoComentario] = useState({
@@ -32,6 +32,8 @@ const Community = () => {
     dispatch(getServices());
   }, [dispatch]);
 
+
+
   const handleComentarioSubmit = async () => {
     /**    if (nuevoComentario.trim() !== "") {
           const nuevoId = comentarios.length + 1;
@@ -46,6 +48,25 @@ const Community = () => {
           setComentarios([...comentarios, nuevoComentarioObj]);
           setNuevoComentario("");
           setVotoComentario(0);
+          
+            const bdName = useSelector(state => state.oneUser);
+  const bdService = useSelector(state => state.oneService);
+  const dispatch = useDispatch();
+
+  const fetchServicesAndUser = useCallback(() => {
+    dispatch(getOneService(service));
+    dispatch(getOneUser(nombre));
+  }, [dispatch, nombre, service]);
+
+  useEffect(() => {
+    fetchServicesAndUser();
+  }, [fetchServicesAndUser]);
+
+  const test = () => {
+    console.log(bdName);
+    console.log(bdService);
+  }
+
         } */
     if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
       return(alert('Falta informacion'))
@@ -118,22 +139,26 @@ const Community = () => {
               value={nuevoComentario.description}
               onChange={handleComentarioChange}
             />
-            <div className="flex items-center mt-4">
-              <p className="mr-4">Votar tu comentario:</p>
-              {[1, 2, 3, 4, 5].map((valor) => (
-                <span
-                  key={valor}
-                  className={`cursor-pointer ${votoComentario >= valor
-                    ? "text-yellow-500"
-                    : "text-gray-400"
-                    }`}
-                  onClick={() => setVotoComentario(valor)}
-                >
-                  &#9733;
-                </span>
-              ))}
+            <div
+              className="lg:flex my-4 "
+            >
+              <div className="flex w-1/2 p-1 my-4">
+                <p className="mr-4">Votar tu comentario:</p>
+                {[1, 2, 3, 4, 5].map((valor) => (
+                  <span
+                    key={valor}
+                    className={`cursor-pointer ${votoComentario >= valor
+                      ? "text-yellow-500"
+                      : "text-gray-400"
+                      }`}
+                    onClick={() => setVotoComentario(valor)}
+                  >
+                    &#9733;
+                  </span>
+                ))}
+              </div>
               <select
-                className="ml-auto border border-light-violet rounded-lg p-1"
+                className="ml-auto border border-light-violet rounded-lg p-1 my-4 "
                 name="serv"
                 onChange={handleComentarioChange}
               >
@@ -170,18 +195,28 @@ const Community = () => {
 
 
             {
-              reviews.map((review, index) => (
-                <div
-                  key={index}
-                >
-                  <Comentario
-                    nombre={''}
-                    comentario={review.description}
-                    imagenPerfil={''}
-                    voto={review.assessment}
-                  />
-                </div>
-              ))
+              reviews.map((review, index) => { 
+                // dispatch(getOneService(review.serviceId));
+                // dispatch(getOneUser(review.userId));
+
+                // const bdName = useSelector(state => state.oneUser);
+                // const bdService = useSelector(state => state.oneService);
+                // console.log(bdName);
+                // console.log(bdService)
+                return (
+                  <div
+                    key={index}
+                  >
+                    <Comentario
+                      nombre={review.userId}
+                      comentario={review.description}
+                      imagenPerfil={''}
+                      voto={review.assessment}
+                      service={review.serviceId}
+                    />
+                  </div>
+                )
+})
               /*{comentarios.map((comentario) => (
               <div key={comentario.id}>
                 <Comentario
