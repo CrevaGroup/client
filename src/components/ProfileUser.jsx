@@ -11,11 +11,12 @@ function ProfileUser() {
   const [isEditing, setIsEditing] = useState(false);
   const [infoUser, setInfoUser] = useState({
     id: user.id,
-    fullName: "",
-    age: "",
-    nacionalidad: "",
-    photo: "",
-    curriculum: ""
+    fullName: user.fullName,
+    email: user.email,
+    age: user.age,
+    nacionalidad: user.nacionalidad,
+    photo: user.photo,
+    curriculum: "",
   });
 
   function photoHandle(event) {
@@ -38,7 +39,7 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false)
-    dispatch(updateUser(infoUser))
+    dispatch(updateUser(infoUser, user))
   }
 
   function deleteUser() {
@@ -65,22 +66,29 @@ function ProfileUser() {
             style={{ backgroundColor: `#C2A3D1` }}
           >
             <div className="flex items-center justify-center w-full h-full">
-              <div className="rounded-full overflow-hidden w-3/4 h-3/4">
-                {isEditing ? (<input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" />) :
-                  (<img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />)}
-              </div>
+              
+                {isEditing ? (<div className="flex-col ml-16 items-center w-full" >
+                  <div className="rounded-full overflow-hidden w-3/4 h-3/4">
+                  <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
+                  </div>
+                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" />
+                  </div>) :
+                  (<div className="rounded-full overflow-hidden w-3/4 h-3/4">
+                  <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
+                  </div>)}
+              
             </div>
           </div>
         </div>
         <div className="text-xl mt-20 lg:ml-8">
-          {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
-          ) : (<h3>Edad: {user?.age}</h3>)}
+          {/* {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
+          ) : (<h3>Edad: {user?.age}</h3>)} */}
           {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} /></h3>
           ) : (<h3>Pais: {user?.nacionalidad}</h3>)}
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>
           ) : (<h3>Email: {user?.email}</h3>)}
           {isEditing ? (<h3>Curriculum: <input type="file" name="curriculum" onChange={curriculumHandle} className="mb-4" /></h3>)
-            : (<h3>Curriculum: {user.curriculum}</h3>)}
+            : (<h3>Curriculum: {user.curriculum?<a target="blank" href={user.curriculum}>Link</a>:null}</h3>)}
           <div className="mt-12 ">
             <Button className="bg-dark-violet mr-4" onClick={deleteUser}>Eliminar Perfil</Button>
             {isEditing ? (<Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>Guardar</Button>) : (

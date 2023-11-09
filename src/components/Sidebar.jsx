@@ -38,6 +38,38 @@ function Sidebar() {
               Perfil
             </li>{" "}
           </Link>
+          <Link to="/chart" className="text-white-100 hover:text-white-900">
+            <li
+              style={{
+                width: "120px",
+                borderRadius: "8px",
+                textAlign: "center",
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+              className="p-2 mb-6 bg-custom-gray"
+            >
+              <svg
+                class="h-8 w-8 text-dark-violet"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                {" "}
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <polyline points="3 17 9 11 13 15 21 7" />{" "}
+                <polyline points="14 7 21 7 21 14" />
+              </svg>
+              Grafica
+            </li>{" "}
+          </Link>
           <Link to="/sales" className="text-white-100 hover:text-white-900">
             <li
               style={{

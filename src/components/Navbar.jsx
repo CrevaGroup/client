@@ -8,7 +8,7 @@ import service from "../assets/service.svg";
 import community from "../assets/community.svg";
 import blog from "../assets/blog.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../Redux/Actions/actions";
+import { logout, setPopup } from "../Redux/Actions/actions";
 
 const Navbar = () => {
   const [navHandler, setNavHandler] = useState(true);
@@ -17,6 +17,11 @@ const Navbar = () => {
   };
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  function openProfile (){
+    toogleNav()
+    dispatch(setPopup('perfil'))
+  }
 
   const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
   const burguerHandler = navHandler ? burguer : close;
@@ -102,7 +107,7 @@ const Navbar = () => {
               </p>
             </NavLink> : <NavLink>
               <p
-                onClick={toogleNav}
+                onClick={openProfile}
                 className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
               >Mi Perfil</p></NavLink>
           }
