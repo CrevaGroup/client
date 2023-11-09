@@ -70,7 +70,13 @@ const Community = () => {
     if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
       return(alert('Falta informacion'))
     }
-    console.log(reviews);
+    await dispatch(createReview(nuevoComentario, votoComentario, user.id))
+    await dispatch(getReview());
+    setVotoComentario(0);
+    setNuevoComentario({
+      description: '',
+      serv: ''
+    });
   };
 
   return (

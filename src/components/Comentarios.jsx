@@ -3,9 +3,8 @@ import React from "react";
 
 const Comentario = ({ nombre, comentario, imagenPerfil, voto, service }) => {
 
-
   return (
-    <div className="bg-white p-2 lg:p-6 m-2 rounded-lg shadow-md  w-full">
+    <div className="bg-white p-2 lg:p-6 m-2 rounded-lg shadow-md  w-full text-dark-gray-blue">
       <div className="flex p-2">
         {imagenPerfil && (
           <img
