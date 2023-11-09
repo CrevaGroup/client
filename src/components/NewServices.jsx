@@ -1,10 +1,12 @@
+import Select from 'react-select';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createServices } from "../Redux/Actions/actions";
 import { Button } from "@material-tailwind/react";
 
 function NewServices({dis}) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const types = useSelector(state => state.types);
     const [servicesInfo, setServicesInfo] = useState({
         name: "",
         description: "",

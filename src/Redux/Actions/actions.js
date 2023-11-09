@@ -2,11 +2,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   deleteUser,
-  updateEmail,
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
+  verifyBeforeUpdateEmail
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -44,6 +44,8 @@ import {
   LOCAL_STORAGE,
   GET_ONEUSER,
   GET_ONESERVICE,
+  UPDATE_USER_EMAIL,
+  GET_CONFIG,
 } from "./actions-type";
 
 import axios from "axios";
@@ -225,28 +227,34 @@ export const deleteUserById = (email, password) => {
   };
 };
 
-export const updateUser = (properties) => {
+export const updateUser = (properties, user) => {
   return async function (dispatch) {
     try {
+      if(properties.curriculum !== user.curriculum){
+        const cvURL = await App(properties.curriculum);
+        properties.curriculum = cvURL
+      }
+      if(properties.photo !== user.photo){
+        const photoURL = await App(properties.photo);
+        properties.photo = photoURL
+      }
       const { data } = await axios.put(`/user`, properties);
 
-      if (properties.hasOwnProperty(email)) {
-        const firebaseUpdateEmail = await updateEmail(
-          auth,
-          data.id,
+      if (properties.email !== user.email) {
+        const firebaseUpdateEmail = await verifyBeforeUpdateEmail(
+          auth.currentUser,
           data.email
         );
-      } else if (properties.hasOwnProperty(password)) {
-        const firebaseUpdatePassword = await updatePassword(
-          auth,
-          data.id,
-          properties.password
-        );
+        localStorage.setItem("user", JSON.stringify(data))
+        return dispatch({
+          type: UPDATE_USER_EMAIL,
+          payload: data,
+        });
       }
-
+      localStorage.setItem("user", JSON.stringify(data))
       return dispatch({
         type: UPDATE_USER,
-        payload: response.data,
+        payload: data,
       });
     } catch (error) {
       return dispatch({
@@ -717,6 +725,25 @@ export const getOneService = (id) => {
       })
     } catch(error) {
       console.log(error);
+    }
+  }
+}
+export const getConfig = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/config/`);
+      return dispatch({
+        type: GET_CONFIG,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }
