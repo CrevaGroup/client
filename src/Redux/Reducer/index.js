@@ -30,6 +30,8 @@ import {
   SET_POPUP,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  GET_ONEUSER,
+  GET_ONESERVICE,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -42,6 +44,10 @@ let initialState = {
   postIg: [],
   postText: [],
   config: {},
+  cart: [],
+  cartUrl: "",
+  oneUser:{},
+  oneService:{},
   filters: {
     min: 1,
     max: 100,
@@ -254,6 +260,17 @@ function rootReducer(state = initialState, action) {
       return {};
     case UPDATE_SERVICES:
       return {};
+      
+    case GET_ONEUSER:
+      return{
+        ...state,
+        oneUser:action.payload,
+      }
+    case GET_ONESERVICE:
+      return{
+        ...state,
+        oneService:action.payload,
+      }
 
     case GET_CONFIG:
       return {

@@ -43,4 +43,10 @@ export const UPDATE_POSTTEXT = "UPDATE_POSTTEXT";
 export const DELETE_POSTTEXT = "DELETE_POSTTEXT";
 
 export const LOGOUT = 'LOGOUT';
+
+
+export const GET_ONEUSER = 'GET_ONEUSER';
+export const GET_ONESERVICE = 'GET_ONESERVICE';
+
 export const GET_CONFIG = 'GET_CONFIG';
+
