@@ -42,10 +42,10 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
-  GET_ONEUSER,
-  GET_ONESERVICE,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  GET_ONEUSER,
+  GET_ONESERVICE,
 } from "./actions-type";
 
 import axios from "axios";
@@ -701,6 +701,26 @@ export const getTransactionLink = (transactionInfo, userCountry) => {
   }
 }
 
+export const getConfig = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/config/`);
+      return dispatch({
+        type: GET_CONFIG,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
+  }
+}
+
 export const getOneUser = (id) => {
   return async dispatch => {
     try{
@@ -725,25 +745,6 @@ export const getOneService = (id) => {
       })
     } catch(error) {
       console.log(error);
-    }
-  }
-}
-export const getConfig = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get(`/config/`);
-      return dispatch({
-        type: GET_CONFIG,
-        payload: response.data
-      });
-    } catch (error) {
-      return dispatch({
-        type: SET_POPUP,
-        payload: {
-          type: 'ERROR',
-          title: 'OOPS!',
-          message: error.message
-      }});
     }
   }
 }

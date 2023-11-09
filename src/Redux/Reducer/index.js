@@ -27,11 +27,11 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
-  GET_ONEUSER,
-  GET_ONESERVICE,
   SET_POPUP,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  GET_ONEUSER,
+  GET_ONESERVICE,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -43,11 +43,11 @@ let initialState = {
   types: [],
   postIg: [],
   postText: [],
+  config: {},
   cart: [],
   cartUrl: "",
   oneUser:{},
   oneService:{},
-  config: {},
   filters: {
     min: 1,
     max: 100,
