@@ -3,7 +3,6 @@ import SocialMedia from "../assets/Social media-amico.png";
 import GroupChat from "../assets/Group Chat-bro.png";
 import TestimonialCard from "./TestimonialCard";
 import Comentario from "../components/Comentarios";
-import { comentarios as initialComentarios } from "../components/comentariosData";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview, getOneService, getReview, getServices, getUser,getOneUser } from "../Redux/Actions/actions";
@@ -71,13 +70,7 @@ const Community = () => {
     if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
       return(alert('Falta informacion'))
     }
-    await dispatch(createReview(nuevoComentario, votoComentario, user.id))
-    await dispatch(getReview());
-    setVotoComentario(0);
-    setNuevoComentario({
-      description: '',
-      serv: ''
-    });
+    console.log(reviews);
   };
 
   return (
@@ -189,7 +182,7 @@ const Community = () => {
           <h2 className="text-2xl md:text-3xl text-center font-semibold">
             Comentarios
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4 ">
 
 
 
@@ -208,11 +201,11 @@ const Community = () => {
                     key={index}
                   >
                     <Comentario
-                      nombre={review.userId}
+                      nombre={review.user.fullName}
                       comentario={review.description}
-                      imagenPerfil={''}
+                      imagenPerfil={review.user.photo}
                       voto={review.assessment}
-                      service={review.serviceId}
+                      service={review.service.name}
                     />
                   </div>
                 )
