@@ -42,10 +42,10 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
-  UPDATE_USER_EMAIL,
-  GET_CONFIG,
   GET_ONEUSER,
   GET_ONESERVICE,
+  UPDATE_USER_EMAIL,
+  GET_CONFIG,
 } from "./actions-type";
 
 import axios from "axios";
