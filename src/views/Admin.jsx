@@ -9,6 +9,7 @@ import OrderRequest from "../components/OrderRequest";
 import Config from "../components/Config";
 import ProfileUser from "../components/ProfileUser";
 import UserList from "../components/UserList";
+import ChartComponent from "../components/ChartComponent";
 
 import Subscription from "../components/Subscription";
 
@@ -20,6 +21,7 @@ function Admin() {
         <UserList />
 
         <Routes>
+          <Route path="/chart" element={<ChartComponent />} />
           <Route path="/" element={<ProfileUser />} index />
           <Route path="/subs" element={<Subscription />} />
           <Route path="/profile" element={<ProfileUser />} />
