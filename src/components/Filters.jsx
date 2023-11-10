@@ -14,8 +14,11 @@ const Filters = () => {
     const dispatch = useDispatch();
     const filters = useSelector(state => state.filters);
     const types = useSelector(state => state.types);
+    const user = useSelector(state => state.user);
     const services = useSelector(state => state.services);
-    const maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
+    const config = useSelector(state => state.config);
+    let maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
+    if (user?.nacionalidad === 'Argentina') maxVal = maxVal * config.dolarValue;
 
     const handleInputChange = e => {
         if (!e.target) {
@@ -82,18 +85,16 @@ const Filters = () => {
                 <div
                     className="flex items-center justify-center my-2 "
                 >
-                    <div
-                    className="flex  flex-col items-center justify-center "
-                >
-                    <input
-                        name="min"
-                        className=" flex text-center w-14 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        type="number"
-                        ref={minRef}
-                        placeholder={1}
-                        onChange={handleInputChange}
-                    />
-                </div>
+                    <div className="flex  flex-col items-center justify-center ">
+                        <input
+                            name="min"
+                            className=" flex text-center w-16 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            type="number"
+                            ref={minRef}
+                            placeholder={1}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
                 <div
                     className=" mx-4"
@@ -102,7 +103,7 @@ const Filters = () => {
                     className="flex  flex-col items-center justify-center"
                 >
                     <input
-                        className=" flex text-center w-14 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className=" flex text-center w-16 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         name="max"
                         type="number"
                         placeholder={maxVal}
