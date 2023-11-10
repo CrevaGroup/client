@@ -498,9 +498,24 @@ export const deleteServices = () => {
 };
 
 export const filterServices = (filters) => {
-  return {
-    type: FILTER_SERVICES,
-    payload: filters
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `service/?order=${filters.order}&min=${filters.min}&max=${filters.max}&type=${filters.types}`
+      );
+      return dispatch({
+        type: FILTER_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
   };
 };
 
@@ -516,15 +531,18 @@ export const resetFilters = () => {
   }
 }
 
-export const getServices = () => {
+export const getServices = (filters) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `service/`
+        `service?order=${filters.order}&min=${filters.min}&max=${filters.max}&type=${filters.types.join('-')}`
       );
       return dispatch({
         type: GET_SERVICES,
-        payload: response.data,
+        payload: {
+          filters: filters,
+          services: response.data,
+        }
       });
     } catch (error) {
       return dispatch({

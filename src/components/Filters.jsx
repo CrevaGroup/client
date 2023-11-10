@@ -1,7 +1,7 @@
 import Select from 'react-select';
 import  { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterServices, resetFilters } from "../Redux/Actions/actions";
+import { filterServices, resetFilters, getServices } from "../Redux/Actions/actions";
 
 const Filters = () => {
 
@@ -27,7 +27,7 @@ const Filters = () => {
     const handleInputChange = e => {
 
         if (!e.target) {
-            dispatch(filterServices({
+            dispatch(getServices({
                 ...filters,
                 types: e.map(type => type.value)
             }));
@@ -35,7 +35,7 @@ const Filters = () => {
         }
        
         if (e.target.name === "order")
-            dispatch(filterServices({
+            dispatch(getServices({
                 ...filters,
                 [e.target.name]: e.target.value
             }));
@@ -70,7 +70,7 @@ const Filters = () => {
                 right: `${rightPercent}%`
             });
 
-            dispatch(filterServices({
+            dispatch(getServices({
                 ...filters,
                 min: Number(newMin),
                 max: Number(newMax)

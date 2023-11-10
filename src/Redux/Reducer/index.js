@@ -146,8 +146,9 @@ function rootReducer(state = initialState, action) {
     case GET_SERVICES:
       return {
         ...state,
-        services: action.payload,
-        servicesFiltered: action.payload
+        services: action.payload.services,
+        filters: action.payload.filters
+        // servicesFiltered: action.payload
       }
 
     case FILTER_SERVICES:

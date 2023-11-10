@@ -13,14 +13,15 @@ const Services = () => {
   const dispatch = useDispatch();
 
   const [create, setCreate] = useState(false)
-  const services = useSelector(state => state.servicesFiltered)
+  const services = useSelector(state => state.services)
+  const filters = useSelector(state => state.filters)
 
   function disableHandler(){
     setCreate(create ? false : true)
   }
 
   useEffect(() => {
-    dispatch(getServices());
+    dispatch(getServices(filters));
     dispatch(getTypes());
 }, []);
 
