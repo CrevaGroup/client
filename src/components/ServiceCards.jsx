@@ -38,7 +38,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center">
                     <h1 className="text-2xl font-bold text-white">{name}</h1>
-                    <div className="italic text-light-gray my-6">
+                    <div className="italic text-light-gray my-4">
                         <p>{description}</p>
                         <div className="italic text-light-gray my-6 space-y-2">
                             <h3 className="font-bold">Contenido:</h3>
