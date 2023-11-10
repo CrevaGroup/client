@@ -18,7 +18,6 @@ const Filters = () => {
     const maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
 
     const handleInputChange = e => {
-        e.preventDefault();
         if (!e.target) {
             dispatch(getServices({
                 ...filters,
@@ -88,10 +87,10 @@ const Filters = () => {
                 >
                     <input
                         name="min"
-                        className=" flex text-center w-14 h-8 mx-2 justify-"
-                        type="text"
+                        className=" flex text-center w-14 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        type="number"
                         ref={minRef}
-                        value={1}
+                        placeholder={1}
                         onChange={handleInputChange}
                     />
                 </div>
@@ -103,10 +102,10 @@ const Filters = () => {
                     className="flex  flex-col items-center justify-center"
                 >
                     <input
-                        className=" flex text-center w-14 h-8 mx-2 justify-"
+                        className=" flex text-center w-14 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         name="max"
-                        type="text"
-                        value={maxVal}
+                        type="number"
+                        placeholder={maxVal}
                         onChange={handleInputChange}
                         ref={maxRef}
                     />

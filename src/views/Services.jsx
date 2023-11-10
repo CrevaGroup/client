@@ -15,6 +15,7 @@ const Services = () => {
   const [create, setCreate] = useState(false)
   const services = useSelector(state => state.services)
   const filters = useSelector(state => state.filters)
+  const config = useSelector(state => state.config)
 
   function disableHandler(){
     setCreate(create ? false : true)
@@ -68,7 +69,7 @@ const Services = () => {
       <div
         className="flex items-center justify-center my-4"
       >
-        <Filters />
+        {config.filters && <Filters />}
       </div>
 
       <div className="flex lg:min-h-screen items-center justify-center  lg:my-2">
