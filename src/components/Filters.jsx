@@ -81,6 +81,7 @@ const Filters = () => {
 
     useEffect(() => {
         percentCalc();
+        return () => dispatch(resetFilters());
     }, []);
 
     const percentCalc = () => {
