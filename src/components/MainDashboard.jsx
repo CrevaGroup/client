@@ -44,7 +44,7 @@ function MainDashboard() {
             Crear nuevo servicio
             {closeSer ? <MdKeyboardArrowDown /> : <MdKeyboardArrowUp />}
           </button>
-          <form
+          <div
             className={`w-full md:-order-none transition-all duration-500 ease-in-out ${
               mostrarNuevoServicio
                 ? "visible opacity-100"
@@ -54,7 +54,7 @@ function MainDashboard() {
             <div className="relative">
               {mostrarNuevoServicio && <NewServices />}
             </div>
-          </form>
+          </div>
         </div>
         <div className="mb-8">
           <p className="text-gray-400">
