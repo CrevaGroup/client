@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createServices } from "../Redux/Actions/actions";
 
-function NewServices({dis}) {
+function NewServices() {
     const dispatch = useDispatch();
     const types = useSelector(state => state.types);
     const maxItems = 5;
@@ -280,7 +280,7 @@ function NewServices({dis}) {
               <input placeholder="##" type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2" />
      </div>
       <h2>Imágen</h2>
-      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer ml-auto"/>
+      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer ml-auto lg:ml-0 lg:flex lg:items-center"/>
       <h2>Incluye</h2>
       <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4 outline-none p-1 rounded-lg">
         <option value=""> Elegir servicio</option>

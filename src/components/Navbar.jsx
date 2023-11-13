@@ -8,7 +8,7 @@ import service from "../assets/service.svg";
 import community from "../assets/community.svg";
 import blog from "../assets/blog.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, setPopup } from "../Redux/Actions/actions";
+import { logout, setPopupComponent } from "../Redux/Actions/actions";
 
 const Navbar = () => {
   const [navHandler, setNavHandler] = useState(true);
@@ -20,7 +20,7 @@ const Navbar = () => {
 
   function openProfile (){
     toogleNav()
-    dispatch(setPopup('perfil'))
+    dispatch(setPopupComponent('PERFIL'))
   }
 
   const additionalClass = navHandler ? "absolute opacity-0 hidden " : "";
@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         <span className="text-2xl flex">
           <NavLink to={"/"}>
-            <img className="h-10 inline mr-4 cursor-pointer" src={logo} />
+            <img className="h-10 inline mr-4 ml-4 cursor-pointer" src={logo} />
           </NavLink>
           <p className="  text-3xl font-georgia font-bold cursor-default">
             Creva
