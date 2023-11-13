@@ -24,6 +24,7 @@ const Services = () => {
   useEffect(() => {
     dispatch(getServices(filters));
     dispatch(getTypes());
+    
 }, []);
 
   return (
@@ -61,6 +62,7 @@ const Services = () => {
                   dis={disableHandler}
                 />
               </div>
+              
             }
           </div>
       </div>
@@ -79,6 +81,8 @@ const Services = () => {
             key={index}
             img={service.photo}
             name={service.name}
+            items={service.items}
+            modalidad={service.modalidad}
             description={service.description}
             price={service.price}
             id={service.id}

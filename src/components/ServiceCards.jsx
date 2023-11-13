@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionLink } from "../Redux/Actions/actions";
 
 
-const ServiceCards = ({img, name, description, price, id}) => {
+const ServiceCards = ({img, name, description, price, id, items, modalidad}) => {
 
     const dispatch = useDispatch()
 
@@ -28,10 +28,10 @@ const ServiceCards = ({img, name, description, price, id}) => {
 
     return(
         <div
-            className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/30 transition-shadow w-[352px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl"
+            className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/30 transition-shadow w-[416px] h-[576px] rounded-3xl"
         >
             <div
-                className="w-[352px] h-[448px] lg:h-[544px] lg:w-[448px]"
+                className="h-[544px] w-[464px]"
             >
                 <img
                     className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
@@ -60,37 +60,39 @@ const ServiceCards = ({img, name, description, price, id}) => {
                                 {description}
 
                         </p>
-                        {/* <ul
+                        <p
+                            className="my-2 text-xl text-white"
+                        >Contenido:</p>
+                         <ul
                             className="my-2 ml-8 hidden lg:block"
                         >
-                            <li>
-                                Presentación personal
-                            </li>
-                            <li> 
-                                Preguntas frecuentes de reclutadores
-                            </li>
-                            <li>
-                                Pensamiento analítico
-                            </li>
-                            <li>
-                                Qué no decir en una entrevista
-                            </li>
-                            <li>
-
-                                Qué preguntar cómo candidato
-                            </li>
+                            
+                            {
+                                items.map((item, index) => 
+                                    <li
+                                        key={index}
+                                    >
+                                        {item}
+                                    </li>)
+                            }
                         </ul>
                         <p
                             className="my-2 text-xl text-white"
                         >
                             Modalidad:                            
                         </p>
-                                                <ul>
-                            <li>
-                                Reunión virtual de aproximadamente 1 hora de duración con uno de nuestros expertos en selección de personal.
-
-                            </li>
-                        </ul> */}
+                        <ul
+                            className="my-2 ml-8 hidden lg:block"
+                        >
+                            {
+                                modalidad.map((mod,index) => 
+                                    <li
+                                        key={index}
+                                    >
+                                        {mod}
+                                    </li>)
+                            }
+                        </ul> 
                         </div>
 
 

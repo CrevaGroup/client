@@ -14,8 +14,8 @@ function NewServices({dis}) {
       description: "",
       price: "",
       photo: "",
-      items: [''],
-      modalidad: [''],
+      items: Array.from({ length: maxItems }, () => ""),
+      modalidad: Array.from({ length: maxModality }, () => ""),
       types: []
     })
 
@@ -55,21 +55,23 @@ function NewServices({dis}) {
         })
     }
 
-    function submitHandler(e){
-      e.preventDefault()
+    const submitHandler = e =>{
+      e.preventDefault();
+      const cleaned = cleanObj(servicesInfo);
       setServicesInfo({
         name: "",
         description: "",
         price: "",
         photo: "",
-        items: [''],
-        modalidad: [''],
+        items: Array.from({ length: maxItems }, () => ""),
+        modalidad: Array.from({ length: maxModality }, () => ""),
         types: []
       });
       setItemsQ(1);
       setModalityQ(1);
-        // dispatch(createServices(servicesInfo))
-      console.log(servicesInfo)
+
+      
+      dispatch(createServices(cleaned))
     }
     
     const modalityHandler = e => {
@@ -102,6 +104,19 @@ function NewServices({dis}) {
     }
   }
 
+  const cleanObj = (obj) => {
+    const cleanedObj = {};
+
+    for (const [key, value] of Object.entries(obj)) {
+      if (Array.isArray(value)) {
+        cleanedObj[key] = value.filter((item) => item !== '');
+      } else {
+        cleanedObj[key] = value;
+      }
+    }
+
+    return cleanedObj;
+  };
     
     /*
 <div
@@ -179,14 +194,14 @@ function NewServices({dis}) {
               <input placeholder="Ingresar nombre..." type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4 w-full rounded-lg outline-none p-1" />
       </div>
         <div
-          className=" lg:w-full"
+          className=" w-full"
         >
           <h2 >Items</h2>
           <div
-            className='lg:flex '
+                className='lg:flex w-full '
           >
             <div
-              className='w-full'
+              className='w-full '
             >
                   {
                     Array.from({ length: itemsQ }, (_, index) => (
@@ -196,7 +211,7 @@ function NewServices({dis}) {
             </div>
                 
             <div
-                  className='flex font-bold'
+                  className='flex font-bold  justify-center'
             >
                   <button
                     value={1}
@@ -228,7 +243,7 @@ function NewServices({dis}) {
                   }
                 </div>
                 <div
-                  className='flex font-bold'
+                  className='flex font-bold justify-center'
                 >
 
 
