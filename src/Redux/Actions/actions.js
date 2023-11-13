@@ -1,12 +1,12 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  deleteUser,
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
-  verifyBeforeUpdateEmail
+  verifyBeforeUpdateEmail,
+  deleteUser
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -34,6 +34,8 @@ import {
   GET_ALL_USERS,
   SET_POPUP,
   CLEAR_POPUP,
+  SET_POPUP_COMPONENT,
+  CLEAR_POPUP_COMPONENT,
   CREATE_POSTIG,
   CREATE_POSTTEXT,
   GET_POSTIG,
@@ -42,6 +44,8 @@ import {
   GET_SERVICES,
   GET_TYPES,
   LOCAL_STORAGE,
+  GET_ONEUSER,
+  GET_ONESERVICE,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
 } from "./actions-type";
@@ -199,20 +203,14 @@ export const createUser = (username, password, email, birthdate, nationality) =>
   };
 };
 
-export const deleteUserById = (email, password) => {
+export const deleteUserById = (id) => {
   return async function (dispatch) {
     try {
-      const firebaseUser = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const id = firebaseUser.user.uid;
-      const disable = await deleteUser(firebaseUser);
-      if (disable) await axios.delete(`/user/${id}`);
-      return dispatch({
-        type: DELETE_USER,
-      });
+        const response = await axios.delete(`/user/${id}`);
+        return dispatch({
+          type: DELETE_USER,
+          payload: id
+        });
     } catch (error) {
       return dispatch({
         type: SET_POPUP,
@@ -475,13 +473,13 @@ export const updateServices = () => {
   };
 };
 
-export const deleteServices = () => {
+export const deleteServices = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.delete(`/service/${id}`);
       return dispatch({
         type: DELETE_SERVICES,
-        payload: response.data,
+        payload: id,
       });
     } catch (error) {
       return dispatch({
@@ -496,9 +494,24 @@ export const deleteServices = () => {
 };
 
 export const filterServices = (filters) => {
-  return {
-    type: FILTER_SERVICES,
-    payload: filters
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `service/?order=${filters.order}&min=${filters.min}&max=${filters.max}&type=${filters.types}`
+      );
+      return dispatch({
+        type: FILTER_SERVICES,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
+    }
   };
 };
 
@@ -514,15 +527,18 @@ export const resetFilters = () => {
   }
 }
 
-export const getServices = () => {
+export const getServices = (filters) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `service/`
+        `service?order=${filters.order}&min=${filters.min}&max=${filters.max}&type=${filters.types.join('-')}`
       );
       return dispatch({
         type: GET_SERVICES,
-        payload: response.data,
+        payload: {
+          filters: filters,
+          services: response.data,
+        }
       });
     } catch (error) {
       return dispatch({
@@ -599,6 +615,24 @@ export const clearPopup = () => {
       type: '',
       title: '',
       message: ''
+    }
+  }
+}
+
+export const setPopupComponent = (type) => {
+  return {
+    type: SET_POPUP_COMPONENT,
+    payload: {
+      type: type,
+    }
+  }
+}
+
+export const clearPopupComponent = () => {
+  return {
+    type: CLEAR_POPUP_COMPONENT,
+    payload: {
+      type: '',
     }
   }
 }
@@ -715,6 +749,34 @@ export const getConfig = () => {
           title: 'OOPS!',
           message: error.message
       }});
+    }
+  }
+}
+
+export const getOneUser = (id) => {
+  return async dispatch => {
+    try{
+      const response = await axios.get(`/user/?id=${id}`);
+      return dispatch({
+        type:GET_ONEUSER,
+        payload:response.data
+      })
+    } catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+export const getOneService = (id) => {
+  return async dispatch => {
+    try{
+      const response = await axios.get(`/service/?id=${id}`);
+      return dispatch({
+        type:GET_ONESERVICE,
+        payload:response.data
+      })
+    } catch(error) {
+      console.log(error);
     }
   }
 }

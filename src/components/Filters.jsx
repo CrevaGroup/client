@@ -1,7 +1,7 @@
 import Select from 'react-select';
 import  { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterServices, resetFilters } from "../Redux/Actions/actions";
+import { filterServices, resetFilters, getServices } from "../Redux/Actions/actions";
 
 const Filters = () => {
 
@@ -14,20 +14,15 @@ const Filters = () => {
     const dispatch = useDispatch();
     const filters = useSelector(state => state.filters);
     const types = useSelector(state => state.types);
+    const user = useSelector(state => state.user);
+    const services = useSelector(state => state.services);
+    const config = useSelector(state => state.config);
+    let maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
+    if (user?.nacionalidad === 'Argentina') maxVal = maxVal * config.dolarValue;
 
-    const min = 1;
-    const max = 100;
-    const [styles, setStyles] = useState({
-        left:`${min}%`,
-        right: `${max}%`
-    });
-    const [des, setDes] = useState(false);
-    const priceGap = 10;
-    
     const handleInputChange = e => {
-
         if (!e.target) {
-            dispatch(filterServices({
+            dispatch(getServices({
                 ...filters,
                 types: e.map(type => type.value)
             }));
@@ -35,63 +30,29 @@ const Filters = () => {
         }
        
         if (e.target.name === "order")
-            dispatch(filterServices({
+            dispatch(getServices({
                 ...filters,
                 [e.target.name]: e.target.value
             }));
 
-        let newMin = filters.min;
-        let newMax = filters.max;
-
-        if (e.target.name === "min" || e.target.name === "max") {
-
-            if (e.target.name === 'min') {
-                newMin = parseInt(e.target.value, 10);
-                if (newMin < 1) newMin = 1;
-                if (newMax - newMin <= priceGap) {
-                    newMax = newMin + priceGap;
-                    if (newMax > 100) {
-                        newMax = 100;
-                        newMin = 100 - priceGap;
-            }}} else {
-                newMax = parseInt(e.target.value, 10);
-                if (newMax > 100) newMax = 100;
-                if (newMax - newMin <= priceGap) {
-                    newMin = newMax - priceGap;
-                    if (newMin < 1) {
-                        newMin = 1;
-                        newMax = 1 + priceGap;
-            }}}
-            const leftPercent = ((newMin - min) / (max - min)) * 100;
-            const rightPercent = 100 - ((newMax - min) / (max - min)) * 100;
-
-            setStyles({
-                left: `${leftPercent}%`,
-                right: `${rightPercent}%`
-            });
-
-            dispatch(filterServices({
+        if (e.target.name === "min") {
+            dispatch(getServices({
                 ...filters,
-                min: Number(newMin),
-                max: Number(newMax)
+                min: e.target.value
             }));
         }
 
+        if (e.target.name === "max") {
+            dispatch(getServices({
+                ...filters,
+                max: e.target.value
+            }));
+        }
     };
 
     useEffect(() => {
-        percentCalc();
+        return () => dispatch(resetFilters());
     }, []);
-
-    const percentCalc = () => {
-        const leftPercent = ((filters.min - min) / (max - min)) * 100;
-        const rightPercent = 100 - ((filters.max - min) / (max - min)) * 100;
-
-        setStyles({
-            left: `${leftPercent}%`,
-            right: `${rightPercent}%`
-        });
-    }
 
     function resetHandler(){
         minRef.current.value = min;
@@ -101,7 +62,7 @@ const Filters = () => {
         typeRef.current.setValue([]);
         orderRef.current.value = "ASC";
         percentCalc();
-        // dispatch(resetFilters());
+        dispatch(resetFilters());
     }
 
 
@@ -118,29 +79,22 @@ const Filters = () => {
                     className="flex items-center justify-center"
                 >
                 <p
-                    className=" text-lg text-dark-gray-blue "
+                    className="font-bold text-dark-gray-blue "
                 >Rango de precio</p>
                 </div>
                 <div
                     className="flex items-center justify-center my-2 "
                 >
-                    <div
-                    className="flex  flex-col items-center justify-center "
-                >
-                    <span
-                        className="font-bold"
-                    >Min</span>
-                    <input
-                        
-                        name="min"
-                        className=" field w-8 mx-2 flex text-center"
-                        type="text"
-                        ref={minRef}
-                        value={filters.min}
-                        onChange={handleInputChange}
-                        disabled={true}
-                    />
-                </div>
+                    <div className="flex  flex-col items-center justify-center ">
+                        <input
+                            name="min"
+                            className=" flex text-center w-16 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            type="number"
+                            ref={minRef}
+                            placeholder={1}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
                 <div
                     className=" mx-4"
@@ -148,74 +102,17 @@ const Filters = () => {
                 <div
                     className="flex  flex-col items-center justify-center"
                 >
-                    <span
-                        className="font-bold"
-                    >Max</span>
                     <input
-                    className=" flex text-center w-8  mx-2 justify-"
+                        className=" flex text-center w-16 h-8 mx-2 justify- [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         name="max"
-                        type="text"
-                        value={filters.max}
+                        type="number"
+                        placeholder={maxVal}
                         onChange={handleInputChange}
                         ref={maxRef}
-                        disabled={true}
                     />
                 </div>
                 </div>
                 
-                {/*slider*/}
-                <div
-                    className="p-2"
-                >
-                    <div
-                    
-                    className="h-[5px] bg-light-violet  rounded-xl relative  w-full"
-                >
-                    <div
-                        style={{ left: styles.left,right:styles.right}}
-                        className={`h-[5px] bg-dark-violet  rounded-xl absolute`}
-                    >
-                    </div>
-                </div>
-                {/* range min*/}
-                    <div className="relative">
-                        <input 
-                            className={` absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none`}
-                            type="range" min={min} max={max} name="min"
-                            value={filters.min}
-                            ref={minSliderRef}
-                            onChange={handleInputChange}
-                    />
-                        <input 
-                            onChange={handleInputChange}
-                            className="absolute top-[-5px] h-[5px] w-full bg-transparent appearance-none pointer-events-none"
-                            type="range" min={min} max={max} name="max"
-                            value={filters.max}
-                            ref={maxSliderRef}
-                            disabled={des}
-                        />
-                        <style>
-                            {`
-                               input[type="range"]::-webkit-slider-thumb {
-                               background: hsl(224,30%,27%);
-                               -webkit-appearance: none;
-                               appearance: none;
-                               pointer-events: auto;
-                           }
-
-                           input[type="range"]::-moz-range-thumb {
-                               border: none;
-                               border-radius: 50%;
-                               pointer-events: auto;
-                               -moz-appearance: none;
-                           }
-                       `}
-                        </style>
-                    </div>
-                </div>
-                
-
-
             </div>
             
             {/*filter*/}
@@ -223,8 +120,9 @@ const Filters = () => {
             <div
                 className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p className="text-lg mb-2 text-dark-gray-blue">Incluye</p>
+                <p className="font-bold mb-2 text-dark-gray-blue">Incluye</p>
                  <Select
+                    className='w-60'
                     defaultValue={[]}
                     isMulti
                     name="filter"
@@ -244,7 +142,7 @@ const Filters = () => {
                 className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p
-                    className=" text-lg mb-2 text-dark-gray-blue"
+                    className="font-bold mb-2 text-dark-gray-blue"
                 >Ordenar por precio</p>
                 
                 <select
@@ -268,7 +166,7 @@ const Filters = () => {
         >
             <button
                 onClick={resetHandler}
-                className="m-2 text-lg"
+                className="m-2"
             >Reiniciar filtros</button>
         </div>
         </div>

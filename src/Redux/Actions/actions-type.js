@@ -31,6 +31,8 @@ export const UPDATE_TRANSACTION = "UPDATE_TRANSACTION";
 
 export const SET_POPUP = "SET_POPUP"
 export const CLEAR_POPUP = "CLEAR_POPUP"
+export const SET_POPUP_COMPONENT = "SET_POPUP_COMPONENT"
+export const CLEAR_POPUP_COMPONENT = "CLEAR_POPUP_COMPONENT"
 
 export const GET_POSTIG = "GET_POSTIG";
 export const CREATE_POSTIG = "CREATE_POSTIG";
@@ -43,4 +45,10 @@ export const UPDATE_POSTTEXT = "UPDATE_POSTTEXT";
 export const DELETE_POSTTEXT = "DELETE_POSTTEXT";
 
 export const LOGOUT = 'LOGOUT';
+
+
+export const GET_ONEUSER = 'GET_ONEUSER';
+export const GET_ONESERVICE = 'GET_ONESERVICE';
+
 export const GET_CONFIG = 'GET_CONFIG';
+

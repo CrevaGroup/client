@@ -12,6 +12,7 @@ import Register from "./views/Register";
 import Community from "./views/Community";
 import Success from "./views/Success";
 import Failure from "./views/Failure";
+import Dashboard from "./views/Dashboard";
 
 import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
@@ -23,6 +24,7 @@ import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
 function App() {
   const dispatch = useDispatch();
 
+  const popupComponent = useSelector((state) => state.popupComponent);
   const popup = useSelector((state) => state.popup);
 
   useEffect(()=>{
@@ -32,14 +34,14 @@ function App() {
 
   return (
     <div className="font-orkney">
-      {popup.type !== "" && popup.type !== "perfil" && (
-        <div className="fixed bottom-4 right-4 z-20">
-          <AlertNotif />
-        </div>
-      )}
-      {popup.type === "perfil" && (
+      {popupComponent.type === "PERFIL" && (
         <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
           <ProfileUser />
+        </div>
+      )}
+      {popup.type !== "" && (
+        <div className="fixed bottom-4 right-4 z-20">
+          <AlertNotif />
         </div>
       )}
       <Routes>
@@ -97,6 +99,7 @@ function App() {
             </React.Fragment>
           }
         />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Success" element={<Success />} />

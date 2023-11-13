@@ -12,16 +12,16 @@ const Services = () => {
 
   const dispatch = useDispatch();
 
-  const [create, setCreate] = useState(false)
-  const services = useSelector(state => state.servicesFiltered)
+  const services = useSelector(state => state.services)
+  const filters = useSelector(state => state.filters)
+  const config = useSelector(state => state.config)
 
-  function disableHandler(){
-    setCreate(create ? false : true)
-  }
+
 
   useEffect(() => {
-    dispatch(getServices());
+    dispatch(getServices(filters));
     dispatch(getTypes());
+    
 }, []);
 
   return (
@@ -40,34 +40,17 @@ const Services = () => {
           <p className="text-3xl lg:text-5xl  mr-2">
             Nuestros Servicios
           </p>
-          <button onClick={disableHandler}>
-            <img
-              src={EditDocument}
-              alt="EditDocument"
-              style={{ width: `30px` }}
-              />
-          </button>
+          
         </div>
         <p className="text-xl">Potenciá tu carrera</p>
-          <div className=" w-full"
-
-          >
-            {create &&
-              <div className=" ">
-
-                <NewServices
-                  dis={disableHandler}
-                />
-              </div>
-            }
-          </div>
+          
       </div>
               
 
       <div
         className="flex items-center justify-center my-4"
       >
-        <Filters />
+        {config.filters && <Filters />}
       </div>
 
       <div className="flex lg:min-h-screen items-center justify-center  lg:my-2">
@@ -77,6 +60,8 @@ const Services = () => {
             key={index}
             img={service.photo}
             name={service.name}
+            items={service.items}
+            modalidad={service.modalidad}
             description={service.description}
             price={service.price}
             id={service.id}

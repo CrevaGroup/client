@@ -1,6 +1,7 @@
 import {
   GET_ALL_USERS,
   GET_USER,
+  DELETE_USER,
   CREATE_USER,
   UPDATE_USER,
   GET_REVIEW,
@@ -28,8 +29,12 @@ import {
   GET_TYPES,
   LOCAL_STORAGE,
   SET_POPUP,
+  CLEAR_POPUP_COMPONENT,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  GET_ONEUSER,
+  GET_ONESERVICE,
+  SET_POPUP_COMPONENT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -42,6 +47,10 @@ let initialState = {
   postIg: [],
   postText: [],
   config: {},
+  cart: [],
+  cartUrl: "",
+  oneUser:{},
+  oneService:{},
   filters: {
     min: 1,
     max: 100,
@@ -53,6 +62,9 @@ let initialState = {
     title: '',
     message: ''
   },
+  popupComponent: {
+    type: ''
+  }
 };
 
 function rootReducer(state = initialState, action) {
@@ -68,6 +80,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         popup: action.payload
+      }
+
+    case SET_POPUP_COMPONENT:
+      return {
+        ...state,
+        popupComponent: action.payload
+      }
+
+    case CLEAR_POPUP_COMPONENT:
+      return {
+        ...state,
+        popupComponent: action.payload
       }
 
     case GET_ALL_USERS:
@@ -120,6 +144,12 @@ function rootReducer(state = initialState, action) {
         }
       };
 
+    case DELETE_USER:
+      return {
+        ...state,
+        allUsers: [...state.allUsers.filter(user => user.id !== action.payload)]
+      }
+
     case GOOGLE_LOGIN:
       return {
         ...state,
@@ -140,8 +170,9 @@ function rootReducer(state = initialState, action) {
     case GET_SERVICES:
       return {
         ...state,
-        services: action.payload,
-        servicesFiltered: action.payload
+        services: action.payload.services,
+        filters: action.payload.filters
+        // servicesFiltered: action.payload
       }
 
     case FILTER_SERVICES:
@@ -251,9 +282,23 @@ function rootReducer(state = initialState, action) {
     case CREATE_TRANSACTION:
       return {};
     case DELETE_SERVICES:
-      return {};
+      return {
+        ...state,
+        services: [...state.services.filter(service => service.id !== action.payload)]
+      };
     case UPDATE_SERVICES:
       return {};
+      
+    case GET_ONEUSER:
+      return{
+        ...state,
+        oneUser:action.payload,
+      }
+    case GET_ONESERVICE:
+      return{
+        ...state,
+        oneService:action.payload,
+      }
 
     case GET_CONFIG:
       return {
