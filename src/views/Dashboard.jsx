@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/actions";
 import { CgProfile } from "react-icons/cg";
 import { PiUsersThreeBold, PiMoneyBold } from "react-icons/pi";
@@ -15,24 +15,36 @@ import ChartComponent from "../components/ChartComponent";
 import CLients from "../components/CLients";
 import MainDashboard from "../components/mainDashboard";
 import ProfileUser from "../components/ProfileUser";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes, useNavigate, NavLink } from "react-router-dom";
 import {
   MdDashboard,
-  MdOutlineNotificationsActive,
   MdKeyboardArrowDown,
   MdOutlineManageSearch,
   MdOutlineHelpOutline,
 } from "react-icons/md";
 
 export default function Dashboard() {
+
+  const navigate = useNavigate()
+
   const [sidebar, setSidebar] = useState(false);
   const handleSidebar = () => {
     setSidebar(!sidebar);
   };
   const dispatch = useDispatch();
+  
   const logoutHandler = () => {
+    navigate('/')
     dispatch(logout());
   };
+
+  const user = useSelector(state => state.user)
+
+  useEffect(()=>{
+    if(Object.keys(user).length){
+      if(!user.admin) navigate('/')
+    }
+  },[user])
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -63,7 +75,7 @@ export default function Dashboard() {
             <ul>
               <li>
                 <Link
-                  to="/newservices"
+                  to="newservices"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <MdDashboard />
@@ -80,18 +92,18 @@ export default function Dashboard() {
                   Perfil
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
-                  to="/chart"
+                  to="chart"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <BsGraphUp />
                   Grafica
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
-                  to="/sales"
+                  to="sales"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <PiMoneyBold />
@@ -100,7 +112,7 @@ export default function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/clients"
+                  to="clients"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <PiUsersThreeBold />
@@ -109,27 +121,15 @@ export default function Dashboard() {
               </li>
             </ul>
           </nav>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 justify-between h-full">
             <img src={imgSvg} alt="Image" />
-            <div className=" bg-purple-300 p-8 flex flex-col gap-4 rounded-3xl">
-              <h3 className="text-xl  text-center">Get update</h3>
-              <p className="text-gray-200 text-center">
-                Lorem ipsum dolor sit amet consectetur.
-              </p>
-              <button className="bg-purple-600 text-white p-2 rounded-lg">
-                Learn more
-              </button>
-            </div>
-            <a
-              onClick={() => {
-                logoutHandler();
-              }}
-              href="#"
+            <button
+              onClick={logoutHandler}
               className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
             >
               <BiLogOut />
-              Logout
-            </a>
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       </div>
@@ -143,24 +143,19 @@ export default function Dashboard() {
       <div className="col-span-5">
         <header className="flex flex-col md:flex-row gap-4 items-center justify-between bg-gray700 p-4 lg:pl-12 w-full">
           <form className="w-full lg:w-[30%] order-1 md:w-[40%] md:-order-none">
-            <div className="relative">
+            {/* <div className="relative">
               <MdOutlineManageSearch className="absolute left-2 top-3" />
               <input
                 type="text"
                 className="w-full py-2 pl-8 pr-4 bg-gray-100 outline-none rounded-lg"
                 placeholder="Buscar"
               />
-            </div>
+            </div> */}
           </form>
 
           <nav className="w-full md:w-[60%] lg:w-[70%] flex justify-center md:justify-end">
             <ul className="flex items-center gap-4">
-              <li>
-                <a href="#" className="relative" onClick={toggleDropdown}>
-                  <MdOutlineNotificationsActive className="text-xl" />
-                  <RiCheckboxBlankCircleFill className="absolute -right-1 -top-1 text-[12px] text-red-500" />
-                </a>
-              </li>
+              <li><NavLink to={'/'}>Cerrar</NavLink></li>
               <li className="relative">
                 {/* Agrega el menú desplegable aquí */}
                 <div
@@ -179,18 +174,11 @@ export default function Dashboard() {
                     </li>
                     <li>
                       <a
+                        onClick={logoutHandler}
                         href="#"
                         className="p-1 flex justify-between hover:bg-purple-400 transition-colors rounded-lg items-center"
                       >
                         Cerrar Sesión <BiLogOutCircle />
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="p-1 flex justify-between hover:bg-purple-400 transition-colors rounded-lg items-center "
-                      >
-                        Ayuda <MdOutlineHelpOutline />
                       </a>
                     </li>
                   </ul>
@@ -200,7 +188,7 @@ export default function Dashboard() {
                   className="flex items-center gap-1 cursor-pointer"
                   onClick={toggleDropdown}
                 >
-                  Alvaro Lopez <MdKeyboardArrowDown />
+                  {user.fullName} <MdKeyboardArrowDown />
                 </a>
               </li>
             </ul>
@@ -210,7 +198,7 @@ export default function Dashboard() {
           <Routes>
             <Route path="/newservices" element={<MainDashboard />} />
             <Route path="/profile" element={<ProfileUser />} />
-            <Route path="/chart" element={<ChartComponent />} />
+            {/* <Route path="/chart" element={<ChartComponent />} /> */}
             <Route path="/sales" element={<Sales />} />
             <Route path="/clients" element={<CLients />} />
           </Routes>

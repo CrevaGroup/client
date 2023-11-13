@@ -1,12 +1,12 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  deleteUser,
   updatePassword,
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
-  verifyBeforeUpdateEmail
+  verifyBeforeUpdateEmail,
+  deleteUser
 } from "firebase/auth";
 import { auth } from "../../Firebase";
 
@@ -203,20 +203,14 @@ export const createUser = (username, password, email, birthdate, nationality) =>
   };
 };
 
-export const deleteUserById = (email, password) => {
+export const deleteUserById = (id) => {
   return async function (dispatch) {
     try {
-      const firebaseUser = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const id = firebaseUser.user.uid;
-      const disable = await deleteUser(firebaseUser);
-      if (disable) await axios.delete(`/user/${id}`);
-      return dispatch({
-        type: DELETE_USER,
-      });
+        const response = await axios.delete(`/user/${id}`);
+        return dispatch({
+          type: DELETE_USER,
+          payload: id
+        });
     } catch (error) {
       return dispatch({
         type: SET_POPUP,
@@ -479,13 +473,13 @@ export const updateServices = () => {
   };
 };
 
-export const deleteServices = () => {
+export const deleteServices = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.delete(`/service/${id}`);
       return dispatch({
         type: DELETE_SERVICES,
-        payload: response.data,
+        payload: id,
       });
     } catch (error) {
       return dispatch({

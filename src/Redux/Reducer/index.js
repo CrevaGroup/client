@@ -1,6 +1,7 @@
 import {
   GET_ALL_USERS,
   GET_USER,
+  DELETE_USER,
   CREATE_USER,
   UPDATE_USER,
   GET_REVIEW,
@@ -143,6 +144,12 @@ function rootReducer(state = initialState, action) {
         }
       };
 
+    case DELETE_USER:
+      return {
+        ...state,
+        allUsers: [...state.allUsers.filter(user => user.id !== action.payload)]
+      }
+
     case GOOGLE_LOGIN:
       return {
         ...state,
@@ -275,7 +282,10 @@ function rootReducer(state = initialState, action) {
     case CREATE_TRANSACTION:
       return {};
     case DELETE_SERVICES:
-      return {};
+      return {
+        ...state,
+        services: [...state.services.filter(service => service.id !== action.payload)]
+      };
     case UPDATE_SERVICES:
       return {};
       

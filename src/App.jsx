@@ -12,6 +12,7 @@ import Register from "./views/Register";
 import Community from "./views/Community";
 import Success from "./views/Success";
 import Failure from "./views/Failure";
+import Dashboard from "./views/Dashboard";
 
 import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
@@ -98,6 +99,7 @@ function App() {
             </React.Fragment>
           }
         />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Success" element={<Success />} />

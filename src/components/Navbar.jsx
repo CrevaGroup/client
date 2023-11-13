@@ -105,11 +105,14 @@ const Navbar = () => {
               >
                 Iniciar Sesion
               </p>
-            </NavLink> : <NavLink>
+            </NavLink> : <NavLink to={user.admin? "/dashboard/newservices" : null}>
+              {user.admin? <p className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center">
+                Dashboard</p>:
               <p
-                onClick={openProfile}
-                className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
-              >Mi Perfil</p></NavLink>
+              onClick={openProfile}
+              className="text-lg h-10 hover:text-violet-500 duration-500 lg:cursor-pointer my-6 lg:my-0  border-2 border-violet-900 rounded-lg lg:border-none lg:rounded-none lg:h-fit flex items-center justify-center"
+              >Mi Perfil</p>}
+              </NavLink>
           }
         </li>
 
