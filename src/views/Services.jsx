@@ -80,6 +80,8 @@ const Services = () => {
             img={service.photo}
             name={service.name}
             description={service.description}
+            items={service.items}
+            modalidad={service.modalidad}
             price={service.price}
             id={service.id}
              />
