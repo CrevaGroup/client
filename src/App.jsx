@@ -23,6 +23,7 @@ import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
 function App() {
   const dispatch = useDispatch();
 
+  const popupComponent = useSelector((state) => state.popupComponent);
   const popup = useSelector((state) => state.popup);
 
   useEffect(()=>{
@@ -32,14 +33,14 @@ function App() {
 
   return (
     <div className="font-orkney">
-      {popup.type !== "" && popup.type !== "perfil" && (
-        <div className="fixed bottom-4 right-4 z-20">
-          <AlertNotif />
-        </div>
-      )}
-      {popup.type === "perfil" && (
+      {popupComponent.type === "PERFIL" && (
         <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
           <ProfileUser />
+        </div>
+      )}
+      {popup.type !== "" && (
+        <div className="fixed bottom-4 right-4 z-20">
+          <AlertNotif />
         </div>
       )}
       <Routes>
