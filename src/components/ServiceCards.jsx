@@ -41,10 +41,11 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
                     <div className="text-light-gray translate-y-[130%] group-hover:translate-y-0 transition-all duration-500">
                         <h1 className="text-2xl font-bold text-white ">{name}</h1>
-                        <p>{description}</p>
+                        
                     </div>
                     <div className="italic text-light-gray my-4">
                         <div className="italic text-light-gray my-6 space-y-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p>{description}</p>
                             <h3 className="font-bold">Contenido:</h3>
                             <ul>
                                 {items.map((item, index) => <li key={index}>{item}</li>)}
