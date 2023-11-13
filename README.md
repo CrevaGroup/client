@@ -1,9 +1,9 @@
-# CreVa Group Web
+# CreVa Group Web 💻
 
-## Descripción
+## Descripción ✏
 La página web de CreVa Group es una plataforma dinámica y moderna diseñada para ofrecer soluciones integrales a profesionales en búsqueda de desarrollo laboral. En CreVa Group, nos enorgullece brindar las herramientas necesarias para potenciar carreras desde cualquier parte del mundo.
 
-## Características Principales
+## Características Principales 🚀
 **Carrusel Interactivo:** Presentamos de manera atractiva nuestras soluciones clave a través de un carrusel interactivo.
 
 **Blog de Expertos:** Descubre consejos esenciales para la búsqueda laboral y el desarrollo profesional en nuestro blog de expertos.
@@ -14,7 +14,7 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 **Testimonios Reales:** 
   Conoce el impacto de CreVa Group a través de testimonios auténticos de profesionales que han transformado sus carreras.
 
-## Tecnologías Utilizadas
+## Tecnologías Utilizadas 🛠
 
 - **React:** Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
 
@@ -24,10 +24,10 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 - **Vite:** Herramienta de construcción y desarrollo para aplicaciones web modernas.
 
-## Contacto
+## Contacto 📍
   Para obtener más información, visita [visita nuestra página web](https://creva.vercel.app/) o ponte en contacto con nosotros a través de group.creva@gmail.com.
 
-## Instalacion y Uso 
+## Instalacion y Uso ⚙
 
   1. Clona este repositorio:
 
@@ -41,7 +41,7 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
      
      npm run dev
      
-## Estado del Proyecto
+## Estado del Proyecto 📈
 
 ### Desarrollo Actual
 - **Version:** 1.0.0
