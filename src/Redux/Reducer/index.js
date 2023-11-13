@@ -28,10 +28,13 @@ import {
   GET_TYPES,
   LOCAL_STORAGE,
   SET_POPUP,
+  SET_POPUP_COMPONENT,
+  CLEAR_POPUP_COMPONENT,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
   GET_ONEUSER,
   GET_ONESERVICE,
+  SET_POPUP_COMPONENT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -59,6 +62,9 @@ let initialState = {
     title: '',
     message: ''
   },
+  popupComponent: {
+    type: ''
+  }
 };
 
 function rootReducer(state = initialState, action) {
@@ -74,6 +80,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         popup: action.payload
+      }
+
+    case SET_POPUP_COMPONENT:
+      return {
+        ...state,
+        popupComponent: action.payload
+      }
+
+    case CLEAR_POPUP_COMPONENT:
+      return {
+        ...state,
+        popupComponent: action.payload
       }
 
     case GET_ALL_USERS:
