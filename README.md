@@ -16,9 +16,13 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Tecnologías Utilizadas
 
-- React: Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
+- **React:** Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
 
-- Tailwind CSS: Estilo moderno y eficiente con Tailwind CSS para un diseño elegante y responsivo.
+- **Redux:** Manejo del estado de la aplicación para un flujo de datos predecible.
+
+- **Tailwind CSS:** Estilo moderno y eficiente con Tailwind CSS para un diseño elegante y responsivo.
+
+- **Vite:** Herramienta de construcción y desarrollo para aplicaciones web modernas.
 
 ## Contacto
   Para obtener más información, visita [visita nuestra página web](https://creva.vercel.app/) o ponte en contacto con nosotros a través de group.creva@gmail.com.
