@@ -2,7 +2,6 @@ import React from "react";
 import ServiceCards from "./ServiceCards";
 import MobileServiceCards from "./MobileServiceCards";
 
-
 const AllServiceCards = ({img, name, description, items, modalidad, price, id}) => {
     return(
         <div>

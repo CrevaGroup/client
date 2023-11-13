@@ -19,6 +19,7 @@ const Blog = () => {
 
     const disableHandler = () => {
         setPostMenu(postMenu ? false : true)
+        console.log(postsText)
     }
 
     useEffect(() => {
@@ -105,26 +106,33 @@ const Blog = () => {
                     }
 
                     {
-                        postsText.length > 0 ? <div
-                            className="flex flex-col items-center justify-center my-8 w-full  "
-                        >
-                            {
-                                postsText.map((post,index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-col  w-10/12 lg:w-3/5 justify-center  my-4 text-dark-gray-blue "
-                                    >
-                                        <h1
-                                            className="my-4 font-bold text-3xl "
-                                        >{post.title}</h1>
-                                        <p
-                                            className="text-xl p-2 whitespace-pre-line"
-                                        >{`${post.content}`}</p>
-                                    </div>
-                                ))
-                            
-                            }
-                        </div> : ''
+                        postsText.length > 0 ? (
+                            <div className="flex flex-col items-center justify-center my-8 w-full">
+                                {
+                                    [...postsText].reverse().map((post, index) => {
+                                        const fechaCompleta = post.createdAt;
+                                        const fecha = new Date(fechaCompleta);
+                                        const año = fecha.getFullYear();
+                                        const mes = fecha.getMonth() + 1;
+                                        const dia = fecha.getDate();
+                                        const fechaFormateada = `${dia < 10 ? '0' : ''}${dia}-${mes < 10 ? '0' : ''}${mes}-${año}`;
+
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="flex flex-col w-10/12 lg:w-3/5 justify-center my-4 text-dark-gray-blue"
+                                            >
+                                                <div className="flex flex-col lg:flex-row my-4 items-center ">
+                                                    <h1 className="font-bold text-3xl">{post.title}</h1>
+                                                    <p className="mr-auto my-2 lg:ml-auto lg:mr-0">{fechaFormateada}</p>
+                                                </div>
+                                                <p className="text-xl p-2 whitespace-pre-line">{`${post.content}`}</p>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                        ) : ''
                     }
                 
 
