@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionLink } from "../Redux/Actions/actions";
 
 
+
 const ServiceCards = ({img, name, description, items, modalidad, price, id}) => {
+
 
     const dispatch = useDispatch()
 
@@ -27,6 +29,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     }
 
     return(
+
         <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[10px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl">
             <div className="w-[352px] h-[448px] lg:h-[544px] lg:w-[448px]">
                 <img
@@ -36,6 +39,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40">
                 </div>
+
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
                     <div className="text-light-gray translate-y-[130%] group-hover:translate-y-0 transition-all duration-500">
                         <h1 className="text-2xl font-bold text-white ">{name}</h1>

@@ -1,26 +1,43 @@
-import Select from 'react-select';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createServices } from "../Redux/Actions/actions";
-import { Button } from "@material-tailwind/react";
 
 function NewServices({dis}) {
     const dispatch = useDispatch();
     const types = useSelector(state => state.types);
+    const maxItems = 5;
+    const maxModality = 3;
+    const [itemsQ, setItemsQ] = useState(1);
+    const [modalityQ, setModalityQ] = useState(1);
     const [servicesInfo, setServicesInfo] = useState({
-        name: "",
-        description: "",
-        price: "",
-        photo: "",
-        types: []
+      name: "",
+      description: "",
+      price: "",
+      photo: "",
+      items: Array.from({ length: maxItems }, () => ""),
+      modalidad: Array.from({ length: maxModality }, () => ""),
+      types: []
     })
 
-    function handleChange(event) {
-        setServicesInfo({
-          ...servicesInfo,
-          [event.target.name]: event.target.value,
-        });
+  const handleChange = event => {
+    const { name, value } = event.target;
+    const [type, index] = name.split("-");
+
+    if (type === "items" || type === "modalidad") {
+      const updatedArray = [...servicesInfo[type]];
+      updatedArray[index] = value;
+
+      setServicesInfo((prevInfo) => ({
+        ...prevInfo,
+        [type]: updatedArray,
+      }));
+    } else {
+      setServicesInfo((prevInfo) => ({
+        ...prevInfo,
+        [name]: value,
+      }));
     }
+  }
 
     function selectedChange(event){
         if(!servicesInfo.types.includes(event.target.value)){
@@ -38,17 +55,70 @@ function NewServices({dis}) {
         })
     }
 
-    function submitHandler(e){
-      e.preventDefault()
+    const submitHandler = e =>{
+      e.preventDefault();
+      const cleaned = cleanObj(servicesInfo);
       setServicesInfo({
         name: "",
         description: "",
         price: "",
         photo: "",
+        items: Array.from({ length: maxItems }, () => ""),
+        modalidad: Array.from({ length: maxModality }, () => ""),
         types: []
+      });
+      setItemsQ(1);
+      setModalityQ(1);
+
+      
+      dispatch(createServices(cleaned))
+    }
+    
+    const modalityHandler = e => {
+      e.preventDefault();
+      if(e.target.value === '1' && modalityQ < maxModality) {
+        setModalityQ(prevValue => {
+          let newValue = prevValue+1;
+          return newValue;
+        })
+      } else if(e.target.value === '0' && modalityQ > 1){
+        setModalityQ(prevValue => {
+          let newValue = prevValue-1;
+          return newValue;
+        })
+      }
+    }
+
+  const itemsHandler = e => {
+    e.preventDefault();
+    if (e.target.value === '1' && itemsQ < maxItems) {
+      setItemsQ(prevValue => {
+        let newValue = prevValue + 1;
+        return newValue;
       })
-        dispatch(createServices(servicesInfo))
-    }/*
+    } else if (e.target.value === '0' && itemsQ > 1) {
+      setItemsQ(prevValue => {
+        let newValue = prevValue - 1;
+        return newValue;
+      })
+    }
+  }
+
+  const cleanObj = (obj) => {
+    const cleanedObj = {};
+
+    for (const [key, value] of Object.entries(obj)) {
+      if (Array.isArray(value)) {
+        cleanedObj[key] = value.filter((item) => item !== '');
+      } else {
+        cleanedObj[key] = value;
+      }
+    }
+
+    return cleanedObj;
+  };
+    
+    /*
 <div
             className="w-full h-full "
         >
@@ -118,11 +188,78 @@ function NewServices({dis}) {
             className="flex flex-col items-center justify-center w-3/4 "
       >
       <div
-        className="lg:w-full"
+        className="w-full"
       >
               <h2 >Nombre</h2>
               <input placeholder="Ingresar nombre..." type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4 w-full rounded-lg outline-none p-1" />
       </div>
+        <div
+          className=" w-full"
+        >
+          <h2 >Items</h2>
+          <div
+                className='lg:flex w-full '
+          >
+            <div
+              className='w-full '
+            >
+                  {
+                    Array.from({ length: itemsQ }, (_, index) => (
+                      <input key={index} placeholder="Ingresar items..." type="text" name={`items-${index}`} onChange={handleChange} value={servicesInfo.items[index]} className=" mr-4 mb-4 w-full rounded-lg outline-none p-1" />
+                    ))
+                  }
+            </div>
+                
+            <div
+                  className='flex font-bold  justify-center'
+            >
+                  <button
+                    value={1}
+                    onClick={itemsHandler}
+                    className='bg-white rounded-full w-8 h-8 mx-4'
+                  >+</button>
+                  <button
+                    value={0}
+                    onClick={itemsHandler}
+                    className='bg-white rounded-full w-8 h-8 mx-4'
+                  >-</button>
+            </div>
+          </div>
+        </div>
+        <div
+          className="w-full"
+        >
+          <h2 >Modalidades</h2>
+          <div
+            className='lg:flex w-full'
+          >
+                <div
+                  className='w-full'
+                >
+                  {
+                    Array.from({ length: modalityQ }, (_, index) => (
+                      <input key={index} placeholder="Ingresar modalidades..." type="text" name={`modalidad-${index}`} onChange={handleChange} value={servicesInfo.modalidad[index]} className=" mr-4 mb-4 w-full rounded-lg outline-none p-1" />
+                    ))
+                  }
+                </div>
+                <div
+                  className='flex font-bold justify-center'
+                >
+
+
+                  <button
+                    value={1}
+                    onClick={modalityHandler}
+                    className='bg-white rounded-full w-8 h-8 mx-4'
+                  >+</button>
+                  <button
+                    value={0}
+                    onClick={modalityHandler}
+                    className='bg-white rounded-full w-8 h-8 mx-4'
+                  >-</button>
+                </div>
+          </div>
+        </div>
       <div
               className="lg:w-full"
       >
@@ -143,7 +280,7 @@ function NewServices({dis}) {
               <input placeholder="##" type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2" />
      </div>
       <h2>Imágen</h2>
-      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer"/>
+      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer ml-auto"/>
       <h2>Incluye</h2>
       <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4 outline-none p-1 rounded-lg">
         <option value=""> Elegir servicio</option>

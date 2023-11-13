@@ -23,6 +23,6 @@ export default {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar"), require("tw-elements/dist/plugin")],
+  //plugins: [require("tailwind-scrollbar"), require("tw-elements/dist/plugin")],
   darkMode: "class",
 };
