@@ -29,9 +29,8 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     }
 
     return(
-
-        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[10px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl">
-            <div className="w-[352px] h-[448px] lg:h-[544px] lg:w-[448px]">
+        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[416px] h-[544px] rounded-3xl">
+            <div className="h-[544px] w-[448px]">
                 <img
                     className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
                     src={img}
@@ -39,7 +38,6 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40">
                 </div>
-
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
                     <div className="text-light-gray translate-y-[130%] group-hover:translate-y-0 transition-all duration-500">
                         <h1 className="text-2xl font-bold text-white ">{name}</h1>
@@ -49,11 +47,11 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                         <div className="italic text-light-gray my-6 space-y-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
                             <h3 className="font-bold">Contenido:</h3>
                             <ul>
-                                {items.map(item => <li>{item}</li>)}
+                                {items.map((item, index) => <li key={index}>{item}</li>)}
                             </ul>
                             <h3 className="font-bold">Modalidad:</h3>
                             <ol>
-                                {modalidad.map(item => <li>{item}</li>)}
+                                {modalidad.map((item, index) => <li key={index}>{item}</li>)}
                             </ol>
                         </div>
                     </div>

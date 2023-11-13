@@ -84,8 +84,6 @@ const Services = () => {
             items={service.items}
             modalidad={service.modalidad}
             description={service.description}
-            items={service.items}
-            modalidad={service.modalidad}
             price={service.price}
             id={service.id}
              />
