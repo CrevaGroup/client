@@ -25,6 +25,9 @@ function Footer() {
             <div className="mb-2">
               <NavLink to="/Comunidad">Comunidad Creva</NavLink>
             </div>
+            <div className="mb-2">
+              <NavLink to="/Team">Equipo de Desarrollo</NavLink>
+            </div>
           </div>
           <div>
             <img src={Logo} alt="Logo Footer" className="w-1/2  mx-auto" style={{ width: `90px` }} />
