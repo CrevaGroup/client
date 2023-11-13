@@ -27,7 +27,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     }
 
     return(
-        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/30 transition-shadow w-[352px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl">
+        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[10px] h-[448px] lg:w-[416px] lg:h-[544px] rounded-3xl">
             <div className="w-[352px] h-[448px] lg:h-[544px] lg:w-[448px]">
                 <img
                     className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
@@ -36,11 +36,13 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40">
                 </div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center">
-                    <h1 className="text-2xl font-bold text-white">{name}</h1>
-                    <div className="italic text-light-gray my-4">
+                <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
+                    <div className="text-light-gray translate-y-[130%] group-hover:translate-y-0 transition-all duration-500">
+                        <h1 className="text-2xl font-bold text-white ">{name}</h1>
                         <p>{description}</p>
-                        <div className="italic text-light-gray my-6 space-y-2">
+                    </div>
+                    <div className="italic text-light-gray my-4">
+                        <div className="italic text-light-gray my-6 space-y-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
                             <h3 className="font-bold">Contenido:</h3>
                             <ul>
                                 {items.map(item => <li>{item}</li>)}
@@ -51,7 +53,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                             </ol>
                         </div>
                     </div>
-                    <div className="flex flex-row justify-center items-center space-x-4">
+                    <div className="flex flex-row justify-center items-center space-x-4 translate-y-[-200%] group-hover:translate-y-0 transition-all duration-500">
                         {user.nacionalidad === 'Argentina'
                         ? <p className="text-white font-bold text-2xl ">{`$ ${price * usd}`}</p>
                         : <p className="text-white font-bold text-2xl ">{`$ ${price}`}</p>
