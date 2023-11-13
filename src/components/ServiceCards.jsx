@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionLink } from "../Redux/Actions/actions";
 
 
-const ServiceCards = ({img, name, description, price, id, items, modalidad}) => {
+
+const ServiceCards = ({img, name, description, items, modalidad, price, id}) => {
+
 
     const dispatch = useDispatch()
 
