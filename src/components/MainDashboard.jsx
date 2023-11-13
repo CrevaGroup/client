@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 import NewServices from "./NewServices";
 import { useDispatch, useSelector } from "react-redux";
-import { getServices, getTypes } from "../Redux/Actions/actions";
+import { deleteServices, getServices, getTypes } from "../Redux/Actions/actions";
 
 function MainDashboard() {
 
@@ -20,6 +20,10 @@ function MainDashboard() {
     dispatch(getTypes());
     
 }, []);
+
+  function deleteHandler (e){
+    dispatch(deleteServices(e.target.value))
+  }
 
   const [mostrarNuevoServicio, setMostrarNuevoServicio] = useState(false);
 
@@ -58,8 +62,8 @@ function MainDashboard() {
         </div>
         <div className="mb-8">
           <p className="text-gray-400">
-            Lorem ipsum dolor sit.{" "}
-            <span className="text-purple-500 font-semibold">{services?services.length:0}</span> services!
+            Actualmente existen{" "}
+            <span className="text-purple-500 font-semibold">{services?services.length:0}</span> servicios!
           </p>
         </div>
         {/* Card */}
@@ -79,6 +83,7 @@ function MainDashboard() {
             <h3 className="text-xl text-gray-500 mb-2 ">${user.nacionalidad==="Argentina"?service.price*config.dolarValue:service.price} {user.nacionalidad==="Argentina"?"ARS":"USD"}</h3>
             <p className="text-gray-500">{service.createdAt.slice(0, 10).split("-").reverse().join("-")}</p>
           </div>
+          <button value={service.id} onClick={deleteHandler}>Eliminar</button>
         </a>
         </div>)}
       </div>

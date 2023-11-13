@@ -258,7 +258,10 @@ function rootReducer(state = initialState, action) {
     case CREATE_TRANSACTION:
       return {};
     case DELETE_SERVICES:
-      return {};
+      return {
+        ...state,
+        services: [...state.services.filter(service => service.id !== action.payload)]
+      };
     case UPDATE_SERVICES:
       return {};
       

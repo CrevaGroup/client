@@ -477,13 +477,13 @@ export const updateServices = () => {
   };
 };
 
-export const deleteServices = () => {
+export const deleteServices = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.delete(`/service/${id}`);
       return dispatch({
         type: DELETE_SERVICES,
-        payload: response.data,
+        payload: id,
       });
     } catch (error) {
       return dispatch({

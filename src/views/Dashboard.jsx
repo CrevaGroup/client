@@ -143,14 +143,14 @@ export default function Dashboard() {
       <div className="col-span-5">
         <header className="flex flex-col md:flex-row gap-4 items-center justify-between bg-gray700 p-4 lg:pl-12 w-full">
           <form className="w-full lg:w-[30%] order-1 md:w-[40%] md:-order-none">
-            <div className="relative">
+            {/* <div className="relative">
               <MdOutlineManageSearch className="absolute left-2 top-3" />
               <input
                 type="text"
                 className="w-full py-2 pl-8 pr-4 bg-gray-100 outline-none rounded-lg"
                 placeholder="Buscar"
               />
-            </div>
+            </div> */}
           </form>
 
           <nav className="w-full md:w-[60%] lg:w-[70%] flex justify-center md:justify-end">
