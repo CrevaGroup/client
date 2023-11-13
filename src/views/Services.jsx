@@ -12,14 +12,11 @@ const Services = () => {
 
   const dispatch = useDispatch();
 
-  const [create, setCreate] = useState(false)
   const services = useSelector(state => state.services)
   const filters = useSelector(state => state.filters)
   const config = useSelector(state => state.config)
 
-  function disableHandler(){
-    setCreate(create ? false : true)
-  }
+
 
   useEffect(() => {
     dispatch(getServices(filters));
@@ -43,27 +40,10 @@ const Services = () => {
           <p className="text-3xl lg:text-5xl  mr-2">
             Nuestros Servicios
           </p>
-          <button onClick={disableHandler}>
-            <img
-              src={EditDocument}
-              alt="EditDocument"
-              style={{ width: `30px` }}
-              />
-          </button>
+          
         </div>
         <p className="text-xl">Potenciá tu carrera</p>
-          <div className=" w-full"
-
-          >
-            {create &&
-              <div className=" ">
-
-                <NewServices
-                />
-              </div>
-              
-            }
-          </div>
+          
       </div>
               
 
