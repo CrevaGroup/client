@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, getUser } from "../Redux/Actions/actions";
+import { deleteUserById, getAllUsers, getUser } from "../Redux/Actions/actions";
 
 export default function CLients() {
   // const [selectedClient, setSelectedClient] = useState("");
@@ -12,6 +12,10 @@ export default function CLients() {
 
       dispatch(getAllUsers())
     },[])
+
+    function deleteHandler(e){
+      dispatch(deleteUserById(e.target.value))
+    }
 
   // const handleClientSelection = (client) => {
   //   setSelectedClient(client);
@@ -28,11 +32,12 @@ export default function CLients() {
               <li
                 key={client.id}
               >
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-5">
                 <p>{client.fullName}</p>
                 <p>Email: <a target="blank" href={`mailto:${client.email}`}>{client.email}</a></p>
                 <p>Nacionalidad: {client.nacionalidad}</p>
-                {client.curriculum?<div>Curriculum: <a target="blank" href={client.curriculum}>Link</a></div>:null}
+                {client.curriculum?<div>Curriculum: <a target="blank" href={client.curriculum}>Link</a></div>:<div>Curriculum: No presentó</div>}
+                <button value={client.id} onClick={deleteHandler}>Eliminar</button>
                 </div>
               </li>
             ))}

@@ -1,6 +1,7 @@
 import {
   GET_ALL_USERS,
   GET_USER,
+  DELETE_USER,
   CREATE_USER,
   UPDATE_USER,
   GET_REVIEW,
@@ -142,6 +143,12 @@ function rootReducer(state = initialState, action) {
           message: 'Se han guardado los cambios.'
         }
       };
+
+    case DELETE_USER:
+      return {
+        ...state,
+        allUsers: [...state.allUsers.filter(user => user.id !== action.payload)]
+      }
 
     case GOOGLE_LOGIN:
       return {

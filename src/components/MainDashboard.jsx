@@ -84,6 +84,7 @@ function MainDashboard() {
             <p className="text-gray-500">{service.createdAt.slice(0, 10).split("-").reverse().join("-")}</p>
           </div>
           <button value={service.id} onClick={deleteHandler}>Eliminar</button>
+          {/* <button>Editar</button> */}
         </a>
         </div>)}
       </div>
