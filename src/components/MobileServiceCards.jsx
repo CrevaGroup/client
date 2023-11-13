@@ -1,7 +1,7 @@
 import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import example from '../assets/example.png'
-const MobileServiceCards = ({img, name, description, price}) => {
+const MobileServiceCards = ({img, name, description, price, id, items, modalidad}) => {
     const [open,setOpen] = useState(false);
 
     const cardHandler = () => {
@@ -26,7 +26,7 @@ const MobileServiceCards = ({img, name, description, price}) => {
                         {name}
                     </h1>
                     <button
-                        className="  p-2 rounded-full text-lg  my-2 w-full text-light-gray "
+                        className="  p-2 rounded-full text-lg   w-full text-light-gray "
                         onClick={()=>cardHandler()}
                     >{open ? 'Ver menos' : 'Ver mas'}</button>
                     </div>
@@ -35,35 +35,68 @@ const MobileServiceCards = ({img, name, description, price}) => {
                 >
                     <div>
                        <div
-            className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[576px]  rounded-br-3xl rounded-bl-3xl lg:hidden transition-all duration-300`}
-        >
-                            <img
-                    className="h-full w-full object-cover "
-                    src={img}
-                    alt="ex"
-                >
-                </img>
-            <div
-                className="w-[352px] h-[576px] "
-            >
-
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-70"
-                >
-                </div>
-                <div
-                    className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center "
-                >
-
-                    <div
-                        className="text-lg italic text-light-gray mb-3  text-start "
-                    >
-                        <p
-                            className="my-2 text-center text-xl"
+                        className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] h-[624px]  rounded-br-3xl rounded-bl-3xl  transition-all duration-300`}
                         >
-                                {description}
+                            <img
+                                className="h-full w-full object-cover "
+                                src={img}
+                                alt="ex"
+                            >
+                            </img>
+                            <div
+                                className="w-[352px] h-[624px] "
+                            >
 
-                        </p>
+                                <div
+                                    className="absolute inset-0 bg-black bg-opacity-70"
+                                >
+                                </div>
+                                <div
+                                    className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center "
+                                >
+
+                                    <div
+                                        className="text-lg italic text-light-gray mb-3  text-start "
+                                    >
+                                        <p
+                                            className="my-2 text-center text-xl"
+                                        >
+                                            {description}
+
+                                        </p>
+                                        <p
+                                            className="my-2 text-xl text-white"
+                                        >Contenido:</p>
+                                        <ul
+                                            className="my-2 ml-8"
+                                        >
+
+                                            {
+                                                items.map((item, index) =>
+                                                    <li
+                                                        key={index}
+                                                    >
+                                                        {item}
+                                                    </li>)
+                                            }
+                                        </ul>
+                                        <p
+                                            className="my-2 text-xl text-white"
+                                        >
+                                            Modalidad:
+                                        </p>
+                                        <ul
+                                            className="my-2 ml-8 "
+                                        >
+                                            {
+                                                modalidad.map((mod, index) =>
+                                                    <li
+                                                        key={index}
+                                                    >
+                                                        {mod}
+                                                    </li>)
+                                            }
+                                        </ul> 
                         {/* <ul
                             className="my-2 ml-8 "
                         >
