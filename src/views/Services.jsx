@@ -59,7 +59,6 @@ const Services = () => {
               <div className=" ">
 
                 <NewServices
-                  dis={disableHandler}
                 />
               </div>
               
