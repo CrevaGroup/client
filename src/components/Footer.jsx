@@ -23,7 +23,7 @@ function Footer() {
               <NavLink to="/Blog">Blog</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/Comunidad">Comunidad Creva</NavLink>
+              <NavLink to="/community">Comunidad Creva</NavLink>
             </div>
             <div className="mb-2">
               <NavLink to="/Team">Equipo de Desarrollo</NavLink>
