@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-
-const clientData = [
-  {
-    id: 1,
-    name: "Cliente 1",
-    email: "cliente1@example.com",
-    phone: "123-456-7890",
-    address: "Dirección de Cliente 1",
-  },
-  {
-    id: 2,
-    name: "Cliente 2",
-    email: "cliente2@example.com",
-    phone: "987-654-3210",
-    address: "Dirección de Cliente 2",
-  },
-  {
-    id: 3,
-    name: "Cliente 3",
-    email: "cliente3@example.com",
-    phone: "555-555-5555",
-    address: "Dirección de Cliente 3",
-  },
-];
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers, getUser } from "../Redux/Actions/actions";
 
 export default function CLients() {
-  const [selectedClient, setSelectedClient] = useState(clientData[0]);
+  // const [selectedClient, setSelectedClient] = useState("");
 
-  const handleClientSelection = (client) => {
-    setSelectedClient(client);
-  };
+  const dispatch = useDispatch()
+    const users = useSelector(state => state.allUsers)
+
+    useEffect(()=>{
+
+      dispatch(getAllUsers())
+    },[])
+
+  // const handleClientSelection = (client) => {
+  //   setSelectedClient(client);
+  // };
 
   return (
     <div className="p-4">
@@ -38,23 +24,26 @@ export default function CLients() {
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2">Lista de Clientes</h3>
           <ul>
-            {clientData.map((client) => (
+            {users.map((client) => (
               <li
                 key={client.id}
-                className="mb-2 cursor-pointer text-blue-500"
-                onClick={() => handleClientSelection(client)}
               >
-                {client.name}
+                <div className="grid grid-cols-4">
+                <p>{client.fullName}</p>
+                <p>Email: <a target="blank" href={`mailto:${client.email}`}>{client.email}</a></p>
+                <p>Nacionalidad: {client.nacionalidad}</p>
+                {client.curriculum?<div>Curriculum: <a target="blank" href={client.curriculum}>Link</a></div>:null}
+                </div>
               </li>
             ))}
           </ul>
         </div>
-        <div>
+        {/* <div>
           <h3 className="text-lg font-semibold mb-2">Detalles del Cliente</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm text-gray-600">Nombre:</label>
-              <p>{selectedClient.name}</p>
+              <p>{selectedClient.fullName}</p>
             </div>
             <div>
               <label className="text-sm text-gray-600">
@@ -63,15 +52,19 @@ export default function CLients() {
               <p>{selectedClient.email}</p>
             </div>
             <div>
-              <label className="text-sm text-gray-600">Teléfono:</label>
-              <p>{selectedClient.phone}</p>
+              <label className="text-sm text-gray-600">Nacionalidad:</label>
+              <p>{selectedClient.nacionalidad}</p>
             </div>
             <div>
-              <label className="text-sm text-gray-600">Dirección:</label>
-              <p>{selectedClient.address}</p>
+              <label className="text-sm text-gray-600">Compras:</label>
+              <div>{selectedClient?.buys?.map((buy,index)=> <p key={index}>{buy.Services[0].name}</p>)}</div>
             </div>
+            {selectedClient.curriculum?<div>
+              <label className="text-sm text-gray-600">Curriculum:</label>
+              <div><a target="blank" href={selectedClient.curriculum}>Link</a></div>
+            </div>:null}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
