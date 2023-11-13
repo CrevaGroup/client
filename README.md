@@ -16,21 +16,27 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Tecnologías Utilizadas
 
-**React:** Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
+- React: Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
 
-**Tailwind CSS:** Estilo moderno y eficiente con Tailwind CSS para un diseño elegante y responsivo.
+- Tailwind CSS: Estilo moderno y eficiente con Tailwind CSS para un diseño elegante y responsivo.
 
 ## Contacto
   Para obtener más información, visita [visita nuestra página web](https://creva.vercel.app/) o ponte en contacto con nosotros a través de group.creva@gmail.com.
 
 ## Instalacion y Uso 
 
-  1. Clona este repositorio: 
-    git clone https://github.com/CrevaGroup/client.git
-  2. Instala las dependencias: 
+  1. Clona este repositorio:
+
+     git clone https://github.com/CrevaGroup/client.git
+  
+  3. Instala las dependencias:
+     
      npm install
-  3. Inicia la aplicacion: 
+  
+  5. Inicia la aplicacion:
+     
      npm run dev
+     
 ## Estado del Proyecto
 
 ### Desarrollo Actual
