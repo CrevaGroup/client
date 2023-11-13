@@ -34,6 +34,8 @@ import {
   GET_ALL_USERS,
   SET_POPUP,
   CLEAR_POPUP,
+  SET_POPUP_COMPONENT,
+  CLEAR_POPUP_COMPONENT,
   CREATE_POSTIG,
   CREATE_POSTTEXT,
   GET_POSTIG,
@@ -619,6 +621,24 @@ export const clearPopup = () => {
       type: '',
       title: '',
       message: ''
+    }
+  }
+}
+
+export const setPopupComponent = (type) => {
+  return {
+    type: SET_POPUP_COMPONENT,
+    payload: {
+      type: type,
+    }
+  }
+}
+
+export const clearPopupComponent = () => {
+  return {
+    type: CLEAR_POPUP_COMPONENT,
+    payload: {
+      type: '',
     }
   }
 }
