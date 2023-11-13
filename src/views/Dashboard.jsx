@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/actions";
 import { CgProfile } from "react-icons/cg";
 import { PiUsersThreeBold, PiMoneyBold } from "react-icons/pi";
@@ -15,7 +15,7 @@ import ChartComponent from "../components/ChartComponent";
 import CLients from "../components/CLients";
 import MainDashboard from "../components/mainDashboard";
 import ProfileUser from "../components/ProfileUser";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes, useNavigate } from "react-router-dom";
 import {
   MdDashboard,
   MdOutlineNotificationsActive,
@@ -25,6 +25,9 @@ import {
 } from "react-icons/md";
 
 export default function Dashboard() {
+
+  const navigate = useNavigate()
+
   const [sidebar, setSidebar] = useState(false);
   const handleSidebar = () => {
     setSidebar(!sidebar);
@@ -33,6 +36,14 @@ export default function Dashboard() {
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  const user = useSelector(state => state.user)
+
+  useEffect(()=>{
+    if(Object.keys(user).length){
+      if(!user.admin) navigate('/')
+    }
+  },[user])
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -63,7 +74,7 @@ export default function Dashboard() {
             <ul>
               <li>
                 <Link
-                  to="/newservices"
+                  to="newservices"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <MdDashboard />
@@ -82,7 +93,7 @@ export default function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/chart"
+                  to="chart"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <BsGraphUp />
@@ -91,7 +102,7 @@ export default function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/sales"
+                  to="sales"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <PiMoneyBold />
@@ -100,7 +111,7 @@ export default function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/clients"
+                  to="clients"
                   className="flex items-center gap-4 hover:bg-purple-400  text-gray-200 p-4 hover:text-white rounded-lg transition-colors font-semibold"
                 >
                   <PiUsersThreeBold />
