@@ -22,3 +22,12 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Contacto
   Para obtener más información, visita [Visita nuestra página web](https://creva.vercel.app/) o ponte en contacto con nosotros a través de group.creva@gmail.com.
+
+## Instalacion y Uso 
+
+  1. Clona este repositorio: 
+    git clone https://github.com/CrevaGroup/client.git
+  2. Instala las dependencias: 
+     npm install
+  3. Inicia la aplicacion: 
+     npm run dev
