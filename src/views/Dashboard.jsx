@@ -10,11 +10,11 @@ import { BsGraphUp } from "react-icons/bs";
 import { GrConfigure } from "react-icons/gr";
 import imgSvg from "../assets/job-search.png";
 import logo from "../assets/Blanco-transparente-Logo.png";
-import Sales from "../components/Sales";
-import ChartComponent from "../components/ChartComponent";
-import CLients from "../components/CLients";
-import MainDashboard from "../components/mainDashboard";
-import ProfileUser from "../components/ProfileUser";
+import Sales from "../components/Sales.jsx";
+import ChartComponent from "../components/ChartComponent.jsx";
+import CLients from "../components/CLients.jsx";
+import MainDashboard from "../components/MainDashboard.jsx";
+import ProfileUser from "../components/ProfileUser.jsx";
 import { BrowserRouter as Router, Link, Route, Routes, useNavigate, NavLink } from "react-router-dom";
 import {
   MdDashboard,
