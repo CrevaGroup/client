@@ -19,7 +19,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-custom-gray">
+    <div className="bg-custom-gray text-dark-gray-blue">
       <div className="flex flex-col mb-24 lg:flex-row">
         <div
           style={{ textAlign: "start", margin: "30px", marginTop: `20px` }}
@@ -28,7 +28,7 @@ const Home = () => {
             Despega tu carrera laboral
             desde cualquier parte del mundo
           </h1>
-          <h2 className="text-2xl mb-4 mt-2 lg:text-3xl lg:text-xl xl:text-2xl">
+          <h2 className="text-2xl mb-4 mt-2 lg:text-3xl  xl:text-2xl">
             Nuestro proposito:
           </h2>
           <Carrusel />
