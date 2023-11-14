@@ -69,7 +69,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
 
                                 <div className="flex flex-row justify-center items-center space-x-4">
                                     {user.nacionalidad === 'Argentina'
-                                    ? <p className="text-white font-bold text-2xl ">{`$ ${price * usd}`} ARS</p>
+                                    ? <p className="text-white font-bold text-2xl ">{`$ ${Math.round(price * usd)}`} ARS</p>
                                     : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                                     }
                                     <button

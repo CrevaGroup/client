@@ -33,6 +33,8 @@ function Register() {
     "Chile",
     "Colombia",
     "México",
+    "Uruguay",
+    "Bolivia",
     "Perú",
     "Venezuela",
     "Estados Unidos",
@@ -66,6 +68,7 @@ function Register() {
       setErrors((prevErrors) => ({
         ...prevErrors,
         email: validateEmail(value),
+        gmail: validateEmail(value),
       }));
     } else if (field === "birthdate") {
       setBirthdate(value);
@@ -367,9 +370,12 @@ const validateConfirmPassword = (password, confirmPassword) => {
 };
 
 const validateEmail = (email) => {
-  if (!email) {
-    return "El correo electrónico es obligatorio.";
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    return "Por favor, ingrese una dirección de correo electrónico válida.";
   }
+
   return "";
 };
 

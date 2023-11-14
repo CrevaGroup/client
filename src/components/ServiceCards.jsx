@@ -59,7 +59,9 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                     </div>
                     <div className="flex flex-row justify-center items-center space-x-4 translate-y-[-200%] group-hover:translate-y-0 transition-all duration-500">
                         {user.nacionalidad === 'Argentina' || country === 'AR'
-                        ? <p className="text-white font-bold text-2xl ">{`$ ${price * usd}`} ARS</p>
+
+                        ? <p className="text-white font-bold text-2xl ">{`$ ${Math.round(price * usd)}`} ARS</p>
+
                         : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                         }
                         <button
