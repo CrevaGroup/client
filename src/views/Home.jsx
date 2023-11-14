@@ -46,13 +46,36 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="">
-        <h1 className="text-2xl lg:text-3xl xl:text-4xl 2xl:text-4xl mt-5 text-center lg:p-4 p-16">
-          Nuestro Blog
-        </h1>
+           
+      <h1 className="text-3xl mb text-center">Servicios</h1>
+      <Services />
+
+      <h1 className="text-3xl mt-40 text-center mb-3">Testimonios</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          width: "100%",
+        }}
+        className="flex flex-wrap justify-center items-center"
+      >
+        <div className=" p-4">
+          <TestimonialCard />
+        </div>
+        <div className="p-4">
+          <TestimonialCard />
+        </div>
+        <div className=" p-4">
+          <TestimonialCard />
+        </div>
+      </div>
+
+      <h1 className="text-3xl mt-40 text-center">Nuestro Blog</h1>
+      <div className="mb-28">
         <div
           style={{ height: "500px" }}
-          className="mt-5 flex items-center justify-center"
+          className="flex items-center justify-center"
         >
           <div
             style={{ height: "400px" }}
@@ -76,7 +99,7 @@ const Home = () => {
                   className="w-full lg:w-96 max-w-full"
                 />
               </div>
-              <div className="lg:w-1/2 text-center lg:text-left">
+              <div className="lg:w-1/2 mt-8 text-center lg:text-left">
                 <h1 className="text-center mb-4 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
                   Conoce tips esenciales en tu búsqueda laboral
                 </h1>
@@ -95,27 +118,8 @@ const Home = () => {
         </div>
       </div>
 
-      <h1 className="text-3xl mt-40 text-center mb-3">Testimonios</h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          width: "100%",
-        }}
-        className="flex flex-wrap justify-center items-center"
-      >
-        <div className=" p-4">
-          <TestimonialCard />
-        </div>
-        <div className="p-4">
-          <TestimonialCard />
-        </div>
-        <div className=" p-4">
-          <TestimonialCard />
-        </div>
-      </div>
-      <Services />
+      
+
       <Footer />
     </div>
   );
