@@ -5,7 +5,7 @@ import TestimonialCard from "./TestimonialCard";
 import Comentario from "../components/Comentarios";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getOneService, getReview, getServices, getUser,getOneUser } from "../Redux/Actions/actions";
+import { createReview, getOneService, getReview, getServices, getUser,getOneUser, deleteReview } from "../Redux/Actions/actions";
 
 const Community = () => {
   const [nuevoComentario, setNuevoComentario] = useState({
@@ -17,7 +17,8 @@ const Community = () => {
   const user = useSelector(state => state.user);
   const reviews = useSelector(state => state.reviews);
   const services = useSelector(state => state.services);
-  const filters = useSelector(state => state.filters)
+  const filters = useSelector(state => state.filters);
+  
 
   const handleComentarioChange = (e) => {
     const { name, value } = e.target;
@@ -33,8 +34,9 @@ const Community = () => {
   }, [dispatch]);
 
 
-  const delRev = id => {
-    console.log(id);
+  const delRev = async id => {
+    await dispatch(deleteReview(id));
+    await dispatch(getReview());
   }
 
   const handleComentarioSubmit = async () => {
@@ -198,7 +200,7 @@ const Community = () => {
 
 
             {
-              reviews.map((review, index) => { 
+              reviews.length > 0 ? reviews.map((review, index) => {
                 // dispatch(getOneService(review.serviceId));
                 // dispatch(getOneUser(review.userId));
 
@@ -221,7 +223,7 @@ const Community = () => {
                     />
                   </div>
                 )
-})
+              }) : ''
               /*{comentarios.map((comentario) => (
               <div key={comentario.id}>
                 <Comentario

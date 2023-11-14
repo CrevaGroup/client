@@ -349,10 +349,10 @@ export const updateReview = () => {
   };
 };
 
-export const deleteReview = () => {
-  return async function (dispatch) {
+export const deleteReview = id => {
+  return async (dispatch) => {
     try {
-      const response = await axios.post(`URL`);
+      const response = await axios.delete(`/review/${id}`);
       return dispatch({
         type: DELETE_REVIEW,
         payload: response.data,
