@@ -58,11 +58,11 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                                     <div className="italic text-light-gray my-6 space-y-2">
                                         <h3 className="font-bold">Contenido:</h3>
                                         <ul>
-                                            {items.map(item => <li>{item}</li>)}
+                                            {items.map((item, index) => <li key={index}>{item}</li>)}
                                         </ul>
                                         <h3 className="font-bold">Modalidad:</h3>
                                         <ol>
-                                            {modalidad.map(item => <li>{item}</li>)}
+                                            {modalidad.map((item, index) => <li key={index}>{item}</li>)}
                                         </ol>
                                     </div>
                                 </div>

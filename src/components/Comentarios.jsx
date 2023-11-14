@@ -1,11 +1,19 @@
 import React from "react";
 
 
-const Comentario = ({ nombre, comentario, imagenPerfil, voto, service }) => {
+const Comentario = ({ nombre, comentario, imagenPerfil, voto, service, del, id }) => {
 
   return (
-    <div className="bg-white p-2 lg:p-6 m-2 rounded-lg shadow-md  w-full text-dark-gray-blue">
-      <div className="flex p-2">
+    <div className="relative bg-white p-2  m-2 rounded-lg shadow-md  w-full text-dark-gray-blue ">
+      <div
+        className="absolute top-1 right-1 z-50 cursor-pointer    "
+        onClick={()=>{del(id)}}
+      >
+        <p
+          className="bg-black/30 text-white rounded-full h-6 w-6 flex  items-center justify-center"
+        >X</p>
+      </div>
+      <div className="flex p-2 lg:p-6">
         {imagenPerfil && (
           <img
             src={imagenPerfil}

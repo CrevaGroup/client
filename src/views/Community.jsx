@@ -33,6 +33,9 @@ const Community = () => {
   }, [dispatch]);
 
 
+  const delRev = id => {
+    console.log(id);
+  }
 
   const handleComentarioSubmit = async () => {
     /**    if (nuevoComentario.trim() !== "") {
@@ -213,6 +216,8 @@ const Community = () => {
                       imagenPerfil={review.user.photo}
                       voto={review.assessment}
                       service={review.service.name}
+                      del={delRev}
+                      id={review.id}
                     />
                   </div>
                 )
