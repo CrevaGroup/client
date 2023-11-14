@@ -30,12 +30,12 @@ const Navbar = () => {
   }
 
   return (
-    <div className="p-3 lg:flex  lg:items-center lg:justify-between" style={{backgroundColor: `#C3A3D0`}}>
+    <div className="lg:static fixed w-full z-10 p-3 lg:flex  lg:items-center lg:justify-between" style={{backgroundColor: `#C3A3D0`}}>
       <div className="flex justify-between items-center">
         <span className="text-2xl flex">
           <NavLink to={"/"} className="flex">
             <img className="h-10 inline mr-4 ml-4 cursor-pointer" src={logo} />
-            <p className="cursor-pointer text-3xl font-georgia font-bold cursor-default">
+            <p className="cursor-pointer text-3xl font-georgia font-bold">
               Creva
             </p>
           </NavLink>
