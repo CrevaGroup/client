@@ -17,6 +17,7 @@ const Community = () => {
   const user = useSelector(state => state.user);
   const reviews = useSelector(state => state.reviews);
   const services = useSelector(state => state.services);
+  const filters = useSelector(state => state.filters)
 
   const handleComentarioChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +29,7 @@ const Community = () => {
 
   useEffect(() => {
     dispatch(getReview());
-    dispatch(getServices());
+    dispatch(getServices(filters));
   }, [dispatch]);
 
 
