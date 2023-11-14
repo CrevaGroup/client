@@ -15,18 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div
-      style={{
-        backgroundColor: "#EFEFEF",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        // minHeight: "75vh",
-        minHeight: "100vh",
-        flexDirection: "column",
-        // margin: "100px",
-      }}
-    >
+    <div className="bg-[#EFEFEF] dark:bg-purple-800 flex justify-center items-center min-h-screen flex-col">
       <style>
         {`
       @media (max-width: 768px) {
@@ -36,6 +25,7 @@ const Login = () => {
       }
     `}
       </style>
+
       {window.innerWidth > 768 ? (
         <div
           style={{

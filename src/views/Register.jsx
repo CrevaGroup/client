@@ -100,10 +100,13 @@ function Register() {
   };
 
   return (
-    <div className="bg-gray-200 min-h-screen flex flex-row">
+    <div className="bg-gray-200 dark:bg-purple-800 min-h-screen flex flex-row">
       <div className="w-full md:w-1/2 p-20 hidden md:flex md:items-center md:justify-center">
         <img src={nuevaImagen} alt="Nueva Imagen" className="w-full h-auto" />
       </div>
+      {/* <div className="m-10">
+        <DarkMode />
+      </div> */}
       <div
         style={{ flexDirection: "column", margin: "10px" }}
         className="w-full md:w-1/2 flex items-center justify-center"

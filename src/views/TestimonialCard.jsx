@@ -25,10 +25,9 @@ function StarIcon() {
 const TestimonialCard = () => {
   return (
     <Card
-      style={{ background: "white" }}
       color="transparent"
       shadow={true}
-      className="w-full max-w-[28rem]"
+      className="bg-white dark:bg-[#C3A3D0] w-full max-w-[28rem]"
     >
       <CardHeader
         color="transparent"
