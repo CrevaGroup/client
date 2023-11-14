@@ -90,7 +90,7 @@ export const getUser = (email, password) => {
           payload: {
             type: 'ERROR',
             title: 'OOPS!',
-            message: 'Usuario o contraseña incorrectos.'
+            message: error.message
         }});
       }
 
@@ -110,7 +110,7 @@ export const getUser = (email, password) => {
         payload: {
           type: 'ERROR',
           title: 'OOPS!',
-          message: error.message
+          message: 'Usuario o contraseña incorrectos.'
       }});
     }
   }
