@@ -19,7 +19,7 @@ const Filters = () => {
     const country = useSelector(state => state.config?.country)
     const config = useSelector(state => state.config);
     let maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
-    if (user?.nacionalidad === 'Argentina' || country === 'AR') maxVal = maxVal * config.dolarValue;
+    if (user?.nacionalidad === 'Argentina' || country === 'AR') maxVal = Math.round(maxVal * config.dolarValue);
 
     const handleInputChange = e => {
         if (!e.target) {
