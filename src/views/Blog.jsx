@@ -13,13 +13,13 @@ const Blog = () => {
     const [postMenu,setPostMenu] = useState(false)
     const dispatch = useDispatch();
     const [quant, setQuant] = useState('');
+    const user = useSelector(state => state.user);
 
     const postsText = useSelector(state => state.postText);
     const postsIg = useSelector(state => state.postIg)
 
     const disableHandler = () => {
         setPostMenu(postMenu ? false : true)
-        console.log(postsText)
     }
 
     useEffect(() => {
@@ -55,12 +55,14 @@ const Blog = () => {
                     </h1>
                               
                 
-                    <img
-                    src={EditDocument}
-                    alt="EditDocument"
-                    className="w-8 cursor-pointer"
-                    onClick={disableHandler}
-                    />
+                    {
+                        user.admin ? <img
+                            src={EditDocument}
+                            alt="EditDocument"
+                            className="w-8 cursor-pointer"
+                            onClick={disableHandler}
+                        /> : ''
+                    }
                 </div>
                 {
                     postMenu && 
