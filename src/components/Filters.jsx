@@ -16,6 +16,7 @@ const Filters = () => {
     const types = useSelector(state => state.types);
     const user = useSelector(state => state.user);
     const services = useSelector(state => state.services);
+    const country = useSelector(state => state.config?.country)
     const config = useSelector(state => state.config);
     let maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
     if (user?.nacionalidad === 'Argentina' || country === 'AR') maxVal = maxVal * config.dolarValue;
