@@ -30,7 +30,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="lg:static fixed w-full z-10 p-3 lg:flex  lg:items-center lg:justify-between" style={{backgroundColor: `#C3A3D0`}}>
+    <div className="lg:static w-full sticky top-0  z-10 p-3 lg:flex  lg:items-center lg:justify-between " style={{backgroundColor: `#C3A3D0`}}>
       <div className="flex justify-between items-center">
         <span className="text-2xl flex">
           <NavLink to={"/"} className="flex">
@@ -46,7 +46,7 @@ const Navbar = () => {
       </div>
 
       <ul
-        className={`lg:flex lg:items-center  z-[-1] lg:z-auto lg:static w-full left:0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100  ${additionalClass}`}
+        className={`lg:flex lg:items-center  z-[-1] lg:z-auto lg:static w-full left:0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 mt-20 ${additionalClass}`}
       >
         <li className={`mx-4 flex items-center h-8 my-4`}>
           <img className="h-6 mr-4 lg:hidden" src={home} />
