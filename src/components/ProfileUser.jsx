@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUserById, clearPopupComponent, updateUser } from "../Redux/Actions/actions";
 
 import { Button } from "@material-tailwind/react";
+import Select from "react-select";
 import Close from "../assets/closeIcon.svg";
 
 function ProfileUser() {
@@ -48,6 +49,11 @@ function ProfileUser() {
     "Venezuela",
     "Estados Unidos",
   ]);
+
+  const daysOptions = Array.from({ length: 31 }, (_, i) => ({
+    label: (i + 1).toString(),
+    value: (i + 1).toString(),
+  }));
 
   const [birthdate, setBirthdate] = useState({
     day: "",
@@ -120,22 +126,43 @@ function ProfileUser() {
           <h3 className="text-2xl mb-4">{user.fullName}</h3>
           {isEditing ? (<h3>Fecha de Nacimiento:
 
-            <select name="" id="" onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })}>
-              {Array.from({ length: 31 }, (_, i) => (
-                <option value="" ></option>
-              ))}
-            </select>
+            <Select styles={{
+              control: (provided) => ({
+                ...provided,
+                width: "80px",
+              })
+            }}
+              value={birthdate.day}
+              options={daysOptions}
+              placeholder="Día"
+            />
 
-            <select name="" id="">{meses.map((meses) => (
-              <option key={meses} value={meses}>{meses}</option>))}</select>
+            <Select name="" id="" placeholder="Mes" options={meses.map((month, index) => ({
+              label: month,
+              value: (index + 1).toString(),
+            }))}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  width: "120px",
+                  marginTop: "10px"
+                })
+              }} />
 
-            <select name="" id="" options={Array.from(
+            <Select name="" id="" placeholder="Año" options={Array.from(
               { length: currentYear - 1923 + 1 },
               (_, i) => ({
                 label: (currentYear - i).toString(),
                 value: (currentYear - i).toString(),
               })
-            )} /></h3>)
+            )}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  width: "120px",
+                  marginTop: "10px"
+                })
+              }}/></h3>)
 
             : (<h3>Edad: {user?.age}</h3>)}
 
