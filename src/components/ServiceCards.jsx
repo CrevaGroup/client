@@ -12,6 +12,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
 
     const user = useSelector(state => state.user)
     const usd = useSelector(state => state.config?.dolarValue);
+    const country = useSelector(state => state.config?.country)
 
     const [transactionInfo, setTransactionInfo] = useState({
         userId: user.id,
@@ -57,7 +58,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                         </div>
                     </div>
                     <div className="flex flex-row justify-center items-center space-x-4 translate-y-[-200%] group-hover:translate-y-0 transition-all duration-500">
-                        {user.nacionalidad === 'Argentina'
+                        {user.nacionalidad === 'Argentina' || country === 'AR'
                         ? <p className="text-white font-bold text-2xl ">{`$ ${price * usd}`} ARS</p>
                         : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                         }
