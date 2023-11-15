@@ -42,6 +42,7 @@ let initialState = {
   allUsers: [],
   services: [],
   servicesFiltered: [],
+  allTransactions: [],
   reviews: [],
   types: [],
   postIg: [],
@@ -261,6 +262,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartUrl: action.payload
       };
+
+    case GET_TRANSACTION:
+      return {
+        ...state,
+        allTransactions: action.payload
+      }
 
     case GET_REVIEW:
       return {
