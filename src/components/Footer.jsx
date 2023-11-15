@@ -17,16 +17,16 @@ function Footer() {
               <NavLink to="/">Inicio</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/Services">Nuestros Servicio</NavLink>
+              <NavLink to="/services">Nuestros Servicio</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/Blog">Blog</NavLink>
+              <NavLink to="/blog">Blog</NavLink>
             </div>
             <div className="mb-2">
               <NavLink to="/community">Comunidad Creva</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/Team">Equipo de Desarrollo</NavLink>
+              <NavLink to="/team">Equipo de Desarrollo</NavLink>
             </div>
           </div>
           <div>
