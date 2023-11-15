@@ -17,7 +17,7 @@ function Carrusel() {
   };
 
   return (
-    <div className="max-w-2xl m-auto">
+    <div className="max-w-2xl lg:m-auto mr-2 overflow-hidden">
       <Slider {...config}>
         <div className="relative">
           <img
