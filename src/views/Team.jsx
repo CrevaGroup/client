@@ -15,7 +15,7 @@ function Team() {
       <div className="flex flex-col lg:flex-row lg:items-center justify-center">
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
-          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+            <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
               <img src={User} alt="User Image" className="w-7 fill-gray-700" />
             </section>
             <section className="block border-l border-gray-300 m-3">
@@ -40,7 +40,7 @@ function Team() {
 
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
-          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+            <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
               <img src={User} alt="User Image" className="w-7 fill-gray-700" />
             </section>
             <section className="block border-l border-gray-300 m-3">
@@ -59,7 +59,7 @@ function Team() {
                   <img src={Instagram} alt="Instagram Logo" className="w-4 hover:scale-125 duration-200 hover:cursor-pointer fill-white stroke-2" />
                 </a>
                 <a href="https://www.behance.net/valentinojerez">
-                  <img src={Behance} alt="Behance Logo" className="w-4 hover:scale-125 duration-200 hover:cursor-pointer fill-white stroke-2"/>
+                  <img src={Behance} alt="Behance Logo" className="w-4 hover:scale-125 duration-200 hover:cursor-pointer fill-white stroke-2" />
                 </a>
               </div>
             </section>
@@ -68,7 +68,7 @@ function Team() {
 
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
-          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+            <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
               <img src={User} alt="User Image" className="w-7 fill-gray-700" />
             </section>
             <section className="block border-l border-gray-300 m-3">
@@ -88,11 +88,11 @@ function Team() {
           </div>
         </div>
       </div>
-      
-      <div className="flex justify-center mb-5">
-        <div className="mx-4 mt-5">
-          <div className="flex items-center p-3 w-72 h-28 bg-white rounded-md shadow-lg">
-            <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+
+      <div className="flex flex-col lg:flex-row lg:items-center justify-center">
+        <div className="mx-4 mt-5 mb-5">
+          <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
+          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
               <img src={User} alt="User Image" className="w-7 fill-gray-700" />
             </section>
             <section className="block border-l border-gray-300 m-3">
@@ -111,10 +111,10 @@ function Team() {
             </section>
           </div>
         </div>
-        <div className="flex justify-center">
-          <div className="mx-4 mt-5">
-            <div className="flex items-center p-3 w-72 h-28 bg-white rounded-md shadow-lg">
-              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+
+        <div className="mx-4 mt-5 mb-5">
+          <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
+          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
                 <img src={User} alt="User Image" className="w-7 fill-gray-700" />
               </section>
               <section className="block border-l border-gray-300 m-3">
@@ -131,11 +131,12 @@ function Team() {
                   </a>
                 </div>
               </section>
-            </div>
           </div>
-          <div className="mx-4 mt-5">
-            <div className="flex items-center p-3 w-72 h-28 bg-white rounded-md shadow-lg">
-              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+        </div>
+
+        <div className="mx-4 mt-5 mb-5">
+          <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
+          <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
                 <img src={User} alt="User Image" className="w-7 fill-gray-700" />
               </section>
               <section className="block border-l border-gray-300 m-3">
@@ -152,7 +153,6 @@ function Team() {
                   </a>
                 </div>
               </section>
-            </div>
           </div>
         </div>
       </div>
