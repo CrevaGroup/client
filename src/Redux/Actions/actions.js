@@ -372,7 +372,7 @@ export const deleteReview = () => {
 export const getTransaction = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`URL`);
+      const response = await axios.get(`/transaction`);
       return dispatch({
         type: GET_TRANSACTION,
         payload: response.data,
