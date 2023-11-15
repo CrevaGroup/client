@@ -35,7 +35,7 @@ function MainDashboard() {
     setCloseSer(!closeSer);
   };
   return (
-    <div className="p-12">
+    <div className="">
       <div>
         <div className="flex flex-col justify-center items-center  align-center">
           <button
@@ -69,7 +69,7 @@ function MainDashboard() {
         {/* Card */}
         {services.map((service, index) => <div key={index}>
         <a
-          className="bg-white rounded-2xl p-8 flex flex-col md:flex-row gap-8 w-full shadow-lg m-3 border-2 border-transparent hover:border-purple-400 transition-all"
+          className="bg-white rounded-2xl p-8 flex flex-col md:flex-row gap-8 w-full shadow-lg my-4 lg:m-3 border-2 border-transparent hover:border-purple-400 transition-all"
           >
           <div className="w-full md:w-[70%]">
             {/* title */}
