@@ -209,7 +209,7 @@ export const deleteUserById = (id) => {
         const response = await axios.delete(`/user/${id}`);
         return dispatch({
           type: DELETE_USER,
-          payload: id
+          payload: response.data
         });
     } catch (error) {
       return dispatch({
