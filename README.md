@@ -46,3 +46,17 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 ### Desarrollo Actual
 - **Version:** 1.0.0
 - **Ultima Actualizacion:** 13 de Noviembre 2023
+
+## Equipo de Desarrollo 👨🏻‍💻
+
+- [Martin Garcia Hervas](https://github.com/MartinGarciaHervas)
+
+- [Osvaldo Cornelli](https://github.com/OsvaldoCorneli)
+
+- [Valentino Jerez](https://github.com/ValentinoJerez)
+
+- [Brian Aguirre](https://github.com/braiaguirre) 
+
+- [Axel Choque](https://github.com/AxelNChoque)
+
+- [Alvaro Lopez](https://github.com/lopezalvaro16)

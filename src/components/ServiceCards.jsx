@@ -30,8 +30,8 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     }
 
     return(
-        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[416px] h-[544px] rounded-3xl">
-            <div className="h-[544px] w-[448px]">
+        <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[416px] h-[570px] rounded-3xl">
+            <div className="h-[580px] w-[448px]">
                 <img
                     className="h-full w-full object-cover  group-hover:scale-105 transition-transform duration-500"
                     src={img}

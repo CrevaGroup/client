@@ -32,7 +32,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
     return(
         <div className={`lg:hidden   overflow-hidden   rounded-3xl transition-all duration-300`}>
             <div>
-                <div className={`flex flex-col  items-center justify-center text-center  bg-black/70`}>
+                <div className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-black/70 to-black/60`}>
                     <h1 className="flex text-2xl font-bold text-white lg:hidden h-16  text-center items-center">
                         {name}
                     </h1>
@@ -43,13 +43,13 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                 </div>
                 <Collapse open={open}>
                     <div>
-                       <div className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] min-h-[450px]  rounded-br-3xl rounded-bl-3xl  transition-all duration-300`}>
+                       <div className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] min-h-[530px]  rounded-br-3xl rounded-bl-3xl  transition-all duration-300`}>
                             <img
                                 className="h-full w-full object-cover "
                                 src={img}
                                 alt="ex"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/50"></div>
                             <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
                                 <div className="text-light-gray">
                                     <p>{description}</p>

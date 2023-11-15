@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { getUser, googleLogin } from "../Redux/Actions/actions";
 import imgLogin from "../assets/Mobile login-pana.png";
 import imgGoogle from "../assets/LogosGoogleIcon.svg";
+import eye from '../assets/eye.svg';
+import eyeslash from '../assets/eye-slash.svg'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -111,8 +113,16 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button
-                style={{
+              {
+                showPassword ? <img src={eye} className=" h-6 w-6" onClick={() => setShowPassword(!showPassword)}  style = {{
+                  position: "absolute",
+                    top: "50%",
+                right: "10px",
+              transform: "translateY(-50%)",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+                }}></img> : <img src={eyeslash} className="h-6 w-6" onClick={() => setShowPassword(!showPassword)}  style={{
                   position: "absolute",
                   top: "50%",
                   right: "10px",
@@ -120,11 +130,9 @@ const Login = () => {
                   border: "none",
                   background: "transparent",
                   cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <div>{showPassword ? "👁" : "👁️‍🗨️"}</div>
-              </button>
+                }}></img>
+              }
+              
             </div>
             <div className="mb-3 text-center">
               <button
@@ -257,20 +265,25 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  right: "10px",
-                  transform: "translateY(-50%)",
-                  border: "none",
-                  background: "transparent",
-                  cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <div>{showPassword ? "👁" : "👁️‍🗨️"}</div>
-              </button>
+                {
+                  showPassword ? <img src={eye} className=" h-6 w-6" onClick={() => setShowPassword(!showPassword)} style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}></img> : <img src={eyeslash} className="h-6 w-6" onClick={() => setShowPassword(!showPassword)} style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}></img>
+                }
             </div>
             <div className="mb-3 text-center">
               <button

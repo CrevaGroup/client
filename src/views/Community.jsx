@@ -99,17 +99,22 @@ const Community = () => {
     <div>
       <div className="bg-custom-gray min-h-screen p-4 text-dark-gray-blue cursor-default dark:bg-purple-900 dark:text-white">
         <div className="text-center">
-          <h1 className="text-3xl md:text-5xl  mt-4">Nuestra Comunidad</h1>
-          <img
+          <h1 className="text-3xl lg:text-5xl  my-4 whitespace-pre-line">
+            Bienvenido a la comunidad Creva
+          </h1>
+          <p
+            className="text-xl lg:text-3xl my-8 text-dark-violet/80"
+          >Diversas personas alrededor del mundo confían en <strong>CreVa</strong> para <strong>despegar su carrera profesional</strong></p>
+          {/* <img
             src={SocialMedia}
             alt="Imagen de la comunidad"
             className="my-2 mx-auto w-2/3 md:w-1/3 h-auto"
-          />
+          /> */}
         </div>
         <div className="my-4 text-center">
-          <h2 className="text-3xl md:text-5xl ">Testimonios</h2>
+          <h2 className="text-3xl md:text-5xl text-dark-gray-blue/80">Testimonios</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Testimonio 1 */}
           <div className="max-w-md m-4 rounded-lg shadow-lg">
             <TestimonialCard />
@@ -125,18 +130,18 @@ const Community = () => {
             <TestimonialCard />
           </div>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center my-14">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold">
-              Pasa a dejar tu comentario
+            <h2 className="text-2xl lg:text-3xl font-semibold">
+              Cuéntanos tu experiencia
             </h2>
           </div>
           <div className="flex">
             <img
-              style={{ width: "800px" }}
+              
               src={GroupChat}
               alt="Imagen de la comunidad"
-              className="h-auto"
+              className="h-auto w-[250px] lg:w-[400px]"
             />
           </div>
         </div>
@@ -151,6 +156,7 @@ const Community = () => {
               name="description"
               value={nuevoComentario.description}
               onChange={handleComentarioChange}
+              maxLength={300}
             />
             <div className="lg:flex my-4 ">
               <div className="flex w-1/2 p-1 my-4">
@@ -193,7 +199,7 @@ const Community = () => {
         </div>
 
         <div className="my-4">
-          <h2 className="text-2xl md:text-3xl text-center font-semibold">
+          <h2 className="text-2xl md:text-3xl text-center font-semibold my-12">
             Comentarios
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4 ">
