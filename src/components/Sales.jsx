@@ -24,13 +24,13 @@ function Sales() {
           <p className="font-bold">Status</p>
           <p className="font-bold">Fecha</p>
         </div>
-        {transactions.map((transaction, index)=><div key={index} className="grid grid-cols-5 p-2 mb-5 rounded-md bg-light-violet/40 hover:bg-light-violet/70">
+        {transactions?transactions.map((transaction, index)=><div key={index} className="grid grid-cols-5 p-2 mb-5 rounded-md bg-light-violet/40 hover:bg-light-violet/70">
           <p className="font-bold">{transaction?.Services[0]?.name}</p>
           <p className="font-bold">{transaction?.user?.email}</p>
           <p className="font-bold">${transaction.amount}{" "}{transaction.currency}</p>
           <p className="font-bold">{transaction.status}</p>
           <p className="font-bold">{transaction?.createdAt.split('T')[0].split("-").reverse().join("-")}</p>
-        </div>)}
+        </div>):null}
       </div>
     </div>
   );
