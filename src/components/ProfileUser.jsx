@@ -49,16 +49,29 @@ function ProfileUser() {
     "Estados Unidos",
   ]);
 
-  const daysOptions = Array.from({ length: 31 }, (_, i) => ({
-    label: (i + 1).toString(),
-    value: (i + 1).toString(),
-  }));
-
   const [birthdate, setBirthdate] = useState({
     day: "",
     month: "",
     year: currentYear,
   });
+
+  const calculateAge = (birthdate) => {
+    const birthdateObj = new Date(
+      birthdate.year.value,
+      birthdate.month.value - 1,
+      birthdate.day.value
+    );
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthdateObj.getFullYear();
+    const monthDiff = currentDate.getMonth() - birthdateObj.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && currentDate.getDate() < birthdateObj.getDate())
+    ) {
+      return age - 1;
+    }
+    return age;
+  };
 
   function photoHandle(event) {
     setInfoUser({
@@ -136,9 +149,18 @@ function ProfileUser() {
                       }),
                     }}
                     value={birthdate.day}
-                    options={daysOptions}
+                    options={Array.from({ length: 31 }, (_, i) => ({
+                      label: (i + 1).toString(),
+                      value: (i + 1).toString(),
+                    }))}
                     placeholder="Día"
                     className="mb-2 lg:mb-0 lg:mr-2"
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        day: selectedOption,
+                      })
+                    }
                   />
 
                   <Select name="" id="" placeholder="Mes"
@@ -146,6 +168,12 @@ function ProfileUser() {
                       label: month,
                       value: (index + 1).toString(),
                     }))}
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        month: selectedOption,
+                      })
+                    }
                     styles={{
                       control: (provided) => ({
                         ...provided,
@@ -157,8 +185,8 @@ function ProfileUser() {
 
                   <Select
                     name="Año"
-                    id=""
                     placeholder="Año"
+                    value={birthdate.year}
                     options={Array.from(
                       { length: currentYear - 1923 + 1 },
                       (_, i) => ({
@@ -166,6 +194,12 @@ function ProfileUser() {
                         value: (currentYear - i).toString(),
                       })
                     )}
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        year: selectedOption,
+                      })
+                    }
                     styles={{
                       control: (provided) => ({
                         ...provided,
