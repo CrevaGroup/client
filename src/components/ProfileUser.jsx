@@ -22,7 +22,7 @@ function ProfileUser() {
     id: user.id,
     fullName: user.fullName,
     email: user.email,
-    age: calculateAge(JSON.parse(user.age)),
+    age: user.age?calculateAge(JSON.parse(user.age)):null,
     nacionalidad: user.nacionalidad,
     photo: "",
     curriculum: "",

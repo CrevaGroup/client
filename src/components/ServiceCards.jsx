@@ -29,7 +29,7 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     })
 
     function clickHandler(){
-        if(calculateAge(JSON.parse(user.age)) >= 18){
+        if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
             if(user.fullName){
                 if(!user.nacionalidad){
                     if(country === "AR"){
