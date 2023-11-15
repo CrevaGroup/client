@@ -20,7 +20,7 @@ import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
 import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
-import DarkMode from "./components/darkMode";
+import DarkMode from "./components/DarkMode";
 
 function App() {
   const dispatch = useDispatch();
