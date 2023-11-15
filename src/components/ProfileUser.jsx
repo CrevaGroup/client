@@ -53,16 +53,29 @@ function ProfileUser() {
     "Estados Unidos",
   ]);
 
-  const daysOptions = Array.from({ length: 31 }, (_, i) => ({
-    label: (i + 1).toString(),
-    value: (i + 1).toString(),
-  }));
-
   const [birthdate, setBirthdate] = useState({
     day: "",
     month: "",
     year: currentYear,
   });
+
+  const calculateAge = (birthdate) => {
+    const birthdateObj = new Date(
+      birthdate.year.value,
+      birthdate.month.value - 1,
+      birthdate.day.value
+    );
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthdateObj.getFullYear();
+    const monthDiff = currentDate.getMonth() - birthdateObj.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && currentDate.getDate() < birthdateObj.getDate())
+    ) {
+      return age - 1;
+    }
+    return age;
+  };
 
   function photoHandle(event) {
     setInfoUser({
@@ -101,7 +114,7 @@ function ProfileUser() {
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
       </button>
       <div className="text-center">
-        <h1 className="text-4xl mb-4">Mi Perfil</h1>
+        <h1 className="text-4xl mb-2">Mi Perfil</h1>
       </div>
       <div className="flex flex-col items-center justify-center ml-5 mr-5 mt-5 mb-8 lg:flex-row">
         <div className="text-center mb-6 lg:mb-0">
@@ -134,7 +147,7 @@ function ProfileUser() {
             
             {isEditing ? (
               <div className="mb-2 lg:flex lg:items-center">
-                <h3 className="mb-2 lg:mr-4">Fecha de Nacimiento:</h3>
+                <h3 className="lg:mr-4">Fecha de Nacimiento:</h3>
                 <div className="flex flex-col lg:flex-row items-center">
                   <Select
                     styles={{
@@ -144,9 +157,18 @@ function ProfileUser() {
                       }),
                     }}
                     value={birthdate.day}
-                    options={daysOptions}
+                    options={Array.from({ length: 31 }, (_, i) => ({
+                      label: (i + 1).toString(),
+                      value: (i + 1).toString(),
+                    }))}
                     placeholder="Día"
                     className="mb-2 lg:mb-0 lg:mr-2"
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        day: selectedOption,
+                      })
+                    }
                   />
 
                   <Select name="" id="" placeholder="Mes"
@@ -154,6 +176,12 @@ function ProfileUser() {
                       label: month,
                       value: (index + 1).toString(),
                     }))}
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        month: selectedOption,
+                      })
+                    }
                     styles={{
                       control: (provided) => ({
                         ...provided,
@@ -165,8 +193,8 @@ function ProfileUser() {
 
                   <Select
                     name="Año"
-                    id=""
                     placeholder="Año"
+                    value={birthdate.year}
                     options={Array.from(
                       { length: currentYear - 1923 + 1 },
                       (_, i) => ({
@@ -174,6 +202,12 @@ function ProfileUser() {
                         value: (currentYear - i).toString(),
                       })
                     )}
+                    onChange={(selectedOption) =>
+                      setBirthdate({
+                        ...birthdate,
+                        year: selectedOption,
+                      })
+                    }
                     styles={{
                       control: (provided) => ({
                         ...provided,
@@ -184,7 +218,7 @@ function ProfileUser() {
                 </div>
               </div>
             ) : (
-              <div className="mb-2">
+              <div>
                 <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
                 <span className="lg:inline-block">{user?.age}</span>
               </div>

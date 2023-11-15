@@ -22,11 +22,11 @@ const Home = () => {
     <div className="bg-custom-gray dark:bg-purple-900 dark:text-custom-gray">
       <div className="flex flex-col mb-24 lg:flex-row">
         <div
-          style={{ textAlign: "start", margin: "40px", marginTop: `20px` }}
-          className="lg:w-1/2 lg:pr-10 mt-10 ml-10"
-        >
-          <h1 className="text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
-            Despega tu carrera laboral desde cualquier parte del mundo
+          style={{ textAlign: "start", marginLeft: "8px", marginTop: `2px` }}
+          className="lg:w-1/2 lg:p-8 mt-12 ml-12">
+          <h1 className="text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl ">
+            Despega tu carrera laboral
+            desde cualquier parte del mundo
           </h1>
           <h2 className="text-2xl mb-4 mt-2 lg:text-3xl  xl:text-2xl">
             Nuestro proposito:
