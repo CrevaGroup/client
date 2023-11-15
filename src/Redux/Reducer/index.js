@@ -307,6 +307,7 @@ function rootReducer(state = initialState, action) {
           title: action.payload.deletedAt? 'SERVICIO ELIMINADO' : 'SERVICIO RESTAURADO',
           message: action.payload.deletedAt? 'Se ha eliminado el servicio con éxito!' : 'Se ha restaurado el servicio con éxito!'
         },
+        reviews:[]
       };
     case UPDATE_SERVICES:
       return {};
