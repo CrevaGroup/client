@@ -15,7 +15,14 @@ import ChartComponent from "../components/ChartComponent.jsx";
 import CLients from "../components/CLients.jsx";
 import MainDashboard from "../components/MainDashboard.jsx";
 import ProfileUser from "../components/ProfileUser.jsx";
-import { BrowserRouter as Router, Link, Route, Routes, useNavigate, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  NavLink,
+} from "react-router-dom";
 import {
   MdDashboard,
   MdKeyboardArrowDown,
@@ -24,27 +31,26 @@ import {
 } from "react-icons/md";
 
 export default function Dashboard() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [sidebar, setSidebar] = useState(false);
   const handleSidebar = () => {
     setSidebar(!sidebar);
   };
   const dispatch = useDispatch();
-  
+
   const logoutHandler = () => {
-    navigate('/')
+    navigate("/");
     dispatch(logout());
   };
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
-  useEffect(()=>{
-    if(Object.keys(user).length){
-      if(!user.admin) navigate('/')
+  useEffect(() => {
+    if (Object.keys(user).length) {
+      if (!user.admin) navigate("/");
     }
-  },[user])
+  }, [user]);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -52,12 +58,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className=" min-h-screen grid  grid-col-1 lg:grid-cols-6 ">
+    <div className=" min-h-screen grid  grid-col-1 lg:grid-cols-6 dark:bg-[#C2A3D1] ">
       <div
-        style={{
-          background: "#C2A3D1",
-        }}
-        className={`fixed lg:static w-[80%] md:w-[40%] lg:w-full top-0 z-50 bg-white transition-all ${
+        className={`fixed lg:static w-[80%] md:w-[40%] lg:w-full top-0 z-50 transition-all bg-[#C2A3D1] dark:bg-purple-900 ${
           sidebar ? "left-0" : "-left-full"
         } h-full overflow-y-scroll col-span-1 p-8 border-r`}
       >
@@ -141,7 +144,7 @@ export default function Dashboard() {
         {sidebar ? <AiOutlineClose /> : <AiOutlineMenuFold />}
       </button>
       <div className="col-span-5">
-        <header className="flex flex-col md:flex-row gap-4 items-center justify-between bg-gray700 p-4 lg:pl-12 w-full">
+        <header className="flex flex-col md:flex-row gap-4 items-center justify-between bg-gray700 p-4 lg:pl-12 w-full dark:bg-[#C2A3D1]">
           <form className="w-full lg:w-[30%] order-1 md:w-[40%] md:-order-none">
             {/* <div className="relative">
               <MdOutlineManageSearch className="absolute left-2 top-3" />
@@ -153,9 +156,11 @@ export default function Dashboard() {
             </div> */}
           </form>
 
-          <nav className="w-full md:w-[60%] lg:w-[70%] flex justify-center md:justify-end">
-            <ul className="flex items-center gap-4">
-              <li><NavLink to={'/'}>Cerrar</NavLink></li>
+          <nav className="w-full md:w-[60%] lg:w-[70%] flex justify-center md:justify-end ">
+            <ul className="flex items-center gap-4 dark:text-white">
+              <li>
+                <NavLink to={"/"}>Cerrar</NavLink>
+              </li>
               <li className="relative">
                 {/* Agrega el menú desplegable aquí */}
                 <div
@@ -194,7 +199,7 @@ export default function Dashboard() {
             </ul>
           </nav>
         </header>
-        <div className="p-4 lg:p-12 bg-gray-100">
+        <div className="p-4 lg:p-12 bg-gray-100 dark:bg-purple-900">
           <Routes>
             <Route path="/newservices" element={<MainDashboard />} />
             <Route path="/profile" element={<ProfileUser />} />

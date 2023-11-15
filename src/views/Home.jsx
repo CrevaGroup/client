@@ -19,7 +19,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-custom-gray text-dark-gray-blue cursor-default">
+    <div className="bg-custom-gray dark:bg-purple-900 dark:text-custom-gray">
       <div className="flex flex-col mb-24 lg:flex-row">
         <div
           style={{ textAlign: "start", marginLeft: "8px", marginTop: `2px` }}
@@ -46,9 +46,52 @@ const Home = () => {
         </div>
       </div>
 
-           
-      <h1 className="text-3xl mb text-center">Servicios</h1>
-      <Services />
+      <h1 className="text-2xl lg:text-3xl xl:text-4xl 2xl:text-4xl mt-5 text-center lg:p-4 p-16">
+        Nuestro Blog
+      </h1>
+      <div
+        style={{ height: "500px" }}
+        className="mt-5 flex items-center justify-center"
+      >
+        <div
+          style={{ height: "400px" }}
+          className="bg-white dark:bg-[#C3A3D0] p-4 rounded shadow-xl w-full max-w-md lg:max-w-3xl xl:max-w-3xl 2xl:max-w-4xl mx-4 lg:mx-10 xl:mx-20 2xl:mx-40"
+        >
+          <div
+            style={{
+              alignItems: "center",
+              marginTop: "-50px",
+            }}
+            className="flex flex-col lg:flex-row items-center justify-center lg:justify-between mt-5"
+          >
+            <div
+              className="lg:w-1/2 flex items-center mb-4 lg:mb-0"
+              style={{ marginTop: "-30px" }}
+            >
+              <img
+                style={{ height: "450px", width: "400px" }}
+                src={Blog}
+                alt="Blog"
+                className="w-full lg:w-96 max-w-full"
+              />
+            </div>
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-center mb-4 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
+                Conoce tips esenciales en tu búsqueda laboral
+              </h1>
+              <div className="text-center lg:text-left">
+                <Button
+                  style={{ display: "flex", justifyContent: "center" }}
+                  onClick={navigateBlog}
+                  className="bg-dark-violet py-2 px-4 block mx-auto lg:inline-block"
+                >
+                  Ver Blog
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h1 className="text-3xl mt-40 text-center mb-3">Testimonios</h1>
       <div
@@ -70,56 +113,7 @@ const Home = () => {
           <TestimonialCard />
         </div>
       </div>
-
-      <h1 className="text-3xl mt-40 text-center">Nuestro Blog</h1>
-      <div className="mb-28">
-        <div
-          style={{ height: "500px" }}
-          className="flex items-center justify-center"
-        >
-          <div
-            style={{ height: "400px" }}
-            className="bg-white p-4 rounded shadow-xl w-full max-w-md lg:max-w-3xl xl:max-w-3xl 2xl:max-w-4xl mx-4 lg:mx-10 xl:mx-20 2xl:mx-40"
-          >
-            <div
-              style={{
-                alignItems: "center",
-                marginTop: "-50px",
-              }}
-              className="flex flex-col lg:flex-row items-center justify-center lg:justify-between mt-5"
-            >
-              <div
-                className="lg:w-1/2 flex items-center mb-4 lg:mb-0"
-                style={{ marginTop: "-30px" }}
-              >
-                <img
-                  style={{ height: "450px", width: "400px" }}
-                  src={Blog}
-                  alt="Blog"
-                  className="w-full lg:w-96 max-w-full"
-                />
-              </div>
-              <div className="lg:w-1/2 mt-8 text-center lg:text-left">
-                <h1 className="text-center mb-4 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
-                  Conoce tips esenciales en tu búsqueda laboral
-                </h1>
-                <div className="text-center lg:text-left">
-                  <Button
-                    style={{ display: "flex", justifyContent: "center" }}
-                    onClick={navigateBlog}
-                    className="bg-dark-violet py-2 px-4 block mx-auto lg:inline-block"
-                  >
-                    Ver Blog
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-
+      <Services />
       <Footer />
     </div>
   );
