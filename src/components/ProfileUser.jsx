@@ -10,7 +10,6 @@ function ProfileUser() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const currentYear = new Date().getFullYear();
-  const [nationality, setNationality] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [infoUser, setInfoUser] = useState({
     id: user.id,
@@ -124,76 +123,70 @@ function ProfileUser() {
         </div>
         <div className="flex-col justify-center items-center lg:ml-8">
           <h3 className="text-2xl mb-4">{user.fullName}</h3>
-          <div className="flex flex-col lg:flex-row items-center justify-center">
+            
             {isEditing ? (
-              <h3 className="mb-2 lg:mr-4">Fecha de Nacimiento:</h3>
+              <div className="mb-2 lg:flex lg:items-center">
+                <h3 className="mb-2 lg:mr-4">Fecha de Nacimiento:</h3>
+                <div className="flex flex-col lg:flex-row items-center">
+                  <Select
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        width: "80px",
+                      }),
+                    }}
+                    value={birthdate.day}
+                    options={daysOptions}
+                    placeholder="Día"
+                    className="mb-2 lg:mb-0 lg:mr-2"
+                  />
+
+                  <Select name="" id="" placeholder="Mes"
+                    options={meses.map((month, index) => ({
+                      label: month,
+                      value: (index + 1).toString(),
+                    }))}
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        width: "120px",
+                      }),
+                    }}
+                    className="mb-2 lg:mb-0 lg:mr-2"
+                  />
+
+                  <Select
+                    name="Año"
+                    id=""
+                    placeholder="Año"
+                    options={Array.from(
+                      { length: currentYear - 1923 + 1 },
+                      (_, i) => ({
+                        label: (currentYear - i).toString(),
+                        value: (currentYear - i).toString(),
+                      })
+                    )}
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        width: "120px",
+                      }),
+                    }}
+                  />
+                </div>
+              </div>
             ) : (
-              <div className="items-start justify-start">
-                <h3 className="lg:mb-0 lg:mr-">Edad: {user?.age}</h3>
+              <div className="mb-2">
+                <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
+                <span className="lg:inline-block">{user?.age}</span>
               </div>
             )}
-
-            {isEditing && (
-              <div className="flex flex-col lg:flex-row items-center">
-                <Select
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      width: "80px",
-                    }),
-                  }}
-                  value={birthdate.day}
-                  options={daysOptions}
-                  placeholder="Día"
-                  className="mb-2 lg:mb-0 lg:mr-2"
-                />
-
-                <Select
-                  name=""
-                  id=""
-                  placeholder="Mes"
-                  options={meses.map((month, index) => ({
-                    label: month,
-                    value: (index + 1).toString(),
-                  }))}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      width: "120px"
-                    }),
-                  }}
-                  className="mb-2 lg:mb-0 lg:mr-2"
-                />
-
-                <Select
-                  name=""
-                  id=""
-                  placeholder="Año"
-                  options={Array.from(
-                    { length: currentYear - 1923 + 1 },
-                    (_, i) => ({
-                      label: (currentYear - i).toString(),
-                      value: (currentYear - i).toString(),
-                    })
-                  )}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      width: "120px"
-                    }),
-                  }}
-                />
-              </div>
-            )}
-          </div>
 
           {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
-
-          </select></h3>)
-
-            : (<h3>Pais: {user?.nacionalidad}</h3>)}
+          </select></h3>
+          ) : (<h3>Pais: {user?.nacionalidad}</h3>)}
 
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>
           ) : (<h3>Email: {user?.email}</h3>)}
