@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function DarkMode() {
+
+  const location = useLocation()
+  console.log(location.pathname);
+
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -15,7 +20,7 @@ function DarkMode() {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
   return (
-    <div className=" h-0 absolute top-5 flex justify-end mx-6 w-[100%] bg-[#C3A3D0] lg:w-[100px] lg:right-[-1%]  lg:top-[10%]  ">
+    <div className={` h-0 absolute top-5 flex justify-end mx-6 w-[93%] bg-[#C3A3D0] lg:w-[100px] lg:right-[-1%]  lg:top-[10%]  ${location.pathname === "/dashboard/newservices" || location.pathname === "/dashboard/profile" || location.pathname === "/dashboard/sales" || location.pathname === "/dashboard/clients" || location.pathname === "/login" || location.pathname === "/register" ? "hidden":""}`}>
       <label class="switch-button" for="switch">
         <div class="switch-outer">
           <input

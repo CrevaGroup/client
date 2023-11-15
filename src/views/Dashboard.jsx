@@ -60,7 +60,7 @@ export default function Dashboard() {
   return (
     <div className=" min-h-screen grid  grid-col-1 lg:grid-cols-6 dark:bg-[#C2A3D1] ">
       <div
-        className={`fixed lg:static w-[80%] md:w-[40%] lg:w-full top-0 z-50 bg-white transition-all bg-[#C2A3D1] dark:bg-purple-900 ${
+        className={`fixed lg:static w-[80%] md:w-[40%] lg:w-full top-0 z-50 transition-all bg-[#C2A3D1] dark:bg-purple-900 ${
           sidebar ? "left-0" : "-left-full"
         } h-full overflow-y-scroll col-span-1 p-8 border-r`}
       >
