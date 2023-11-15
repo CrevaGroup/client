@@ -4,6 +4,7 @@ import {
   deleteUserById,
   clearPopupComponent,
   updateUser,
+  logout
 } from "../Redux/Actions/actions";
 
 import { Button } from "@material-tailwind/react";
@@ -102,6 +103,7 @@ function ProfileUser() {
 
   function deleteUser() {
     dispatch(deleteUserById(user.id));
+    dispatch(logout());
   }
 
   function closePopup() {
