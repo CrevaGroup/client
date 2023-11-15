@@ -93,14 +93,14 @@ function ProfileUser() {
   }
 
   return (
-    <div className="bg-white rounded-md p-4">
+    <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen">
       <button onClick={closePopup}>
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
       </button>
       <div className="text-center">
-        <h1 className="text-4xl mb-5">Mi Perfil</h1>
+        <h1 className="text-4xl mb-4">Mi Perfil</h1>
       </div>
-      <div className="flex flex-col items-center justify-center ml-5 mr-5 mt-8 mb-8 lg:flex-row">
+      <div className="flex flex-col items-center justify-center ml-5 mr-5 mt-5 mb-8 lg:flex-row">
         <div className="text-center mb-6 lg:mb-0">
           <div
             className="w-60 h-60 mx-auto rounded"
@@ -124,49 +124,70 @@ function ProfileUser() {
         </div>
         <div className="flex-col justify-center items-center lg:ml-8">
           <h3 className="text-2xl mb-4">{user.fullName}</h3>
-          {isEditing ? (<h3>Fecha de Nacimiento:
-
-            <Select styles={{
-              control: (provided) => ({
-                ...provided,
-                width: "80px",
-              })
-            }}
-              value={birthdate.day}
-              options={daysOptions}
-              placeholder="Día"
-            />
-
-            <Select name="" id="" placeholder="Mes" options={meses.map((month, index) => ({
-              label: month,
-              value: (index + 1).toString(),
-            }))}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  width: "120px",
-                  marginTop: "10px"
-                })
-              }} />
-
-            <Select name="" id="" placeholder="Año" options={Array.from(
-              { length: currentYear - 1923 + 1 },
-              (_, i) => ({
-                label: (currentYear - i).toString(),
-                value: (currentYear - i).toString(),
-              })
+          <div className="flex flex-col lg:flex-row items-center justify-center">
+            {isEditing ? (
+              <h3 className="mb-2 lg:mr-4">Fecha de Nacimiento:</h3>
+            ) : (
+              <div className="items-start justify-start">
+                <h3 className="lg:mb-0 lg:mr-">Edad: {user?.age}</h3>
+              </div>
             )}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  width: "120px",
-                  marginTop: "10px"
-                })
-              }}/></h3>)
 
-            : (<h3>Edad: {user?.age}</h3>)}
+            {isEditing && (
+              <div className="flex flex-col lg:flex-row items-center">
+                <Select
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      width: "80px",
+                    }),
+                  }}
+                  value={birthdate.day}
+                  options={daysOptions}
+                  placeholder="Día"
+                  className="mb-2 lg:mb-0 lg:mr-2"
+                />
 
-          {isEditing ? (<h3>Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })}>{countries.map((country) => (
+                <Select
+                  name=""
+                  id=""
+                  placeholder="Mes"
+                  options={meses.map((month, index) => ({
+                    label: month,
+                    value: (index + 1).toString(),
+                  }))}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      width: "120px"
+                    }),
+                  }}
+                  className="mb-2 lg:mb-0 lg:mr-2"
+                />
+
+                <Select
+                  name=""
+                  id=""
+                  placeholder="Año"
+                  options={Array.from(
+                    { length: currentYear - 1923 + 1 },
+                    (_, i) => ({
+                      label: (currentYear - i).toString(),
+                      value: (currentYear - i).toString(),
+                    })
+                  )}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      width: "120px"
+                    }),
+                  }}
+                />
+              </div>
+            )}
+          </div>
+
+          {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
 
