@@ -66,6 +66,11 @@ const Blog = () => {
         <div className="flex items-center justify-center">
           <img className=" h-48 lg:h-[560px] " src={blog}></img>
         </div>
+        <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
+        <h2 className="text-2xl lg:text-3xl font-semibold">
+            Posteos
+          </h2>
+        </div>
         <div className="flex  flex-col items-center justify-center my-16">
           {postsIg.length > 0 ? (
             <div
@@ -83,6 +88,11 @@ const Blog = () => {
           ) : (
             ""
           )}
+           <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
+        <h2 className="text-2xl lg:text-3xl font-semibold">
+            Noticias
+          </h2>
+        </div>
 
           {postsText.length > 0 ? (
             <div className="flex flex-col items-center justify-center my-8 w-full dark:text-white">
