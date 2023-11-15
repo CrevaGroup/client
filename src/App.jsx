@@ -20,6 +20,7 @@ import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
 import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
+import DarkMode from "./components/darkMode";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,13 +28,14 @@ function App() {
   const popupComponent = useSelector((state) => state.popupComponent);
   const popup = useSelector((state) => state.popup);
 
-  useEffect(()=>{
-    dispatch(setLocalStorage('user'))
+  useEffect(() => {
+    dispatch(setLocalStorage("user"));
     dispatch(getConfig());
-  },[])
+  }, []);
 
   return (
     <div className="font-orkney">
+      <DarkMode />
       {popupComponent.type === "PERFIL" && (
         <div className="flex fixed items-center justify-center w-full h-full bg-black bg-opacity-60 z-20 l-0">
           <ProfileUser />
@@ -50,6 +52,7 @@ function App() {
           element={
             <React.Fragment>
               <Navbar />
+
               <Home />
             </React.Fragment>
           }
