@@ -49,9 +49,14 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Equipo de Desarrollo 
 
-[Martin Garcia Hervas]()
-[Alvaro Lopez]()
-[Valentino Jerez]()
+[Martin Garcia Hervas](https://github.com/MartinGarciaHervas)
+
+[Alvaro Lopez](https://github.com/lopezalvaro16)
+
+[Valentino Jerez](https://github.com/ValentinoJerez)
+
 [Osvaldo Cornelli]()
+
 [Axel Choque]
+
 [Brian Aguirre]() 
