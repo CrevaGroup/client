@@ -605,8 +605,8 @@ export const setPopup = (type, title, message) => {
     type: SET_POPUP,
     payload: {
       type: type,
-      title: '',
-      message: ''
+      title: title,
+      message: message
     }
   }
 }
