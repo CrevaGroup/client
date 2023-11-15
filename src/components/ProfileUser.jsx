@@ -97,7 +97,7 @@ function ProfileUser() {
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
       </button>
       <div className="text-center">
-        <h1 className="text-4xl mb-4">Mi Perfil</h1>
+        <h1 className="text-4xl mb-2">Mi Perfil</h1>
       </div>
       <div className="flex flex-col items-center justify-center ml-5 mr-5 mt-5 mb-8 lg:flex-row">
         <div className="text-center mb-6 lg:mb-0">
@@ -126,7 +126,7 @@ function ProfileUser() {
             
             {isEditing ? (
               <div className="mb-2 lg:flex lg:items-center">
-                <h3 className="mb-2 lg:mr-4">Fecha de Nacimiento:</h3>
+                <h3 className="lg:mr-4">Fecha de Nacimiento:</h3>
                 <div className="flex flex-col lg:flex-row items-center">
                   <Select
                     styles={{
@@ -176,7 +176,7 @@ function ProfileUser() {
                 </div>
               </div>
             ) : (
-              <div className="mb-2">
+              <div>
                 <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
                 <span className="lg:inline-block">{user?.age}</span>
               </div>
