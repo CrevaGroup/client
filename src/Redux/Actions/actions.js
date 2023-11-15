@@ -235,9 +235,9 @@ export const updateUser = (properties, user, birthdate) => {
         properties.photo = photoURL
       }
 
-      const properties = {...properties, age: JSON.stringify(birthdate)}
+      const allProperties = {...properties, age: JSON.stringify(birthdate)}
 
-      const { data } = await axios.put(`/user`, properties);
+      const { data } = await axios.put(`/user`, allProperties);
 
       if (properties.email !== user.email) {
         const firebaseUpdateEmail = await verifyBeforeUpdateEmail(
@@ -600,7 +600,7 @@ export const searchServices = (input) => {
   };
 };
 
-export const setPopup = (type) => {
+export const setPopup = (type, title, message) => {
   return {
     type: SET_POPUP,
     payload: {

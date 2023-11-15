@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import example from '../assets/example.png'
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactionLink } from "../Redux/Actions/actions";
+import { getTransactionLink, setPopup } from "../Redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
+import calculateAge from "../Utils/calculateAge";
 
 
 
@@ -28,17 +29,23 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     })
 
     function clickHandler(){
-        if(user.fullName){
-            if(!user.nacionalidad){
-                if(country === "AR"){
-                    dispatch(getTransactionLink(transactionInfo, "Argentina"))
-                }else{
-                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))}
-            
+        if(calculateAge(JSON.parse(user.age)) >= 18){
+            if(user.fullName){
+                if(!user.nacionalidad){
+                    if(country === "AR"){
+                        dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+                    }
+                        
+                    } else {
+                        navigate('/login')
+                    }
+                }
         } else {
-            navigate('/login')
+            dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad!'))
         }
-    }}
+    }
 
     return(
         <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[416px] h-[570px] rounded-3xl">

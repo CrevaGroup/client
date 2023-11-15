@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 function DarkMode() {
 
   const location = useLocation()
-  console.log(location.pathname);
 
   const [theme, setTheme] = useState("light");
 

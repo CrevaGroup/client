@@ -7,11 +7,13 @@ import {
   logout
 } from "../Redux/Actions/actions";
 
-import { Button } from "@material-tailwind/react";
+import { Button, input } from "@material-tailwind/react";
 import Select from "react-select";
 import Close from "../assets/closeIcon.svg";
+import calculateAge from "../Utils/calculateAge";
 
 function ProfileUser() {
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const currentYear = new Date().getFullYear();
@@ -20,9 +22,9 @@ function ProfileUser() {
     id: user.id,
     fullName: user.fullName,
     email: user.email,
-    age: user.age,
+    age: calculateAge(JSON.parse(user.age)),
     nacionalidad: user.nacionalidad,
-    photo: user.photo,
+    photo: "",
     curriculum: "",
   });
 
@@ -60,24 +62,6 @@ function ProfileUser() {
     year: currentYear,
   });
 
-  const calculateAge = (birthdate) => {
-    const birthdateObj = new Date(
-      birthdate.year.value,
-      birthdate.month.value - 1,
-      birthdate.day.value
-    );
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthdateObj.getFullYear();
-    const monthDiff = currentDate.getMonth() - birthdateObj.getMonth();
-    if (
-      monthDiff < 0 ||
-      (monthDiff === 0 && currentDate.getDate() < birthdateObj.getDate())
-    ) {
-      return age - 1;
-    }
-    return age;
-  };
-
   function photoHandle(event) {
     setInfoUser({
       ...infoUser,
@@ -99,6 +83,7 @@ function ProfileUser() {
   function handleSaveClick() {
     setIsEditing(false);
     dispatch(updateUser(infoUser, user, birthdate));
+    setInfoUser({...infoUser, age: calculateAge(birthdate)})
   }
 
   function deleteUser() {
@@ -135,7 +120,7 @@ function ProfileUser() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" value={""} />
+                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" style={{color: infoUser.photo===""?"transparent":"black"}} />
                 </div>) :
                 (<div className="rounded-full overflow-hidden w-3/4 h-3/4">
                   <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
@@ -222,7 +207,7 @@ function ProfileUser() {
             ) : (
               <div>
                 <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
-                <span className="lg:inline-block">{user?.age}</span>
+                <span className="lg:inline-block">{infoUser?.age}</span>
               </div>
             )}
 
@@ -238,7 +223,7 @@ function ProfileUser() {
           {isEditing ? (<h3>Curriculum: <input type="file" title=" asd" name="curriculum" onChange={curriculumHandle} className="mb-4 [appearance:button] ::-webkit-file-upload-button" /></h3>)
             : (<h3>Curriculum: {user.curriculum ? <a target="blank" href={user.curriculum}>Link</a> : null}</h3>)}
 
-          <h3>Mis compras: {user?.buys.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)}</h3>
+          <h3>Mis compras: {user?.buys?.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)}</h3>
 
           <div className="mt-4 space-x-4">
             <Button className="bg-dark-violet" onClick={deleteUser}>
