@@ -99,7 +99,7 @@ const Blog = () => {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col w-10/12 lg:w-3/5 justify-center my-4 text-dark-gray-blue"
+                    className="flex flex-col w-10/12 lg:w-3/5 justify-center my-4 text-dark-gray-blue dark:text-white"
                   >
                     <div className="flex flex-col lg:flex-row my-4 items-center ">
                       <h1 className="font-bold text-3xl">{post.title}</h1>
