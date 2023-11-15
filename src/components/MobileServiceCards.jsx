@@ -30,17 +30,22 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
     })
 
     function clickHandler(){
-        if(user.fullName){
-            if(!user.nacionalidad){
-                if(country === "AR"){
-                    dispatch(getTransactionLink(transactionInfo, "Argentina"))
-                }else{
-                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))}
-            
+        if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
+            if(user.fullName){
+                if(!user.nacionalidad){
+                    if(country === "AR"){
+                        dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+                    }
+                        
+                    } else {
+                        navigate('/login')
+                    }
+                }
         } else {
-            navigate('/login')
+            dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad!'))
         }
-    }
     }
 
     return(

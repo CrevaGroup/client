@@ -44,6 +44,8 @@ const Services = () => {
           {services.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10  gap-x-64 min-w-screen my-8 justify-center items-center">
               {services?.map((service, index) => (
+                !service.deletedAt &&
+                <div key={index}>
                 <AllServiceCards
                   key={index}
                   img={service.photo}
@@ -54,6 +56,7 @@ const Services = () => {
                   price={service.price}
                   id={service.id}
                 />
+                </div>
               ))}
             </div>
           ) : (
