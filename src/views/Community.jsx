@@ -38,7 +38,7 @@ const Community = () => {
   useEffect(() => {
     dispatch(getReview());
     dispatch(getServices(filters));
-    return dispatch(getReview());
+    return () => dispatch(getReview());
   }, []);
 
   const delRev = async (id) => {

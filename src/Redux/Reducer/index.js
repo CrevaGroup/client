@@ -148,7 +148,12 @@ function rootReducer(state = initialState, action) {
     case DELETE_USER:
       return {
         ...state,
-        allUsers: [...state.allUsers.filter(user => user.id !== action.payload.id), action.payload]
+        allUsers: [...state.allUsers.filter(user => user.id !== action.payload.id), action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: 'DATOS EDITADOS',
+          message: action.payload.deletedAt? 'Se ha eliminado el usuario con éxito!' : 'Se ha restaurado el usuario con éxito!'
+        }
       }
 
     case GOOGLE_LOGIN:
