@@ -59,7 +59,7 @@ export default function CLients() {
                       value={client.id}
                       onClick={deleteHandler}
                     >
-                      {client.deletedAt?"Restore":"Eliminar"}
+                      {client.deletedAt?"Restaurar":"Eliminar"}
                     </button>
                   </div>
                 </div>

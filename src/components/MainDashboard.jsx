@@ -83,7 +83,7 @@ function MainDashboard() {
             <h3 className="text-xl text-gray-500 mb-2 ">${user.nacionalidad==="Argentina"?Math.round(service.price*config.dolarValue):service.price} {user.nacionalidad==="Argentina"?"ARS":"USD"}</h3>
             <p className="text-gray-500">{service.createdAt.slice(0, 10).split("-").reverse().join("-")}</p>
           </div>
-          <button value={service.id} onClick={deleteHandler}>Eliminar</button>
+          <button value={service.id} onClick={deleteHandler}>{service.deletedAt?"Restaurar":"Eliminar"}</button>
           {/* <button>Editar</button> */}
         </a>
         </div>)}
