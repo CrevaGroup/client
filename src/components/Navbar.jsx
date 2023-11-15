@@ -33,12 +33,12 @@ const Navbar = () => {
     <div className="p-3 lg:flex  lg:items-center lg:justify-between" style={{backgroundColor: `#C3A3D0`}}>
       <div className="flex justify-between items-center">
         <span className="text-2xl flex">
-          <NavLink to={"/"}>
+          <NavLink to={"/"} className="flex">
             <img className="h-10 inline mr-4 ml-4 cursor-pointer" src={logo} />
+            <p className="cursor-pointer text-3xl font-georgia font-bold cursor-default">
+              Creva
+            </p>
           </NavLink>
-          <p className="  text-3xl font-georgia font-bold cursor-default">
-            Creva
-          </p>
         </span>
         <span className="w-12 h-10 ml-auto cursor-pointer lg:hidden mx-2 block">
           <img onClick={toogleNav} src={burguerHandler} />

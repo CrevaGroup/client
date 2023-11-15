@@ -21,10 +21,10 @@ export default function CLients() {
   // };
 
   return (
-    <div className="p-4">
+    <div className="p-4 dark:bg-[#C2A3D1] dark:text-white">
       <h2 className="text-2xl font-semibold mb-4">Clientes</h2>
-      <div className="bg-white p-4 rounded shadow">
-        <div className="mb-4">
+      <div className="bg-white p-4 rounded shadow dark:bg-purple-900 dark:text-white">
+        <div className="mb-4 dar:text-white">
           <h3 className="text-lg font-semibold mb-2">Lista de Clientes</h3>
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             {users.map((client) => (

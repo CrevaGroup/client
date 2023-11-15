@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserById, clearPopupComponent, updateUser } from "../Redux/Actions/actions";
+import {
+  deleteUserById,
+  clearPopupComponent,
+  updateUser,
+} from "../Redux/Actions/actions";
 
 import { Button } from "@material-tailwind/react";
 import Close from "../assets/closeIcon.svg";
@@ -29,21 +33,21 @@ function ProfileUser() {
   function curriculumHandle(event) {
     setInfoUser({
       ...infoUser,
-      curriculum: event.target.files[0]
+      curriculum: event.target.files[0],
     });
   }
 
   function handleEditClick() {
-    setIsEditing(true)
+    setIsEditing(true);
   }
 
   function handleSaveClick() {
-    setIsEditing(false)
-    dispatch(updateUser(infoUser, user))
+    setIsEditing(false);
+    dispatch(updateUser(infoUser, user));
   }
 
   function deleteUser() {
-    dispatch(deleteUserById(user.id))
+    dispatch(deleteUserById(user.id));
   }
 
   function closePopup() {
@@ -51,7 +55,7 @@ function ProfileUser() {
   }
 
   return (
-    <div className="bg-white rounded-md p-4">
+    <div className="bg-white rounded-md p-4 dark:bg-purple-900 dark:text-white">
       <button onClick={closePopup}>
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
       </button>
@@ -65,18 +69,32 @@ function ProfileUser() {
             style={{ backgroundColor: `#C2A3D1` }}
           >
             <div className="flex items-center justify-center w-full h-full">
-              
-                {isEditing ? (
-                <div className="flex-col ml-16 items-center w-full" >
+              {isEditing ? (
+                <div className="flex-col ml-16 items-center w-full">
                   <div className="rounded-full overflow-hidden w-3/4 h-3/4">
-                    <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
+                    <img
+                      src={user?.photo}
+                      alt="Imagen de Usuario"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                    <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" />
-                </div>) :
-                (<div className="rounded-full overflow-hidden w-3/4 h-3/4">
-                  <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
-                </div>)}
-              
+                  <input
+                    type="file"
+                    accept="image/*"
+                    name="photo"
+                    onChange={photoHandle}
+                    className="mb-4"
+                  />
+                </div>
+              ) : (
+                <div className="rounded-full overflow-hidden w-3/4 h-3/4">
+                  <img
+                    src={user?.photo}
+                    alt="Imagen de Usuario"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -84,16 +102,68 @@ function ProfileUser() {
           <h3 className="text-2xl mb-4">{user.fullName}</h3>
           {/* {isEditing ? (<h3>Edad: <input type="text" value={infoUser.age} onChange={(event) => setInfoUser({ ...infoUser, age: event.target.value })} /></h3>
           ) : (<h3>Edad: {user?.age}</h3>)} */}
-          {isEditing ? (<h3>Pais: <input type="text" value={infoUser.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} /></h3>
-          ) : (<h3>Pais: {user?.nacionalidad}</h3>)}
-          {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>
-          ) : (<h3>Email: {user?.email}</h3>)}
-          {isEditing ? (<h3>Curriculum: <input type="file" title=" asd" name="curriculum" onChange={curriculumHandle} className="mb-4 [appearance:button] ::-webkit-file-upload-button" /></h3>)
-            : (<h3>Curriculum: {user.curriculum?<a target="blank" href={user.curriculum}>Link</a>:null}</h3>)}
+          {isEditing ? (
+            <h3>
+              Pais:{" "}
+              <input
+                type="text"
+                value={infoUser.nacionalidad}
+                onChange={(event) =>
+                  setInfoUser({ ...infoUser, nacionalidad: event.target.value })
+                }
+              />
+            </h3>
+          ) : (
+            <h3>Pais: {user?.nacionalidad}</h3>
+          )}
+          {isEditing ? (
+            <h3>
+              Email:{" "}
+              <input
+                type="text"
+                value={infoUser.email}
+                onChange={(event) =>
+                  setInfoUser({ ...infoUser, email: event.target.value })
+                }
+              />
+            </h3>
+          ) : (
+            <h3>Email: {user?.email}</h3>
+          )}
+          {isEditing ? (
+            <h3>
+              Curriculum:{" "}
+              <input
+                type="file"
+                title=" asd"
+                name="curriculum"
+                onChange={curriculumHandle}
+                className="mb-4 [appearance:button] ::-webkit-file-upload-button"
+              />
+            </h3>
+          ) : (
+            <h3>
+              Curriculum:{" "}
+              {user.curriculum ? (
+                <a target="blank" href={user.curriculum}>
+                  Link
+                </a>
+              ) : null}
+            </h3>
+          )}
           <div className="mt-4 space-x-4">
-            <Button className="bg-dark-violet" onClick={deleteUser}>Eliminar Perfil</Button>
-            {isEditing ? (<Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>Guardar</Button>) : (
-              <Button className="bg-dark-violet" onClick={handleEditClick}>Editar</Button>)}
+            <Button className="bg-dark-violet" onClick={deleteUser}>
+              Eliminar Perfil
+            </Button>
+            {isEditing ? (
+              <Button className="bg-dark-violet mr-4" onClick={handleSaveClick}>
+                Guardar
+              </Button>
+            ) : (
+              <Button className="bg-dark-violet" onClick={handleEditClick}>
+                Editar
+              </Button>
+            )}
           </div>
         </div>
       </div>

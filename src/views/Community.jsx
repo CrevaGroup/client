@@ -5,33 +5,45 @@ import TestimonialCard from "./TestimonialCard";
 import Comentario from "../components/Comentarios";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { createReview, getOneService, getReview, getServices, getUser,getOneUser } from "../Redux/Actions/actions";
+import {
+  createReview,
+  getOneService,
+  getReview,
+  getServices,
+  getUser,
+  getOneUser,
+  deleteReview,
+} from "../Redux/Actions/actions";
 
 const Community = () => {
   const [nuevoComentario, setNuevoComentario] = useState({
-    description: '',
-    serv: ''
+    description: "",
+    serv: "",
   });
   const [votoComentario, setVotoComentario] = useState(0);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
-  const reviews = useSelector(state => state.reviews);
-  const services = useSelector(state => state.services);
+  const user = useSelector((state) => state.user);
+  const reviews = useSelector((state) => state.reviews);
+  const services = useSelector((state) => state.services);
+  const filters = useSelector((state) => state.filters);
 
   const handleComentarioChange = (e) => {
     const { name, value } = e.target;
     setNuevoComentario((prevComentario) => ({
       ...prevComentario,
-      [name]: value
+      [name]: value,
     }));
   };
 
   useEffect(() => {
     dispatch(getReview());
-    dispatch(getServices());
+    dispatch(getServices(filters));
   }, [dispatch]);
 
-
+  const delRev = async (id) => {
+    await dispatch(deleteReview(id));
+    await dispatch(getReview());
+  };
 
   const handleComentarioSubmit = async () => {
     /**    if (nuevoComentario.trim() !== "") {
@@ -67,25 +79,27 @@ const Community = () => {
   }
 
         } */
-    if(nuevoComentario.description === '' || nuevoComentario.serv === '' || votoComentario === 0) {
-      return(alert('Falta informacion'))
+    if (
+      nuevoComentario.description === "" ||
+      nuevoComentario.serv === "" ||
+      votoComentario === 0
+    ) {
+      return alert("Falta informacion");
     }
-    await dispatch(createReview(nuevoComentario, votoComentario, user.id))
+    await dispatch(createReview(nuevoComentario, votoComentario, user.id));
     await dispatch(getReview());
     setVotoComentario(0);
     setNuevoComentario({
-      description: '',
-      serv: ''
+      description: "",
+      serv: "",
     });
   };
 
   return (
     <div>
-      <div className="bg-custom-gray min-h-screen p-4 text-dark-gray-blue cursor-default">
+      <div className="bg-custom-gray min-h-screen p-4 text-dark-gray-blue cursor-default dark:bg-purple-900 dark:text-white">
         <div className="text-center">
-          <h1 className="text-3xl md:text-5xl  mt-4">
-            Nuestra Comunidad
-          </h1>
+          <h1 className="text-3xl md:text-5xl  mt-4">Nuestra Comunidad</h1>
           <img
             src={SocialMedia}
             alt="Imagen de la comunidad"
@@ -127,7 +141,7 @@ const Community = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-2/4 p-4 mx-auto">
+        <div className="w-full md:w-2/4 p-4 mx-auto dark:text-black">
           <div className="bg-white rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold">Deja tu comentario</h3>
             <textarea
@@ -138,18 +152,17 @@ const Community = () => {
               value={nuevoComentario.description}
               onChange={handleComentarioChange}
             />
-            <div
-              className="lg:flex my-4 "
-            >
+            <div className="lg:flex my-4 ">
               <div className="flex w-1/2 p-1 my-4">
                 <p className="mr-4">Votar tu comentario:</p>
                 {[1, 2, 3, 4, 5].map((valor) => (
                   <span
                     key={valor}
-                    className={`cursor-pointer ${votoComentario >= valor
-                      ? "text-yellow-500"
-                      : "text-gray-400"
-                      }`}
+                    className={`cursor-pointer ${
+                      votoComentario >= valor
+                        ? "text-yellow-500"
+                        : "text-gray-400"
+                    }`}
                     onClick={() => setVotoComentario(valor)}
                   >
                     &#9733;
@@ -161,17 +174,12 @@ const Community = () => {
                 name="serv"
                 onChange={handleComentarioChange}
               >
-                <option
-                  value={''}
-                >Elegir servicio</option>
-                {
-                  services.map((service, index) =>
-                  (<option
-                    value={service.id}
-                    key={index}
-                  >{service.name}</option>)
-                  )
-                }
+                <option value={""}>Elegir servicio</option>
+                {services.map((service, index) => (
+                  <option value={service.id} key={index}>
+                    {service.name}
+                  </option>
+                ))}
               </select>
             </div>
             <button
@@ -189,33 +197,31 @@ const Community = () => {
             Comentarios
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-4 ">
-
-
-
-
             {
-              reviews.map((review, index) => { 
-                // dispatch(getOneService(review.serviceId));
-                // dispatch(getOneUser(review.userId));
+              reviews.length > 0
+                ? reviews.map((review, index) => {
+                    // dispatch(getOneService(review.serviceId));
+                    // dispatch(getOneUser(review.userId));
 
-                // const bdName = useSelector(state => state.oneUser);
-                // const bdService = useSelector(state => state.oneService);
-                // console.log(bdName);
-                // console.log(bdService)
-                return (
-                  <div
-                    key={index}
-                  >
-                    <Comentario
-                      nombre={review.user.fullName}
-                      comentario={review.description}
-                      imagenPerfil={review.user.photo}
-                      voto={review.assessment}
-                      service={review.service.name}
-                    />
-                  </div>
-                )
-})
+                    // const bdName = useSelector(state => state.oneUser);
+                    // const bdService = useSelector(state => state.oneService);
+                    // console.log(bdName);
+                    // console.log(bdService)
+                    return (
+                      <div key={index}>
+                        <Comentario
+                          nombre={review.user.fullName}
+                          comentario={review.description}
+                          imagenPerfil={review.user.photo}
+                          voto={review.assessment}
+                          service={review.service.name}
+                          del={delRev}
+                          id={review.id}
+                        />
+                      </div>
+                    );
+                  })
+                : ""
               /*{comentarios.map((comentario) => (
               <div key={comentario.id}>
                 <Comentario

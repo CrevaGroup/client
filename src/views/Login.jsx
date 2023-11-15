@@ -15,18 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div
-      style={{
-        backgroundColor: "#EFEFEF",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        // minHeight: "75vh",
-        minHeight: "100vh",
-        flexDirection: "column",
-        // margin: "100px",
-      }}
-    >
+    <div className="bg-[#EFEFEF] dark:bg-purple-900 flex justify-center items-center min-h-screen flex-col">
       <style>
         {`
       @media (max-width: 768px) {
@@ -36,6 +25,7 @@ const Login = () => {
       }
     `}
       </style>
+
       {window.innerWidth > 768 ? (
         <div
           style={{
@@ -91,24 +81,11 @@ const Login = () => {
             </h1>
             <div style={{ textAlign: "left" }}>
               <Link to="/">
-                <button
-                  style={{
-                    backgroundColor: "transparent",
-                    color: "#7F7F7F",
-                    border: "none",
-                    borderRadius: "50%",
-                    width: "30px",
-                    height: "30px",
-                    fontSize: "1.5rem",
-                    position: "absolute",
-                    top: "10px",
-                    left: "10px",
-                  }}
-                >
+                <button className="text-gray-600 absolute top-0 left-0 mt-2 ml-2 w-8 h-8 rounded-full border-none dark:bg-white">
                   <img
-                    style={{ width: "15px", height: "15px" }}
                     src={flechaVolver}
                     alt=""
+                    className="w-4 h-4 m-auto dark:text-purple-800"
                   />
                 </button>
               </Link>

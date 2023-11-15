@@ -283,7 +283,10 @@ function rootReducer(state = initialState, action) {
     case UPDATE_REVIEW:
       return {};
     case DELETE_REVIEW:
-      return {};
+      return {
+        ...state,
+        reviews: [...state.reviews.filter(review => review.id !== action.payload)]
+      };
     case UPDATE_TRANSACTION:
       return {};
     case CREATE_TRANSACTION:
