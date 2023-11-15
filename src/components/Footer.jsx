@@ -7,26 +7,35 @@ import WhatsApp from "../assets/MdiWhatsapp.svg"
 import Gmail from "../assets/BxBxlGmail.svg"
 
 function Footer() {
+
+  const handleLink = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+  
   return (
+    
     <footer className="bg-custom-gray text-black py-6">
       <div className="container mx-auto text-center">
         <hr className="border-gray-400 mb-4" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="mx-auto text-left mt-5">
             <div className="mb-2">
-              <NavLink to="/">Inicio</NavLink>
+              <NavLink to="/" onClick={handleLink}>Inicio</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/services">Nuestros Servicio</NavLink>
+              <NavLink to="/services" onClick={handleLink}>Nuestros Servicio</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/blog">Blog</NavLink>
+              <NavLink to="/blog" onClick={handleLink}>Blog</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/community">Comunidad Creva</NavLink>
+              <NavLink to="/community" onClick={handleLink}>Comunidad Creva</NavLink>
             </div>
             <div className="mb-2">
-              <NavLink to="/team">Equipo de Desarrollo</NavLink>
+              <NavLink to="/team" onClick={handleLink}>Equipo de Desarrollo</NavLink>
             </div>
           </div>
           <div>
