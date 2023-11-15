@@ -2,8 +2,11 @@ import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import example from '../assets/example.png'
+import { getTransactionLink } from "../Redux/Actions/actions";
+import { useNavigate } from "react-router-dom";
 const MobileServiceCards = ({img, name, description, price, id, items, modalidad}) => {
     const [open,setOpen] = useState(false);
+    const navigate = useNavigate()
 
     const cardHandler = () => {
         setOpen(curr => !curr);
@@ -26,7 +29,11 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
     })
 
     function clickHandler(){
-        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        if(user.fullName){
+            dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        }else{
+            navigate('/login')
+        }
     }
 
     return(

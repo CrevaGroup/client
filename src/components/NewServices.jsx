@@ -3,23 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { createServices } from "../Redux/Actions/actions";
 
 function NewServices() {
-    const dispatch = useDispatch();
-    const types = useSelector(state => state.types);
-    const maxItems = 5;
-    const maxModality = 3;
-    const [itemsQ, setItemsQ] = useState(1);
-    const [modalityQ, setModalityQ] = useState(1);
-    const [servicesInfo, setServicesInfo] = useState({
-      name: "",
-      description: "",
-      price: "",
-      photo: "",
-      items: Array.from({ length: maxItems }, () => ""),
-      modalidad: Array.from({ length: maxModality }, () => ""),
-      types: []
-    })
+  const dispatch = useDispatch();
+  const types = useSelector((state) => state.types);
+  const maxItems = 5;
+  const maxModality = 3;
+  const [itemsQ, setItemsQ] = useState(1);
+  const [modalityQ, setModalityQ] = useState(1);
+  const [servicesInfo, setServicesInfo] = useState({
+    name: "",
+    description: "",
+    price: "",
+    photo: "",
+    items: Array.from({ length: maxItems }, () => ""),
+    modalidad: Array.from({ length: maxModality }, () => ""),
+    types: [],
+  });
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     const [type, index] = name.split("-");
 
@@ -37,79 +37,78 @@ function NewServices() {
         [name]: value,
       }));
     }
+  };
+
+  function selectedChange(event) {
+    if (!servicesInfo.types.includes(event.target.value)) {
+      setServicesInfo({
+        ...servicesInfo,
+        types: [...servicesInfo.types, event.target.value],
+      });
+    }
   }
 
-    function selectedChange(event){
-        if(!servicesInfo.types.includes(event.target.value)){
-            setServicesInfo({
-              ...servicesInfo,
-              types: [...servicesInfo.types, event.target.value]
-            })
-        }
-      }
+  function photoHandle(event) {
+    setServicesInfo({
+      ...servicesInfo,
+      photo: event.target.files[0],
+    });
+  }
 
-    function photoHandle(event){
-        setServicesInfo({
-            ...servicesInfo,
-            photo: event.target.files[0]
-        })
-    }
-
-    const submitHandler = e =>{
-      e.preventDefault();
-      const cleaned = cleanObj(servicesInfo);
-      setServicesInfo({
-        name: "",
-        description: "",
-        price: "",
-        photo: "",
-        items: Array.from({ length: maxItems }, () => ""),
-        modalidad: Array.from({ length: maxModality }, () => ""),
-        types: []
-      });
-      setItemsQ(1);
-      setModalityQ(1);
-
-      
-      dispatch(createServices(cleaned))
-    }
-    
-    const modalityHandler = e => {
-      e.preventDefault();
-      if(e.target.value === '1' && modalityQ < maxModality) {
-        setModalityQ(prevValue => {
-          let newValue = prevValue+1;
-          return newValue;
-        })
-      } else if(e.target.value === '0' && modalityQ > 1){
-        setModalityQ(prevValue => {
-          let newValue = prevValue-1;
-          return newValue;
-        })
-      }
-    }
-
-  const itemsHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    if (e.target.value === '1' && itemsQ < maxItems) {
-      setItemsQ(prevValue => {
+    const cleaned = cleanObj(servicesInfo);
+    setServicesInfo({
+      name: "",
+      description: "",
+      price: "",
+      photo: "",
+      items: Array.from({ length: maxItems }, () => ""),
+      modalidad: Array.from({ length: maxModality }, () => ""),
+      types: [],
+    });
+    setItemsQ(1);
+    setModalityQ(1);
+
+    dispatch(createServices(cleaned));
+  };
+
+  const modalityHandler = (e) => {
+    e.preventDefault();
+    if (e.target.value === "1" && modalityQ < maxModality) {
+      setModalityQ((prevValue) => {
         let newValue = prevValue + 1;
         return newValue;
-      })
-    } else if (e.target.value === '0' && itemsQ > 1) {
-      setItemsQ(prevValue => {
+      });
+    } else if (e.target.value === "0" && modalityQ > 1) {
+      setModalityQ((prevValue) => {
         let newValue = prevValue - 1;
         return newValue;
-      })
+      });
     }
-  }
+  };
+
+  const itemsHandler = (e) => {
+    e.preventDefault();
+    if (e.target.value === "1" && itemsQ < maxItems) {
+      setItemsQ((prevValue) => {
+        let newValue = prevValue + 1;
+        return newValue;
+      });
+    } else if (e.target.value === "0" && itemsQ > 1) {
+      setItemsQ((prevValue) => {
+        let newValue = prevValue - 1;
+        return newValue;
+      });
+    }
+  };
 
   const cleanObj = (obj) => {
     const cleanedObj = {};
 
     for (const [key, value] of Object.entries(obj)) {
       if (Array.isArray(value)) {
-        cleanedObj[key] = value.filter((item) => item !== '');
+        cleanedObj[key] = value.filter((item) => item !== "");
       } else {
         cleanedObj[key] = value;
       }
@@ -117,8 +116,8 @@ function NewServices() {
 
     return cleanedObj;
   };
-    
-    /*
+
+  /*
 <div
             className="w-full h-full "
         >
@@ -174,132 +173,150 @@ function NewServices() {
     */
 
   return (
-    <div className="flex  justify-center items-center  w-full h-ful " >
-
-
-  <div className="p-8 rounded-lg mt-5 mb-5 bg-light-violet lg:w-3/5  items-center justify-center text-xl text-black">
-
-
-    <form onSubmit={submitHandler} className="flex flex-col w-full items-center">
-              
-
-      <h1 className="text-3xl my-4 text-black">Crear un nuevo servicio</h1>
-      <div
-            className="flex flex-col items-center justify-center w-3/4 "
-      >
-      <div
-        className="w-full"
-      >
-              <h2 >Nombre</h2>
-              <input placeholder="Ingresar nombre..." type="text" name="name" onChange={handleChange} value={servicesInfo.name} className=" mb-4 w-full rounded-lg outline-none p-1" />
-      </div>
-        <div
-          className=" w-full"
+    <div className="flex  justify-center items-center  w-full h-full dark:text-white  ">
+      <div className="p-8 rounded-lg mt-5 mb-5 bg-light-violet lg:w-3/5  items-center justify-center text-xl text-black dark:text-white">
+        <form
+          onSubmit={submitHandler}
+          className="flex flex-col w-full items-center"
         >
-          <h2 >Items</h2>
-          <div
-                className='lg:flex w-full '
-          >
-            <div
-              className='w-full '
-            >
-                  {
-                    Array.from({ length: itemsQ }, (_, index) => (
-                      <input key={index} placeholder="Ingresar items..." type="text" name={`items-${index}`} onChange={handleChange} value={servicesInfo.items[index]} className=" mr-4 mb-4 w-full rounded-lg outline-none p-1" />
-                    ))
-                  }
+          <h1 className="text-3xl my-4 text-black">Crear un nuevo servicio</h1>
+          <div className="flex flex-col items-center justify-center w-3/4 ">
+            <div className="w-full">
+              <h2>Nombre</h2>
+              <input
+                placeholder="Ingresar nombre..."
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={servicesInfo.name}
+                className=" mb-4 w-full rounded-lg outline-none p-1"
+              />
             </div>
-                
-            <div
-                  className='flex font-bold  justify-center'
-            >
+            <div className=" w-full">
+              <h2>Items</h2>
+              <div className="lg:flex w-full ">
+                <div className="w-full ">
+                  {Array.from({ length: itemsQ }, (_, index) => (
+                    <input
+                      key={index}
+                      placeholder="Ingresar items..."
+                      type="text"
+                      name={`items-${index}`}
+                      onChange={handleChange}
+                      value={servicesInfo.items[index]}
+                      className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
+                    />
+                  ))}
+                </div>
+
+                <div className="flex font-bold  justify-center dark:text-purple-800">
                   <button
                     value={1}
                     onClick={itemsHandler}
-                    className='bg-white rounded-full w-8 h-8 mx-4'
-                  >+</button>
+                    className="bg-white rounded-full w-8 h-8 mx-4"
+                  >
+                    +
+                  </button>
                   <button
                     value={0}
                     onClick={itemsHandler}
-                    className='bg-white rounded-full w-8 h-8 mx-4'
-                  >-</button>
-            </div>
-          </div>
-        </div>
-        <div
-          className="w-full"
-        >
-          <h2 >Modalidades</h2>
-          <div
-            className='lg:flex w-full'
-          >
-                <div
-                  className='w-full'
-                >
-                  {
-                    Array.from({ length: modalityQ }, (_, index) => (
-                      <input key={index} placeholder="Ingresar modalidades..." type="text" name={`modalidad-${index}`} onChange={handleChange} value={servicesInfo.modalidad[index]} className=" mr-4 mb-4 w-full rounded-lg outline-none p-1" />
-                    ))
-                  }
+                    className="bg-white rounded-full w-8 h-8 mx-4"
+                  >
+                    -
+                  </button>
                 </div>
-                <div
-                  className='flex font-bold justify-center'
-                >
-
-
+              </div>
+            </div>
+            <div className="w-full">
+              <h2>Modalidades</h2>
+              <div className="lg:flex w-full dark:text-purple-800">
+                <div className="w-full">
+                  {Array.from({ length: modalityQ }, (_, index) => (
+                    <input
+                      key={index}
+                      placeholder="Ingresar modalidades..."
+                      type="text"
+                      name={`modalidad-${index}`}
+                      onChange={handleChange}
+                      value={servicesInfo.modalidad[index]}
+                      className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
+                    />
+                  ))}
+                </div>
+                <div className="flex font-bold justify-center">
                   <button
                     value={1}
                     onClick={modalityHandler}
-                    className='bg-white rounded-full w-8 h-8 mx-4'
-                  >+</button>
+                    className="bg-white rounded-full w-8 h-8 mx-4"
+                  >
+                    +
+                  </button>
                   <button
                     value={0}
                     onClick={modalityHandler}
-                    className='bg-white rounded-full w-8 h-8 mx-4'
-                  >-</button>
+                    className="bg-white rounded-full w-8 h-8 mx-4"
+                  >
+                    -
+                  </button>
                 </div>
-          </div>
-        </div>
-      <div
-              className="lg:w-full"
-      >
-              <h2
-                className=""
-              >Descripción</h2>
-              <textarea name="description" rows="3"
+              </div>
+            </div>
+            <div className="lg:w-full">
+              <h2 className="">Descripción</h2>
+              <textarea
+                name="description"
+                rows="3"
                 value={servicesInfo.description}
                 onChange={handleChange}
                 className="mb-4 w-full rounded-lg outline-none p-1"
-                placeholder="Ingresar descripcion..." ></textarea>
-      </div>
-      
-     <div
-      className="w-full flex flex-col items-center justify-center"
-     >
+                placeholder="Ingresar descripcion..."
+              ></textarea>
+            </div>
+
+            <div className="w-full flex flex-col items-center justify-center">
               <h2>Precio</h2>
-              <input placeholder="##" type="number" name="price" onChange={handleChange} value={servicesInfo.price} className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2" />
-     </div>
-      <h2>Imágen</h2>
-      <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 cursor-pointer ml-auto lg:ml-0 lg:flex lg:items-center"/>
-      <h2>Incluye</h2>
-      <select name="types" onChange={selectedChange} value={servicesInfo.types.join(',')} className="mb-4 outline-none p-1 rounded-lg">
-        <option value=""> Elegir servicio</option>
-        <option value="cv">Curriculum Vitae</option>
-        <option value="perfil">Perfil de Linkedin</option>
-        <option value="busqueda">Búsqueda Laboral</option>
-        <option value="practica">Capacitación</option>
-      </select>
+              <input
+                placeholder="##"
+                type="number"
+                name="price"
+                onChange={handleChange}
+                value={servicesInfo.price}
+                className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2"
+              />
+            </div>
+            <h2>Imágen</h2>
+            <input
+              type="file"
+              accept="image/*"
+              name="photo"
+              onChange={photoHandle}
+              className="mb-4 cursor-pointer ml-auto lg:ml-0 lg:flex lg:items-center"
+            />
+            <h2>Incluye</h2>
+            <select
+              name="types"
+              onChange={selectedChange}
+              value={servicesInfo.types.join(",")}
+              className="mb-4 outline-none p-1 rounded-lg dark:text-purple-900"
+            >
+              <option value=""> Elegir servicio</option>
+              <option value="cv">Curriculum Vitae</option>
+              <option value="perfil">Perfil de Linkedin</option>
+              <option value="busqueda">Búsqueda Laboral</option>
+              <option value="practica">Capacitación</option>
+            </select>
           </div>
-      <div className="flex justify-center items-center mt-2 mb-2">
-        
+          <div className="flex justify-center items-center mt-2 mb-2">
             <button
               type="submit"
               className="px-2 text-lgp py-2 my-8 border-2 border-custom-gray rounded-2xl transition duration-200 ease-in-out hover:bg-dark-violet hover:text-custom-gray hover:border-dark-violet hover:duration-200"
-            >Crear</button>
+            >
+              Crear
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-</div>
+    </div>
   );
 }
 

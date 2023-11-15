@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import example from '../assets/example.png'
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionLink } from "../Redux/Actions/actions";
+import { useNavigate } from "react-router-dom";
 
 
 
 const ServiceCards = ({img, name, description, items, modalidad, price, id}) => {
 
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.user)
@@ -26,7 +28,11 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     })
 
     function clickHandler(){
-        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        if(user.fullName){
+            dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        } else {
+            navigate('/login')
+        }
     }
 
     return(

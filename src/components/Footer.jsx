@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-import Logo from "../assets/logo.png"
-import Linkedin from "../assets/UilLinkedin.svg"
-import Instagram from "../assets/PhInstagramLogo.svg"
-import WhatsApp from "../assets/MdiWhatsapp.svg"
-import Gmail from "../assets/BxBxlGmail.svg"
+import Logo from "../assets/logo.png";
+import Linkedin from "../assets/UilLinkedin.svg";
+import Instagram from "../assets/PhInstagramLogo.svg";
+import WhatsApp from "../assets/MdiWhatsapp.svg";
+import Gmail from "../assets/BxBxlGmail.svg";
 
 function Footer() {
 
@@ -39,7 +39,12 @@ function Footer() {
             </div>
           </div>
           <div>
-            <img src={Logo} alt="Logo Footer" className="w-1/2  mx-auto" style={{ width: `90px` }} />
+            <img
+              src={Logo}
+              alt="Logo Footer"
+              className="w-1/2  mx-auto"
+              style={{ width: `90px` }}
+            />
             <p className="mt-5">&copy; 2023 CreVa Group</p>
             <p>Todos los derechos reservados.</p>
           </div>
@@ -47,28 +52,53 @@ function Footer() {
         <div className="flex justify-center mt-2">
           <div className="mx-4">
             <a href="https://www.instagram.com/creva.group/" target="_blank">
-              <img src={Instagram} alt="Instagram" className="" style={{ width: `40px` }} />
+              <img
+                src={Instagram}
+                alt="Instagram"
+                className=""
+                style={{ width: `40px` }}
+              />
             </a>
           </div>
           <div className="mx-4">
-            <a href="https://www.linkedin.com/company/creva-group/" target="_blank">
-              <img src={Linkedin} alt="Linkedin Logo" style={{ width: `40px` }} />
+            <a
+              href="https://www.linkedin.com/company/creva-group/"
+              target="_blank"
+            >
+              <img
+                src={Linkedin}
+                alt="Linkedin Logo"
+                style={{ width: `40px` }}
+              />
             </a>
           </div>
           <div className="mx-4">
             <a href={`mailto:crevagroup.global@gmail.com`} target="_blank">
-              <img src={Gmail} alt="Gmail" className="" style={{ width: `40px` }} />
+              <img
+                src={Gmail}
+                alt="Gmail"
+                className=""
+                style={{ width: `40px` }}
+              />
             </a>
           </div>
           <div className="mx-4">
-            <a href="https://api.whatsapp.com/send?phone=5491167867530&text=%C2%A1Hola%21+Quiero+conocer+m%C3%A1s+sobre+los+servicios+de+CreVa+Group." target="_blank">
-              <img src={WhatsApp} alt="WhatsApp" className="" style={{ width: `40px` }} />
+            <a
+              href="https://api.whatsapp.com/send?phone=5491167867530&text=%C2%A1Hola%21+Quiero+conocer+m%C3%A1s+sobre+los+servicios+de+CreVa+Group."
+              target="_blank"
+            >
+              <img
+                src={WhatsApp}
+                alt="WhatsApp"
+                className=""
+                style={{ width: `40px` }}
+              />
             </a>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer;
