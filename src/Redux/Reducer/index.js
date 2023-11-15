@@ -301,7 +301,12 @@ function rootReducer(state = initialState, action) {
     case DELETE_SERVICES:
       return {
         ...state,
-        services: [...state.services.filter(service => service.id !== action.payload)]
+        services: [...state.services.filter(service => service.id !== action.payload.id), action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: action.payload.deletedAt? 'SERVICIO ELIMINADO' : 'SERVICIO RESTAURADO',
+          message: action.payload.deletedAt? 'Se ha eliminado el servicio con éxito!' : 'Se ha restaurado el servicio con éxito!'
+        },
       };
     case UPDATE_SERVICES:
       return {};

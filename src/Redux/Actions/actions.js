@@ -482,7 +482,7 @@ export const deleteServices = (id) => {
       const response = await axios.delete(`/service/${id}`);
       return dispatch({
         type: DELETE_SERVICES,
-        payload: id,
+        payload: response.data,
       });
     } catch (error) {
       return dispatch({
