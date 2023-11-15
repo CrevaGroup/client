@@ -98,7 +98,7 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false);
-    dispatch(updateUser(infoUser, user));
+    dispatch(updateUser(infoUser, user, birthdate));
   }
 
   function deleteUser() {
@@ -135,7 +135,7 @@ function ProfileUser() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" />
+                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4" value={""} />
                 </div>) :
                 (<div className="rounded-full overflow-hidden w-3/4 h-3/4">
                   <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
@@ -237,6 +237,8 @@ function ProfileUser() {
 
           {isEditing ? (<h3>Curriculum: <input type="file" title=" asd" name="curriculum" onChange={curriculumHandle} className="mb-4 [appearance:button] ::-webkit-file-upload-button" /></h3>)
             : (<h3>Curriculum: {user.curriculum ? <a target="blank" href={user.curriculum}>Link</a> : null}</h3>)}
+
+          <h3>Mis compras: {user?.buys.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)}</h3>
 
           <div className="mt-4 space-x-4">
             <Button className="bg-dark-violet" onClick={deleteUser}>

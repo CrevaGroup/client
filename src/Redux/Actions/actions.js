@@ -223,7 +223,7 @@ export const deleteUserById = (id) => {
   };
 };
 
-export const updateUser = (properties, user) => {
+export const updateUser = (properties, user, birthdate) => {
   return async function (dispatch) {
     try {
       if(properties.curriculum !== user.curriculum){
@@ -234,6 +234,9 @@ export const updateUser = (properties, user) => {
         const photoURL = await App(properties.photo);
         properties.photo = photoURL
       }
+
+      const properties = {...properties, age: JSON.stringify(birthdate)}
+
       const { data } = await axios.put(`/user`, properties);
 
       if (properties.email !== user.email) {
