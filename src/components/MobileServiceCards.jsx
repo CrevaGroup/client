@@ -34,13 +34,13 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
             if(!user.nacionalidad){
                 if(country === "AR"){
                     dispatch(getTransactionLink(transactionInfo, "Argentina"))
-                }
-            }else{
-                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
-            }
+                }else{
+                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))}
+            
         } else {
             navigate('/login')
         }
+    }
     }
 
     return(
