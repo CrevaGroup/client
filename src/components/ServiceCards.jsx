@@ -32,14 +32,13 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
             if(!user.nacionalidad){
                 if(country === "AR"){
                     dispatch(getTransactionLink(transactionInfo, "Argentina"))
-                }
-            }else{
-                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
-            }
+                }else{
+                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))}
+            
         } else {
             navigate('/login')
         }
-    }
+    }}
 
     return(
         <div className="hidden lg:block group relative items-center justify-center overflow-hidden cursor-default hover:shadow-xl hover:shadow-black/10 transition-shadow w-[416px] h-[570px] rounded-3xl">
