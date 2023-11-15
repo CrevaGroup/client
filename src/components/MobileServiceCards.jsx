@@ -16,6 +16,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
 
     const user = useSelector(state => state.user)
     const usd = useSelector(state => state.config?.dolarValue);
+    const country = useSelector(state => state.config?.country);
 
     const [transactionInfo, setTransactionInfo] = useState({
         userId: user.id,
@@ -30,8 +31,14 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
 
     function clickHandler(){
         if(user.fullName){
-            dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
-        }else{
+            if(!user.nacionalidad){
+                if(country === "AR"){
+                    dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                }
+            }else{
+                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+            }
+        } else {
             navigate('/login')
         }
     }
@@ -75,7 +82,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                                 </div>
 
                                 <div className="flex flex-row justify-center items-center space-x-4">
-                                    {user.nacionalidad === 'Argentina'
+                                    {user.nacionalidad === 'Argentina' || country === "AR"
                                     ? <p className="text-white font-bold text-2xl ">{`$ ${Math.round(price * usd)}`} ARS</p>
                                     : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                                     }

@@ -29,7 +29,13 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
 
     function clickHandler(){
         if(user.fullName){
-            dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+            if(!user.nacionalidad){
+                if(country === "AR"){
+                    dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                }
+            }else{
+                dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+            }
         } else {
             navigate('/login')
         }
