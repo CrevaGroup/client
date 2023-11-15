@@ -15,14 +15,14 @@ function DarkMode() {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
   return (
-    <div className="w-[90%] absolute lg:fixed z-200 lg:top-[100px]  right-[0px] top-[20px]">
+    <div className=" h-0 absolute top-5 flex justify-end mx-6 w-[100%] bg-[#C3A3D0] lg:w-[100px] lg:right-[-1%]  lg:top-[10%]  ">
       <label class="switch-button" for="switch">
         <div class="switch-outer">
           <input
             id="switch"
             type="checkbox"
             onClick={toggleTheme}
-            className={` theme-switch__checkbox px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-300 ${
+            className={`theme-switch__checkbox px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-300 ${
               theme === "dark" ? "bg-gray-800 text-white" : ""
             }`}
             checked={theme === "light"}

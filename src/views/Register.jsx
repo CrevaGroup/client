@@ -100,7 +100,7 @@ function Register() {
   };
 
   return (
-    <div className="bg-gray-200 dark:bg-purple-800 min-h-screen flex flex-row">
+    <div className="bg-gray-200 dark:bg-purple-900 min-h-screen flex flex-row">
       <div className="w-full md:w-1/2 p-20 hidden md:flex md:items-center md:justify-center">
         <img src={nuevaImagen} alt="Nueva Imagen" className="w-full h-auto" />
       </div>
@@ -128,8 +128,12 @@ function Register() {
           className="p-8 rounded shadow-md w-full md:w-96"
         >
           <Link to="/">
-            <button className="text-gray-600 absolute top-0 left-0 mt-2 ml-2 w-8 h-8 rounded-full border-none">
-              <img src={flechaVolver} alt="" className="w-4 h-4 m-auto" />
+            <button className="text-gray-600 absolute top-0 left-0 mt-2 ml-2 w-8 h-8 rounded-full border-none dark:bg-white">
+              <img
+                src={flechaVolver}
+                alt=""
+                className="w-4 h-4 m-auto dark:text-purple-800"
+              />
             </button>
           </Link>
           <h1 className="text-2xl font-bold text-center text-white mb-4">

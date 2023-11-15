@@ -12,7 +12,7 @@ function Services() {
   }
 
   return (
-    <div className="mt-20 mb-20 flex items-center justify-center">
+    <div className="mt-20 mb-20 flex items-center justify-center dark:text-white">
       <div className="bg-white dark:bg-[#C3A3D0] p-4 rounded shadow-xl">
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between mt-5 mx-10 dark:bg-[#C3A3D0] p-4 rounded overflow-visible">
           <div>
