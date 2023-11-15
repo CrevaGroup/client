@@ -89,6 +89,7 @@ function ProfileUser() {
   function deleteUser() {
     dispatch(deleteUserById(user.id));
     dispatch(logout());
+    dispatch(clearPopupComponent());
   }
 
   function closePopup() {
