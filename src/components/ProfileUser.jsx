@@ -118,7 +118,7 @@ function ProfileUser() {
   }
 
   useEffect(() => {
-    countryRef.current.value = user?.nacionalidad;
+    // countryRef.current.value = user?.nacionalidad;
   }, [])
 
   return (
