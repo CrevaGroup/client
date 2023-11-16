@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUserById,
@@ -15,6 +15,10 @@ import { useLocation } from "react-router-dom";
 
 function ProfileUser() {
 
+  const countryRef = useRef();
+  const dayRef = useRef();
+  const monthRef = useRef();
+  const yearRef = useRef();
   const location = useLocation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -26,9 +30,10 @@ function ProfileUser() {
     email: user.email,
     age: user.age?calculateAge(JSON.parse(user.age)):null,
     nacionalidad: user.nacionalidad,
-    photo: "",
-    curriculum: "",
+    photo: user.photo,
+    curriculum: user.curriculum,
   });
+  const birthdayOk = JSON.parse(user?.age);
   const [meses, setMeses] = useState([
     "Enero",
     "Febrero",
@@ -60,7 +65,7 @@ function ProfileUser() {
   const [birthdate, setBirthdate] = useState({
     day: "",
     month: "",
-    year: currentYear,
+    year: "",
   });
 
   function photoHandle(event) {
@@ -96,6 +101,28 @@ function ProfileUser() {
   function closePopup() {
     dispatch(clearPopupComponent());
   }
+
+  useEffect(() => {
+    if (isEditing) {
+      countryRef.current.value = user?.nacionalidad;
+
+      console.log(birthdayOk)
+      
+      if (birthdayOk) {
+        dayRef.current.setValue([{ ...birthdayOk.day }]);
+        monthRef.current.setValue([{ ...birthdayOk.month }]);
+        yearRef.current.setValue([{ ...birthdayOk.year }]);
+    
+        setBirthdate({
+          day: birthdayOk.day,
+          month: birthdayOk.month,
+          year: birthdayOk.year
+        })
+      }
+    }
+  }, [isEditing])
+
+  //? age(pin):"{"day":{"label":"4","value":"4"},"month":{"label":"Abril","value":"4"},"year":{"label":"2020","value":"2020"}}"
 
   return (
     <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen dark:bg-purple-900 dark:text-white">
@@ -145,7 +172,7 @@ function ProfileUser() {
                         width: "80px",
                       }),
                     }}
-                    value={birthdate.day}
+                    ref={dayRef}
                     options={Array.from({ length: 31 }, (_, i) => ({
                       label: (i + 1).toString(),
                       value: (i + 1).toString(),
@@ -171,6 +198,7 @@ function ProfileUser() {
                         month: selectedOption,
                       })
                     }
+                    ref={monthRef}
                     styles={{
                       control: (provided) => ({
                         ...provided,
@@ -183,25 +211,25 @@ function ProfileUser() {
                   <Select
                     name="Año"
                     placeholder="Año"
-                    value={birthdate.year}
                     options={Array.from(
                       { length: currentYear - 1923 + 1 },
                       (_, i) => ({
                         label: (currentYear - i).toString(),
                         value: (currentYear - i).toString(),
                       })
-                    )}
+                      )}
                     onChange={(selectedOption) =>
                       setBirthdate({
                         ...birthdate,
                         year: selectedOption,
                       })
                     }
+                    ref={yearRef}
                     styles={{
                       control: (provided) => ({
                         ...provided,
                         width: "120px",
-                      }),
+                    }),
                     }}
                   />
                 </div>
@@ -213,7 +241,7 @@ function ProfileUser() {
               </div>
             )}
 
-          {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
+          {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} ref={countryRef} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
           </select></h3>
