@@ -117,7 +117,7 @@ function ProfileUser() {
     dispatch(clearPopupComponent());
   }
 
-  useEffect(() => {
+  useEffect(() => { 
     // countryRef.current.value = user?.nacionalidad;
   }, [])
 
