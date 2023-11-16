@@ -16,9 +16,9 @@ function Carrusel() {
     autoplaySpeed: 8000,
     responsive: [
       {
-        breakpoint: 1024, // Cambia a la pantalla más pequeña que "lg"
+        breakpoint: 1024,
         settings: {
-          arrows: false, // Oculta las flechas en dispositivos más pequeños
+          arrows: false,
         },
       },
     ],
