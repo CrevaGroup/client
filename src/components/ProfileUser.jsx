@@ -15,7 +15,7 @@ import { useLocation } from "react-router-dom";
 
 function ProfileUser() {
 
-  const countryRef = userRef();
+  const countryRef = useRef();
   const location = useLocation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
