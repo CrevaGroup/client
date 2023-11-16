@@ -29,7 +29,7 @@ function ProfileUser() {
     photo: "",
     curriculum: "",
   });
-
+  console.log(infoUser.age);
   const [meses, setMeses] = useState([
     "Enero",
     "Febrero",
