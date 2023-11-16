@@ -70,8 +70,11 @@ function ProfileUser() {
 
   const [birthdate, setBirthdate] = useState({
     day: JSON.parse(user?.age).day.label,
+    dayValue: JSON.parse(user?.age).day.value,
     month: JSON.parse(user?.age).month.label,
+    monthValue: JSON.parse(user?.age).month.value,
     year: JSON.parse(user?.age).year.label,
+    yearValue: JSON.parse(user?.age).year.value,
   });
 
   function photoHandle(event) {
@@ -156,7 +159,7 @@ function ProfileUser() {
                         width: "80px",
                       }),
                     }}
-                    value={birthdate.day}
+                    defaultValue={{ label: birthdate.day, value: birthdate.dayValue }}
                     options={Array.from({ length: 31 }, (_, i) => ({
                       label: (i + 1).toString(),
                       value: (i + 1).toString(),
@@ -172,6 +175,7 @@ function ProfileUser() {
                   />
 
                   <Select name="" id="" placeholder="Mes"
+                    defaultValue={{ label: birthdate.month, value: birthdate.monthValue }}
                     options={meses.map((month, index) => ({
                       label: month,
                       value: (index + 1).toString(),
@@ -194,7 +198,7 @@ function ProfileUser() {
                   <Select
                     name="Año"
                     placeholder="Año"
-                    value={birthdate.year}
+                    defaultValue={{ label: birthdate.year, value: birthdate.yearValue }}
                     options={Array.from(
                       { length: currentYear - 1923 + 1 },
                       (_, i) => ({
