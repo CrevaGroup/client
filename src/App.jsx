@@ -13,6 +13,7 @@ import Community from "./views/Community";
 import Success from "./views/Success";
 import Failure from "./views/Failure";
 import Dashboard from "./views/Dashboard";
+import Error from "./views/Error";
 
 import Navbar from "./components/Navbar";
 import ProfileUser from "./components/ProfileUser";
@@ -20,7 +21,7 @@ import AlertNotif from "./components/AlertNotif";
 
 import "./App.css";
 import { setLocalStorage, getConfig } from "./Redux/Actions/actions";
-import DarkMode from "./components/darkMode";
+import DarkMode from "./components/DarkMode";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/Success" element={<Success />} />
         <Route path="/Failure" element={<Failure />} />
+        <Route path="*" element={<Error />}/>
       </Routes>
     </div>
   );

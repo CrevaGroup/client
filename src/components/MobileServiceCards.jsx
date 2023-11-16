@@ -2,8 +2,12 @@ import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import example from '../assets/example.png'
+import { getTransactionLink, setPopup } from "../Redux/Actions/actions";
+import { useNavigate } from "react-router-dom";
+import calculateAge from "../Utils/calculateAge";
 const MobileServiceCards = ({img, name, description, price, id, items, modalidad}) => {
     const [open,setOpen] = useState(false);
+    const navigate = useNavigate()
 
     const cardHandler = () => {
         setOpen(curr => !curr);
@@ -13,6 +17,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
 
     const user = useSelector(state => state.user)
     const usd = useSelector(state => state.config?.dolarValue);
+    const country = useSelector(state => state.config?.country);
 
     const [transactionInfo, setTransactionInfo] = useState({
         userId: user.id,
@@ -26,7 +31,22 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
     })
 
     function clickHandler(){
-        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
+            if(user.fullName){
+                if(!user.nacionalidad){
+                    if(country === "AR"){
+                        dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+                    }
+                        
+                    } else {
+                        navigate('/login')
+                    }
+                }
+        } else {
+            dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad!'))
+        }
     }
 
     return(
@@ -68,7 +88,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                                 </div>
 
                                 <div className="flex flex-row justify-center items-center space-x-4">
-                                    {user.nacionalidad === 'Argentina'
+                                    {user.nacionalidad === 'Argentina' || country === "AR"
                                     ? <p className="text-white font-bold text-2xl ">{`$ ${Math.round(price * usd)}`} ARS</p>
                                     : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                                     }

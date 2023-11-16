@@ -199,7 +199,7 @@ export default function Dashboard() {
             </ul>
           </nav>
         </header>
-        <div className="p-4 lg:p-12 bg-gray-100 dark:bg-purple-900">
+        <div className="lg:p-12 bg-gray-100 dark:bg-purple-900">
           <Routes>
             <Route path="/newservices" element={<MainDashboard />} />
             <Route path="/profile" element={<ProfileUser />} />

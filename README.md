@@ -16,6 +16,8 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Tecnologías Utilizadas 🛠
 
+### Front End
+
 - **React:** Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
 
 - **Redux:** Manejo del estado de la aplicación para un flujo de datos predecible.
@@ -29,23 +31,27 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Instalacion y Uso ⚙
 
-  1. Clona este repositorio:
+  1. Clona estos repositorios:
 
      git clone https://github.com/CrevaGroup/client.git
+
+     git clone https://github.com/CrevaGroup/server.git
   
   3. Instala las dependencias:
      
      npm install
   
   5. Inicia la aplicacion:
-     
-     npm run dev
+
+     Client: npm run dev
+
+     Server: npm start
      
 ## Estado del Proyecto 📈
 
 ### Desarrollo Actual
 - **Version:** 1.0.0
-- **Ultima Actualizacion:** 13 de Noviembre 2023
+- **Ultima Actualizacion:** 16 de Noviembre 2023
 
 ## Equipo de Desarrollo 👨🏻‍💻
 

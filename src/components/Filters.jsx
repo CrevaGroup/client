@@ -39,14 +39,14 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: e.target.value
+                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
             }));
         }
 
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: e.target.value
+                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
             }));
         }
     };
