@@ -14,10 +14,18 @@ function Carrusel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 8000,
+    responsive: [
+      {
+        breakpoint: 1024, // Cambia a la pantalla más pequeña que "lg"
+        settings: {
+          arrows: false, // Oculta las flechas en dispositivos más pequeños
+        },
+      },
+    ],
   };
 
   return (
-    <div className="max-w-2xl lg:m-auto mr-2 overflow-hidden">
+    <div className="max-w-2xl lg:m-auto">
       <Slider {...config}>
         <div className="relative">
           <img

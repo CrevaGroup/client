@@ -22,7 +22,7 @@ const Home = () => {
     <div className="bg-custom-gray dark:bg-purple-900 dark:text-custom-gray">
       <div className="flex flex-col mb-24 lg:flex-row">
         <div
-          style={{ textAlign: "start", marginLeft: "8px", marginTop: `2px` }}
+          style={{ textAlign: "start", marginLeft: "1px", marginTop: `2px` }}
           className="lg:w-1/2 lg:p-8 mt-12 ml-12">
           <h1 className="text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl ">
             Despega tu carrera laboral
