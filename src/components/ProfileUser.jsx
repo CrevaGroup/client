@@ -33,7 +33,8 @@ function ProfileUser() {
     photo: user.photo,
     curriculum: user.curriculum,
   });
-  const birthdayOk = JSON.parse(user?.age);
+  console.log(infoUser);
+  const birthdateOk = JSON.parse(user?.age);
   const [meses, setMeses] = useState([
     "Enero",
     "Febrero",
@@ -106,17 +107,17 @@ function ProfileUser() {
     if (isEditing) {
       countryRef.current.value = user?.nacionalidad;
 
-      console.log(birthdayOk)
+      console.log(birthdateOk)
       
-      if (birthdayOk) {
-        dayRef.current.setValue([{ ...birthdayOk.day }]);
-        monthRef.current.setValue([{ ...birthdayOk.month }]);
-        yearRef.current.setValue([{ ...birthdayOk.year }]);
+      if (birthdateOk) {
+        dayRef.current.setValue([{ ...birthdateOk.day }]);
+        monthRef.current.setValue([{ ...birthdateOk.month }]);
+        yearRef.current.setValue([{ ...birthdateOk.year }]);
     
         setBirthdate({
-          day: birthdayOk.day,
-          month: birthdayOk.month,
-          year: birthdayOk.year
+          day: birthdateOk.day,
+          month: birthdateOk.month,
+          year: birthdateOk.year
         })
       }
     }

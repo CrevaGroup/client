@@ -228,6 +228,7 @@ export const deleteUserById = (id) => {
 export const updateUser = (properties, user, birthdate) => {
   return async function (dispatch) {
     try {
+      console.log(properties, user, birthdate)
       if(properties.curriculum !== user.curriculum){
         const cvURL = await App(properties.curriculum);
         properties.curriculum = cvURL
@@ -236,12 +237,10 @@ export const updateUser = (properties, user, birthdate) => {
         const photoURL = await App(properties.photo);
         properties.photo = photoURL
       }
-
-      let allProperties = properties
-      if (birthdate) allProperties = {...properties, age: JSON.stringify(birthdate)}
-
+      const allProperties = {...properties, age: JSON.stringify(birthdate)}
+      console.log(allProperties)
       const { data } = await axios.put(`/user`, allProperties);
-
+    
       if (properties.email !== user.email) {
         const firebaseUpdateEmail = await verifyBeforeUpdateEmail(
           auth.currentUser,
