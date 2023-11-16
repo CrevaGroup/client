@@ -1,4 +1,4 @@
-const calculateAge = (birthdate ) => {
+const calculateAge = (birthdate) => {
     const birthdateObj = new Date(
       birthdate.year.value,
       birthdate.month.value - 1,
