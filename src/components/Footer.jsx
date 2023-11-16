@@ -17,7 +17,7 @@ function Footer() {
 
   return (
 
-    <footer className="bg-custom-gray text-black py-6">
+    <footer className="bg-custom-gray text-black py-6 dark:bg-[#C2A3D1] dark:text-white">
       <div className="container mx-auto text-center">
         <hr className="border-gray-400 mb-4" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

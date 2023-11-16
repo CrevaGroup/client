@@ -11,9 +11,11 @@ import { Button, input } from "@material-tailwind/react";
 import Select from "react-select";
 import Close from "../assets/closeIcon.svg";
 import calculateAge from "../Utils/calculateAge";
+import { useLocation } from "react-router-dom";
 
 function ProfileUser() {
 
+  const location = useLocation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const currentYear = new Date().getFullYear();
@@ -98,9 +100,9 @@ function ProfileUser() {
 
   return (
     <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen dark:bg-purple-900 dark:text-white">
-      <button onClick={closePopup}>
+      {location.pathname !== "/dashboard/profile" && <button onClick={closePopup}>
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
-      </button>
+      </button>}
       <div className="text-center">
         <h1 className="text-4xl mb-2">Mi Perfil</h1>
       </div>
