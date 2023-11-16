@@ -35,6 +35,8 @@ import {
   GET_ONEUSER,
   GET_ONESERVICE,
   SET_POPUP_COMPONENT,
+  DELETE_POSTIG,
+  DELETE_POSTTEXT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -240,11 +242,23 @@ function rootReducer(state = initialState, action) {
         postIg:[...state.postIg, action.payload],
       };
 
+    case DELETE_POSTIG:
+      return {
+        ...state,
+        postIg: [...state.postIg.filter(post => post.id !== action.payload.id)]
+      }
+
     case CREATE_POSTTEXT:
       return{
         ...state,
         postText:[...state.postText, action.payload],
       };
+
+    case DELETE_POSTTEXT:
+      return{
+        ...state,
+        postText: [...state.postText.filter(post => post.id !== action.payload.id)]
+      }
 
     case LOGOUT:
       return{

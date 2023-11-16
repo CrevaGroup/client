@@ -48,6 +48,8 @@ import {
   GET_ONESERVICE,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  DELETE_POSTIG,
+  DELETE_POSTTEXT,
 } from "./actions-type";
 
 import axios from "axios";
@@ -688,6 +690,28 @@ export const createPostIg = (postURL) => {
   }
 }
 
+export const deletePostIg = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`/igpost/${id}`,);
+      return dispatch({
+        type: DELETE_POSTIG,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type:SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+        }
+      });
+    }
+  }
+}
+
+
 export const createPostText = (title, content) => {
   return async dispatch => {
     try {
@@ -701,6 +725,27 @@ export const createPostText = (title, content) => {
       });
     } catch(error) {
       alert(error.message);
+    }
+  }
+}
+
+export const deletePostText = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`/textblog/${id}`);
+      return dispatch({
+        type: DELETE_POSTTEXT,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type:SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+        }
+      });
     }
   }
 }
