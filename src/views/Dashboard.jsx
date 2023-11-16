@@ -46,11 +46,11 @@ export default function Dashboard() {
 
   const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (Object.keys(user).length) {
-      if (!user.admin) navigate("/");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (Object.keys(user).length) {
+  //     if (!user.admin) navigate("/");
+  //   }
+  // }, [user]);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -73,7 +73,7 @@ export default function Dashboard() {
             />
           </a>
         </div>
-        <div className=" flex flex-col justify-between h-[800px]">
+        <div className=" flex flex-col justify-between  lg:h-[800px]">
           <nav>
             <ul>
               <li>
@@ -159,42 +159,22 @@ export default function Dashboard() {
           <nav className="w-full md:w-[60%] lg:w-[70%] flex justify-center md:justify-end ">
             <ul className="flex items-center gap-4 dark:text-white">
               <li>
+                <p
+                  className=" cursor-default  mx-4 lg:mx-10 "
+                >
+                  {user.fullName} Axel Choque
+                </p>
+              </li>
+              <li
+                className="font-bold"
+              >
                 <NavLink to={"/"}>Cerrar</NavLink>
               </li>
               <li className="relative">
                 {/* Agrega el menú desplegable aquí */}
-                <div
-                  className={`${
-                    dropdownOpen ? "block" : "hidden"
-                  } absolute p-2  mt-7 right-0 w-[150px] bg-white border rounded-lg shadow-lg`}
-                >
-                  <ul className="py-2  ">
-                    <li>
-                      <a
-                        href="#"
-                        className="p-1 flex justify-between hover:bg-purple-400 transition-colors rounded-lg items-center"
-                      >
-                        Configuración <GrConfigure />
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={logoutHandler}
-                        href="#"
-                        className="p-1 flex justify-between hover:bg-purple-400 transition-colors rounded-lg items-center"
-                      >
-                        Cerrar Sesión <BiLogOutCircle />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                
                 {/* Fin del menú desplegable */}
-                <a
-                  className="flex items-center gap-1 cursor-pointer"
-                  onClick={toggleDropdown}
-                >
-                  {user.fullName} <MdKeyboardArrowDown />
-                </a>
+                
               </li>
             </ul>
           </nav>
