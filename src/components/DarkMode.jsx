@@ -5,14 +5,16 @@ function DarkMode() {
 
   const location = useLocation()
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
 
   useEffect(() => {
     const htmlElement = document.documentElement;
     if (theme === "dark") {
       htmlElement.classList.add("dark");
+      localStorage.setItem("theme", "dark")
     } else {
       htmlElement.classList.remove("dark");
+      localStorage.setItem("theme", "light")
     }
   }, [theme]);
   const toggleTheme = () => {
