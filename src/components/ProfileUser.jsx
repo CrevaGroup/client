@@ -69,9 +69,9 @@ function ProfileUser() {
   ]);
 
   const [birthdate, setBirthdate] = useState({
-    day: "",
-    month: "",
-    year: currentYear,
+    day: JSON.parse(user?.age).day.label,
+    month: JSON.parse(user?.age).month.label,
+    year: JSON.parse(user?.age).year.label,
   });
 
   function photoHandle(event) {
@@ -224,7 +224,7 @@ function ProfileUser() {
               </div>
             )}
 
-          {isEditing ? (<h3 className="mt-3">Pais: <select value='México' onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
+          {isEditing ? (<h3 className="mt-3">Pais: <select value={user?.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
           </select></h3>
