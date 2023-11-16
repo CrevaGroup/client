@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { getUser, googleLogin } from "../Redux/Actions/actions";
 import imgLogin from "../assets/Mobile login-pana.png";
 import imgGoogle from "../assets/LogosGoogleIcon.svg";
+import eye from '../assets/eye.svg';
+import eyeslash from '../assets/eye-slash.svg'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -96,7 +98,7 @@ const Login = () => {
                 className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
-                placeholder="Usuario"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -111,8 +113,16 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button
-                style={{
+              {
+                showPassword ? <img src={eye} className=" h-6 w-6" onClick={() => setShowPassword(!showPassword)}  style = {{
+                  position: "absolute",
+                    top: "50%",
+                right: "10px",
+              transform: "translateY(-50%)",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+                }}></img> : <img src={eyeslash} className="h-6 w-6" onClick={() => setShowPassword(!showPassword)}  style={{
                   position: "absolute",
                   top: "50%",
                   right: "10px",
@@ -120,11 +130,9 @@ const Login = () => {
                   border: "none",
                   background: "transparent",
                   cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <div>{showPassword ? "👁" : "👁️‍🗨️"}</div>
-              </button>
+                }}></img>
+              }
+              
             </div>
             <div className="mb-3 text-center">
               <button
@@ -165,21 +173,26 @@ const Login = () => {
               className="text-center"
               style={{ marginTop: "-20px", padding: "10px" }}
             >
-              <a style={{ fontSize: ".8rem" }} className="text-white" href="#">
+              <p style={{ fontSize: ".8rem" }} className="text-white" href="#">
                 ¿Olvidaste tu contraseña?
-              </a>
+              </p>
             </div>
-            <p
-              style={{ fontSize: ".8rem" }}
-              className="text-center text-white text-xs"
+            <div
+              className="flex items-center justify-center"
             >
-              ¿No tienes cuenta?{" "}
+              <p
+                style={{ fontSize: ".8rem" }}
+                className="text-center text-white text-xs mx-2"
+              >
+                ¿No tienes cuenta?{" "}
+              </p>
               <Link to="/register">
-                <a className="text-blue-500 hover:text-gray-500" href="#">
+                <p className="text-blue-500 hover:text-gray-500" href="#">
                   Regístrate aquí
-                </a>
+                </p>
               </Link>
-            </p>
+            </div>
+
           </div>
         </div>
       ) : (
@@ -242,7 +255,7 @@ const Login = () => {
                 className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
-                placeholder="Usuario"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -257,20 +270,25 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  right: "10px",
-                  transform: "translateY(-50%)",
-                  border: "none",
-                  background: "transparent",
-                  cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <div>{showPassword ? "👁" : "👁️‍🗨️"}</div>
-              </button>
+                {
+                  showPassword ? <img src={eye} className=" h-6 w-6" onClick={() => setShowPassword(!showPassword)} style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}></img> : <img src={eyeslash} className="h-6 w-6" onClick={() => setShowPassword(!showPassword)} style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}></img>
+                }
             </div>
             <div className="mb-3 text-center">
               <button
@@ -304,17 +322,23 @@ const Login = () => {
                 ¿Olvidaste tu contraseña?
               </a>
             </div>
-            <p
-              style={{ fontSize: ".8rem" }}
-              className="text-center text-white text-xs"
-            >
-              ¿No tienes cuenta?{" "}
-              <Link to="/register">
-                <a className="text-blue-500 hover:text-gray-500" href="#">
-                  Regístrate aquí
-                </a>
-              </Link>
-            </p>
+            <div
+              className="flex items-center justify-center"
+            > 
+                <p
+                  style={{ fontSize: ".8rem" }}
+                  className="text-center text-white text-xs mx-2"
+                >
+                  ¿No tienes cuenta?{" "}
+                </p>
+
+                <Link to="/register">
+                  <p className="text-blue-500 hover:text-gray-500 " href="#">
+                    Regístrate aquí
+                  </p>
+                </Link>
+            </div>
+
           </div>
         </div>
       )}

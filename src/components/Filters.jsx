@@ -39,14 +39,14 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: e.target.value
+                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
             }));
         }
 
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: e.target.value
+                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
             }));
         }
     };
@@ -69,7 +69,7 @@ const Filters = () => {
 
     return(
         <div
-            className="flex flex-col w-full   items-center justify-center"
+            className="flex flex-col w-full   items-center justify-center  dark:text-white"
         >
             <div className=" grid grid-cols-1 lg:grid-cols-3 lg:w-1/2 my-4 cursor-default">
             
@@ -80,7 +80,7 @@ const Filters = () => {
                     className="flex items-center justify-center"
                 >
                 <p
-                    className="font-bold text-dark-gray-blue "
+                    className="font-bold text-dark-gray-blue  dark:text-white"
                 >Rango de precio</p>
                 </div>
                 <div
@@ -121,7 +121,7 @@ const Filters = () => {
             <div
                 className="flex flex-col items-center my-4 lg:my-0"
             >
-                <p className="font-bold mb-2 text-dark-gray-blue">Incluye</p>
+                <p className="font-bold mb-2 text-dark-gray-blue  dark:text-white">Incluye</p>
                  <Select
                     className='w-60'
                     defaultValue={[]}
@@ -143,7 +143,7 @@ const Filters = () => {
                 className="flex flex-col items-center my-4 lg:my-0"
             >
                 <p
-                    className="font-bold mb-2 text-dark-gray-blue"
+                    className="font-bold mb-2 text-dark-gray-blue  dark:text-white"
                 >Ordenar por precio</p>
                 
                 <select

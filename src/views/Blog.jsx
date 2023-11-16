@@ -6,7 +6,7 @@ import { InstagramEmbed } from "react-social-media-embed";
 import EditDocument from "../assets/EditDocument.svg";
 import BlogsMenu from "../components/BlogsMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostIg, getPostText } from "../Redux/Actions/actions";
+import { deletePostIg, deletePostText, getPostIg, getPostText } from "../Redux/Actions/actions";
 
 const Blog = () => {
   const [postMenu, setPostMenu] = useState(false);
@@ -39,6 +39,16 @@ const Blog = () => {
     setQuant(quant);
   }, [postsIg]);
 
+  const deleteIg = async id => {
+    await dispatch(deletePostIg(id));
+    await dispatch(getPostIg());
+  }
+
+  const deleteText = async id => {
+    await dispatch(deletePostText(id));
+    await dispatch(getPostText());
+  }
+
   return (
     <div>
       <div className=" flex flex-col min-h-screen h-full w-full bg-custom-gray cursor-default dark:bg-purple-900 ">
@@ -66,23 +76,48 @@ const Blog = () => {
         <div className="flex items-center justify-center">
           <img className=" h-48 lg:h-[560px] " src={blog}></img>
         </div>
+        <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
+        <h2 className="text-2xl lg:text-3xl font-semibold text-dark-gray-blue my-8">
+            Posteos
+          </h2>
+        </div>
         <div className="flex  flex-col items-center justify-center my-16">
           {postsIg.length > 0 ? (
             <div
               className={`grid grid-cols-1 ${quant} gap-x-8  gap-y-8  w-full lg:mx-16`}
             >
               {postsIg.map((post, index) => (
-                <div key={index} className="flex justify-center w-full">
+                
+                <div key={index} className=" flex justify-center w-full">
+                  <div
+                    className="relative"
+                  >
+                    {
+                    user.admin ? <div
+                      className="absolute top-1 right-1 z-50 cursor-pointer "
+                        onClick={() => { deleteIg(post.id) }}
+                    >
+                      <p
+                        className="bg-black/30 text-white rounded-full h-6 w-6 flex  items-center justify-center"
+                      >X</p>
+                    </div> : ''
+                  }
                   <InstagramEmbed
                     className="w-[328px] lg:w-[400px]"
                     url={`${post.url}`}
                   />
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            ""
+            ''
           )}
+           <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
+        <h2 className="text-2xl lg:text-3xl font-semibold text-dark-gray-blue my-8">
+            Noticias
+          </h2>
+        </div>
 
           {postsText.length > 0 ? (
             <div className="flex flex-col items-center justify-center my-8 w-full dark:text-white">
@@ -99,11 +134,24 @@ const Blog = () => {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col w-10/12 lg:w-3/5 justify-center my-4 text-dark-gray-blue"
+                    className="flex flex-col w-10/12 lg:w-3/5 justify-center my-4 text-dark-gray-blue dark:text-white relative "
                   >
-                    <div className="flex flex-col lg:flex-row my-4 items-center ">
+                    
+                      {
+                        user.admin ? <div
+                          className="absolute top-1 right-1 z-50 cursor-pointer "
+                          onClick={() => { deleteText(post.id) }}
+                        >
+                          <p
+                            className="bg-black/30 text-white rounded-full h-6 w-6 flex  items-center justify-center"
+                          >X</p>
+                        </div> : ''
+                      }
+
+                    
+                    <div className="flex flex-col lg:flex-row my-4 items-center  ">
                       <h1 className="font-bold text-3xl">{post.title}</h1>
-                      <p className="mr-auto my-2 lg:ml-auto lg:mr-0">
+                      <p className=" my-2 lg:ml-auto lg:mr-0 ">
                         {fechaFormateada}
                       </p>
                     </div>

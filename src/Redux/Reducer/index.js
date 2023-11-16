@@ -35,6 +35,8 @@ import {
   GET_ONEUSER,
   GET_ONESERVICE,
   SET_POPUP_COMPONENT,
+  DELETE_POSTIG,
+  DELETE_POSTTEXT,
 } from "../Actions/actions-type";
 
 let initialState = {
@@ -148,7 +150,14 @@ function rootReducer(state = initialState, action) {
     case DELETE_USER:
       return {
         ...state,
-        allUsers: [...state.allUsers.filter(user => user.id !== action.payload)]
+        allUsers: [...state.allUsers.filter(user => user.id !== action.payload.id), action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: action.payload.deletedAt? 'USUARIO ELIMINADO' : 'USUARIO RESTAURADO',
+          message: action.payload.deletedAt? 'Se ha eliminado el usuario con éxito!' : 'Se ha restaurado el usuario con éxito!'
+        },
+        reviews: []
+        
       }
 
     case GOOGLE_LOGIN:
@@ -233,11 +242,23 @@ function rootReducer(state = initialState, action) {
         postIg:[...state.postIg, action.payload],
       };
 
+    case DELETE_POSTIG:
+      return {
+        ...state,
+        postIg: [...state.postIg.filter(post => post.id !== action.payload.id)]
+      }
+
     case CREATE_POSTTEXT:
       return{
         ...state,
         postText:[...state.postText, action.payload],
       };
+
+    case DELETE_POSTTEXT:
+      return{
+        ...state,
+        postText: [...state.postText.filter(post => post.id !== action.payload.id)]
+      }
 
     case LOGOUT:
       return{
@@ -294,7 +315,13 @@ function rootReducer(state = initialState, action) {
     case DELETE_SERVICES:
       return {
         ...state,
-        services: [...state.services.filter(service => service.id !== action.payload)]
+        services: [...state.services.filter(service => service.id !== action.payload.id), action.payload],
+        popup: {
+          type: 'NOTIF',
+          title: action.payload.deletedAt? 'SERVICIO ELIMINADO' : 'SERVICIO RESTAURADO',
+          message: action.payload.deletedAt? 'Se ha eliminado el servicio con éxito!' : 'Se ha restaurado el servicio con éxito!'
+        },
+        reviews:[]
       };
     case UPDATE_SERVICES:
       return {};

@@ -2,8 +2,12 @@ import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import example from '../assets/example.png'
+import { getTransactionLink, setPopup } from "../Redux/Actions/actions";
+import { useNavigate } from "react-router-dom";
+import calculateAge from "../Utils/calculateAge";
 const MobileServiceCards = ({img, name, description, price, id, items, modalidad}) => {
     const [open,setOpen] = useState(false);
+    const navigate = useNavigate()
 
     const cardHandler = () => {
         setOpen(curr => !curr);
@@ -13,6 +17,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
 
     const user = useSelector(state => state.user)
     const usd = useSelector(state => state.config?.dolarValue);
+    const country = useSelector(state => state.config?.country);
 
     const [transactionInfo, setTransactionInfo] = useState({
         userId: user.id,
@@ -26,13 +31,28 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
     })
 
     function clickHandler(){
-        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+        if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
+            if(user.fullName){
+                if(!user.nacionalidad){
+                    if(country === "AR"){
+                        dispatch(getTransactionLink(transactionInfo, "Argentina"))
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+                    }
+                        
+                    } else {
+                        navigate('/login')
+                    }
+                }
+        } else {
+            dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad!'))
+        }
     }
 
     return(
         <div className={`lg:hidden   overflow-hidden   rounded-3xl transition-all duration-300`}>
             <div>
-                <div className={`flex flex-col  items-center justify-center text-center  bg-black/70`}>
+                <div className={`flex flex-col  items-center justify-center text-center  bg-gradient-to-b from-black/70 to-black/60`}>
                     <h1 className="flex text-2xl font-bold text-white lg:hidden h-16  text-center items-center">
                         {name}
                     </h1>
@@ -43,13 +63,13 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                 </div>
                 <Collapse open={open}>
                     <div>
-                       <div className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] min-h-[450px]  rounded-br-3xl rounded-bl-3xl  transition-all duration-300`}>
+                       <div className={`block group relative items-center justify-center overflow-hidden cursor-default  w-[352px] min-h-[530px]  rounded-br-3xl rounded-bl-3xl  transition-all duration-300`}>
                             <img
                                 className="h-full w-full object-cover "
                                 src={img}
                                 alt="ex"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/50"></div>
                             <div className="absolute inset-0 flex flex-col items-center justify-center px-9 text-center ">
                                 <div className="text-light-gray">
                                     <p>{description}</p>
@@ -68,7 +88,7 @@ const MobileServiceCards = ({img, name, description, price, id, items, modalidad
                                 </div>
 
                                 <div className="flex flex-row justify-center items-center space-x-4">
-                                    {user.nacionalidad === 'Argentina'
+                                    {user.nacionalidad === 'Argentina' || country === "AR"
                                     ? <p className="text-white font-bold text-2xl ">{`$ ${Math.round(price * usd)}`} ARS</p>
                                     : <p className="text-white font-bold text-2xl ">{`$ ${price} USD`}</p>
                                     }

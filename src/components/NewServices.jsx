@@ -173,146 +173,151 @@ function NewServices() {
     */
 
   return (
-    <div className="flex  justify-center items-center  w-full h-full dark:text-white  ">
-      <div className="p-8 rounded-lg mt-5 mb-5 bg-light-violet lg:w-3/5  items-center justify-center text-xl text-black dark:text-white">
+    <div className=" flex justify-center items-center  w-full h-full dark:text-white  " >
+      <div className="lg:p-8 rounded-lg my-5 bg-light-violet lg:w-3/5  items-center justify-center text-xl text-black dark:text-white " >
         <form
           onSubmit={submitHandler}
-          className="flex flex-col w-full items-center"
+          
         >
-          <h1 className="text-3xl my-4 text-black">Crear un nuevo servicio</h1>
-          <div className="flex flex-col items-center justify-center w-3/4 ">
-            <div className="w-full">
-              <h2>Nombre</h2>
-              <input
-                placeholder="Ingresar nombre..."
-                type="text"
-                name="name"
-                onChange={handleChange}
-                value={servicesInfo.name}
-                className=" mb-4 w-full rounded-lg outline-none p-1"
-              />
-            </div>
-            <div className=" w-full">
-              <h2>Items</h2>
-              <div className="lg:flex w-full ">
-                <div className="w-full ">
-                  {Array.from({ length: itemsQ }, (_, index) => (
-                    <input
-                      key={index}
-                      placeholder="Ingresar items..."
-                      type="text"
-                      name={`items-${index}`}
-                      onChange={handleChange}
-                      value={servicesInfo.items[index]}
-                      className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
-                    />
-                  ))}
-                </div>
+          <div
+            className="flex flex-col items-center"
+          >
+            <h1 className="text-3xl my-8 text-black ">Crear un nuevo servicio</h1>
+            <div className="flex flex-col items-center justify-center w-3/4 ">
+              <div className="w-full">
+                <h2>Nombre</h2>
+                <input
+                  placeholder="Ingresar nombre..."
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  value={servicesInfo.name}
+                  className=" mb-4 w-full rounded-lg outline-none p-1"
+                />
+              </div>
+              <div className=" w-full">
+                <h2>Items</h2>
+                <div className="lg:flex w-full ">
+                  <div className="w-full ">
+                    {Array.from({ length: itemsQ }, (_, index) => (
+                      <input
+                        key={index}
+                        placeholder="Ingresar items..."
+                        type="text"
+                        name={`items-${index}`}
+                        onChange={handleChange}
+                        value={servicesInfo.items[index]}
+                        className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
+                      />
+                    ))}
+                  </div>
 
-                <div className="flex font-bold  justify-center dark:text-purple-800">
-                  <button
-                    value={1}
-                    onClick={itemsHandler}
-                    className="bg-white rounded-full w-8 h-8 mx-4"
-                  >
-                    +
-                  </button>
-                  <button
-                    value={0}
-                    onClick={itemsHandler}
-                    className="bg-white rounded-full w-8 h-8 mx-4"
-                  >
-                    -
-                  </button>
+                  <div className="flex font-bold  justify-center dark:text-purple-800">
+                    <button
+                      value={1}
+                      onClick={itemsHandler}
+                      className="bg-white rounded-full w-8 h-8 mx-4"
+                    >
+                      +
+                    </button>
+                    <button
+                      value={0}
+                      onClick={itemsHandler}
+                      className="bg-white rounded-full w-8 h-8 mx-4"
+                    >
+                      -
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="w-full">
-              <h2>Modalidades</h2>
-              <div className="lg:flex w-full dark:text-purple-800">
-                <div className="w-full">
-                  {Array.from({ length: modalityQ }, (_, index) => (
-                    <input
-                      key={index}
-                      placeholder="Ingresar modalidades..."
-                      type="text"
-                      name={`modalidad-${index}`}
-                      onChange={handleChange}
-                      value={servicesInfo.modalidad[index]}
-                      className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
-                    />
-                  ))}
-                </div>
-                <div className="flex font-bold justify-center">
-                  <button
-                    value={1}
-                    onClick={modalityHandler}
-                    className="bg-white rounded-full w-8 h-8 mx-4"
-                  >
-                    +
-                  </button>
-                  <button
-                    value={0}
-                    onClick={modalityHandler}
-                    className="bg-white rounded-full w-8 h-8 mx-4"
-                  >
-                    -
-                  </button>
+              <div className="w-full">
+                <h2>Modalidades</h2>
+                <div className="lg:flex w-full dark:text-purple-800">
+                  <div className="w-full">
+                    {Array.from({ length: modalityQ }, (_, index) => (
+                      <input
+                        key={index}
+                        placeholder="Ingresar modalidades..."
+                        type="text"
+                        name={`modalidad-${index}`}
+                        onChange={handleChange}
+                        value={servicesInfo.modalidad[index]}
+                        className=" mr-4 mb-4 w-full rounded-lg outline-none p-1"
+                      />
+                    ))}
+                  </div>
+                  <div className="flex font-bold justify-center">
+                    <button
+                      value={1}
+                      onClick={modalityHandler}
+                      className="bg-white rounded-full w-8 h-8 mx-4"
+                    >
+                      +
+                    </button>
+                    <button
+                      value={0}
+                      onClick={modalityHandler}
+                      className="bg-white rounded-full w-8 h-8 mx-4"
+                    >
+                      -
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="lg:w-full">
-              <h2 className="">Descripción</h2>
-              <textarea
-                name="description"
-                rows="3"
-                value={servicesInfo.description}
-                onChange={handleChange}
-                className="mb-4 w-full rounded-lg outline-none p-1"
-                placeholder="Ingresar descripcion..."
-              ></textarea>
-            </div>
+              <div className="w-full">
+                <h2 className="">Descripción</h2>
+                <textarea
+                  name="description"
+                  rows="3"
+                  value={servicesInfo.description}
+                  onChange={handleChange}
+                  className="mb-4 w-full rounded-lg outline-none p-1"
+                  placeholder="Ingresar descripcion..."
+                  maxLength={300}
+                ></textarea>
+              </div>
 
-            <div className="w-full flex flex-col items-center justify-center">
-              <h2>Precio</h2>
+              <div className=" w-24 flex flex-col items-center justify-center ">
+                <h2>Precio</h2>
+                <input
+                  placeholder="####"
+                  type="number"
+                  name="price"
+                  onChange={handleChange}
+                  value={servicesInfo.price}
+                  className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2"
+                />
+              </div>
+              <h2>Imágen</h2>
               <input
-                placeholder="##"
-                type="number"
-                name="price"
-                onChange={handleChange}
-                value={servicesInfo.price}
-                className="mb-4 w-full lg:w-16 rounded-lg outline-none p-2"
+                type="file"
+                accept="image/*"
+                name="photo"
+                onChange={photoHandle}
+                className="w-11/12 mb-4 cursor-pointer  lg:ml-0 lg:flex lg:items-center"
               />
+              <h2>Incluye</h2>
+              <select
+                name="types"
+                onChange={selectedChange}
+                value={servicesInfo.types.join(",")}
+                className="mb-4 outline-none p-1 rounded-lg dark:text-purple-900"
+              >
+                <option value=""> Elegir servicio</option>
+                <option value="cv">Curriculum Vitae</option>
+                <option value="perfil">Perfil de Linkedin</option>
+                <option value="busqueda">Búsqueda Laboral</option>
+                <option value="practica">Capacitación</option>
+              </select>
             </div>
-            <h2>Imágen</h2>
-            <input
-              type="file"
-              accept="image/*"
-              name="photo"
-              onChange={photoHandle}
-              className="mb-4 cursor-pointer ml-auto lg:ml-0 lg:flex lg:items-center"
-            />
-            <h2>Incluye</h2>
-            <select
-              name="types"
-              onChange={selectedChange}
-              value={servicesInfo.types.join(",")}
-              className="mb-4 outline-none p-1 rounded-lg dark:text-purple-900"
-            >
-              <option value=""> Elegir servicio</option>
-              <option value="cv">Curriculum Vitae</option>
-              <option value="perfil">Perfil de Linkedin</option>
-              <option value="busqueda">Búsqueda Laboral</option>
-              <option value="practica">Capacitación</option>
-            </select>
-          </div>
-          <div className="flex justify-center items-center mt-2 mb-2">
-            <button
-              type="submit"
-              className="px-2 text-lgp py-2 my-8 border-2 border-custom-gray rounded-2xl transition duration-200 ease-in-out hover:bg-dark-violet hover:text-custom-gray hover:border-dark-violet hover:duration-200"
-            >
-              Crear
-            </button>
+            <div className="flex justify-center items-center mt-2 mb-2">
+              <button
+                type="submit"
+                className="px-2 text-lgp py-2 my-8 border-2 border-custom-gray rounded-2xl transition duration-200 ease-in-out hover:bg-dark-violet hover:text-custom-gray hover:border-dark-violet hover:duration-200"
+              >
+                Crear
+              </button>
+            </div>
           </div>
         </form>
       </div>

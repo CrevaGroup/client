@@ -48,6 +48,8 @@ import {
   GET_ONESERVICE,
   UPDATE_USER_EMAIL,
   GET_CONFIG,
+  DELETE_POSTIG,
+  DELETE_POSTTEXT,
 } from "./actions-type";
 
 import axios from "axios";
@@ -209,7 +211,7 @@ export const deleteUserById = (id) => {
         const response = await axios.delete(`/user/${id}`);
         return dispatch({
           type: DELETE_USER,
-          payload: id
+          payload: response.data
         });
     } catch (error) {
       return dispatch({
@@ -223,7 +225,7 @@ export const deleteUserById = (id) => {
   };
 };
 
-export const updateUser = (properties, user) => {
+export const updateUser = (properties, user, birthdate) => {
   return async function (dispatch) {
     try {
       if(properties.curriculum !== user.curriculum){
@@ -234,7 +236,10 @@ export const updateUser = (properties, user) => {
         const photoURL = await App(properties.photo);
         properties.photo = photoURL
       }
-      const { data } = await axios.put(`/user`, properties);
+
+      const allProperties = {...properties, age: JSON.stringify(birthdate)}
+
+      const { data } = await axios.put(`/user`, allProperties);
 
       if (properties.email !== user.email) {
         const firebaseUpdateEmail = await verifyBeforeUpdateEmail(
@@ -479,7 +484,7 @@ export const deleteServices = (id) => {
       const response = await axios.delete(`/service/${id}`);
       return dispatch({
         type: DELETE_SERVICES,
-        payload: id,
+        payload: response.data,
       });
     } catch (error) {
       return dispatch({
@@ -597,13 +602,13 @@ export const searchServices = (input) => {
   };
 };
 
-export const setPopup = (type) => {
+export const setPopup = (type, title, message) => {
   return {
     type: SET_POPUP,
     payload: {
       type: type,
-      title: '',
-      message: ''
+      title: title,
+      message: message
     }
   }
 }
@@ -685,6 +690,28 @@ export const createPostIg = (postURL) => {
   }
 }
 
+export const deletePostIg = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`/igpost/${id}`,);
+      return dispatch({
+        type: DELETE_POSTIG,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type:SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+        }
+      });
+    }
+  }
+}
+
+
 export const createPostText = (title, content) => {
   return async dispatch => {
     try {
@@ -698,6 +725,27 @@ export const createPostText = (title, content) => {
       });
     } catch(error) {
       alert(error.message);
+    }
+  }
+}
+
+export const deletePostText = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`/textblog/${id}`);
+      return dispatch({
+        type: DELETE_POSTTEXT,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type:SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+        }
+      });
     }
   }
 }
