@@ -228,7 +228,7 @@ export const deleteUserById = (id) => {
 export const updateUser = (properties, user, birthdate) => {
   return async function (dispatch) {
     try {
-      console.log(properties, user, birthdate)
+      
       if(properties.curriculum !== user.curriculum){
         const cvURL = await App(properties.curriculum);
         properties.curriculum = cvURL
@@ -238,7 +238,7 @@ export const updateUser = (properties, user, birthdate) => {
         properties.photo = photoURL
       }
       const allProperties = {...properties, age: JSON.stringify(birthdate)}
-      console.log(allProperties)
+      
       const { data } = await axios.put(`/user`, allProperties);
     
       if (properties.email !== user.email) {
@@ -651,7 +651,13 @@ export const getPostIg = () => {
         payload: response.data
       })
     } catch(error) {
-      console.log(error.message)
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }
@@ -665,7 +671,13 @@ export const getPostText = () => {
         payload: response.data
       })
     } catch(error) {
-      console.log(error.message)
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }
@@ -810,7 +822,13 @@ export const getOneUser = (id) => {
         payload:response.data
       })
     } catch(error) {
-      console.log(error);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }
@@ -824,7 +842,13 @@ export const getOneService = (id) => {
         payload:response.data
       })
     } catch(error) {
-      console.log(error);
+      return dispatch({
+        type: SET_POPUP,
+        payload: {
+          type: 'ERROR',
+          title: 'OOPS!',
+          message: error.message
+      }});
     }
   }
 }

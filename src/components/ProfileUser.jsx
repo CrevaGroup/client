@@ -33,7 +33,7 @@ function ProfileUser() {
     photo: user.photo,
     curriculum: user.curriculum,
   });
-  console.log(infoUser);
+  
   const birthdateOk = JSON.parse(user?.age);
   const [meses, setMeses] = useState([
     "Enero",
@@ -107,8 +107,6 @@ function ProfileUser() {
     if (isEditing) {
       countryRef.current.value = user?.nacionalidad;
 
-      console.log(birthdateOk)
-      
       if (birthdateOk) {
         dayRef.current.setValue([{ ...birthdateOk.day }]);
         monthRef.current.setValue([{ ...birthdateOk.month }]);
@@ -122,8 +120,6 @@ function ProfileUser() {
       }
     }
   }, [isEditing])
-
-  //? age(pin):"{"day":{"label":"4","value":"4"},"month":{"label":"Abril","value":"4"},"year":{"label":"2020","value":"2020"}}"
 
   return (
     <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen dark:bg-purple-900 dark:text-white">
