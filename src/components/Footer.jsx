@@ -14,9 +14,9 @@ function Footer() {
       behavior: "instant",
     });
   };
-  
+
   return (
-    
+
     <footer className="bg-custom-gray text-black py-6">
       <div className="container mx-auto text-center">
         <hr className="border-gray-400 mb-4" />
@@ -39,12 +39,14 @@ function Footer() {
             </div>
           </div>
           <div>
-            <img
-              src={Logo}
-              alt="Logo Footer"
-              className="w-1/2  mx-auto"
-              style={{ width: `90px` }}
-            />
+            <div className="hidden sm:block">
+              <img
+                src={Logo}
+                alt="Logo Footer"
+                className="w-1/2  mx-auto"
+                style={{ width: `90px` }}
+              />
+            </div>
             <p className="mt-5">&copy; 2023 CreVa Group</p>
             <p>Todos los derechos reservados.</p>
           </div>
