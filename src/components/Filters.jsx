@@ -37,16 +37,23 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
+                min: !e.target.value
+                     ? 1
+                     : user?.nacionalidad === 'Argentina' || country === 'AR' 
+                     ? Math.round(e.target.value / config.dolarValue) 
+                     : e.target.value
             }));
         }
         
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
+                max: !e.target.value
+                     ? maxVal
+                     : user?.nacionalidad === 'Argentina' || country === 'AR' 
+                     ? Math.round(e.target.value / config.dolarValue) 
+                     : e.target.value
             }));
-            console.log(Math.round(e.target.value / config.dolarValue));
         }
     };
 
