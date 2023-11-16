@@ -45,7 +45,7 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ### Desarrollo Actual
 - **Version:** 1.0.0
-- **Ultima Actualizacion:** 13 de Noviembre 2023
+- **Ultima Actualizacion:** 16 de Noviembre 2023
 
 ## Equipo de Desarrollo 👨🏻‍💻
 
