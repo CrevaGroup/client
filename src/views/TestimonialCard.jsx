@@ -30,20 +30,20 @@ const TestimonialCard = () => {
               className=" w-full flex items-center justify-center"
 
             >
-            <Avatar
-              style={{ borderRadius: "100%", width: "100px", marginTop: "0" }}
-              size="lg"
-              variant="circular"
-              src={argFlag}
-              alt="tania andrew"
-            />
+              <Avatar
+                style={{ borderRadius: "100%", width: "100px", marginTop: "0" }}
+                size="lg"
+                variant="circular"
+                src={argFlag}
+                alt="tania andrew"
+              />
             </div>
           </CardHeader>
           <CardBody className="mb-4 sm:mb-6 p-4 sm:p-10 dark:text-gray-100">
             <p
               className=" whitespace-pre-line"
             >
-              {`Chicos son lo más!!! Gracias por el CV quedó muy bueno, ya le pase el dato a mis conocidos jaja les cuento como me va en la entrevista el lunes, GRACIAS ❤`}
+              {`Chicos son lo más!!! Gracias por el CV quedó muy bueno, ya le pase el dato a mis conocidos, les cuento como me va en la entrevista, GRACIAS ❤`}
             </p>
           </CardBody>
         </Card>
@@ -66,20 +66,20 @@ const TestimonialCard = () => {
               className=" w-full flex items-center justify-center"
 
             >
-            <Avatar
-              style={{ borderRadius: "100%", width: "100px", marginTop: "0" }}
-              size="lg"
-              variant="circular"
-              src={mexFlag}
-              alt="tania andrew"
-            />
+              <Avatar
+                style={{ borderRadius: "100%", width: "100px", marginTop: "0" }}
+                size="lg"
+                variant="circular"
+                src={mexFlag}
+                alt="tania andrew"
+              />
             </div>
           </CardHeader>
           <CardBody className="mb-4 sm:mb-6 p-4 sm:p-10 dark:text-gray-100">
             <p
               className=" whitespace-pre-line"
             >
-              {`Hoy me han confirmado que he sido seleccionado para la vacante de ###. 
+              {`Hoy me han confirmado que he sido seleccionado para la vacante. 
               Estoy muy contento y agradecido por su ayuda en mi búsqueda y con el currículum`}
             </p>
           </CardBody>
@@ -111,18 +111,14 @@ const TestimonialCard = () => {
                 alt="tania andrew"
               />
             </div>
-            
+
           </CardHeader>
           <CardBody className="mb-4 sm:mb-6 p-4 sm:p-10 dark:text-gray-100">
 
-              <p
+            <p
               className="whitespace-pre-line"
-            >{`Hola chicos. Buenas tardes.
-
-              Se me fue el mensaje anterior por equivocación. Quedaron geniales las fotos.
-              Muchas gracias por ayudarme a corregir el CV 💜 ahora si hay mas posibilidades que me llamen en alguna oferta laboral jaja
-
-                Les mando un abrazo. Que tengas un lindo dia`}</p>
+            >{`Quedaron geniales las fotos. Muchas gracias por ayudarme a corregir el CV 💜 
+              Ahora si hay mas posibilidades que me llamen en alguna oferta laboral. Les mando un abrazo.`}</p>
 
           </CardBody>
         </Card>
@@ -130,7 +126,7 @@ const TestimonialCard = () => {
 
 
     </div>
-    
+
   );
 };
 

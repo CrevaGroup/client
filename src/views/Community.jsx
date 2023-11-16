@@ -103,7 +103,7 @@ const Community = () => {
             Bienvenido a la comunidad Creva
           </h1>
           <p
-            className="text-xl lg:text-3xl my-8 text-dark-violet/80 "
+            className="text-xl lg:text-3xl my-8 text-dark-violet/80 dark:text-purple-300 "
           >Diversas personas alrededor del mundo confían en <strong>CreVa</strong> para <strong>despegar su carrera profesional</strong></p>
           {/* <img
             src={SocialMedia}
@@ -112,7 +112,7 @@ const Community = () => {
           /> */}
         </div>
         <div className="my-4 text-center">
-          <h2 className="text-3xl md:text-5xl text-dark-gray-blue/80 mt-20">Testimonios</h2>
+          <h2 className="text-3xl md:text-5xl text-dark-gray-blue/80 mt-20 dark:text-white">Testimonios</h2>
         </div>
         <TestimonialCard/>
         <div className="flex justify-center items-center my-14">
