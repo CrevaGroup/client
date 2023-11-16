@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import argFlag from '../assets/argFlag.png'
 import mexFlag from '../assets/mexFlag.png'
-import colFlag from '../assets/colFlag.png'
+import colFlag from '../assets/colFLag.png'
 
 const TestimonialCard = () => {
   return (
