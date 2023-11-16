@@ -30,7 +30,7 @@ function Register() {
   const [countries, setCountries] = useState([
     "Argentina",
     "Brasil",
-    "Chile",
+    "Chile", 
     "Colombia",
     "México",
     "Uruguay",
@@ -38,6 +38,17 @@ function Register() {
     "Perú",
     "Venezuela",
     "Estados Unidos",
+    "Cuba",
+    "República Dominicana",
+    "Puerto Rico",
+    "Costa Rica",
+    "Panamá",
+    "Guatemala",
+    "El Salvador",
+    "Honduras",
+    "Nicaragua",
+    "Paraguay",
+    "Ecuador",
   ]);
 
   const [errors, setErrors] = useState({
