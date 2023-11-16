@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUserById,
@@ -15,6 +15,7 @@ import { useLocation } from "react-router-dom";
 
 function ProfileUser() {
 
+  const countryRef = userRef();
   const location = useLocation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -97,8 +98,13 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false);
-    dispatch(updateUser(infoUser, user, birthdate));
-    setInfoUser({...infoUser, age: calculateAge(birthdate)})
+    let birthdateOk = {
+      day: birthdate.day,
+      month: birthdate.month,
+      year: birthdate.year
+    }
+    dispatch(updateUser(infoUser, user, birthdateOk));
+    setInfoUser({...infoUser, age: calculateAge(birthdateOk)})
   }
 
   function deleteUser() {
@@ -110,6 +116,10 @@ function ProfileUser() {
   function closePopup() {
     dispatch(clearPopupComponent());
   }
+
+  useEffect(() => {
+    countryRef.current.value = user?.nacionalidad;
+  }, [])
 
   return (
     <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen dark:bg-purple-900 dark:text-white">
@@ -228,7 +238,7 @@ function ProfileUser() {
               </div>
             )}
 
-          {isEditing ? (<h3 className="mt-3">Pais: <select value={user?.nacionalidad} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
+          {isEditing ? (<h3 className="mt-3">Pais: <select ref={countryRef} onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
           </select></h3>
