@@ -162,7 +162,7 @@ export default function Dashboard() {
                 <p
                   className=" cursor-default  mx-4 lg:mx-10 "
                 >
-                  {user.fullName} Axel Choque
+                  {user.fullName}
                 </p>
               </li>
               <li
