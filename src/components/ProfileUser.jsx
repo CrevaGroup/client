@@ -225,7 +225,7 @@ function ProfileUser() {
             : (<h3>Curriculum: {user.curriculum ? <a target="blank" href={user.curriculum}>Link</a> : 'No completado'}</h3>)}
 
           <h3>Mis compras: {
-            user?.buis?.length
+            user?.buys?.length
             ? 'No tiene'
             : user?.buys?.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)
           }</h3>
