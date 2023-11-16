@@ -11,9 +11,11 @@ import { Button, input } from "@material-tailwind/react";
 import Select from "react-select";
 import Close from "../assets/closeIcon.svg";
 import calculateAge from "../Utils/calculateAge";
+import { useLocation } from "react-router-dom";
 
 function ProfileUser() {
 
+  const location = useLocation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const currentYear = new Date().getFullYear();
@@ -27,7 +29,6 @@ function ProfileUser() {
     photo: "",
     curriculum: "",
   });
-
   const [meses, setMeses] = useState([
     "Enero",
     "Febrero",
@@ -46,7 +47,7 @@ function ProfileUser() {
   const [countries, setCountries] = useState([
     "Argentina",
     "Brasil",
-    "Chile",
+    "Chile", 
     "Colombia",
     "México",
     "Uruguay",
@@ -54,6 +55,17 @@ function ProfileUser() {
     "Perú",
     "Venezuela",
     "Estados Unidos",
+    "Cuba",
+    "República Dominicana",
+    "Puerto Rico",
+    "Costa Rica",
+    "Panamá",
+    "Guatemala",
+    "El Salvador",
+    "Honduras",
+    "Nicaragua",
+    "Paraguay",
+    "Ecuador",
   ]);
 
   const [birthdate, setBirthdate] = useState({
@@ -98,9 +110,9 @@ function ProfileUser() {
 
   return (
     <div className="bg-white rounded-md p-4 overflow-y-auto max-h-screen dark:bg-purple-900 dark:text-white">
-      <button onClick={closePopup}>
+      {location.pathname !== "/dashboard/profile" && <button onClick={closePopup}>
         <img src={Close} alt="Close Popup" className="ml-4 mt-4 w-6" />
-      </button>
+      </button>}
       <div className="text-center">
         <h1 className="text-4xl mb-2">Mi Perfil</h1>
       </div>
@@ -208,7 +220,7 @@ function ProfileUser() {
             ) : (
               <div>
                 <h3 className="lg:inline-block">Edad:</h3>
-                <span className="lg:inline-block">{infoUser?.age?.day ? infoUser?.age : 'No completado'}</span>
+                <span className="lg:inline-block ">{user?.age.length > 33 ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
 

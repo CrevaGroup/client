@@ -6,9 +6,7 @@ import { filterServices, resetFilters, getServices } from "../Redux/Actions/acti
 const Filters = () => {
 
     const minRef = useRef();
-    const minSliderRef = useRef();
     const maxRef = useRef();
-    const maxSliderRef = useRef();
     const typeRef = useRef();
     const orderRef = useRef();
     const dispatch = useDispatch();
@@ -39,16 +37,23 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
+                min: !e.target.value
+                     ? 1
+                     : user?.nacionalidad === 'Argentina' || country === 'AR' 
+                     ? Math.round(e.target.value / config.dolarValue) 
+                     : e.target.value
             }));
         }
         
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
+                max: !e.target.value
+                     ? maxVal
+                     : user?.nacionalidad === 'Argentina' || country === 'AR' 
+                     ? Math.round(e.target.value / config.dolarValue) 
+                     : e.target.value
             }));
-            console.log(Math.round(e.target.value / config.dolarValue));
         }
     };
 
@@ -57,13 +62,10 @@ const Filters = () => {
     }, []);
 
     function resetHandler(){
-        minRef.current.value = min;
-        minSliderRef.current.value = min;
-        maxRef.current.value = max;
-        maxSliderRef.current.value = max;
+        minRef.current.value = 1;
+        maxRef.current.value = maxVal;
         typeRef.current.setValue([]);
         orderRef.current.value = "ASC";
-        percentCalc();
         dispatch(resetFilters());
     }
 

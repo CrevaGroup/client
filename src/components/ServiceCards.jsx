@@ -29,21 +29,23 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
     })
 
     function clickHandler(){
-        if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
-            if(user.fullName){
+        if(user.fullName){
+            if(user.age && calculateAge(JSON.parse(user.age)) >= 18){
                 if(!user.nacionalidad){
                     if(country === "AR"){
                         dispatch(getTransactionLink(transactionInfo, "Argentina"))
                     }else{
-                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
-                    }
+                        dispatch(getTransactionLink(transactionInfo, country))
+                    } 
                         
-                    } else {
-                        navigate('/login')
-                    }
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
+                    } 
+                }else {
+                    dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad! Completa tu perfil!'))
                 }
-        } else {
-            dispatch(setPopup('ERROR', 'OOPS!', 'Debes ser mayor de edad!'))
+            } else {
+            navigate('/login')
         }
     }
 
