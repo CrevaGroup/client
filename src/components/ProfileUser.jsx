@@ -94,13 +94,8 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false);
-    if (!birthdate.day || !birthdate.month || !birthdate.year) {
-      dispatch(updateUser(infoUser, user));
-      setInfoUser({...infoUser})
-    } else {
-      dispatch(updateUser(infoUser, user, birthdate));
-      setInfoUser({...infoUser, age: calculateAge(birthdate)})
-    }
+    dispatch(updateUser(infoUser, user, birthdate));
+    setInfoUser({...infoUser, age: calculateAge(birthdate)})
   }
 
   function deleteUser() {
@@ -229,7 +224,7 @@ function ProfileUser() {
               </div>
             )}
 
-          {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
+          {isEditing ? (<h3 className="mt-3">Pais: <select value='México' onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
           </select></h3>
