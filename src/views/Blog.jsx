@@ -77,7 +77,7 @@ const Blog = () => {
           <img className=" h-48 lg:h-[560px] " src={blog}></img>
         </div>
         <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
-        <h2 className="text-2xl lg:text-3xl font-semibold">
+        <h2 className="text-2xl lg:text-3xl font-semibold text-dark-gray-blue my-8">
             Posteos
           </h2>
         </div>
@@ -114,7 +114,7 @@ const Blog = () => {
             ''
           )}
            <div className="flex items-center justify-center mt-4 lg:mt-8 lg:my-0">
-        <h2 className="text-2xl lg:text-3xl font-semibold">
+        <h2 className="text-2xl lg:text-3xl font-semibold text-dark-gray-blue my-8">
             Noticias
           </h2>
         </div>
@@ -149,9 +149,9 @@ const Blog = () => {
                       }
 
                     
-                    <div className="flex flex-col lg:flex-row my-4 items-center ">
+                    <div className="flex flex-col lg:flex-row my-4 items-center  ">
                       <h1 className="font-bold text-3xl">{post.title}</h1>
-                      <p className="mr-auto my-2 lg:ml-auto lg:mr-0">
+                      <p className=" my-2 lg:ml-auto lg:mr-0 ">
                         {fechaFormateada}
                       </p>
                     </div>

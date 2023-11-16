@@ -94,7 +94,11 @@ const Home = () => {
       </div>
 
       <h1 className="text-3xl mt-40 text-center mb-3">Testimonios</h1>
-      <div
+
+        <TestimonialCard/>
+
+      
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "space-around",
@@ -112,7 +116,7 @@ const Home = () => {
         <div className=" p-4">
           <TestimonialCard />
         </div>
-      </div>
+      </div> */}
       <Services />
       <Footer />
     </div>
