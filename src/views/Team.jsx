@@ -11,11 +11,11 @@ import Osvaldo from "../assets/Osvaldo.png"
 
 function Team() {
   return (
-    <div className="bg-custom-gray">
+    <div className="flex flex-col bg-custom-gray dark:bg-purple-900 dark:text-white min-h-screen">
       <div className="text-4xl flex justify-center">
         <h1 className="mt-7 mb-5">Equipo de Desarrollo</h1>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-center justify-center">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-center flex-grow">
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/lopezalvaro16" target="_blank">
@@ -165,7 +165,9 @@ function Team() {
           </div>
         </div>
       </div>
+      <div className="flex flex-col flex-grow justify-end">
       <Footer />
+      </div>
     </div>
   );
 }
