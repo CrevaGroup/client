@@ -114,22 +114,7 @@ const Community = () => {
         <div className="my-4 text-center">
           <h2 className="text-3xl md:text-5xl text-dark-gray-blue/80 mt-20">Testimonios</h2>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Testimonio 1 */}
-          <div className="max-w-md m-4 rounded-lg shadow-lg">
-            <TestimonialCard />
-          </div>
-
-          {/* Testimonio 2 */}
-          <div className="max-w-md m-4 rounded-lg shadow-lg">
-            <TestimonialCard />
-          </div>
-
-          {/* Testimonio 3 */}
-          <div className="max-w-md m-4 rounded-lg shadow-lg">
-            <TestimonialCard />
-          </div>
-        </div>
+        <TestimonialCard/>
         <div className="flex justify-center items-center my-14">
           <div className="text-center">
             <h2 className="text-2xl lg:text-3xl font-semibold">
