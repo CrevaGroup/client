@@ -39,16 +39,16 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
+                min: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
             }));
-            console.log(e.target.value / config.dolarValue);
         }
-
+        
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
+                max: user?.nacionalidad === 'Argentina' || country === 'AR' ? Math.round(e.target.value / config.dolarValue) : e.target.value
             }));
+            console.log(Math.round(e.target.value / config.dolarValue));
         }
     };
 
