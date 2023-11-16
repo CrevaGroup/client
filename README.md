@@ -29,17 +29,21 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Instalacion y Uso ⚙
 
-  1. Clona este repositorio:
+  1. Clona estos repositorios:
 
      git clone https://github.com/CrevaGroup/client.git
+
+     git clone https://github.com/CrevaGroup/server.git
   
   3. Instala las dependencias:
      
      npm install
   
   5. Inicia la aplicacion:
-     
-     npm run dev
+
+     Client: npm run dev
+
+     Server: npm start
      
 ## Estado del Proyecto 📈
 
