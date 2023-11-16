@@ -37,7 +37,7 @@ const Filters = () => {
         if (e.target.name === "min") {
             dispatch(getServices({
                 ...filters,
-                min: e.target.value === 0
+                min: !e.target.value === 0
                      ? 1
                      : user?.nacionalidad === 'Argentina' || country === 'AR' 
                      ? Math.round(e.target.value / config.dolarValue) 
@@ -48,7 +48,7 @@ const Filters = () => {
         if (e.target.name === "max") {
             dispatch(getServices({
                 ...filters,
-                max: e.target.value === 0
+                max: !e.target.value
                      ? 1
                      : user?.nacionalidad === 'Argentina' || country === 'AR' 
                      ? Math.round(e.target.value / config.dolarValue) 
