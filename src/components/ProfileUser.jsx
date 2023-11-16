@@ -207,7 +207,7 @@ function ProfileUser() {
               </div>
             ) : (
               <div>
-                <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
+                <h3 className="lg:inline-block">Edad:</h3>
                 <span className="lg:inline-block">{infoUser?.age?.day ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
