@@ -208,7 +208,7 @@ function ProfileUser() {
             ) : (
               <div>
                 <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
-                <span className="lg:inline-block">{typeof(infoUser?.age) === number ? infoUser?.age : 'No completado'}</span>
+                <span className="lg:inline-block">{typeof(infoUser?.age) === 'number' ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
 
