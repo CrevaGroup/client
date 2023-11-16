@@ -8,6 +8,8 @@ import Behance from "../assets/PhBehanceLogo.svg"
 import Alvaro from "../assets/Alvaro.png"
 import Martin from "../assets/Martin2.jpg"
 import Osvaldo from "../assets/Osvaldo.png"
+import Axel from "../assets/Axel.jpg"
+import Brian from "../assets/Brian.jpg"
 
 function Team() {
   return (
@@ -19,7 +21,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/lopezalvaro16" target="_blank">
-              <img src={Alvaro} alt="Alvaro Image" className="flex justify-center items-center w-14 h-14 rounded-full shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
+              <img src={Alvaro} alt="Alvaro Image" className="flex justify-center items-center w-16 h-16 rounded-full object-cover shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
             </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
@@ -44,7 +46,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/ValentinoJerez" target="_blank">
-              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+              <section className="flex justify-center items-center w-16 h-16 rounded-full object-cover shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
                 <img src={User} alt="User Image" className="w-7 fill-gray-700" />
               </section>
             </a>
@@ -74,9 +76,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/AxelNChoque" target="_blank">
-              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
-                <img src={User} alt="User Image" className="w-7 fill-gray-700" />
-              </section>
+              <img src={Axel} alt="Axel Image" className="flex justify-center items-center w-16 h-16 rounded-full shadow-md hover:cursor-pointer hover:scale-110 duration-300 object-cover" />
             </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
@@ -100,9 +100,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/braiaguirre" target="_blank">
-              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
-                <img src={User} alt="User Image" className="w-7 fill-gray-700" />
-              </section>
+              <img src={Brian} alt="Brian Image" className="flex justify-center items-center w-16 h-16 rounded-full object-cover shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300" />
             </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
@@ -124,7 +122,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href=" https://github.com/MartinGarciaHervas" target="_blank">
-              <img src={Martin} alt="Martin Image" className="flex justify-center items-center w-14 h-14 rounded-full shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
+              <img src={Martin} alt="Martin Image" className="flex justify-center items-center w-16 h-16 rounded-full object-cover shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
             </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
@@ -146,7 +144,7 @@ function Team() {
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
             <a href="https://github.com/OsvaldoCorneli" target="_blank">
-              <img src={Osvaldo} alt="Osvaldo Image" className="flex justify-center items-center w-14 h-14 rounded-full shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
+              <img src={Osvaldo} alt="Osvaldo Image" className="flex justify-center items-center w-16 h-16 rounded-full object-cover shadow-md hover:cursor-pointer hover:scale-110 duration-300" />
             </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
