@@ -2,8 +2,9 @@ import { Collapse } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import example from '../assets/example.png'
-import { getTransactionLink } from "../Redux/Actions/actions";
+import { getTransactionLink, setPopup } from "../Redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
+import calculateAge from "../Utils/calculateAge";
 const MobileServiceCards = ({img, name, description, price, id, items, modalidad}) => {
     const [open,setOpen] = useState(false);
     const navigate = useNavigate()
