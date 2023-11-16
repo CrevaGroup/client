@@ -46,11 +46,11 @@ export default function Dashboard() {
 
   const user = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   if (Object.keys(user).length) {
-  //     if (!user.admin) navigate("/");
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (Object.keys(user).length) {
+      if (!user.admin) navigate("/");
+    }
+  }, [user]);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
