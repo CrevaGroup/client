@@ -18,7 +18,7 @@ const Filters = () => {
     const services = useSelector(state => state.services);
     const country = useSelector(state => state.config?.country)
     const config = useSelector(state => state.config);
-    let maxVal = Math.round(Math.max(...services.map(service => service.price)) * 1.3);
+    let maxVal = services.length ? Math.round(Math.max(...services.map(service => service.price)) * 1.3) : 100;
     if (user?.nacionalidad === 'Argentina' || country === 'AR') maxVal = Math.round(maxVal * config.dolarValue);
 
     const handleInputChange = e => {
@@ -41,6 +41,7 @@ const Filters = () => {
                 ...filters,
                 min: user?.nacionalidad === 'Argentina' || country === 'AR' ? e.target.value / config.dolarValue : e.target.value
             }));
+            console.log(e.target.value / config.dolarValue);
         }
 
         if (e.target.name === "max") {
