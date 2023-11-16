@@ -138,15 +138,21 @@ function ProfileUser() {
             <div className="flex items-center justify-center w-full h-full">
 
               {isEditing ? (
-                <div className="flex-col ml-16 items-center w-full" >
-                  <div className="rounded-full overflow-hidden w-3/4 h-3/4">
+                <div className="flex-col justify-center items-center max-h-100 " >
+                  <div className="rounded-full overflow-hidden w-full border-50 mb-4 w-3/4 h-3/4">
                     <img
                       src={user?.photo}
                       alt="Imagen de Usuario"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <input type="file" accept="image/*" name="photo" onChange={photoHandle} className="mb-4 position-relative overflow-hidden w-[153px]" style={{color: infoUser.photo===""?"transparent":"black"}} />
+                  <label for="dropzone-file" class="flex flex-col border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                      <div class="flex flex-col pt-2 pl-2 pr-2">
+                          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click</span> o arrastra.</p>
+                      </div>
+                      <input id="dropzone-file" type="file" accept="image/*" name="photo" onChange={photoHandle} class="hidden" />
+                  </label>
+                  {/* <input  className="mb-4 position-relative overflow-hidden w-[153px]" style={{color: infoUser.photo===""?"transparent":"black"}} /> */}
                 </div>) :
                 (<div className="rounded-full overflow-hidden w-3/4 h-3/4">
                   <img src={user?.photo} alt="Imagen de Usuario" className="w-full h-full object-cover" />
@@ -237,17 +243,27 @@ function ProfileUser() {
                 <span className="lg:inline-block">{user?.age?.length > 33 ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
-
+            
           {isEditing ? (<h3 className="mt-3">Pais: <select onChange={(event) => setInfoUser({ ...infoUser, nacionalidad: event.target.value })} ref={countryRef} options>{countries.map((country) => (
             <option key={country} value={country}>
               {country}</option>))}
           </select></h3>
+          
           ) : (<h3>Pais: {user?.nacionalidad !== null ? user?.nacionalidad : 'No completado'}</h3>)}
 
           {isEditing ? (<h3>Email: <input type="text" value={infoUser.email} onChange={(event) => setInfoUser({ ...infoUser, email: event.target.value })} /></h3>
           ) : (<h3>Email: {user?.email}</h3>)}
 
-          {isEditing ? (<h3>Curriculum: <input type="file" title=" asd" name="curriculum" onChange={curriculumHandle} className="mb-4 position-relative overflow-hidden w-[153px]" /></h3>)
+          {isEditing ? (<h3>Curriculum: 
+            <div class="flex w-full">
+                <label for="dropzone-file" class="flex flex-col border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col pt-2 pl-2 pr-2">
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click</span> o arrastra. <span class="font-semibold">PDF</span></p>
+                    </div>
+                    <input id="dropzone-file" title=" asd" name="curriculum" onChange={curriculumHandle} type="file" class="hidden" />
+                </label>
+            </div> 
+            </h3>)
             : (<h3>Curriculum: {user.curriculum ? <a target="blank" href={user.curriculum}>Link</a> : 'No completado'}</h3>)}
 
           <h3>Mis compras: {
