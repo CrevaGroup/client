@@ -49,7 +49,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (Object.keys(user).length) {
       if (!user.admin) navigate("/");
-    }
+    } else { navigate("/") }
   }, [user]);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
