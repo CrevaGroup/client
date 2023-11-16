@@ -208,7 +208,7 @@ function ProfileUser() {
             ) : (
               <div>
                 <h3 className="lg:inline-block lg:mr-4">Edad:</h3>
-                <span className="lg:inline-block">{typeof(infoUser?.age) === 'number' ? infoUser?.age : 'No completado'}</span>
+                <span className="lg:inline-block">{infoUser?.age?.day ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
 
@@ -224,7 +224,11 @@ function ProfileUser() {
           {isEditing ? (<h3>Curriculum: <input type="file" title=" asd" name="curriculum" onChange={curriculumHandle} className="mb-4 position-relative overflow-hidden w-[153px]" /></h3>)
             : (<h3>Curriculum: {user.curriculum ? <a target="blank" href={user.curriculum}>Link</a> : 'No completado'}</h3>)}
 
-          <h3>Mis compras: {user?.buys?.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)}</h3>
+          <h3>Mis compras: {
+            user?.buis?.length
+            ? 'No tiene'
+            : user?.buys?.map((buy, index)=> <p key={index}>{buy?.Services[0].name}</p>)
+          }</h3>
 
           <div className="mt-4 space-x-4">
             <Button className="bg-dark-violet" onClick={deleteUser}>
