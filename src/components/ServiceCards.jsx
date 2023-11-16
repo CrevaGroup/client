@@ -34,7 +34,9 @@ const ServiceCards = ({img, name, description, items, modalidad, price, id}) => 
                 if(!user.nacionalidad){
                     if(country === "AR"){
                         dispatch(getTransactionLink(transactionInfo, "Argentina"))
-                    }
+                    }else{
+                        dispatch(getTransactionLink(transactionInfo, country))
+                    } 
                         
                     }else{
                         dispatch(getTransactionLink(transactionInfo, user.nacionalidad))
