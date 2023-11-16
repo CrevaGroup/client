@@ -41,9 +41,11 @@ function Team() {
 
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
-            <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
-              <img src={User} alt="User Image" className="w-7 fill-gray-700" />
-            </section>
+            <a href="https://github.com/ValentinoJerez" target="_blank">
+              <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#F9C97C] to-[#A2E9C1] hover:from-[#C9A9E9] hover:to-[#7EE7FC] hover:cursor-pointer hover:scale-110 duration-300">
+                <img src={User} alt="User Image" className="w-7 fill-gray-700" />
+              </section>
+            </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
                 <h3 className="text-gray-600 font-semibold text-sm">Valentino Jerez</h3>
