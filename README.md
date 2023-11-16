@@ -16,6 +16,8 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 
 ## Tecnologías Utilizadas 🛠
 
+### Front End
+
 - **React:** Desarrollo del frontend utilizando la biblioteca React para una experiencia de usuario dinámica.
 
 - **Redux:** Manejo del estado de la aplicación para un flujo de datos predecible.
