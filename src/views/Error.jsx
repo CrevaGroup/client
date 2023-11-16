@@ -12,8 +12,8 @@ function Error(){
     }
 
     return(
-        <div className="bg-custom-gray">
-            <div className="flex flex-col lg:flex-row items-center justify-center">
+        <div className="bg-custom-gray dark:bg-purple-900 dark:text-white h-screen">
+            <div className="flex flex-col lg:flex-row items-center justify-center h-full">
                 <div className="lg:w-1/2 mt-8">
                     <h1 className="text-3xl flex justify-center">Oops! La página que estás buscando no existe</h1>
                     <div className=" flex justify-center">
