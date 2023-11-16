@@ -135,9 +135,9 @@ function Team() {
 
         <div className="mx-4 mt-5 mb-5">
           <div className="flex items-center p-3 lg:w-72 h-28 bg-white rounded-md shadow-lg">
+            <a href="https://github.com/OsvaldoCorneli" target="_blank">
             <img src={Osvaldo} alt="Osvaldo Image" className="flex justify-center items-center w-14 h-14 rounded-full shadow-md hover:cursor-pointer hover:scale-110 duration-300"/>
-              {/* <img src={User} alt="User Image" className="w-7 fill-gray-700" /> */}
-            
+            </a>
             <section className="block border-l border-gray-300 m-3">
               <div className="pl-3">
                 <h3 className="text-gray-600 font-semibold text-sm">Osvaldo Corneli Nassif</h3>
