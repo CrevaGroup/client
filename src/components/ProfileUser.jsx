@@ -94,8 +94,13 @@ function ProfileUser() {
 
   function handleSaveClick() {
     setIsEditing(false);
-    dispatch(updateUser(infoUser, user, birthdate));
-    setInfoUser({...infoUser, age: calculateAge(birthdate)})
+    if (!birthdate.day || !birthdate.month || !birthdate.year) {
+      dispatch(updateUser(infoUser, user));
+      setInfoUser({...infoUser})
+    } else {
+      dispatch(updateUser(infoUser, user, birthdate));
+      setInfoUser({...infoUser, age: calculateAge(birthdate)})
+    }
   }
 
   function deleteUser() {

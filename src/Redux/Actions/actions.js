@@ -237,7 +237,8 @@ export const updateUser = (properties, user, birthdate) => {
         properties.photo = photoURL
       }
 
-      const allProperties = {...properties, age: JSON.stringify(birthdate)}
+      let allProperties = properties
+      if (birthdate) allProperties = {...properties, age: JSON.stringify(birthdate)}
 
       const { data } = await axios.put(`/user`, allProperties);
 
