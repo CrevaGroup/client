@@ -6,9 +6,7 @@ import { filterServices, resetFilters, getServices } from "../Redux/Actions/acti
 const Filters = () => {
 
     const minRef = useRef();
-    const minSliderRef = useRef();
     const maxRef = useRef();
-    const maxSliderRef = useRef();
     const typeRef = useRef();
     const orderRef = useRef();
     const dispatch = useDispatch();
@@ -57,13 +55,10 @@ const Filters = () => {
     }, []);
 
     function resetHandler(){
-        minRef.current.value = min;
-        minSliderRef.current.value = min;
-        maxRef.current.value = max;
-        maxSliderRef.current.value = max;
+        minRef.current.value = 1;
+        maxRef.current.value = maxVal;
         typeRef.current.setValue([]);
         orderRef.current.value = "ASC";
-        percentCalc();
         dispatch(resetFilters());
     }
 
