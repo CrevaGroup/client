@@ -29,7 +29,6 @@ function ProfileUser() {
     photo: "",
     curriculum: "",
   });
-  console.log(infoUser.age);
   const [meses, setMeses] = useState([
     "Enero",
     "Febrero",
@@ -210,7 +209,7 @@ function ProfileUser() {
             ) : (
               <div>
                 <h3 className="lg:inline-block">Edad:</h3>
-                <span className="lg:inline-block">{infoUser?.age.length > 33 ? infoUser?.age : 'No completado'}</span>
+                <span className="lg:inline-block">{user?.age.length > 33 ? infoUser?.age : 'No completado'}</span>
               </div>
             )}
 
