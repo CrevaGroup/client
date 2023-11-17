@@ -138,8 +138,8 @@ function ProfileUser() {
             <div className="flex items-center justify-center w-full h-full">
 
               {isEditing ? (
-                <div className="flex-col justify-center items-center max-h-100 " >
-                  <div className="rounded-full overflow-hidden w-full border-50 mb-4 w-3/4 h-3/4">
+                <div className="flex-col justify-center items-center" >
+                  <div className="rounded-full overflow-hidden w-full mb-4 w-3/4 h-3/4">
                     <img
                       src={user?.photo}
                       alt="Imagen de Usuario"
@@ -148,7 +148,7 @@ function ProfileUser() {
                   </div>
                   <label for="dropzone-file" class="flex flex-col border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                       <div class="flex flex-col pt-2 pl-2 pr-2">
-                          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click</span> o arrastra.</p>
+                          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click </span>para subir</p>
                       </div>
                       <input id="dropzone-file" type="file" accept="image/*" name="photo" onChange={photoHandle} class="hidden" />
                   </label>
@@ -256,11 +256,11 @@ function ProfileUser() {
 
           {isEditing ? (<h3>Curriculum: 
             <div class="flex w-full">
-                <label for="dropzone-file" class="flex flex-col border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                <label for="dropzone-file2" class="flex flex-col border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col pt-2 pl-2 pr-2">
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click</span> o arrastra. <span class="font-semibold">PDF</span></p>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click </span>para subir<span class="font-semibold"></span></p>
                     </div>
-                    <input id="dropzone-file" title=" asd" name="curriculum" onChange={curriculumHandle} type="file" class="hidden" />
+                    <input id="dropzone-file2" title=" asd" name="curriculum" onChange={curriculumHandle} type="file" accept="application/pdf" class="hidden" />
                 </label>
             </div> 
             </h3>)
