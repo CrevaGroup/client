@@ -25,6 +25,18 @@ La página web de CreVa Group es una plataforma dinámica y moderna diseñada pa
 - **Tailwind CSS:** Estilo moderno y eficiente con Tailwind CSS para un diseño elegante y responsivo.
 
 - **Vite:** Herramienta de construcción y desarrollo para aplicaciones web modernas.
+  
+### Back End
+
+- **Cloudinary:** Un servicio en la nube que proporciona almacenamiento y entrega de imágenes y videos.
+
+- **Express:** Un marco web para Node.js que simplifica el desarrollo de aplicaciones web y API.
+
+- **Mercadopago:** Plataforma de pagos en línea que permite a los usuarios realizar transacciones en línea.
+
+- **Stripe:** Plataforma de pagos en línea que proporciona servicios para realizar transacciones seguras en línea.
+
+- **Sequelize:** Facilita la interacción con bases de datos relacionales, como PostgreSQL, mediante el uso de modelos y consultas en lugar de SQL directo.
 
 ## Contacto 📍
   Para obtener más información, visita [visita nuestra página web](https://creva.vercel.app/) o ponte en contacto con nosotros a través de group.creva@gmail.com.
