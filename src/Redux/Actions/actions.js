@@ -298,13 +298,7 @@ export const getReview = () => {
         payload: response.data,
       });
     } catch (error) {
-      return dispatch({
-        type: SET_POPUP,
-        payload: {
-          type: 'ERROR',
-          title: 'OOPS!',
-          message: error.message
-      }});
+      return;
     }
   };
 };
@@ -651,13 +645,7 @@ export const getPostIg = () => {
         payload: response.data
       })
     } catch(error) {
-      return dispatch({
-        type: SET_POPUP,
-        payload: {
-          type: 'ERROR',
-          title: 'OOPS!',
-          message: error.message
-      }});
+      return;
     }
   }
 }
@@ -671,13 +659,7 @@ export const getPostText = () => {
         payload: response.data
       })
     } catch(error) {
-      return dispatch({
-        type: SET_POPUP,
-        payload: {
-          type: 'ERROR',
-          title: 'OOPS!',
-          message: error.message
-      }});
+      return;
     }
   }
 }
