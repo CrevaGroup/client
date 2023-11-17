@@ -377,13 +377,7 @@ export const getTransaction = () => {
         payload: response.data,
       });
     } catch (error) {
-      return dispatch({
-        type: SET_POPUP,
-        payload: {
-          type: 'ERROR',
-          title: 'OOPS!',
-          message: error.message
-      }});
+      return;
     }
   };
 };
